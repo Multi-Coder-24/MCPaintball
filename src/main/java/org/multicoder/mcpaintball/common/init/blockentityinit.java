@@ -1,0 +1,12 @@
+package org.multicoder.mcpaintball.common.init;
+
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.multicoder.mcpaintball.MCPaintball;
+
+@SuppressWarnings("all")
+public class blockentityinit {
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MCPaintball.MOD_ID);
+
+}
