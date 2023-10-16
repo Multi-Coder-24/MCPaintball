@@ -21,6 +21,7 @@ import org.multicoder.mcpaintball.common.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.util.enums.Teams;
 import org.multicoder.mcpaintball.common.util.holders.*;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.List;
 import java.util.Objects;
@@ -48,46 +49,59 @@ public class ExplosiveStationBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!level.isClientSide()) {
-            PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-            if (Objects.equals(Team, PPlayer.Team)) {
-                List<ItemStack> Stacks = null;
-                switch (PPlayer.Team) {
-                    case RED -> {
-                        Stacks = RedClass.GetExplosives(PPlayer.ClassType);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    {
+        try{
+            if (!level.isClientSide()) {
+                PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                if (Objects.equals(Team, PPlayer.Team)) {
+                    List<ItemStack> Stacks = null;
+                    switch (PPlayer.Team) {
+                        case RED -> {
+                            Stacks = RedClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case BLUE -> {
+                            Stacks = BlueClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case GREEN -> {
+                            Stacks = GreenClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case MAGENTA -> {
+                            Stacks = MagentaClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case PINK -> {
+                            Stacks = PinkClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case PURPLE -> {
+                            Stacks = PurpleClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case LIME -> {
+                            Stacks = LimeClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case LIGHT_BLUE -> {
+                            Stacks = LightBlueClass.GetExplosives(PPlayer.ClassType);
+                        }
+                        case CYAN -> {
+                            Stacks = CyanClass.GetExplosives(PPlayer.ClassType);
+                        }
                     }
-                    case BLUE -> {
-                        Stacks = BlueClass.GetExplosives(PPlayer.ClassType);
+                    if (Objects.nonNull(Stacks)) {
+                        Stacks.forEach(stack -> {
+                            player.drop(stack, true);
+                        });
                     }
-                    case GREEN -> {
-                        Stacks = GreenClass.GetExplosives(PPlayer.ClassType);
-                    }
-                    case MAGENTA -> {
-                        Stacks = MagentaClass.GetExplosives(PPlayer.ClassType);
-                    }
-                    case PINK -> {
-                        Stacks = PinkClass.GetExplosives(PPlayer.ClassType);
-                    }
-                    case PURPLE -> {
-                        Stacks = PurpleClass.GetExplosives(PPlayer.ClassType);
-                    }
-                    case LIME -> {
-                        Stacks = LimeClass.GetExplosives(PPlayer.ClassType);
-                    }
-                    case LIGHT_BLUE -> {
-                        Stacks = LightBlueClass.GetExplosives(PPlayer.ClassType);
-                    }
-                    case CYAN -> {
-                        Stacks = CyanClass.GetExplosives(PPlayer.ClassType);
-                    }
-                }
-                if (Objects.nonNull(Stacks)) {
-                    Stacks.forEach(stack -> {
-                        player.drop(stack, true);
-                    });
                 }
             }
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
         return InteractionResult.SUCCESS;
     }

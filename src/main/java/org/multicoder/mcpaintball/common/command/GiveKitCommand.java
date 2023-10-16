@@ -6,9 +6,11 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.util.holders.*;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +22,26 @@ public class GiveKitCommand {
         Dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("giveKit").executes(GiveKitCommand::Run).build().createBuilder()));
     }
 
-    private static int Run(CommandContext<CommandSourceStack> context) {
-        ServerPlayer Player = context.getSource().getPlayer();
-        PaintballPlayer PPlayer = Player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-        String Code = PPlayer.GetCode();
-        ApplyCode(Code, Player);
-        return 1;
+    private static int Run(CommandContext<CommandSourceStack> context)
+    {
+        try{
+            ServerPlayer Player = context.getSource().getPlayer();
+            PaintballPlayer PPlayer = Player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+            String Code = PPlayer.GetCode();
+            ApplyCode(Code, Player);
+            return 1;
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+        return -1;
     }
 
     private static void ApplyCode(String Code, ServerPlayer Player) {
@@ -81,7 +97,15 @@ public class GiveKitCommand {
                     });
                 }
             }
-        } catch (Exception ex) {
+        } catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
     }
 }

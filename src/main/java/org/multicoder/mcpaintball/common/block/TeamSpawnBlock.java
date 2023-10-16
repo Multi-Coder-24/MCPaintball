@@ -21,9 +21,11 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.util.enums.Teams;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 @SuppressWarnings("all")
 public class TeamSpawnBlock extends Block {
@@ -36,47 +38,74 @@ public class TeamSpawnBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-        if (!level.isClientSide()) {
-            Direction D = state.getValue(FACING);
-            if ((player.isCrouching() && player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team == Team) || (player.isCrouching() && player.hasPermissions(Commands.LEVEL_ADMINS))) {
-                D = D.getClockWise();
-                level.setBlockAndUpdate(pos, state.setValue(FACING, D));
-                player.sendSystemMessage(Component.translatable("text.mcpaintball.spawn_facing", D.getName()));
-                return InteractionResult.CONSUME;
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result)
+    {
+        try{
+            if (!level.isClientSide()) {
+                Direction D = state.getValue(FACING);
+                if ((player.isCrouching() && player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team == Team) || (player.isCrouching() && player.hasPermissions(Commands.LEVEL_ADMINS))) {
+                    D = D.getClockWise();
+                    level.setBlockAndUpdate(pos, state.setValue(FACING, D));
+                    player.sendSystemMessage(Component.translatable("text.mcpaintball.spawn_facing", D.getName()));
+                    return InteractionResult.CONSUME;
+                }
+                switch (D) {
+                    case NORTH -> {
+                        pos = pos.north();
+                    }
+                    case EAST -> {
+                        pos = pos.east();
+                    }
+                    case WEST -> {
+                        pos = pos.west();
+                    }
+                    case SOUTH -> {
+                        pos = pos.south();
+                    }
+                    default -> {
+                        pos = pos.above();
+                    }
+                }
+                PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                if (PPlayer.Team == Team) {
+                    ServerPlayer P = (ServerPlayer) player;
+                    P.setRespawnPosition(level.dimension(), pos, 0f, true, false);
+                    player.sendSystemMessage(Component.translatable("text.mcpaintball.spawn_update"));
+                }
             }
-            switch (D) {
-                case NORTH -> {
-                    pos = pos.north();
-                }
-                case EAST -> {
-                    pos = pos.east();
-                }
-                case WEST -> {
-                    pos = pos.west();
-                }
-                case SOUTH -> {
-                    pos = pos.south();
-                }
-                default -> {
-                    pos = pos.above();
-                }
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
             }
-            PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-            if (PPlayer.Team == Team) {
-                ServerPlayer P = (ServerPlayer) player;
-                P.setRespawnPosition(level.dimension(), pos, 0f, true, false);
-                player.sendSystemMessage(Component.translatable("text.mcpaintball.spawn_update"));
-            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
         return InteractionResult.SUCCESS;
     }
 
     @Override
-    public boolean canHarvestBlock(BlockState state, BlockGetter level, BlockPos pos, Player player) {
-        if (player.hasPermissions(Commands.LEVEL_ADMINS)) {
-            return true;
-        } else return player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team == Team;
+    public boolean canHarvestBlock(BlockState state, BlockGetter level, BlockPos pos, Player player)
+    {
+        try{
+            if (player.hasPermissions(Commands.LEVEL_ADMINS)) {
+                return true;
+            } else return player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team == Team;
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+        return false;
     }
 
     @Override

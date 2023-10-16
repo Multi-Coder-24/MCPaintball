@@ -4,9 +4,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.fml.DistExecutor;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.client.ClientPlayerTeamData;
 import org.multicoder.mcpaintball.common.util.enums.KitType;
 import org.multicoder.mcpaintball.common.util.enums.Teams;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.function.Supplier;
 
@@ -40,12 +42,24 @@ public class TeamDataSyncS2CPacket {
 
     public void HandlePacket(CustomPayloadEvent.Context context)
     {
-        DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
-            ClientPlayerTeamData.SetTeam(Team);
-            ClientPlayerTeamData.SetClass(Class);
-            ClientPlayerTeamData.SetPoints(Points);
-            ClientPlayerTeamData.SetCode(Code);
-            return 1;
-        });
+        try{
+            DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> {
+                ClientPlayerTeamData.SetTeam(Team);
+                ClientPlayerTeamData.SetClass(Class);
+                ClientPlayerTeamData.SetPoints(Points);
+                ClientPlayerTeamData.SetCode(Code);
+                return 1;
+            });
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
     }
 }

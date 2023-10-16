@@ -20,6 +20,7 @@ import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.config.MCPaintballConfig;
 import org.multicoder.mcpaintball.common.entity.PaintballEntity;
 import org.multicoder.mcpaintball.common.init.soundinit;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.List;
 
@@ -32,27 +33,39 @@ public class PaintballSniper extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if (!pLevel.isClientSide())
+        try{
+            if (!pLevel.isClientSide())
+            {
+                if(pPlayer.getItemInHand(pUsedHand).getDamageValue() < 6)
+                {
+                    AbstractArrow Bullet;
+                    PaintballPlayer Player = pPlayer.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                    EntityType<?> ET = Player.Team.GetPaintball();
+                    Bullet = new PaintballEntity((EntityType<? extends AbstractArrow>) ET, pPlayer, pLevel);
+                    Bullet.addTag("true");
+                    Bullet.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 5f, MCPaintballConfig.RIFLE_INACCURACY.get().floatValue());
+                    Bullet.setNoGravity(true);
+                    pLevel.addFreshEntity(Bullet);
+                    pPlayer.getCooldowns().addCooldown(this, 60);
+                    pLevel.playSound(null, pPlayer.blockPosition(), soundinit.SINGLE_SHOT.get(), SoundSource.PLAYERS, 1f, 1f);
+                    pPlayer.getItemInHand(pUsedHand).setDamageValue(pPlayer.getItemInHand(pUsedHand).getDamageValue() + 1);
+                    return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+                }
+                else
+                {
+                    pPlayer.sendSystemMessage(Component.translatable("text.mcpaintball.reload_needed").withStyle(ChatFormatting.BOLD));
+                }
+            }
+        }
+        catch(Exception e)
         {
-            if(pPlayer.getItemInHand(pUsedHand).getDamageValue() < 6)
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
             {
-                AbstractArrow Bullet;
-                PaintballPlayer Player = pPlayer.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-                EntityType<?> ET = Player.Team.GetPaintball();
-                Bullet = new PaintballEntity((EntityType<? extends AbstractArrow>) ET, pPlayer, pLevel);
-                Bullet.addTag("true");
-                Bullet.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 5f, MCPaintballConfig.RIFLE_INACCURACY.get().floatValue());
-                Bullet.setNoGravity(true);
-                pLevel.addFreshEntity(Bullet);
-                pPlayer.getCooldowns().addCooldown(this, 60);
-                pLevel.playSound(null, pPlayer.blockPosition(), soundinit.SINGLE_SHOT.get(), SoundSource.PLAYERS, 1f, 1f);
-                pPlayer.getItemInHand(pUsedHand).setDamageValue(pPlayer.getItemInHand(pUsedHand).getDamageValue() + 1);
-                return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+                ErrorLogGenerator.Generate(e);
             }
-            else
-            {
-                pPlayer.sendSystemMessage(Component.translatable("text.mcpaintball.reload_needed").withStyle(ChatFormatting.BOLD));
-            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
         return InteractionResultHolder.fail(pPlayer.getItemInHand(pUsedHand));
     }

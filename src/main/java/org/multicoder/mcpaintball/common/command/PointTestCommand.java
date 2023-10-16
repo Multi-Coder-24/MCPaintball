@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 @SuppressWarnings("all")
 public class PointTestCommand {
@@ -26,11 +27,16 @@ public class PointTestCommand {
             Cache += IntegerArgumentType.getInteger(context, "amount");
             PPlayer.Points = Cache;
             return 0;
-        } catch (Exception e) {
-            System.err.println(e.getCause());
-            System.err.println(e.getMessage());
-            System.err.println(e.getStackTrace());
-            return 1;
+        } catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
+        return -1;
     }
 }

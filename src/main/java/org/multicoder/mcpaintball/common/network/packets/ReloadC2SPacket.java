@@ -7,7 +7,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.network.NetworkContext;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.client.player.ReloadWeaponManager;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.function.Supplier;
 
@@ -24,9 +26,21 @@ public class ReloadC2SPacket {
 
     public void HandlePacket(CustomPayloadEvent.Context context)
     {
-        ServerLevel Level = context.getSender().serverLevel();
-        ServerPlayer Player = context.getSender();
-        ItemStack Held = Player.getItemInHand(InteractionHand.MAIN_HAND);
-        ReloadWeaponManager.ReloadWeapon(Player, Held);
+        try{
+            ServerLevel Level = context.getSender().serverLevel();
+            ServerPlayer Player = context.getSender();
+            ItemStack Held = Player.getItemInHand(InteractionHand.MAIN_HAND);
+            ReloadWeaponManager.ReloadWeapon(Player, Held);
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
     }
 }

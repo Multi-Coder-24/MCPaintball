@@ -22,72 +22,151 @@ import org.multicoder.mcpaintball.common.network.Networking;
 import org.multicoder.mcpaintball.common.network.packets.TeamDataSyncS2CPacket;
 import org.multicoder.mcpaintball.common.util.enums.KitType;
 import org.multicoder.mcpaintball.common.util.enums.Teams;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 @SuppressWarnings("all")
 @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID)
 public class MCPaintballEvents {
     @SubscribeEvent
-    public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof Player) {
-            if (!event.getObject().getCapability(PaintballPlayerProvider.CAPABILITY).isPresent()) {
-                event.addCapability(new ResourceLocation(MCPaintball.MOD_ID, "team"), new PaintballPlayerProvider());
-                Player player = (Player) event.getObject();
-                event.getObject().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
-                {
-                    cap.Team = Teams.NONE;
-                    cap.ClassType = KitType.NONE;
-                    cap.Points = 0;
-                    cap.LoadoutCode = "00";
-                });
+    public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event)
+    {
+        try{
+            if (event.getObject() instanceof Player) {
+                if (!event.getObject().getCapability(PaintballPlayerProvider.CAPABILITY).isPresent()) {
+                    event.addCapability(new ResourceLocation(MCPaintball.MOD_ID, "team"), new PaintballPlayerProvider());
+                    Player player = (Player) event.getObject();
+                    event.getObject().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
+                    {
+                        cap.Team = Teams.NONE;
+                        cap.ClassType = KitType.NONE;
+                        cap.Points = 0;
+                        cap.LoadoutCode = "00";
+                    });
+                }
             }
         }
-    }
-
-    @SubscribeEvent
-    public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
-        event.register(PaintballPlayer.class);
-    }
-
-    @SubscribeEvent
-    public static void onPlayerCloned(PlayerEvent.Clone event) {
-        if (event.isWasDeath()) {
-            event.getOriginal().reviveCaps();
-            event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(oldStore ->
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
             {
-                event.getEntity().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(newStore ->
-                {
-                    newStore.copyFrom(oldStore);
-                    event.getOriginal().invalidateCaps();
-                });
-            });
-        }
-    }
-
-    @SubscribeEvent
-    public static void onCommandRegister(RegisterCommandsEvent event) {
-        PointTestCommand.Regsiter(event.getDispatcher());
-        WinningTeamCommand.Register(event.getDispatcher());
-        SetTeamCommand.RegisterCommand(event.getDispatcher());
-        SetClassCommand.RegisterCommand(event.getDispatcher());
-        GiveKitCommand.RegisterCommand(event.getDispatcher());
-    }
-
-
-    @SubscribeEvent
-    public static void PlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.side == LogicalSide.SERVER && event.player.isAlive()) {
-            PaintballPlayer PPlayer = event.player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-            Networking.sendToPlayer(new TeamDataSyncS2CPacket(PPlayer.GetTeam(), PPlayer.GetClass(), PPlayer.GetPoints(), PPlayer.GetCode()), (ServerPlayer) event.player);
-        }
-    }
-
-    @SubscribeEvent
-    public static void PlayerJoin(EntityJoinLevelEvent event) {
-        if (!event.getLevel().isClientSide()) {
-            if (event.getEntity() instanceof ServerPlayer player) {
-                PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-                Networking.sendToPlayer(new TeamDataSyncS2CPacket(PPlayer.Team, PPlayer.ClassType, PPlayer.Points, PPlayer.GetCode()), player);
+                ErrorLogGenerator.Generate(e);
             }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterCapabilities(RegisterCapabilitiesEvent event)
+    {
+        try{
+            event.register(PaintballPlayer.class);
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerCloned(PlayerEvent.Clone event)
+    {
+        try{
+            if (event.isWasDeath()) {
+                event.getOriginal().reviveCaps();
+                event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(oldStore ->
+                {
+                    event.getEntity().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(newStore ->
+                    {
+                        newStore.copyFrom(oldStore);
+                        event.getOriginal().invalidateCaps();
+                    });
+                });
+            }
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+    }
+
+    @SubscribeEvent
+    public static void onCommandRegister(RegisterCommandsEvent event)
+    {
+        try{
+            PointTestCommand.Regsiter(event.getDispatcher());
+            WinningTeamCommand.Register(event.getDispatcher());
+            SetTeamCommand.RegisterCommand(event.getDispatcher());
+            SetClassCommand.RegisterCommand(event.getDispatcher());
+            GiveKitCommand.RegisterCommand(event.getDispatcher());
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+    }
+
+
+    @SubscribeEvent
+    public static void PlayerTick(TickEvent.PlayerTickEvent event)
+    {
+        try{
+            if (event.side == LogicalSide.SERVER && event.player.isAlive()) {
+                PaintballPlayer PPlayer = event.player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                Networking.sendToPlayer(new TeamDataSyncS2CPacket(PPlayer.GetTeam(), PPlayer.GetClass(), PPlayer.GetPoints(), PPlayer.GetCode()), (ServerPlayer) event.player);
+            }
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+    }
+
+    @SubscribeEvent
+    public static void PlayerJoin(EntityJoinLevelEvent event)
+    {
+        try{
+            if (!event.getLevel().isClientSide()) {
+                if (event.getEntity() instanceof ServerPlayer player) {
+                    PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                    Networking.sendToPlayer(new TeamDataSyncS2CPacket(PPlayer.Team, PPlayer.ClassType, PPlayer.Points, PPlayer.GetCode()), player);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
     }
 }

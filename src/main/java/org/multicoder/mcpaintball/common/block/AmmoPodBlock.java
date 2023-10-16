@@ -23,6 +23,7 @@ import org.multicoder.mcpaintball.common.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.init.iteminit;
 import org.multicoder.mcpaintball.common.util.enums.KitType;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.Objects;
 
@@ -35,46 +36,72 @@ public class AmmoPodBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!level.isClientSide() && state.getValue(ENABLED)) {
-            PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-            KitType Class = PPlayer.ClassType;
-            switch (Class) {
-                case HEAVY -> {
-                    ItemStack Stack_1 = new ItemStack(iteminit.HEAVY_AMMO.get(), 24);
-                    ItemStack Stack_2 = new ItemStack(iteminit.BASIC_AMMO.get(), 32);
-                    player.drop(Stack_1, true);
-                    player.drop(Stack_2, true);
-                    level.setBlockAndUpdate(pos, state.cycle(ENABLED));
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    {
+        try{
+            if (!level.isClientSide() && state.getValue(ENABLED)) {
+                PaintballPlayer PPlayer = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                KitType Class = PPlayer.ClassType;
+                switch (Class) {
+                    case HEAVY -> {
+                        ItemStack Stack_1 = new ItemStack(iteminit.HEAVY_AMMO.get(), 24);
+                        ItemStack Stack_2 = new ItemStack(iteminit.BASIC_AMMO.get(), 32);
+                        player.drop(Stack_1, true);
+                        player.drop(Stack_2, true);
+                        level.setBlockAndUpdate(pos, state.cycle(ENABLED));
+                    }
+                    case SNIPER, STANDARD -> {
+                        ItemStack Stack_1 = new ItemStack(iteminit.BASIC_AMMO.get(), 24);
+                        ItemStack Stack_2 = new ItemStack(iteminit.BASIC_AMMO.get(), 32);
+                        player.drop(Stack_1, true);
+                        player.drop(Stack_2, true);
+                        level.setBlockAndUpdate(pos, state.cycle(ENABLED));
+                    }
+                    case MEDICAL, ENGINEER -> {
+                        ItemStack Stack_1 = new ItemStack(iteminit.SHELL_AMMO.get(), 24);
+                        ItemStack Stack_2 = new ItemStack(iteminit.BASIC_AMMO.get(), 32);
+                        player.drop(Stack_1, true);
+                        player.drop(Stack_2, true);
+                        level.setBlockAndUpdate(pos, state.cycle(ENABLED));
+                    }
                 }
-                case SNIPER, STANDARD -> {
-                    ItemStack Stack_1 = new ItemStack(iteminit.BASIC_AMMO.get(), 24);
-                    ItemStack Stack_2 = new ItemStack(iteminit.BASIC_AMMO.get(), 32);
-                    player.drop(Stack_1, true);
-                    player.drop(Stack_2, true);
-                    level.setBlockAndUpdate(pos, state.cycle(ENABLED));
-                }
-                case MEDICAL, ENGINEER -> {
-                    ItemStack Stack_1 = new ItemStack(iteminit.SHELL_AMMO.get(), 24);
-                    ItemStack Stack_2 = new ItemStack(iteminit.BASIC_AMMO.get(), 32);
-                    player.drop(Stack_1, true);
-                    player.drop(Stack_2, true);
-                    level.setBlockAndUpdate(pos, state.cycle(ENABLED));
-                }
+                return InteractionResult.CONSUME;
             }
-            return InteractionResult.CONSUME;
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
         return InteractionResult.PASS;
     }
 
     @Override
-    public void randomTick(BlockState p_222954_, ServerLevel p_222955_, BlockPos p_222956_, RandomSource p_222957_) {
-        if (p_222954_.getValue(ENABLED).booleanValue()) {
-            return;
-        } else {
-            p_222955_.setBlockAndUpdate(p_222956_, p_222954_.cycle(ENABLED));
+    public void randomTick(BlockState p_222954_, ServerLevel p_222955_, BlockPos p_222956_, RandomSource p_222957_)
+    {
+        try{
+            if (p_222954_.getValue(ENABLED).booleanValue()) {
+                return;
+            } else {
+                p_222955_.setBlockAndUpdate(p_222956_, p_222954_.cycle(ENABLED));
+            }
+            super.randomTick(p_222954_, p_222955_, p_222956_, p_222957_);
         }
-        super.randomTick(p_222954_, p_222955_, p_222956_, p_222957_);
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
     }
 
     @Override

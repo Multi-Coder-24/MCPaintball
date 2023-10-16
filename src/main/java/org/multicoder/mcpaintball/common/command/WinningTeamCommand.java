@@ -14,6 +14,7 @@ import org.multicoder.mcpaintball.common.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.config.MCPaintballConfig;
 import org.multicoder.mcpaintball.common.util.enums.Teams;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,17 @@ public class WinningTeamCommand {
                 return Command(Source, level, player);
             }
             return -1;
-        } catch (Exception e) {
-            return -1;
+        } catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
+        return -1;
     }
 
     private static int Command(CommandSourceStack source, ServerLevel level, ServerPlayer player) {

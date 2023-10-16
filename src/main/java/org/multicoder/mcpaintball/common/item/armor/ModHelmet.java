@@ -6,6 +6,8 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,15 +29,29 @@ public class ModHelmet extends ArmorItem {
         super.onArmorTick(stack, level, player);
     }
 
-    private static boolean HasFullArmor(Player p) {
-        AtomicInteger V = new AtomicInteger(0);
-        p.getArmorSlots().forEach(slot ->
+    private static boolean HasFullArmor(Player p)
+    {
+        try{
+            AtomicInteger V = new AtomicInteger(0);
+            p.getArmorSlots().forEach(slot ->
+            {
+                if (!slot.isEmpty()) {
+                    V.getAndIncrement();
+                }
+            });
+            return V.get() == 4;
+        }
+        catch(Exception e)
         {
-            if (!slot.isEmpty()) {
-                V.getAndIncrement();
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
             }
-        });
-        return V.get() == 4;
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
+        }
+        return false;
     }
 
 }

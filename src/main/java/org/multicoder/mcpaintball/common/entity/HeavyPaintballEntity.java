@@ -9,10 +9,12 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.config.MCPaintballConfig;
 import org.multicoder.mcpaintball.common.util.enums.Teams;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,30 +36,43 @@ public class HeavyPaintballEntity extends AbstractArrow {
     }
 
     @Override
-    protected void onHit(HitResult pResult) {
-        if (Objects.nonNull(this.getOwner())) {
-            if (!this.level().isClientSide()) {
-                Vec3 Vector = pResult.getLocation();
-                ServerPlayer Player = (ServerPlayer) getOwner();
-                PaintballPlayer PPlayer = Player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-                Teams Shooter = PPlayer.Team;
-                Explosion explosion;
-                if (MCPaintballConfig.EXPLODE_BLOCKS.get()) {
-                    explosion = this.level().explode(null, Vector.x, Vector.y, Vector.z, 2f, Level.ExplosionInteraction.TNT);
-                } else {
-                    explosion = this.level().explode(null, Vector.x, Vector.y, Vector.z, 2f, Level.ExplosionInteraction.NONE);
-                }
-                AtomicInteger Points = new AtomicInteger();
-                explosion.getHitPlayers().keySet().forEach(player ->
-                {
-                    if (!Objects.equals(Shooter, player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team)) {
-                        Points.getAndIncrement();
+    protected void onHit(HitResult pResult)
+    {
+        try{
+            if (Objects.nonNull(this.getOwner())) {
+                if (!this.level().isClientSide()) {
+                    Vec3 Vector = pResult.getLocation();
+                    ServerPlayer Player = (ServerPlayer) getOwner();
+                    PaintballPlayer PPlayer = Player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                    Teams Shooter = PPlayer.Team;
+                    Explosion explosion;
+                    if (MCPaintballConfig.EXPLODE_BLOCKS.get()) {
+                        explosion = this.level().explode(null, Vector.x, Vector.y, Vector.z, 2f, Level.ExplosionInteraction.TNT);
+                    } else {
+                        explosion = this.level().explode(null, Vector.x, Vector.y, Vector.z, 2f, Level.ExplosionInteraction.NONE);
                     }
-                });
-                PPlayer.Points += Points.get();
-                this.kill();
-                this.discard();
+                    AtomicInteger Points = new AtomicInteger();
+                    explosion.getHitPlayers().keySet().forEach(player ->
+                    {
+                        if (!Objects.equals(Shooter, player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team)) {
+                            Points.getAndIncrement();
+                        }
+                    });
+                    PPlayer.Points += Points.get();
+                    this.kill();
+                    this.discard();
+                }
             }
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
     }
 }

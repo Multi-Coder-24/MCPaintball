@@ -15,10 +15,12 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.init.iteminit;
 import org.multicoder.mcpaintball.common.util.enums.KitType;
 import org.multicoder.mcpaintball.common.util.enums.Teams;
+import org.multicoder.mcpaintball.util.ErrorLogGenerator;
 
 import java.util.Objects;
 
@@ -48,38 +50,51 @@ public class MedicalStationBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!level.isClientSide()) {
-            if (Objects.equals(player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team, Team)) {
-                if (Objects.equals(player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().ClassType, KitType.MEDICAL)) {
-                    switch (player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team) {
-                        case RED -> {
-                            player.drop(new ItemStack(iteminit.RED_MED_KIT.get(), 16), true);
-                        }
-                        case BLUE -> {
-                            player.drop(new ItemStack(iteminit.BLUE_MED_KIT.get(), 16), true);
-                        }
-                        case GREEN -> {
-                            player.drop(new ItemStack(iteminit.GREEN_MED_KIT.get(), 16), true);
-                        }
-                        case MAGENTA -> {
-                            player.drop(new ItemStack(iteminit.MAGENTA_MED_KIT.get(), 16), true);
-                        }
-                        case PURPLE -> {
-                            player.drop(new ItemStack(iteminit.PURPLE_MED_KIT.get(), 16), true);
-                        }
-                        case PINK -> {
-                            player.drop(new ItemStack(iteminit.PINK_MED_KIT.get(), 16), true);
-                        }
-                        case LIME -> {
-                            player.drop(new ItemStack(iteminit.LIME_MED_KIT.get(), 16), true);
-                        }
-                        case LIGHT_BLUE -> {
-                            player.drop(new ItemStack(iteminit.LIGHT_BLUE_MED_KIT.get(), 16), true);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    {
+        try{
+            if (!level.isClientSide()) {
+                if (Objects.equals(player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team, Team)) {
+                    if (Objects.equals(player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().ClassType, KitType.MEDICAL)) {
+                        switch (player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get().Team) {
+                            case RED -> {
+                                player.drop(new ItemStack(iteminit.RED_MED_KIT.get(), 16), true);
+                            }
+                            case BLUE -> {
+                                player.drop(new ItemStack(iteminit.BLUE_MED_KIT.get(), 16), true);
+                            }
+                            case GREEN -> {
+                                player.drop(new ItemStack(iteminit.GREEN_MED_KIT.get(), 16), true);
+                            }
+                            case MAGENTA -> {
+                                player.drop(new ItemStack(iteminit.MAGENTA_MED_KIT.get(), 16), true);
+                            }
+                            case PURPLE -> {
+                                player.drop(new ItemStack(iteminit.PURPLE_MED_KIT.get(), 16), true);
+                            }
+                            case PINK -> {
+                                player.drop(new ItemStack(iteminit.PINK_MED_KIT.get(), 16), true);
+                            }
+                            case LIME -> {
+                                player.drop(new ItemStack(iteminit.LIME_MED_KIT.get(), 16), true);
+                            }
+                            case LIGHT_BLUE -> {
+                                player.drop(new ItemStack(iteminit.LIGHT_BLUE_MED_KIT.get(), 16), true);
+                            }
                         }
                     }
                 }
             }
+        }
+        catch(Exception e)
+        {
+            MCPaintball.LOG_ERROR.throwing(e);
+            try
+            {
+                ErrorLogGenerator.Generate(e);
+            }
+            catch (Exception ex){}
+            MCPaintball.LOG_ERROR.info("Error Handled");
         }
         return InteractionResult.SUCCESS;
     }
