@@ -19,6 +19,8 @@ public class MCPaintballWorldData extends SavedData
     public int LIGHT_BLUE_POINTS;
     public int PINK_POINTS;
     public int PURPLE_POINTS;
+    public boolean MatchStarted;
+    public boolean GameStarted;
 
     public static void IncrementByTranslationKey(String Key)
     {
@@ -57,6 +59,8 @@ public class MCPaintballWorldData extends SavedData
         data.BLUE_POINTS = 0;
         data.GREEN_POINTS = 0;
         data.RED_POINTS = 0;
+        data.MatchStarted = false;
+        data.GameStarted = false;
         return data;
     }
     public static MCPaintballWorldData load(CompoundTag nbt)
@@ -72,6 +76,8 @@ public class MCPaintballWorldData extends SavedData
         data.LIGHT_BLUE_POINTS = nbt.getInt("light_blue");
         data.PINK_POINTS = nbt.getInt("pink");
         data.PURPLE_POINTS = nbt.getInt("purple");
+        data.MatchStarted = nbt.getBoolean("match");
+        data.GameStarted = nbt.getBoolean("game");
         return data;
     }
 
@@ -88,6 +94,8 @@ public class MCPaintballWorldData extends SavedData
         tag.putInt("light_blue",LIGHT_BLUE_POINTS);
         tag.putInt("pink",PINK_POINTS);
         tag.putInt("purple",PURPLE_POINTS);
+        tag.putBoolean("match",MatchStarted);
+        tag.putBoolean("game",GameStarted);
         return tag;
     }
 }

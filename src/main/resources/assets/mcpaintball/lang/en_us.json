@@ -22,6 +22,10 @@
   "Comment_3": "Command Responses",
   "mcpaintball.command.response.team.set": "Your team has been set to %s",
   "mcpaintball.command.response.class.set": "Your class has been set to %s",
+  "mcpaintball.command.response.match_start": "The match has started, Select your team and class now",
+  "mcpaintball.command.response.match_stop": "The match has stopped, All teams and classes have been reset to defaults",
+  "mcpaintball.command.response.game_start": "The game has started, Battle has begun",
+  "mcpaintball.command.response.game_stop": "The game has ended, Winning team will be announced soon",
 
   "Comment_4": "Subtitles",
   "subtitle.mcpaintball.shot": "Shot Fired",
