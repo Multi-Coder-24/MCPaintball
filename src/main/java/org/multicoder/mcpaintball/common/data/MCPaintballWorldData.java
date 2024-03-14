@@ -45,10 +45,11 @@ public class MCPaintballWorldData extends SavedData
         } else if (Key.contains("purple")) {
             INSTANCE.PURPLE_POINTS++;
         }
+        INSTANCE.setDirty();
     }
     public static MCPaintballWorldData create()
     {
-        MCPaintballWorldData data =  new MCPaintballWorldData();
+        MCPaintballWorldData data = new MCPaintballWorldData();
         data.PURPLE_POINTS = 0;
         data.PINK_POINTS = 0;
         data.LIGHT_BLUE_POINTS = 0;

@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.PaintballClass;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
@@ -24,22 +25,25 @@ public class TeamCommands
     {
         try
         {
-            CommandSourceStack source = context.getSource();
-            ServerPlayer player = source.getPlayerOrException();
-            PaintballClass selected = context.getArgument("class", PaintballClass.class);
-            CompoundTag playerData = player.getPersistentData();
-            if(!playerData.contains("mcpaintball.teamsTag"))
+            if(MCPaintballWorldData.INSTANCE.MatchStarted)
             {
-                CompoundTag paintball = new CompoundTag();
-                paintball.putInt("class",selected.ordinal());
-                playerData.put("mcpaintball.teamsTag",paintball);
+                CommandSourceStack source = context.getSource();
+                ServerPlayer player = source.getPlayerOrException();
+                PaintballClass selected = context.getArgument("class", PaintballClass.class);
+                CompoundTag playerData = player.getPersistentData();
+                if(!playerData.contains("mcpaintball.teamsTag"))
+                {
+                    CompoundTag paintball = new CompoundTag();
+                    paintball.putInt("class",selected.ordinal());
+                    playerData.put("mcpaintball.teamsTag",paintball);
+                }
+                else
+                {
+                    CompoundTag paintball = playerData.getCompound("mcpaintball.teamsTag");
+                    paintball.putInt("class",selected.ordinal());
+                }
+                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set",selected.name().toLowerCase()));
             }
-            else
-            {
-                CompoundTag paintball = playerData.getCompound("mcpaintball.teamsTag");
-                paintball.putInt("class",selected.ordinal());
-            }
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set",selected.name().toLowerCase()));
             return 0;
         }
         catch (Exception exception)
@@ -53,21 +57,24 @@ public class TeamCommands
     {
         try
         {
-            CommandSourceStack source = context.getSource();
-            ServerPlayer player = source.getPlayerOrException();
-            PaintballTeam selected = context.getArgument("team", PaintballTeam.class);
-            CompoundTag playerData = player.getPersistentData();
-            if(!playerData.contains("mcpaintball.teamsTag")) {
-                CompoundTag paintball = new CompoundTag();
-                paintball.putInt("team",selected.ordinal());
-                playerData.put("mcpaintball.teamsTag",paintball);
+            if(MCPaintballWorldData.INSTANCE.MatchStarted)
+            {
+                CommandSourceStack source = context.getSource();
+                ServerPlayer player = source.getPlayerOrException();
+                PaintballTeam selected = context.getArgument("team", PaintballTeam.class);
+                CompoundTag playerData = player.getPersistentData();
+                if(!playerData.contains("mcpaintball.teamsTag")) {
+                    CompoundTag paintball = new CompoundTag();
+                    paintball.putInt("team",selected.ordinal());
+                    playerData.put("mcpaintball.teamsTag",paintball);
+                }
+                else {
+                    CompoundTag paintball = playerData.getCompound("mcpaintball.teamsTag");
+                    paintball.putInt("team",selected.ordinal());
+                }
+                player.getDisplayName().getStyle().applyFormat(selected.getDisplayColor());
+                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set",selected.name().toLowerCase()));
             }
-            else {
-                CompoundTag paintball = playerData.getCompound("mcpaintball.teamsTag");
-                paintball.putInt("team",selected.ordinal());
-            }
-            player.getDisplayName().getStyle().applyFormat(selected.getDisplayColor());
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set",selected.name().toLowerCase()));
             return 0;
         }
         catch (Exception exception)

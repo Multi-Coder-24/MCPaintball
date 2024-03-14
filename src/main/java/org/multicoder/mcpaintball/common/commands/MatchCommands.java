@@ -23,13 +23,15 @@ public class MatchCommands
     {
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_start"),true);
         MCPaintballWorldData.INSTANCE.MatchStarted = true;
-        return 1;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
     private static int MatchStop(CommandContext<CommandSourceStack> context)
     {
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_stop"),true);
         MCPaintballWorldData.INSTANCE.MatchStarted = false;
-        return 1;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
 
     private static int GameStart(CommandContext<CommandSourceStack> context)
@@ -37,13 +39,15 @@ public class MatchCommands
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start"),true);
         MCPaintballWorldData.INSTANCE.MatchStarted = true;
         MCPaintballWorldData.INSTANCE.GameStarted = true;
-        return 1;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
     private static int GameStop(CommandContext<CommandSourceStack> context)
     {
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_stop"),true);
         MCPaintballWorldData.INSTANCE.MatchStarted = false;
         MCPaintballWorldData.INSTANCE.GameStarted = false;
+        MCPaintballWorldData.INSTANCE.setDirty();
         context.getSource().getServer().getPlayerList().getPlayers().forEach(serverPlayer ->
         {
             CompoundTag Persist = serverPlayer.getPersistentData();
@@ -52,6 +56,6 @@ public class MatchCommands
                 Persist.remove("mcpaintball.teamsTag");
             }
         });
-        return 1;
+        return 0;
     }
 }

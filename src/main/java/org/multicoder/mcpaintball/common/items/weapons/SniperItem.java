@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
@@ -27,7 +28,7 @@ public class SniperItem extends Item
             CompoundTag PersistData = player.getPersistentData();
             if(PersistData.contains("mcpaintball.teamsTag")){
                 CompoundTag TeamData = PersistData.getCompound("mcpaintball.teamsTag");
-                if(TeamData.contains("team")){
+                if(TeamData.contains("team") && MCPaintballWorldData.INSTANCE.GameStarted){
                     PaintballTeam Team = PaintballTeam.values()[TeamData.getInt("team")];
                     AbstractArrow Paintball = new PaintballEntity(Team.getPaintball(),player,level);
                     Paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,5f,0f);

@@ -64,18 +64,18 @@ public enum PaintballTeam
         }
         return null;
     }
-    public String getPaintballTranslation(){
+    public EntityType<?> getGrenade(){
         switch (this){
-            case RED -> {return "mcpaintball:red_paintball";}
-            case GREEN -> {return "mcpaintball:green_paintball";}
-            case BLUE -> {return "mcpaintball:blue_paintball";}
-            case CYAN -> {return "mcpaintball:cyan_paintball";}
-            case MAGENTA -> {return "mcpaintball:magenta_paintball";}
-            case YELLOW -> {return "mcpaintball:yellow_paintball";}
-            case LIME -> {return "mcpaintball:lime_paintball";}
-            case LIGHT_BLUE -> {return "mcpaintball:light_blue_paintball";}
-            case PINK -> {return "mcpaintball:pink_paintball";}
-            case PURPLE -> {return "mcpaintball:purple_paintball";}
+            case RED -> {return MCPaintballEntities.RED_GRENADE.get();}
+            case GREEN -> {return MCPaintballEntities.GREEN_GRENADE.get();}
+            case BLUE -> {return MCPaintballEntities.BLUE_GRENADE.get();}
+            case CYAN -> {return MCPaintballEntities.CYAN_GRENADE.get();}
+            case MAGENTA -> {return MCPaintballEntities.MAGENTA_GRENADE.get();}
+            case YELLOW -> {return MCPaintballEntities.YELLOW_GRENADE.get();}
+            case LIME -> {return MCPaintballEntities.LIME_GRENADE.get();}
+            case LIGHT_BLUE -> {return MCPaintballEntities.LIGHT_BLUE_GRENADE.get();}
+            case PINK -> {return MCPaintballEntities.PINK_GRENADE.get();}
+            case PURPLE -> {return MCPaintballEntities.PURPLE_GRENADE.get();}
         }
         return null;
     }

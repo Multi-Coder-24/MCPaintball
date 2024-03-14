@@ -23,7 +23,9 @@ import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.*;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
+import org.multicoder.mcpaintball.common.entity.throwable.GrenadeEntity;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.*;
+import org.multicoder.mcpaintball.common.entityrenderers.throwable.GrenadeEntityRenderer;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
 @Mod(MCPaintball.MOD_ID)
@@ -66,6 +68,17 @@ public class MCPaintball
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.LIGHT_BLUE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.PINK_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.PURPLE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
+
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.CYAN_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.MAGENTA_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.YELLOW_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.LIME_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.LIGHT_BLUE_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PINK_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PURPLE_GRENADE.get(), GrenadeEntityRenderer::new);
     }
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
@@ -82,6 +95,7 @@ public class MCPaintball
             } else if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
             {
                 event.accept(MCPaintballItems.REMOTE.get());
+                event.accept(MCPaintballItems.GRENADE.get());
             }
         }
         catch (Exception exception)
