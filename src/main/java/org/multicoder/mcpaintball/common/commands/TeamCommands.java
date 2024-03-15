@@ -34,6 +34,7 @@ public class TeamCommands
             CompoundTag TeamData = Persist.getCompound("mcpaintball.teamsTag");
             String Name = TeamData.getString("name");
             TeamData.remove("name");
+            Persist.put("mcpaintball.teamsTag",TeamData);
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.left",Name));
         }
         return 0;
@@ -52,6 +53,7 @@ public class TeamCommands
             TeamData = new CompoundTag();
         }
         TeamData.putString("name",Name);
+        Persist.put("mcpaintball.teamsTag",TeamData);
         player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.joined",Name));
         return 0;
     }
@@ -69,6 +71,7 @@ public class TeamCommands
             if(Enabled || Started)
             {
                 TeamData.putInt("class",selected.ordinal());
+                playerData.put("mcpaintball.teamsTag",TeamData);
                 player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set", selected.name().toLowerCase()));
             }
         }
@@ -87,6 +90,7 @@ public class TeamCommands
             boolean Started = MCPaintballWorldData.INSTANCE.StartedByName(TeamData.getString("name"));
             if(Enabled && !Started){
                 TeamData.putInt("team", selected.ordinal());
+                playerData.put("mcpaintball.teamsTag",TeamData);
                 player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set", selected.name().toLowerCase()));
             }
         }
