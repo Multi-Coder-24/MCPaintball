@@ -8,6 +8,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
 import org.multicoder.mcpaintball.common.entity.throwable.GrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.throwable.SlownessGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.throwable.WeaknessGrenadeEntity;
 
 public class MCPaintballEntities
 {
@@ -48,5 +50,8 @@ public class MCPaintballEntities
     public static final DeferredHolder<EntityType<?>,EntityType<?>> LIGHT_BLUE_GRENADE = ENTITIES.register("light_blue_grenade",() -> EntityType.Builder.of(GrenadeEntity::new,MobCategory.MISC).build("light_blue_grenade"));
     public static final DeferredHolder<EntityType<?>,EntityType<?>> PINK_GRENADE = ENTITIES.register("pink_grenade",() -> EntityType.Builder.of(GrenadeEntity::new,MobCategory.MISC).build("pink_grenade"));
     public static final DeferredHolder<EntityType<?>,EntityType<?>> PURPLE_GRENADE = ENTITIES.register("purple_grenade",() -> EntityType.Builder.of(GrenadeEntity::new,MobCategory.MISC).build("purple_grenade"));
+
+    public static final DeferredHolder<EntityType<?>,EntityType<?>> SLOWNESS_GRENADE = ENTITIES.register("slow_grenade",() -> EntityType.Builder.of(SlownessGrenadeEntity::new,MobCategory.MISC).build("slow_grenade"));
+    public static final DeferredHolder<EntityType<?>,EntityType<?>> WEAKNESS_GRENADE = ENTITIES.register("weak_grenade",() -> EntityType.Builder.of(WeaknessGrenadeEntity::new,MobCategory.MISC).build("weak_grenade"));
 
 }

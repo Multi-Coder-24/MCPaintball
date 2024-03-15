@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball;
 
 
 import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -25,7 +26,6 @@ import org.multicoder.mcpaintball.common.entity.*;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
 import org.multicoder.mcpaintball.common.entity.throwable.GrenadeEntity;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.*;
-import org.multicoder.mcpaintball.common.entityrenderers.throwable.GrenadeEntityRenderer;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
 @Mod(MCPaintball.MOD_ID)
@@ -69,16 +69,19 @@ public class MCPaintball
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.PINK_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.PURPLE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
 
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.CYAN_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.MAGENTA_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.YELLOW_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.LIME_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.LIGHT_BLUE_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PINK_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PURPLE_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.CYAN_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.MAGENTA_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.YELLOW_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.LIME_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.LIGHT_BLUE_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PINK_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PURPLE_GRENADE.get(), ThrownItemRenderer::new);
+
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.SLOWNESS_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.WEAKNESS_GRENADE.get(), ThrownItemRenderer::new);
     }
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
@@ -96,6 +99,8 @@ public class MCPaintball
             {
                 event.accept(MCPaintballItems.REMOTE.get());
                 event.accept(MCPaintballItems.GRENADE.get());
+                event.accept(MCPaintballItems.SLOW_GRENADE.get());
+                event.accept(MCPaintballItems.WEAK_GRENADE.get());
             }
         }
         catch (Exception exception)

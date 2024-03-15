@@ -17,5 +17,7 @@ public class MCPaintballItems
 
     public static final DeferredItem<?> REMOTE = (DeferredItem<?>) ITEMS.register("remote", RemoteItem::new);
     public static final DeferredItem<?> GRENADE = (DeferredItem<?>) ITEMS.register("grenade", GrenadeItem::new);
+    public static final DeferredItem<?> SLOW_GRENADE = (DeferredItem<?>) ITEMS.register("slow_grenade", SlownessGrenadeItem::new);
+    public static final DeferredItem<?> WEAK_GRENADE = (DeferredItem<?>) ITEMS.register("weak_grenade", WeaknessGrenadeItem::new);
     public static final DeferredItem<?> DEBUG_WAND = (DeferredItem<?>) ITEMS.register("debug_wand", DebugWand::new);
 }
