@@ -8,23 +8,19 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
-import org.multicoder.mcpaintball.common.commands.MatchCommands;
-import org.multicoder.mcpaintball.common.commands.TeamCommands;
+import org.multicoder.mcpaintball.common.commands.*;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.*;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
-import org.multicoder.mcpaintball.common.entity.throwable.GrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.throwable.*;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.*;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
@@ -80,8 +76,8 @@ public class MCPaintball
         event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PINK_GRENADE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.PURPLE_GRENADE.get(), ThrownItemRenderer::new);
 
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.SLOWNESS_GRENADE.get(), ThrownItemRenderer::new);
-        event.registerEntityRenderer((EntityType<GrenadeEntity>) MCPaintballEntities.WEAKNESS_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<SlownessGrenadeEntity>) MCPaintballEntities.SLOWNESS_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<WeaknessGrenadeEntity>) MCPaintballEntities.WEAKNESS_GRENADE.get(), ThrownItemRenderer::new);
     }
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)

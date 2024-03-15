@@ -1,5 +1,6 @@
 package org.multicoder.mcpaintball.common.items;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -26,12 +27,15 @@ public class WeaknessGrenadeItem extends Item
     {
         if(!level.isClientSide())
         {
-            if(MCPaintballWorldData.INSTANCE.GameStarted)
-            {
-                WeaknessGrenadeEntity Grenade = new WeaknessGrenadeEntity(MCPaintballEntities.WEAKNESS_GRENADE.get(),player,level);
-                Grenade.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,3f,0f);
-                level.addFreshEntity(Grenade);
-                level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1f,1f);
+            CompoundTag Persist = player.getPersistentData();
+            if(Persist.contains("mcpaintball.teamsTag")) {
+                CompoundTag TeamData = Persist.getCompound("mcpaintball.teamsTag");
+                if (MCPaintballWorldData.INSTANCE.StartedByName(TeamData.getString("name"))) {
+                    WeaknessGrenadeEntity Grenade = new WeaknessGrenadeEntity(MCPaintballEntities.WEAKNESS_GRENADE.get(), player, level);
+                    Grenade.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 3f, 0f);
+                    level.addFreshEntity(Grenade);
+                    level.playSound(null, player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS, 1f, 1f);
+                }
             }
         }
         return super.use(level, player, hand);

@@ -1,102 +1,155 @@
 package org.multicoder.mcpaintball.common.data;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.saveddata.SavedData;
-import org.lwjgl.openal.SOFTEffectTarget;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MCPaintballWorldData extends SavedData
 {
     public static final String SAVE_NAME = "mcpaintball";
 
     public static MCPaintballWorldData INSTANCE;
-    public int RED_POINTS;
-    public int GREEN_POINTS;
-    public int BLUE_POINTS;
-    public int CYAN_POINTS;
-    public int MAGENTA_POINTS;
-    public int YELLOW_POINTS;
-    public int LIME_POINTS;
-    public int LIGHT_BLUE_POINTS;
-    public int PINK_POINTS;
-    public int PURPLE_POINTS;
-    public boolean MatchStarted;
-    public boolean GameStarted;
 
-    public static void IncrementByTranslationKey(String Key)
-    {
-        if(Key.contains("red")){
-            INSTANCE.RED_POINTS++;
-        } else if (Key.contains("green")) {
-            INSTANCE.GREEN_POINTS++;
-        } else if (Key.contains("blue")) {
-            INSTANCE.BLUE_POINTS++;
-        } else if (Key.contains("cyan")) {
-            INSTANCE.CYAN_POINTS++;
-        } else if (Key.contains("magenta")) {
-            INSTANCE.MAGENTA_POINTS++;
-        } else if (Key.contains("yellow")) {
-            INSTANCE.YELLOW_POINTS++;
-        } else if (Key.contains("lime")) {
-            INSTANCE.LIME_POINTS++;
-        } else if (Key.contains("light_blue")) {
-            INSTANCE.LIGHT_BLUE_POINTS++;
-        } else if (Key.contains("pink")) {
-            INSTANCE.PINK_POINTS++;
-        } else if (Key.contains("purple")) {
-            INSTANCE.PURPLE_POINTS++;
-        }
-        INSTANCE.setDirty();
-    }
+    public String VERSION;
+    public List<MCPaintballMatch> MATCHES;
+
     public static MCPaintballWorldData create()
     {
         MCPaintballWorldData data = new MCPaintballWorldData();
-        data.PURPLE_POINTS = 0;
-        data.PINK_POINTS = 0;
-        data.LIGHT_BLUE_POINTS = 0;
-        data.LIME_POINTS = 0;
-        data.MAGENTA_POINTS = 0;
-        data.CYAN_POINTS = 0;
-        data.YELLOW_POINTS = 0;
-        data.BLUE_POINTS = 0;
-        data.GREEN_POINTS = 0;
-        data.RED_POINTS = 0;
-        data.MatchStarted = false;
-        data.GameStarted = false;
+        data.VERSION = "2.0.0";
+        data.MATCHES = new ArrayList<>();
         return data;
     }
     public static MCPaintballWorldData load(CompoundTag nbt)
     {
         MCPaintballWorldData data = new MCPaintballWorldData();
-        data.RED_POINTS = nbt.getInt("red");
-        data.BLUE_POINTS = nbt.getInt("blue");
-        data.GREEN_POINTS = nbt.getInt("green");
-        data.CYAN_POINTS= nbt.getInt("cyan");
-        data.MAGENTA_POINTS = nbt.getInt("magenta");
-        data.YELLOW_POINTS = nbt.getInt("yellow");
-        data.LIME_POINTS = nbt.getInt("lime");
-        data.LIGHT_BLUE_POINTS = nbt.getInt("light_blue");
-        data.PINK_POINTS = nbt.getInt("pink");
-        data.PURPLE_POINTS = nbt.getInt("purple");
-        data.MatchStarted = nbt.getBoolean("match");
-        data.GameStarted = nbt.getBoolean("game");
+        data.VERSION = nbt.getString("version");
+        data.MATCHES = new ArrayList<>();
+        ListTag Matches = nbt.getList("matches", Tag.TAG_COMPOUND);
+        Matches.forEach(tag -> {CompoundTag NBT = (CompoundTag) tag;data.MATCHES.add(new MCPaintballMatch(NBT));});
         return data;
     }
 
     @Override
     public CompoundTag save(CompoundTag tag)
     {
-        tag.putInt("red",RED_POINTS);
-        tag.putInt("green",GREEN_POINTS);
-        tag.putInt("blue",BLUE_POINTS);
-        tag.putInt("cyan",CYAN_POINTS);
-        tag.putInt("magenta",MAGENTA_POINTS);
-        tag.putInt("yellow",YELLOW_POINTS);
-        tag.putInt("lime",LIME_POINTS);
-        tag.putInt("light_blue",LIGHT_BLUE_POINTS);
-        tag.putInt("pink",PINK_POINTS);
-        tag.putInt("purple",PURPLE_POINTS);
-        tag.putBoolean("match",MatchStarted);
-        tag.putBoolean("game",GameStarted);
+        tag.putString("version",VERSION);
+        ListTag Matches = new ListTag();
+        MATCHES.forEach(match -> Matches.add(match.Serialize()));
+        tag.put("matches",Matches);
         return tag;
+    }
+
+    public void IncrementByName(String name,String TK)
+    {
+        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+        MATCHES.forEach(mcPaintballMatch -> {
+            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+                Buffered.set(mcPaintballMatch);
+            }
+        });
+        if(Buffered.get() != null)
+        {
+            MCPaintballMatch Match = Buffered.get();
+            Match.IncrementByTranslationKey(TK);
+            setDirty();
+        }
+    }
+
+    public void StartMatch(String name){
+        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+        MATCHES.forEach(mcPaintballMatch -> {
+            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+                Buffered.set(mcPaintballMatch);
+            }
+        });
+        if(Buffered.get() != null)
+        {
+            MCPaintballMatch Match = Buffered.get();
+            Match.Enabled = true;
+            setDirty();
+        }
+    }
+    public void StartGame(String name){
+        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+        MATCHES.forEach(mcPaintballMatch -> {
+            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+                Buffered.set(mcPaintballMatch);
+            }
+        });
+        if(Buffered.get() != null)
+        {
+            MCPaintballMatch Match = Buffered.get();
+            Match.Started = true;
+            Match.Enabled = true;
+            setDirty();
+        }
+    }
+    public void StopMatch(String name){
+        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+        MATCHES.forEach(mcPaintballMatch -> {
+            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+                Buffered.set(mcPaintballMatch);
+            }
+        });
+        if(Buffered.get() != null)
+        {
+            MCPaintballMatch Match = Buffered.get();
+            Match.Enabled = false;
+            setDirty();
+        }
+    }
+    public void StopGame(String name){
+        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+        MATCHES.forEach(mcPaintballMatch -> {
+            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+                Buffered.set(mcPaintballMatch);
+            }
+        });
+        if(Buffered.get() != null)
+        {
+            MCPaintballMatch Match = Buffered.get();
+            Match.Started = false;
+            setDirty();
+        }
+    }
+    public void AddMatch(MCPaintballMatch match){
+        MATCHES.add(match);
+        setDirty();
+    }
+    public boolean EnabledByName(String name)
+    {
+        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+        MATCHES.forEach(mcPaintballMatch -> {
+            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+                Buffered.set(mcPaintballMatch);
+            }
+        });
+        if(Buffered.get() != null)
+        {
+            MCPaintballMatch Match = Buffered.get();
+            return Match.Enabled;
+        }
+        return false;
+    }
+    public boolean StartedByName(String name)
+    {
+        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+        MATCHES.forEach(mcPaintballMatch -> {
+            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+                Buffered.set(mcPaintballMatch);
+            }
+        });
+        if(Buffered.get() != null)
+        {
+            MCPaintballMatch Match = Buffered.get();
+            return Match.Started;
+        }
+        return false;
     }
 }

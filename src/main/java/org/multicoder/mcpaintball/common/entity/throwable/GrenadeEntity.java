@@ -44,7 +44,7 @@ public class GrenadeEntity extends ThrowableItemProjectile
                 PaintballTeam T = PaintballTeam.values()[TeamsData.getInt("team")];
                 if(EntityTeam != T)
                 {
-                    MCPaintballWorldData.IncrementByTranslationKey(TK);
+                    MCPaintballWorldData.INSTANCE.IncrementByName(TeamsData.getString("name"),TK);
                 }
             }
         });

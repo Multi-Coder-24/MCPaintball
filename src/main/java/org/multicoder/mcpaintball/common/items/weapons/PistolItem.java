@@ -29,7 +29,7 @@ public class PistolItem extends Item
             CompoundTag PersistData = player.getPersistentData();
             if(PersistData.contains("mcpaintball.teamsTag")){
                 CompoundTag TeamData = PersistData.getCompound("mcpaintball.teamsTag");
-                if(TeamData.contains("team") && MCPaintballWorldData.INSTANCE.GameStarted){
+                if(TeamData.contains("team") && MCPaintballWorldData.INSTANCE.StartedByName(TeamData.getString("name"))){
                     PaintballTeam Team = PaintballTeam.values()[TeamData.getInt("team")];
                     AbstractArrow Paintball = new PaintballEntity(Team.getPaintball(),player,level);
                     Paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,3f,0f);

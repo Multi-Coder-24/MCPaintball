@@ -28,13 +28,12 @@ public class BazookaItem extends Item
             CompoundTag PersistData = player.getPersistentData();
             if(PersistData.contains("mcpaintball.teamsTag")){
                 CompoundTag TeamData = PersistData.getCompound("mcpaintball.teamsTag");
-                if(TeamData.contains("team") && MCPaintballWorldData.INSTANCE.GameStarted)
-                {
+                if(TeamData.contains("team") && MCPaintballWorldData.INSTANCE.StartedByName(TeamData.getString("name"))) {
                     PaintballTeam Team = PaintballTeam.values()[TeamData.getInt("team")];
-                    AbstractArrow Paintball = new HeavyPaintballEntity(Team.getHeavyPaintball(),player,level);
-                    Paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,3f,0f);
+                    AbstractArrow Paintball = new HeavyPaintballEntity(Team.getHeavyPaintball(), player, level);
+                    Paintball.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 3f, 0f);
                     level.addFreshEntity(Paintball);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.BAZOOKA.get(), SoundSource.PLAYERS,1f,1f);
+                    level.playSound(null, player.blockPosition(), MCPaintballSounds.BAZOOKA.get(), SoundSource.PLAYERS, 1f, 1f);
                 }
             }
         }

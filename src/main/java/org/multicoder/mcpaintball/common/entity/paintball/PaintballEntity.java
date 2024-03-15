@@ -30,8 +30,8 @@ public class PaintballEntity extends AbstractArrow
     {
         if(!level().isClientSide())
         {
-            String TN = getTypeName().getString();
-            PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
+            String TK = getTypeName().getString();
+            PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
             if(hitResult.getEntity() instanceof Player player)
             {
                 CompoundTag Persist = player.getPersistentData();
@@ -41,7 +41,7 @@ public class PaintballEntity extends AbstractArrow
                     PaintballTeam T = PaintballTeam.values()[TeamsData.getInt("team")];
                     if(EntityTeam != T)
                     {
-                        MCPaintballWorldData.IncrementByTranslationKey(TN);
+                        MCPaintballWorldData.INSTANCE.IncrementByName(TeamsData.getString("name"),TK);
                     }
                 }
             }

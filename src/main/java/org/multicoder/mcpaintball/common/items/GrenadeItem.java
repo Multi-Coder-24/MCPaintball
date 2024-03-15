@@ -28,13 +28,11 @@ public class GrenadeItem extends Item
     {
         if(!level.isClientSide())
         {
-            if(MCPaintballWorldData.INSTANCE.GameStarted)
-            {
                 CompoundTag Persist = player.getPersistentData();
                 if(Persist.contains("mcpaintball.teamsTag"))
                 {
                     CompoundTag TeamData = Persist.getCompound("mcpaintball.teamsTag");
-                    if(TeamData.contains("team"))
+                    if(TeamData.contains("team") && MCPaintballWorldData.INSTANCE.StartedByName(TeamData.getString("name")))
                     {
                         MCPaintball.LOG.info("Creating Entity");
                         PaintballTeam Team = PaintballTeam.values()[TeamData.getInt("team")];
@@ -48,7 +46,6 @@ public class GrenadeItem extends Item
                     }
                 }
             }
-        }
         return super.use(level, player, hand);
     }
 }
