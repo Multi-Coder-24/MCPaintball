@@ -17,23 +17,6 @@ public enum PaintballTeam
     PINK,
     PURPLE;
 
-    public ChatFormatting getDisplayColor()
-    {
-        switch(this)
-        {
-            case RED ->{return ChatFormatting.DARK_RED;}
-            case GREEN ->{return ChatFormatting.DARK_GREEN;}
-            case BLUE ->{return ChatFormatting.DARK_BLUE;}
-            case CYAN ->{return ChatFormatting.DARK_AQUA;}
-            case MAGENTA ->{return ChatFormatting.DARK_PURPLE;}
-            case YELLOW ->{return ChatFormatting.YELLOW;}
-            case LIME ->{return ChatFormatting.GREEN;}
-            case LIGHT_BLUE ->{return ChatFormatting.AQUA;}
-            case PINK ->{return ChatFormatting.LIGHT_PURPLE;}
-            case PURPLE ->{return ChatFormatting.BLUE;}
-        }
-        return ChatFormatting.BLACK;
-    }
     public EntityType<?> getPaintball(){
         switch (this){
             case RED -> {return MCPaintballEntities.RED_PAINTBALL.get();}

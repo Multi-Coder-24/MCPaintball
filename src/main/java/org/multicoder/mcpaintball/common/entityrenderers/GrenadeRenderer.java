@@ -31,14 +31,12 @@ public class GrenadeRenderer extends EntityRenderer<GrenadeEntity>
     public GrenadeRenderer(EntityRendererProvider.Context p_174008_)
     {
         super(p_174008_);
-        MCPaintball.LOG.info("Register Grenade Renderer");
     }
 
     @Override
     public void render(GrenadeEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight)
     {
         ResourceLocation TEXTURE = getTextureLocation(entity);
-        MCPaintball.LOG.info("Texture: " + TEXTURE.getNamespace() + ":" + TEXTURE.getPath());
         poseStack.pushPose();
         poseStack.scale(0.75F, 0.75F, 0.75F);
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());

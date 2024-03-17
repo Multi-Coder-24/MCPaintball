@@ -7,6 +7,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
+import org.multicoder.mcpaintball.common.entity.throwable.BlindnessGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.throwable.GrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.throwable.SlownessGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.throwable.WeaknessGrenadeEntity;
@@ -53,5 +54,6 @@ public class MCPaintballEntities
 
     public static final DeferredHolder<EntityType<?>,EntityType<?>> SLOWNESS_GRENADE = ENTITIES.register("slow_grenade",() -> EntityType.Builder.of(SlownessGrenadeEntity::new,MobCategory.MISC).build("slow_grenade"));
     public static final DeferredHolder<EntityType<?>,EntityType<?>> WEAKNESS_GRENADE = ENTITIES.register("weak_grenade",() -> EntityType.Builder.of(WeaknessGrenadeEntity::new,MobCategory.MISC).build("weak_grenade"));
+    public static final DeferredHolder<EntityType<?>,EntityType<?>> BLINDNESS_GRENADE = ENTITIES.register("blind_grenade",() -> EntityType.Builder.of(BlindnessGrenadeEntity::new,MobCategory.MISC).build("blind_grenade"));
 
 }

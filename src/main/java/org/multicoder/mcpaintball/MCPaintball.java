@@ -4,6 +4,7 @@ package org.multicoder.mcpaintball;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -13,6 +14,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.*;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import org.apache.logging.log4j.*;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
@@ -79,6 +81,7 @@ public class MCPaintball
 
         event.registerEntityRenderer((EntityType<SlownessGrenadeEntity>) MCPaintballEntities.SLOWNESS_GRENADE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer((EntityType<WeaknessGrenadeEntity>) MCPaintballEntities.WEAKNESS_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<BlindnessGrenadeEntity>) MCPaintballEntities.BLINDNESS_GRENADE.get(), ThrownItemRenderer::new);
     }
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
@@ -98,6 +101,7 @@ public class MCPaintball
                 event.accept(MCPaintballItems.GRENADE.get());
                 event.accept(MCPaintballItems.SLOW_GRENADE.get());
                 event.accept(MCPaintballItems.WEAK_GRENADE.get());
+                event.accept(MCPaintballItems.BLIND_GRENADE.get());
             }
         }
         catch (Exception exception)
@@ -116,6 +120,17 @@ public class MCPaintball
             ServerLevel overworld = event.getServer().overworld();
             SavedData.Factory<MCPaintballWorldData> F = new SavedData.Factory<>(MCPaintballWorldData::create, MCPaintballWorldData::load);
             MCPaintballWorldData.INSTANCE = overworld.getDataStorage().computeIfAbsent(F,MCPaintballWorldData.SAVE_NAME);
+        }
+
+        @SubscribeEvent
+        private static void PlayerCloned(PlayerEvent.Clone event)
+        {
+            CompoundTag OldPersist = event.getOriginal().getPersistentData();
+            if(OldPersist.contains("mcpaintball.teamsTag"))
+            {
+                CompoundTag T = OldPersist.getCompound("mcpaintball.teamsTag");
+                event.getEntity().getPersistentData().put("mcpaintball.teamsTag",T);
+            }
         }
     }
     @SuppressWarnings("unused")

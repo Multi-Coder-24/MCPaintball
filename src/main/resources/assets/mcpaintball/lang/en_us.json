@@ -10,6 +10,8 @@
   "item.mcpaintball.grenade": "Grenade",
   "item.mcpaintball.slow_grenade": "Slowness Grenade",
   "item.mcpaintball.weak_grenade": "Weakness Grenade",
+  "item.mcpaintball.blind_grenade": "Blindness Grenade",
+  "item.mcpaintball.nausea_grenade": "Nausea Grenade",
 
 
   "Comment_3": "Command Responses",
@@ -32,5 +34,55 @@
   "subtitle.mcpaintball.c4_added": "Armed C4",
   "subtitle.mcpaintball.c4_removed": "Disarmed C4",
   "subtitle.mcpaintball.c4_explode": "C4 Detonated",
-  "subtitle.mcpaintball.grenade": "Grenade Thrown"
+  "subtitle.mcpaintball.grenade": "Grenade Thrown",
+
+  "item.mcpaintball.armor.red_boots": "Red Team Boots",
+  "item.mcpaintball.armor.red_leggings": "Red Team Leggings",
+  "item.mcpaintball.armor.red_chestplate": "Red Team Chestplate",
+  "item.mcpaintball.armor.red_helmet": "Red Team Helmet",
+
+  "item.mcpaintball.armor.green_boots": "Green Team Boots",
+  "item.mcpaintball.armor.green_leggings": "Green Team Leggings",
+  "item.mcpaintball.armor.green_chestplate": "Green Team Chestplate",
+  "item.mcpaintball.armor.green_helmet": "Green Team Helmet",
+
+  "item.mcpaintball.armor.blue_boots": "Blue Team Boots",
+  "item.mcpaintball.armor.blue_leggings": "Blue Team Leggings",
+  "item.mcpaintball.armor.blue_chestplate": "Blue Team Chestplate",
+  "item.mcpaintball.armor.blue_helmet": "Blue Team Helmet",
+
+  "item.mcpaintball.armor.cyan_boots": "Cyan Team Boots",
+  "item.mcpaintball.armor.cyan_leggings": "Cyan Team Leggings",
+  "item.mcpaintball.armor.cyan_chestplate": "Cyan Team Chestplate",
+  "item.mcpaintball.armor.cyan_helmet": "Cyan Team Helmet",
+
+  "item.mcpaintball.armor.magenta_boots": "Magenta Team Boots",
+  "item.mcpaintball.armor.magenta_leggings": "Magenta Team Leggings",
+  "item.mcpaintball.armor.magenta_chestplate": "Magenta Team Chestplate",
+  "item.mcpaintball.armor.magenta_helmet": "Magenta Team Helmet",
+
+  "item.mcpaintball.armor.yellow_boots": "Yellow Team Boots",
+  "item.mcpaintball.armor.yellow_leggings": "Yellow Team Leggings",
+  "item.mcpaintball.armor.yellow_chestplate": "Yellow Team Chestplate",
+  "item.mcpaintball.armor.yellow_helmet": "Yellow Team Helmet",
+
+  "item.mcpaintball.armor.lime_boots": "Lime Team Boots",
+  "item.mcpaintball.armor.lime_leggings": "Lime Team Leggings",
+  "item.mcpaintball.armor.lime_chestplate": "Lime Team Chestplate",
+  "item.mcpaintball.armor.lime_helmet": "Lime Team Helmet",
+
+  "item.mcpaintball.armor.light_blue_boots": "Light Blue Team Boots",
+  "item.mcpaintball.armor.light_blue_leggings": "Light Blue Team Leggings",
+  "item.mcpaintball.armor.light_blue_chestplate": "Light Blue Team Chestplate",
+  "item.mcpaintball.armor.light_blue_helmet": "Light Blue Team Helmet",
+
+  "item.mcpaintball.armor.pink_boots": "Pink Team Boots",
+  "item.mcpaintball.armor.pink_leggings": "Pink Team Leggings",
+  "item.mcpaintball.armor.pink_chestplate": "Pink Team Chestplate",
+  "item.mcpaintball.armor.pink_helmet": "Pink Team Helmet",
+
+  "item.mcpaintball.armor.purple_boots": "Purple Team Boots",
+  "item.mcpaintball.armor.purple_leggings": "Purple Team Leggings",
+  "item.mcpaintball.armor.purple_chestplate": "Purple Team Chestplate",
+  "item.mcpaintball.armor.purple_helmet": "Purple Team Helmet"
 }

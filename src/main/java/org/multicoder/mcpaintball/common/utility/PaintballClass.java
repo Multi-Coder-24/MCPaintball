@@ -6,5 +6,6 @@ public enum PaintballClass
     HEAVY,
     MEDICAL,
     ENGINEER,
-    SNIPER;
+    SNIPER,
+    GRENADIER;
 }
