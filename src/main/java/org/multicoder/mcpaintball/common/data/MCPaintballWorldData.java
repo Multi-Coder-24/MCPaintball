@@ -71,40 +71,11 @@ public class MCPaintballWorldData extends SavedData
         if(Buffered.get() != null)
         {
             MCPaintballMatch Match = Buffered.get();
-            Match.Enabled = true;
-            setDirty();
-        }
-    }
-    public void StartGame(String name){
-        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
-        MATCHES.forEach(mcPaintballMatch -> {
-            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
-                Buffered.set(mcPaintballMatch);
-            }
-        });
-        if(Buffered.get() != null)
-        {
-            MCPaintballMatch Match = Buffered.get();
             Match.Started = true;
-            Match.Enabled = true;
             setDirty();
         }
     }
     public void StopMatch(String name){
-        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
-        MATCHES.forEach(mcPaintballMatch -> {
-            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
-                Buffered.set(mcPaintballMatch);
-            }
-        });
-        if(Buffered.get() != null)
-        {
-            MCPaintballMatch Match = Buffered.get();
-            Match.Enabled = false;
-            setDirty();
-        }
-    }
-    public void StopGame(String name){
         AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
         MATCHES.forEach(mcPaintballMatch -> {
             if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
@@ -121,21 +92,6 @@ public class MCPaintballWorldData extends SavedData
     public void AddMatch(MCPaintballMatch match){
         MATCHES.add(match);
         setDirty();
-    }
-    public boolean EnabledByName(String name)
-    {
-        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
-        MATCHES.forEach(mcPaintballMatch -> {
-            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
-                Buffered.set(mcPaintballMatch);
-            }
-        });
-        if(Buffered.get() != null)
-        {
-            MCPaintballMatch Match = Buffered.get();
-            return Match.Enabled;
-        }
-        return false;
     }
     public boolean StartedByName(String name)
     {

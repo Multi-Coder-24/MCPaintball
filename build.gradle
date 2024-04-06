@@ -13,6 +13,7 @@ repositories {
     mavenLocal()
     maven { url = 'https://api.modrinth.com/maven'}
     maven { url = 'https://maven.maxhenkel.de/repository/public' }
+    maven {url = "https://api.modrinth.com/maven"}
 }
 
 base {
@@ -42,6 +43,8 @@ runs {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
+    implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
+    runtimeOnly "maven.modrinth:simple-voice-chat:neoforge-${voicechat_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -51,7 +54,7 @@ tasks.withType(ProcessResources).configureEach {
             loader_version_range: loader_version_range,
             mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors         : mod_authors, mod_description: mod_description, pack_format_number: pack_format_number,
-            mod_update_url: mod_update_url, mod_display_url: mod_display_url
+            mod_update_url: mod_update_url, mod_display_url: mod_display_url, voicechat_api_version : voicechat_api_version
     ]
     inputs.properties replaceProperties
 

@@ -15,11 +15,9 @@ public class MatchCommands
 {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("match").then(Commands.literal("start").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::MatchStart))))).createBuilder().build();
-        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("match").then(Commands.literal("stop").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::MatchStop))))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("start").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::GameStart))))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("stop").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::GameStop))))).createBuilder().build();
-        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("match").then(Commands.literal("create").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::MatchCreate))))).createBuilder().build();
+        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("create").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::MatchCreate))))).createBuilder().build();
     }
 
     private static int MatchCreate(CommandContext<CommandSourceStack> context)
@@ -27,36 +25,20 @@ public class MatchCommands
         String name = StringArgumentType.getString(context,"name");
         MCPaintballMatch Match = new MCPaintballMatch(name);
         MCPaintballWorldData.INSTANCE.AddMatch(Match);
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_create",name),true);
+        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_create",name),true);
         return 0;
     }
-
-    private static int MatchStart(CommandContext<CommandSourceStack> context)
-    {
-        String name = StringArgumentType.getString(context,"name");
-        MCPaintballWorldData.INSTANCE.StartMatch(name);
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_start",name),true);
-        return 0;
-    }
-    private static int MatchStop(CommandContext<CommandSourceStack> context)
-    {
-        String name = StringArgumentType.getString(context,"name");
-        MCPaintballWorldData.INSTANCE.StopMatch(name);
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_stop",name),true);
-        return 0;
-    }
-
     private static int GameStart(CommandContext<CommandSourceStack> context)
     {
         String name = StringArgumentType.getString(context,"name");
-        MCPaintballWorldData.INSTANCE.StartGame(name);
+        MCPaintballWorldData.INSTANCE.StopMatch(name);
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start",name),true);
         return 0;
     }
     private static int GameStop(CommandContext<CommandSourceStack> context)
     {
         String name = StringArgumentType.getString(context,"name");
-        MCPaintballWorldData.INSTANCE.StopGame(name);
+        MCPaintballWorldData.INSTANCE.StopMatch(name);
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_stop",name),true);
         return 0;
     }

@@ -5,7 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 public class MCPaintballMatch
 {
     public String Name;
-    public boolean Enabled;
     public boolean Started;
     public int RED;
     public int GREEN;
@@ -30,14 +29,12 @@ public class MCPaintballMatch
         LIGHT_BLUE = 0;
         PINK = 0;
         PURPLE = 0;
-        Enabled = false;
         Started = false;
     }
 
     public MCPaintballMatch(CompoundTag nbt)
     {
         Name = nbt.getString("name");
-        Enabled = nbt.getBoolean("enabled");
         Started = nbt.getBoolean("started");
         RED = nbt.getInt("red");
         GREEN = nbt.getInt("green");
@@ -65,7 +62,6 @@ public class MCPaintballMatch
         nbt.putInt("light_blue",RED);
         nbt.putInt("pink",RED);
         nbt.putInt("purple",RED);
-        nbt.putBoolean("enabled",Enabled);
         nbt.putBoolean("started",Started);
         return nbt;
     }
