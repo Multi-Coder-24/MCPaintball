@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mcpaintball:block/utility/cyan_respawn_station"
+    },
+    "facing=south": {
+      "model": "mcpaintball:block/utility/cyan_respawn_station"
+    },
+    "facing=east": {
+      "model": "mcpaintball:block/utility/cyan_respawn_station"
+    },
+    "facing=west": {
+      "model": "mcpaintball:block/utility/cyan_respawn_station"
+    }
+  }
+}

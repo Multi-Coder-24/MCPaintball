@@ -1,0 +1,82 @@
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+}
+version = project.property("mod.mod_version")
+group = project.property("mod.group_id")
+archivesBaseName = project.property("mod.mod_id")
+print(project.findProperty("id"))
+minecraft {
+
+    mappings channel: project.property("mod.mappings_channel"), version: project.property("mod.minecraft_version")
+
+    runs {
+        client {
+            workingDirectory project.file('run/Client')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+        }
+        server {
+            workingDirectory project.file('run/Server')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+        }
+    }
+}
+
+
+repositories {
+    maven { url 'https://maven.blamejared.com' }
+    maven { url = 'https://maven.maxhenkel.de/repository/public' }
+}
+repositories {
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:'+project.property("mod.minecraft_version")+'-'+project.property("mod.forge_version")
+    implementation "de.maxhenkel.voicechat:voicechat-api:2.4.11"
+    runtimeOnly fg.deobf("maven.modrinth:simple-voice-chat:forge-"+project.property("mod.simple_chat_version"))
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: project.property("mod.minecraft_version"), minecraft_version_range: project.property("mod.minecraft_version_range"),
+            forge_version: project.property("mod.forge_version"), forge_version_range: project.property("mod.forge_version_range"),
+            loader_version_range: project.property("mod.forge_version_range"),
+            mod_id: project.property("mod.mod_id"), mod_name: project.property("mod.mod_name"), mod_license: project.property("mod.mod_licence"), mod_version: project.property("mod.mod_version"),
+            mod_authors: project.property("mod.mod_author"), mod_description: project.property("mod.mod_description"),
+            updateJSONURL : project.property("mod.update_url"), displayURL : project.property("mod.display_url"),
+            projectID: project.property("mod.projectID")
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+
+jar {
+    manifest {
+        attributes([
+                "Built-By" : project.property("mod.mod_author"),
+                "Build-Jdk" : project.property("mod.jvm_version"),
+                "Package" : project.property("mod.group_id"),
+                "Version-Info" : project.property("mod.mod_version")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
