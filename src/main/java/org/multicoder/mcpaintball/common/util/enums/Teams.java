@@ -1,11 +1,11 @@
 package org.multicoder.mcpaintball.common.util.enums;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 import org.multicoder.mcpaintball.common.init.blockinit;
 import org.multicoder.mcpaintball.common.init.entityinit;
 
-@SuppressWarnings("all")
 public enum Teams {
     NONE,
     RED,
@@ -17,56 +17,37 @@ public enum Teams {
     LIME,
     LIGHT_BLUE,
     CYAN;
-
     public static Teams getTeam(int T) {
-        switch (T) {
-            case 0:
-                return NONE;
-            case 1:
-                return RED;
-            case 2:
-                return GREEN;
-            case 3:
-                return BLUE;
-            case 4:
-                return MAGENTA;
-            case 5:
-                return PINK;
-            case 6:
-                return PURPLE;
-            case 7:
-                return LIME;
-            case 8:
-                return LIGHT_BLUE;
-            case 9:
-                return CYAN;
-        }
-        return NONE;
+        return switch (T) {
+            case 0 -> NONE;
+            case 1 -> RED;
+            case 2 -> GREEN;
+            case 3 -> BLUE;
+            case 4 -> MAGENTA;
+            case 5 -> PINK;
+            case 6 -> PURPLE;
+            case 7 -> LIME;
+            case 8 -> LIGHT_BLUE;
+            case 9 -> CYAN;
+            default -> NONE;
+        };
     }
 
     public static Teams getTeam(String team) {
         team = team.toLowerCase();
         team = team.trim();
-        if (team.equals("red")) {
-            return RED;
-        } else if (team.equals("blue")) {
-            return BLUE;
-        } else if (team.equals("green")) {
-            return GREEN;
-        } else if (team.equals("lime")) {
-            return LIME;
-        } else if (team.equals("magenta")) {
-            return MAGENTA;
-        } else if (team.equals("purple")) {
-            return PURPLE;
-        } else if (team.equals("pink")) {
-            return PINK;
-        } else if (team.equals("lightblue")) {
-            return LIGHT_BLUE;
-        } else if (team.equals("cyan")) {
-            return CYAN;
-        }
-        return NONE;
+        return switch (team) {
+            case "red" -> RED;
+            case "blue" -> BLUE;
+            case "green" -> GREEN;
+            case "lime" -> LIME;
+            case "magenta" -> MAGENTA;
+            case "purple" -> PURPLE;
+            case "pink" -> PINK;
+            case "lightblue" -> LIGHT_BLUE;
+            case "cyan" -> CYAN;
+            default -> NONE;
+        };
     }
 
     public String GetTranslationKey() {
@@ -265,5 +246,38 @@ public enum Teams {
             }
         }
         return null;
+    }
+
+    public ChatFormatting getColor() {
+        switch (this) {
+            case RED -> {
+                return ChatFormatting.DARK_RED;
+            }
+            case BLUE -> {
+                return ChatFormatting.DARK_BLUE;
+            }
+            case GREEN -> {
+                return ChatFormatting.DARK_GREEN;
+            }
+            case LIME -> {
+                return ChatFormatting.GREEN;
+            }
+            case LIGHT_BLUE -> {
+                return ChatFormatting.AQUA;
+            }
+            case CYAN -> {
+                return ChatFormatting.DARK_AQUA;
+            }
+            case PURPLE -> {
+                return ChatFormatting.BLUE;
+            }
+            case MAGENTA -> {
+                return ChatFormatting.DARK_PURPLE;
+            }
+            case PINK -> {
+                return ChatFormatting.LIGHT_PURPLE;
+            }
+        }
+        return ChatFormatting.BLACK;
     }
 }

@@ -24,6 +24,7 @@ public class SetTeamCommand {
         try{
             ServerPlayer Player = context.getSource().getPlayer();
             Teams Team = context.getArgument("team", Teams.class);
+            Player.getDisplayName().getStyle().applyFormat(Team.getColor());
             PaintballPlayer PPlayer = Player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
             PPlayer.SetTeam(Team);
             SimpleVoicePlugin.AddPlayerToGroup(Player, Team.ordinal());
