@@ -1,0 +1,11 @@
+{
+  "name": "C4 Explosives",
+  "icon": "mcpaintball:utility/red_explosive",
+  "category": "mcpaintball:utilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The C4 explosive block is the other half to the remote detonators. This item is currently only provided in limited supply to the heavy class. Once triggered the block will explode and any enemies caught in its blast are counted as points."
+    }
+  ]
+}

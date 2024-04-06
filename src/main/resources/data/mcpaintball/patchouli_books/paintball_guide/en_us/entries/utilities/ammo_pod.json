@@ -1,0 +1,11 @@
+{
+  "name": "Ammo Pods",
+  "icon": "mcpaintball:utility/ammo/red_basic",
+  "category": "mcpaintball:utilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The ammo pods provide all players of the same team a means to gain more ammo to allow the match to last longer. While there is no separate pod for each class the ammo pod will check your class and provide you the correct ammo type."
+    }
+  ]
+}

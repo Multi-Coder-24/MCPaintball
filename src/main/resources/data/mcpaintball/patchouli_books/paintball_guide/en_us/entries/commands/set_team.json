@@ -1,0 +1,12 @@
+{
+  "name": "Set Team Command",
+  "icon": "minecraft:command_block",
+  "category": "mcpaintball:commands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Set Team",
+      "text": "This command is the new way to obtain your class loadout, Simply hold one of the kits in your main hand and type the following /SetTeam \"Color\" Replacing Color with the team color of choice. Eg. \"/SetTeam Red\" The colors are not case sensitive however with light blue you need to remove the space in between light blue. Once the command runs it will drop you your loadout."
+    }
+  ]
+}

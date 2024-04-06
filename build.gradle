@@ -1,0 +1,88 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1+'
+    }
+}
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+
+version = '1.2.1-R'
+group = 'org.multicoder.mcpaintball'
+archivesBaseName = 'mcpaintball'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'parchment', version: '2022.11.06-1.18.2'
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            property 'forge.enabledGameTestNamespaces', 'mcpaintball'
+
+            mods {
+                mcpaintball {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'mcpaintball'
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+repositories {
+    maven { url 'https://maven.blamejared.com' }
+    maven {url "https://cursemaven.com"}
+}
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.0'
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-70")
+}
+
+jar {
+    manifest {
+        attributes([
+                "Built-By" : "Multicoder",
+                "Build-Jdk" : "17.0.4",
+                "Package" : "org.multicoder.mcpaintball",
+                "Version-Info" : "1.2.1-R"
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

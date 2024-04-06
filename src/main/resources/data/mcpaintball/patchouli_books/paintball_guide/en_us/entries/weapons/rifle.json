@@ -1,0 +1,15 @@
+{
+  "name": "Paintballing Rifles",
+  "icon": "mcpaintball:weapon/paintball_rifle",
+  "category": "mcpaintball:weapons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The rifle is the weapon of choice for the standard class, with significantly faster reload time you can cover fire while your teammates reload.$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The specs of the rifle are.$(br)$(li1)Range: Mid,$(li1)Speed: 0.5 Second,$(li1)Projectiles: 1.$(br)"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " ##",
+    " i "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:black_wool"
+    },
+    "i": {
+      "item": "mcpaintball:utility/extra/kit_base"
+    }
+  },
+  "result": {
+    "item": "mcpaintball:utility/kits/paintball_medical",
+    "count": 1
+  }
+}

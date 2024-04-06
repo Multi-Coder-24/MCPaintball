@@ -1,0 +1,15 @@
+{
+  "name": "Paintballing Pistols",
+  "icon": "mcpaintball:weapon/paintball_pistol",
+  "category": "mcpaintball:weapons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The pistol is the sidearm of all classes. While the range is short compared to other weapons.$(br)However this weapon can save you in a pinch.$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The specs of the pistol are.$(br)$(li1)Range: Low,$(li1)Speed: 1 Second,$(li1)Projectiles: 1.$(br)"
+    }
+  ]
+}

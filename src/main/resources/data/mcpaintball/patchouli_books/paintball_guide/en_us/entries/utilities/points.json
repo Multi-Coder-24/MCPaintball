@@ -1,0 +1,17 @@
+{
+  "name": "Points and the tablet",
+  "icon": "mcpaintball:utility/extra/tablet",
+  "category": "mcpaintball:utilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "The Tablet",
+      "text": "The tablet is an item which is designed to tell you your points and should only be used at the end of a match to help determine the winning team. The tablet is expected to become obsolete when the terminal is added in."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Points",
+      "text": "Points are the essential but not needed part of the mod. If you are playing for fun then you can safely ignore the points. However if your playing a scored match then points are everything, each player has an independent score and once added up the winning team as well as MVP can be announced."
+    }
+  ]
+}

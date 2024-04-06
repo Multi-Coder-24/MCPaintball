@@ -1,0 +1,32 @@
+{
+  "name": "Crafting Recipes",
+  "icon": "minecraft:crafting_table",
+  "category": "mcpaintball:recipes",
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "title": "Weapons Base",
+      "recipe": "mcpaintball:craft/weapons_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Standard Class Kit",
+      "recipe": "mcpaintball:craft/standard_class"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Medical Class Kit",
+      "recipe": "mcpaintball:craft/medical_class"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Heavy Class Kit",
+      "recipe": "mcpaintball:craft/heavy_class"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Trainee Class Kit",
+      "recipe": "mcpaintball:craft/trainee_class"
+    }
+  ]
+}

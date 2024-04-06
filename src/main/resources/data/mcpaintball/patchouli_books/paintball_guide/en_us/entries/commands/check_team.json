@@ -1,0 +1,12 @@
+{
+  "name": "Check Team Command",
+  "icon": "minecraft:command_block",
+  "category": "mcpaintball:commands",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Check Team",
+      "text": "This command allows you to check which team you are on. Simply type /CheckTeam and there will be a message telling you your current team."
+    }
+  ]
+}

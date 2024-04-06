@@ -1,0 +1,11 @@
+{
+  "name": "Ammo Pods",
+  "icon": "mcpaintball:utility/grenades/paintball_grenade",
+  "category": "mcpaintball:utilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The greandes are the throwable explosive that you would expect, Once thrown they detonate when they hit the ground or a player. All hit Players of different teams count as points."
+    }
+  ]
+}

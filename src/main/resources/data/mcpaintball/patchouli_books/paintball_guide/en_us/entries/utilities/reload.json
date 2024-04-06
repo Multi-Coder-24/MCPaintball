@@ -1,0 +1,26 @@
+{
+  "name": "Reload Mechanics",
+  "icon": "mcpaintball:weapon/pistol/red_pistol",
+  "category": "mcpaintball:utilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The reload mechanic is broken down into two types, the new type and the legacy type. While there are huge differences with how this mechanic works between the two types, they effectively do the same job."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "New Mechanic",
+      "text": "The new mechanic is now accessed by using a dedicated keybinding and when pressed your weapon reloads from the ammo inside your inventory. The keybinding is currently set to $(k:mcpaintball.reload) And each weapon holds a specific amount of ammo internally."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Legacy Mechanic",
+      "text": "The legacy mechanic operates much more simplistically than the new mechanic does. Every time you take a shot one piece of ammo is consumed. There is no reloading needed here so the keybinding will not be registered."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Changing between",
+      "text": "As only one mechanic can be used the way to change the mechanic selected is through the configuration file. Inside the file under weapons you will see a value called legacy ammo and by default this is set to false. When the value is false the new mechanic is used and when true the legacy mechanic is in play."
+    }
+  ]
+}

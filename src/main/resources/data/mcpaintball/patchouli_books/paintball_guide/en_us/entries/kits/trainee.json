@@ -1,0 +1,15 @@
+{
+  "name": "Trainee Class Kits",
+  "icon": "mcpaintball:utility/kits/paintball_trainee",
+  "category": "mcpaintball:kits",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The trainee class is the practice class who gets provided all items and has access to use other entities as target practice. They are the only class who cannot actually join any battles and are provided to allow players to hone their skills."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The items it gives you are one of each weapon, a stack of each ammo, explosives and grenades also gives medkits and ammo pods"
+    }
+  ]
+}

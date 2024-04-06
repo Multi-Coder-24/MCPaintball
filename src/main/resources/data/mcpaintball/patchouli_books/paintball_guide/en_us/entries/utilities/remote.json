@@ -1,0 +1,15 @@
+{
+  "name": "The Remote Detonator",
+  "icon": "mcpaintball:utility/red_remote",
+  "category": "mcpaintball:utilities",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The remote detonator is the heart of the C4 explosives, without it the C4 becomes useless. To link a block of C4 to the remote right click it, you will hear a two tone sound from low to high. To detonate the explosive Shift-Right Click and another two tones play this time the same tone twice."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Once linked you can either wait for the right time or by right clicking the block again you can unlink the block and a two tone sound will play this time from high to low. Should a block be broken the remote will tell you that one or more blocks were destroyed."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Medic Class Kits",
+  "icon": "mcpaintball:utility/kits/paintball_medical",
+  "category": "mcpaintball:kits",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The medic class is the healer of the team, provided with medkits they can use on any teammate to heal the equivalent of 1 bullet, However the medic is not suited to long range battle and who's main focus is to heal the injured."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The items it gives you are the following.$(br)$(li1)Pistol$(li1)Shotgun$(li1)Remote Detonator$(li1)Armor$(li1)32 Grenades$(li1)128 Ammo$(li1)32 med kits$(li1)The Reset Rod$(li1)The Tablet"
+    }
+  ]
+}

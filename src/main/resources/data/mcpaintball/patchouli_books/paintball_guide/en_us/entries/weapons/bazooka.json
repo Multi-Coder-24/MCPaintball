@@ -1,0 +1,15 @@
+{
+  "name": "Paintballing Bazookas",
+  "icon": "mcpaintball:weapon/paintball_bazooka",
+  "category": "mcpaintball:weapons",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The bazooka is quite the explosive weapon, launching an explosive projectile towards enemies and enemy bases.$(br)This weapon will definitely make a bang in your world, you can use it to break barricades or just blow up the enemy.$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The specs of the bazooka are.$(br)$(li1)Range: Mid,$(li1)Speed: 2 Seconds,$(li1)Projectiles: 1.$(br)"
+    }
+  ]
+}

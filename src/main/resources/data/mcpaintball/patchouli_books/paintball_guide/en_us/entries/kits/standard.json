@@ -1,0 +1,15 @@
+{
+  "name": "Standard Class Kits",
+  "icon": "mcpaintball:utility/kits/paintball_standard",
+  "category": "mcpaintball:kits",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The standard class loadout is the most basic loadout, it provides the basic items and weapons needed to begin.$(br)When starting a match it is highly recommended to have at least one standard class teammate in your team.$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The items it gives you are the following.$(br)$(li1)Pistol$(li1)Rifle$(li1)Remote Detonator$(li1)Armor$(li1)48 Grenades$(li1)128 Ammo$(li1)8 Ammo Pods$(li1)The Reset Rod$(li1)The Tablet"
+    }
+  ]
+}
