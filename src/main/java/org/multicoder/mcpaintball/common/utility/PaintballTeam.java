@@ -62,4 +62,9 @@ public enum PaintballTeam
         }
         return null;
     }
+
+    public String GetTKey()
+    {
+        return "team." + this.name().toLowerCase();
+    }
 }

@@ -6,17 +6,15 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.server.command.EnumArgument;
-import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.extra.VoiceChatIntegration;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.utility.PaintballClass;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+
+import java.util.Objects;
 
 public class TeamCommands
 {
@@ -30,68 +28,41 @@ public class TeamCommands
 
     private static int LeaveMatch(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         Player player = context.getSource().getPlayerOrException();
-        CompoundTag Persist = player.getPersistentData();
-        if(Persist.contains("mcpaintball.teamsTag"))
-        {
-            CompoundTag TeamData = Persist.getCompound("mcpaintball.teamsTag");
-            String Name = TeamData.getString("name");
-            TeamData.remove("name");
-            Persist.put("mcpaintball.teamsTag",TeamData);
+        player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->{
+            String Name = cap.getName();
+            cap.SetName("");
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.left",Name));
-            boolean IntegrationVoice = ModList.get().isLoaded("voicechat");
-            if(IntegrationVoice)
-            {
-                VoiceChatIntegration.RemoveGroup((ServerPlayer) player);
-            }
-        }
+        });
         return 0;
     }
 
     private static int JoinMatch(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String Name = StringArgumentType.getString(context,"name");
         Player player = context.getSource().getPlayerOrException();
-        CompoundTag Persist = player.getPersistentData();
-        CompoundTag TeamData;
-        if(Persist.contains("mcpaintbal.teamsTag"))
+        player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
         {
-             TeamData = Persist.getCompound("mcpaintball.teamsTag");
-        }
-        else {
-            TeamData = new CompoundTag();
-        }
-        TeamData.putString("name",Name);
-        Persist.put("mcpaintball.teamsTag",TeamData);
-        player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.joined",Name));
-        boolean IntegrationVoice = ModList.get().isLoaded("voicechat");
-        if(IntegrationVoice)
-        {
-            VoiceChatIntegration.AddPlayerToGroup((ServerPlayer) player);
-        }
+            cap.SetName(Name);
+            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.joined",Name));
+        });
         return 0;
     }
 
-    private static int setClassCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    private static int setClassCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException
+    {
         CommandSourceStack source = context.getSource();
         ServerPlayer player = source.getPlayerOrException();
         PaintballClass selected = context.getArgument("class", PaintballClass.class);
-        CompoundTag playerData = player.getPersistentData();
-        if (playerData.contains("mcpaintball.teamsTag"))
+        player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
         {
-            CompoundTag TeamData = playerData.getCompound("mcpaintball.teamsTag");
-            if(!TeamData.contains("name"))
+            if(Objects.equals(cap.getName(), ""))
             {
-                TeamData.putInt("class",selected.ordinal());
-                playerData.put("mcpaintball.teamsTag",TeamData);
-                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set", selected.name().toLowerCase()));
+                cap.SetType(selected);
+                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set", Component.translatable(selected.getTKey()).getString()));
+                return;
             }
-        }
-        else
-        {
-            CompoundTag TeamData = new CompoundTag();
-            TeamData.putInt("class",selected.ordinal());
-            playerData.put("mcpaintball.teamsTag",TeamData);
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set", selected.name().toLowerCase()));
-        }
+            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.invalid"));
+
+        });
         return 0;
     }
 
@@ -99,24 +70,16 @@ public class TeamCommands
         CommandSourceStack source = context.getSource();
         ServerPlayer player = source.getPlayerOrException();
         PaintballTeam selected = context.getArgument("team", PaintballTeam.class);
-        CompoundTag playerData = player.getPersistentData();
-        if (playerData.contains("mcpaintball.teamsTag"))
+        player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
         {
-            CompoundTag TeamData = playerData.getCompound("mcpaintball.teamsTag");
-            if(!TeamData.contains("name"))
+            if(Objects.equals(cap.getName(),""))
             {
-                TeamData.putInt("team", selected.ordinal());
-                playerData.put("mcpaintball.teamsTag",TeamData);
-                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set", selected.name().toLowerCase()));
+                cap.SetTeam(selected);
+                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set", Component.translatable(selected.GetTKey())));
+                return;
             }
-        }
-        else
-        {
-            CompoundTag TeamData = new CompoundTag();
-            TeamData.putInt("team", selected.ordinal());
-            playerData.put("mcpaintball.teamsTag",TeamData);
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set", selected.name().toLowerCase()));
-        }
+            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.invalid"));
+        });
         return 0;
     }
 }

@@ -8,4 +8,8 @@ public enum PaintballClass
     ENGINEER,
     SNIPER,
     GRENADIER;
+
+    public String getTKey(){
+        return "type." + this.name().toLowerCase();
+    }
 }

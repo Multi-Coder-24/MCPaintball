@@ -5,14 +5,20 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.common.capabilities.ICapabilityProvider;
+import net.neoforged.neoforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
@@ -20,6 +26,8 @@ import org.apache.logging.log4j.*;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.commands.*;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.entity.*;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
 import org.multicoder.mcpaintball.common.entity.throwable.*;
@@ -40,8 +48,7 @@ public class MCPaintball
         eventBus.addListener(this::registerEntityRenderers);
         MCPaintballItems.ITEMS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
-        MCPaintballSounds.SOUNDS.register(eventBus);
-    }
+        MCPaintballSounds.SOUNDS.register(eventBus);    }
 
     @SuppressWarnings("unchecked")
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
@@ -125,11 +132,15 @@ public class MCPaintball
         @SubscribeEvent
         private static void PlayerCloned(PlayerEvent.Clone event)
         {
-            CompoundTag OldPersist = event.getOriginal().getPersistentData();
-            if(OldPersist.contains("mcpaintball.teamsTag"))
+            if(event.isWasDeath())
             {
-                CompoundTag T = OldPersist.getCompound("mcpaintball.teamsTag");
-                event.getEntity().getPersistentData().put("mcpaintball.teamsTag",T);
+                event.getEntity().reviveCaps();
+                event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(oldStore -> {
+                    event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(newStore -> {
+                        newStore.CopyFrom(oldStore);
+                    });
+                });
+                event.getEntity().invalidateCaps();
             }
         }
     }
@@ -143,6 +154,22 @@ public class MCPaintball
             CommandDispatcher<CommandSourceStack> Dispatcher = event.getDispatcher();
             TeamCommands.registerCommands(Dispatcher);
             MatchCommands.register(Dispatcher);
+        }
+        @SubscribeEvent
+        public static void RegisterCapabilities(RegisterCapabilitiesEvent event){
+            event.register(PaintballPlayer.class);
+        }
+        @SubscribeEvent
+        public static void AttachCapabilityPlayer(AttachCapabilitiesEvent<Entity> event)
+        {
+            if(event.getObject() instanceof Player player)
+            {
+                MCPaintball.LOG.info("Capability Register :: Called");
+                if(!player.getCapability(PaintballPlayerProvider.CAPABILITY).isPresent())
+                {
+                    event.addCapability(new ResourceLocation(MCPaintball.MOD_ID, "paintball_player"), new PaintballPlayerProvider());
+                }
+            }
         }
     }
 }
