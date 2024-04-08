@@ -164,7 +164,6 @@ public class MCPaintball
         {
             if(event.getObject() instanceof Player player)
             {
-                MCPaintball.LOG.info("Capability Register :: Called");
                 if(!player.getCapability(PaintballPlayerProvider.CAPABILITY).isPresent())
                 {
                     event.addCapability(new ResourceLocation(MCPaintball.MOD_ID, "paintball_player"), new PaintballPlayerProvider());

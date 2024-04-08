@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.common.entity.paintball;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,6 +13,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
@@ -29,20 +32,21 @@ public class HeavyPaintballEntity extends AbstractArrow
     @Override
     protected void onHitBlock(BlockHitResult hitResult)
     {
+        ServerPlayer Owner = (ServerPlayer) getOwner();
+        PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
         BlockPos Position = hitResult.getBlockPos();
+        String TK = getTypeName().getString();
+        int EntityTeam = FormattingManagers.FormatTypeToTeam(TK).ordinal();
         Explosion E = level().explode(this,Position.getX(), Position.getY(),Position.getZ(),5f, Level.ExplosionInteraction.MOB);
         E.getHitPlayers().keySet().forEach(player ->
         {
-            String TK = getTypeName().getString();
-            PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-            CompoundTag Persist = player.getPersistentData();
-            if(Persist.contains("mcpaintball.teamsTag"))
+            ServerPlayer target = (ServerPlayer) player;
+            PaintballPlayer TargetData = target.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+            if(OwnerData.getName().equals(TargetData.getName()))
             {
-                CompoundTag TeamsData = Persist.getCompound("mcpaintball.teamsTag");
-                PaintballTeam T = PaintballTeam.values()[TeamsData.getInt("team")];
-                if(EntityTeam != T)
+                if(OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal())
                 {
-                    MCPaintballWorldData.INSTANCE.IncrementByName(TeamsData.getString("name"),TK);
+                    MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),TK);
                 }
             }
         });

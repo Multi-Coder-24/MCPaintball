@@ -11,6 +11,7 @@
   "item.mcpaintball.slow_grenade": "Slowness Grenade",
   "item.mcpaintball.weak_grenade": "Weakness Grenade",
   "item.mcpaintball.blind_grenade": "Blindness Grenade",
+  "item.mcpaintball.smoke_grenade": "Smoke Grenade",
   "item.mcpaintball.nausea_grenade": "Nausea Grenade",
 
   "team.red": "Red",
@@ -33,8 +34,10 @@
 
   "Comment_3": "Command Responses",
   "mcpaintball.command.response.team.set": "Your team has been set to %s",
+  "mcpaintball.command.response.team.get": "Your team is set to %s",
   "mcpaintball.command.response.invalid": "You cannot run this command now",
   "mcpaintball.command.response.class.set": "Your class has been set to %s",
+  "mcpaintball.command.response.class.get": "Your class is set to %s",
   "mcpaintball.command.response.match.joined": "You have joined %s",
   "mcpaintball.command.response.match.left": "You have left %s",
   "mcpaintball.command.response.game_create": "Game %s has been created",

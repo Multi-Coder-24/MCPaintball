@@ -31,7 +31,7 @@ public class MatchCommands
     private static int GameStart(CommandContext<CommandSourceStack> context)
     {
         String name = StringArgumentType.getString(context,"name");
-        MCPaintballWorldData.INSTANCE.StopMatch(name);
+        MCPaintballWorldData.INSTANCE.StartMatch(name);
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start",name),true);
         return 0;
     }

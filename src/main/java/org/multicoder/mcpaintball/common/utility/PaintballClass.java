@@ -9,7 +9,7 @@ public enum PaintballClass
     SNIPER,
     GRENADIER;
 
-    public String getTKey(){
+    public String GetTKey(){
         return "type." + this.name().toLowerCase();
     }
 }

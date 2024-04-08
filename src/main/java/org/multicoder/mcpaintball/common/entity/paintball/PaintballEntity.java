@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.common.entity.paintball;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
@@ -30,18 +33,16 @@ public class PaintballEntity extends AbstractArrow
     {
         if(!level().isClientSide())
         {
-            String TK = getTypeName().getString();
-            PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-            if(hitResult.getEntity() instanceof Player player)
+            ServerPlayer Owner = (ServerPlayer) getOwner();
+            if(hitResult.getEntity() instanceof ServerPlayer target)
             {
-                CompoundTag Persist = player.getPersistentData();
-                if(Persist.contains("mcpaintball.teamsTag"))
+                PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                PaintballPlayer TargetData = target.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                if(OwnerData.getName().equals(TargetData.getName()))
                 {
-                    CompoundTag TeamsData = Persist.getCompound("mcpaintball.teamsTag");
-                    PaintballTeam T = PaintballTeam.values()[TeamsData.getInt("team")];
-                    if(EntityTeam != T)
+                    if(OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal())
                     {
-                        MCPaintballWorldData.INSTANCE.IncrementByName(TeamsData.getString("name"),TK);
+                        MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),getTypeName().getString());
                     }
                 }
             }
