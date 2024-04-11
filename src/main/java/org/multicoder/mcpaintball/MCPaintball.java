@@ -40,6 +40,7 @@ public class MCPaintball
 {
     public static final String MOD_ID = "mcpaintball";
     public static Logger LOG = LogManager.getLogger(MOD_ID);
+    public static final boolean DEBUG_MODE = true;
 
     public MCPaintball()
     {
@@ -102,6 +103,57 @@ public class MCPaintball
                 event.accept(MCPaintballItems.SHOTGUN.get());
                 event.accept(MCPaintballItems.SNIPER.get());
                 event.accept(MCPaintballItems.BAZOOKA.get());
+
+                event.accept(MCPaintballItems.RED_BOOTS.get());
+                event.accept(MCPaintballItems.RED_LEGGINGS.get());
+                event.accept(MCPaintballItems.RED_CHESTPLATE.get());
+                event.accept(MCPaintballItems.RED_HELMET.get());
+
+                event.accept(MCPaintballItems.GREEN_BOOTS.get());
+                event.accept(MCPaintballItems.GREEN_LEGGINGS.get());
+                event.accept(MCPaintballItems.GREEN_CHESTPLATE.get());
+                event.accept(MCPaintballItems.GREEN_HELMET.get());
+
+                event.accept(MCPaintballItems.BLUE_BOOTS.get());
+                event.accept(MCPaintballItems.BLUE_LEGGINGS.get());
+                event.accept(MCPaintballItems.BLUE_CHESTPLATE.get());
+                event.accept(MCPaintballItems.BLUE_HELMET.get());
+
+                event.accept(MCPaintballItems.CYAN_BOOTS.get());
+                event.accept(MCPaintballItems.CYAN_LEGGINGS.get());
+                event.accept(MCPaintballItems.CYAN_CHESTPLATE.get());
+                event.accept(MCPaintballItems.CYAN_HELMET.get());
+
+                event.accept(MCPaintballItems.MAGENTA_BOOTS.get());
+                event.accept(MCPaintballItems.MAGENTA_LEGGINGS.get());
+                event.accept(MCPaintballItems.MAGENTA_CHESTPLATE.get());
+                event.accept(MCPaintballItems.MAGENTA_HELMET.get());
+
+                event.accept(MCPaintballItems.YELLOW_BOOTS.get());
+                event.accept(MCPaintballItems.YELLOW_LEGGINGS.get());
+                event.accept(MCPaintballItems.YELLOW_CHESTPLATE.get());
+                event.accept(MCPaintballItems.YELLOW_HELMET.get());
+
+                event.accept(MCPaintballItems.LIME_BOOTS.get());
+                event.accept(MCPaintballItems.LIME_LEGGINGS.get());
+                event.accept(MCPaintballItems.LIME_CHESTPLATE.get());
+                event.accept(MCPaintballItems.LIME_HELMET.get());
+
+                event.accept(MCPaintballItems.LIGHT_BLUE_BOOTS.get());
+                event.accept(MCPaintballItems.LIGHT_BLUE_LEGGINGS.get());
+                event.accept(MCPaintballItems.LIGHT_BLUE_CHESTPLATE.get());
+                event.accept(MCPaintballItems.LIGHT_BLUE_HELMET.get());
+
+                event.accept(MCPaintballItems.PINK_BOOTS.get());
+                event.accept(MCPaintballItems.PINK_LEGGINGS.get());
+                event.accept(MCPaintballItems.PINK_CHESTPLATE.get());
+                event.accept(MCPaintballItems.PINK_HELMET.get());
+
+                event.accept(MCPaintballItems.PURPLE_BOOTS.get());
+                event.accept(MCPaintballItems.PURPLE_LEGGINGS.get());
+                event.accept(MCPaintballItems.PURPLE_CHESTPLATE.get());
+                event.accept(MCPaintballItems.PURPLE_HELMET.get());
+
             } else if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
             {
                 event.accept(MCPaintballItems.REMOTE.get());
@@ -109,6 +161,9 @@ public class MCPaintball
                 event.accept(MCPaintballItems.SLOW_GRENADE.get());
                 event.accept(MCPaintballItems.WEAK_GRENADE.get());
                 event.accept(MCPaintballItems.BLIND_GRENADE.get());
+                event.accept(MCPaintballItems.BASIC_AMMO.get());
+                event.accept(MCPaintballItems.SHELL_AMMO.get());
+                event.accept(MCPaintballItems.HEAVY_AMMO.get());
             }
         }
         catch (Exception exception)

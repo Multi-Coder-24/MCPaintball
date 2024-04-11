@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.common.entity.throwable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -11,6 +12,8 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
+import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
@@ -31,25 +34,22 @@ public class GrenadeEntity extends ThrowableItemProjectile
     @Override
     protected void onHitBlock(BlockHitResult result)
     {
-        BlockPos Position = result.getBlockPos();
-        Explosion E = level().explode(this,Position.getX(), Position.getY(),Position.getZ(),5f, Level.ExplosionInteraction.MOB);
-        E.getHitPlayers().keySet().forEach(player ->
+        if(!level().isClientSide())
         {
-            String TK = getTypeName().getString();
-            PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-            CompoundTag Persist = player.getPersistentData();
-            if(Persist.contains("mcpaintball.teamsTag"))
+            ServerPlayer Owner = (ServerPlayer) getOwner();
+            BlockPos Position = result.getBlockPos();
+            Explosion E = level().explode(this,Position.getX(), Position.getY(),Position.getZ(),5f, Level.ExplosionInteraction.MOB);
+            E.getHitPlayers().keySet().forEach(player ->
             {
-                CompoundTag TeamsData = Persist.getCompound("mcpaintball.teamsTag");
-                PaintballTeam T = PaintballTeam.values()[TeamsData.getInt("team")];
-                if(EntityTeam != T)
-                {
-                    MCPaintballWorldData.INSTANCE.IncrementByName(TeamsData.getString("name"),TK);
+                PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                PaintballPlayer TargetData = ((ServerPlayer) player).getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                if(OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal()){
+                    MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),OwnerData.GetTeam().ordinal());
                 }
-            }
-        });
-        this.kill();
-        this.discard();
+            });
+            this.kill();
+            this.discard();
+        }
         super.onHitBlock(result);
     }
 

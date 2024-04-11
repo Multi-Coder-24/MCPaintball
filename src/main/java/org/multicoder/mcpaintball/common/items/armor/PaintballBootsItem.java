@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.common.items;
+package org.multicoder.mcpaintball.common.items.armor;
 
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;

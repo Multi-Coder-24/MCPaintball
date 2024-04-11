@@ -3,6 +3,14 @@ package org.multicoder.mcpaintball.common.items;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.*;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.common.items.armor.PaintballBootsItem;
+import org.multicoder.mcpaintball.common.items.armor.PaintballChestplateItem;
+import org.multicoder.mcpaintball.common.items.armor.PaintballHelmetItem;
+import org.multicoder.mcpaintball.common.items.armor.PaintballLeggingsItem;
+import org.multicoder.mcpaintball.common.items.grenades.BlindnessGrenadeItem;
+import org.multicoder.mcpaintball.common.items.grenades.GrenadeItem;
+import org.multicoder.mcpaintball.common.items.grenades.SlownessGrenadeItem;
+import org.multicoder.mcpaintball.common.items.grenades.WeaknessGrenadeItem;
 import org.multicoder.mcpaintball.common.items.weapons.*;
 import org.multicoder.mcpaintball.common.utility.PaintballArmorType;
 
@@ -23,6 +31,10 @@ public class MCPaintballItems
     public static final DeferredItem<?> BLIND_GRENADE = (DeferredItem<?>) ITEMS.register("blind_grenade", BlindnessGrenadeItem::new);
     public static final DeferredItem<?> DEBUG_WAND = (DeferredItem<?>) ITEMS.register("debug_wand", DebugWand::new);
 
+    public static final DeferredItem<?> BASIC_AMMO = (DeferredItem<?>) ITEMS.register("basic_ammo", BasicAmmoItem::new);
+    public static final DeferredItem<?> SHELL_AMMO = (DeferredItem<?>) ITEMS.register("shell_ammo", ShellAmmoItem::new);
+    public static final DeferredItem<?> HEAVY_AMMO = (DeferredItem<?>) ITEMS.register("heavy_ammo", HeavyAmmoItem::new);
+
     //  Armor Sets
     public static final DeferredItem<?> RED_BOOTS = (DeferredItem<?>) ITEMS.register("armor/red_boots",() -> new PaintballBootsItem(PaintballArmorType.RED));
     public static final DeferredItem<?> RED_LEGGINGS = (DeferredItem<?>) ITEMS.register("armor/red_leggings",() -> new PaintballLeggingsItem(PaintballArmorType.RED));
@@ -30,7 +42,7 @@ public class MCPaintballItems
     public static final DeferredItem<?> RED_HELMET = (DeferredItem<?>) ITEMS.register("armor/red_helmet",() -> new PaintballHelmetItem(PaintballArmorType.RED));
 
     public static final DeferredItem<?> GREEN_BOOTS = (DeferredItem<?>) ITEMS.register("armor/green_boots",() -> new PaintballBootsItem(PaintballArmorType.GREEN));
-    public static final DeferredItem<?> GREEN_LEGGINGS = (DeferredItem<?>) ITEMS.register("armor/leggings",() -> new PaintballLeggingsItem(PaintballArmorType.GREEN));
+    public static final DeferredItem<?> GREEN_LEGGINGS = (DeferredItem<?>) ITEMS.register("armor/green_leggings",() -> new PaintballLeggingsItem(PaintballArmorType.GREEN));
     public static final DeferredItem<?> GREEN_CHESTPLATE = (DeferredItem<?>) ITEMS.register("armor/green_chestplate",() -> new PaintballChestplateItem(PaintballArmorType.GREEN));
     public static final DeferredItem<?> GREEN_HELMET = (DeferredItem<?>) ITEMS.register("armor/green_helmet",() -> new PaintballHelmetItem(PaintballArmorType.GREEN));
 

@@ -46,7 +46,7 @@ public class HeavyPaintballEntity extends AbstractArrow
             {
                 if(OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal())
                 {
-                    MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),TK);
+                    MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),OwnerData.GetTeam().ordinal());
                 }
             }
         });

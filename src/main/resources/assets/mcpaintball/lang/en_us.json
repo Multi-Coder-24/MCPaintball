@@ -14,6 +14,10 @@
   "item.mcpaintball.smoke_grenade": "Smoke Grenade",
   "item.mcpaintball.nausea_grenade": "Nausea Grenade",
 
+  "item.mcpaintball.basic_ammo": "Basic Ammo",
+  "item.mcpaintball.shell_ammo": "Shell Ammo",
+  "item.mcpaintball.heavy_ammo": "Heavy Ammo",
+
   "team.red": "Red",
   "team.green": "Green",
   "team.blue": "Blue",
@@ -43,6 +47,11 @@
   "mcpaintball.command.response.game_create": "Game %s has been created",
   "mcpaintball.command.response.game_start": "Game %s has started, Battle has begun",
   "mcpaintball.command.response.game_stop": "Game %s has ended, Winning team will be announced soon",
+  "mcpaintball.command.response.match_exists": "A match with the name %s already exists",
+
+
+  "Comment_3_1": "Utility",
+  "mcpaintball.response.reload": "Reload Weapon",
 
   "Comment_4": "Subtitles",
   "subtitle.mcpaintball.shot": "Shot Fired",

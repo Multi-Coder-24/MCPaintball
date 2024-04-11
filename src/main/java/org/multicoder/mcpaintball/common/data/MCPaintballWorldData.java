@@ -1,12 +1,19 @@
 package org.multicoder.mcpaintball.common.data;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.saveddata.SavedData;
+import org.multicoder.mcpaintball.MCPaintball;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MCPaintballWorldData extends SavedData
@@ -45,7 +52,7 @@ public class MCPaintballWorldData extends SavedData
         return tag;
     }
 
-    public void IncrementByName(String name,String TK)
+    public void IncrementByName(String name,int Index)
     {
         AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
         MATCHES.forEach(mcPaintballMatch -> {
@@ -56,8 +63,8 @@ public class MCPaintballWorldData extends SavedData
         if(Buffered.get() != null)
         {
             MCPaintballMatch Match = Buffered.get();
-            Match.IncrementByTranslationKey(TK);
-            setDirty();
+            Match.IncrementByOrdinal(Index);
+            setDirty(true);
         }
     }
 
@@ -89,9 +96,26 @@ public class MCPaintballWorldData extends SavedData
             setDirty();
         }
     }
-    public void AddMatch(MCPaintballMatch match){
-        MATCHES.add(match);
-        setDirty();
+    public void AddMatch(MCPaintballMatch match, ServerPlayer player, MinecraftServer server)
+    {
+        AtomicBoolean Exists = new AtomicBoolean(false);
+        MATCHES.forEach(Existing ->
+        {
+            if(Objects.equals(Existing.Name, match.Name))
+            {
+                Exists.set(true);
+            }
+        });
+        if(Exists.get())
+        {
+            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match_exists",match.Name).withStyle(ChatFormatting.DARK_RED));
+        }
+        else
+        {
+            MATCHES.add(match);
+            setDirty();
+            server.getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_create",match.Name),true);
+        }
     }
     public boolean StartedByName(String name)
     {

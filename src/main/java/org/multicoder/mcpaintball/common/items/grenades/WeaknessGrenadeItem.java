@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.common.items;
+package org.multicoder.mcpaintball.common.items.grenades;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;

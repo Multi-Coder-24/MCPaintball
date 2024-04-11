@@ -3,13 +3,16 @@ package org.multicoder.mcpaintball.common.entity.paintball;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
@@ -42,9 +45,15 @@ public class PaintballEntity extends AbstractArrow
                 {
                     if(OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal())
                     {
-                        MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),getTypeName().getString());
+                        MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),OwnerData.GetTeam().ordinal());
+                        level().playSound(null,Owner.blockPosition(),MCPaintballSounds.HIT.get(), SoundSource.PLAYERS,1f,1f);
                     }
                 }
+            } else if (hitResult.getEntity() instanceof Cow && MCPaintball.DEBUG_MODE)
+            {
+                PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
+                MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(),OwnerData.GetTeam().ordinal());
+                level().playSound(null,Owner.blockPosition(),MCPaintballSounds.HIT.get(), SoundSource.PLAYERS,1f,1f);
             }
         }
         this.kill();

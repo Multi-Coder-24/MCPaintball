@@ -1,6 +1,9 @@
 package org.multicoder.mcpaintball.common.items.weapons;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -17,12 +20,13 @@ import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider
 import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+import org.multicoder.mcpaintball.common.utility.ReloadManager;
 
 public class PistolItem extends Item
 {
     public PistolItem()
     {
-        super(new Properties().setNoRepair().stacksTo(1));
+        super(new Properties().durability(16).setNoRepair());
     }
 
     @Override
@@ -30,21 +34,36 @@ public class PistolItem extends Item
     {
         if(!level.isClientSide())
         {
-            MCPaintball.LOG.info("Pistol Use::Server Side");
-            ServerPlayer SP = (ServerPlayer) player;
-            SP.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
+            if(!Screen.hasControlDown())
             {
-                MCPaintball.LOG.info("Pistol Use::Capability Consumer Running");
-                if(MCPaintballWorldData.INSTANCE.StartedByName(cap.getName()))
+                ServerPlayer SP = (ServerPlayer) player;
+                SP.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
                 {
-                    MCPaintball.LOG.info("Pistol Use::Check Passed");
-                    PaintballTeam Team = cap.GetTeam();
-                    AbstractArrow Paintball = new PaintballEntity(Team.getPaintball(),player,level);
-                    Paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,5f,0f);
-                    level.addFreshEntity(Paintball);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT.get(), SoundSource.PLAYERS,1f,1f);
-                }
-            });
+                    if(MCPaintballWorldData.INSTANCE.StartedByName(cap.getName()))
+                    {
+                        if(SP.getItemInHand(hand).getDamageValue() < 16)
+                        {
+                            PaintballTeam Team = cap.GetTeam();
+                            AbstractArrow Paintball = new PaintballEntity(Team.getPaintball(),player,level);
+                            Paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,5f,0f);
+                            level.addFreshEntity(Paintball);
+                            level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT.get(), SoundSource.PLAYERS,1f,1f);
+                            SP.getItemInHand(hand).setDamageValue(SP.getItemInHand(hand).getDamageValue() + 1);
+                            SP.getCooldowns().addCooldown(this,20);
+                        }
+                        else
+                        {
+                            SP.displayClientMessage(Component.translatable("mcpaintball.response.reload").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.DARK_RED),true);
+                        }
+                    }
+                });
+            }
+            else
+            {
+                ServerPlayer SP = (ServerPlayer) player;
+                ItemStack Weapon = SP.getItemInHand(hand);
+                ReloadManager.ReloadWeapon(Weapon,SP);
+            }
         }
         return super.use(level, player, hand);
     }

@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.common.data;
 
 import net.minecraft.nbt.CompoundTag;
+import org.multicoder.mcpaintball.MCPaintball;
 
 public class MCPaintballMatch
 {
@@ -53,41 +54,33 @@ public class MCPaintballMatch
         CompoundTag nbt = new CompoundTag();
         nbt.putString("name",Name);
         nbt.putInt("red",RED);
-        nbt.putInt("green",RED);
-        nbt.putInt("blue",RED);
-        nbt.putInt("cyan",RED);
-        nbt.putInt("magenta",RED);
-        nbt.putInt("yellow",RED);
-        nbt.putInt("lime",RED);
-        nbt.putInt("light_blue",RED);
-        nbt.putInt("pink",RED);
-        nbt.putInt("purple",RED);
+        nbt.putInt("green",GREEN);
+        nbt.putInt("blue",BLUE);
+        nbt.putInt("cyan",CYAN);
+        nbt.putInt("magenta",MAGENTA);
+        nbt.putInt("yellow",YELLOW);
+        nbt.putInt("lime",LIME);
+        nbt.putInt("light_blue",LIGHT_BLUE);
+        nbt.putInt("pink",PINK);
+        nbt.putInt("purple",PURPLE);
         nbt.putBoolean("started",Started);
         return nbt;
     }
 
-    public void IncrementByTranslationKey(String Key)
+    public void IncrementByOrdinal(int Index)
     {
-        if(Key.contains("red")){
-            RED++;
-        } else if (Key.contains("green")) {
-            GREEN++;
-        } else if (Key.contains("blue")) {
-            BLUE++;
-        } else if (Key.contains("cyan")) {
-            CYAN++;
-        } else if (Key.contains("magenta")) {
-            MAGENTA++;
-        } else if (Key.contains("yellow")) {
-            YELLOW++;
-        } else if (Key.contains("lime")) {
-            LIME++;
-        } else if (Key.contains("light_blue")) {
-            LIGHT_BLUE++;
-        } else if (Key.contains("pink")) {
-            PINK++;
-        } else if (Key.contains("purple")) {
-            PURPLE++;
+        switch (Index)
+        {
+            case 0 -> RED++;
+            case 1 -> GREEN++;
+            case 2 -> BLUE++;
+            case 3 -> CYAN++;
+            case 4 -> MAGENTA++;
+            case 5 -> YELLOW++;
+            case 6 -> LIME++;
+            case 7 -> LIGHT_BLUE++;
+            case 8 -> PINK++;
+            case 9 -> PURPLE++;
         }
     }
 }

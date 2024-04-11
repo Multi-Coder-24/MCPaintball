@@ -3,6 +3,7 @@ package org.multicoder.mcpaintball.common.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
@@ -20,12 +21,10 @@ public class MatchCommands
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("create").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::MatchCreate))))).createBuilder().build();
     }
 
-    private static int MatchCreate(CommandContext<CommandSourceStack> context)
-    {
+    private static int MatchCreate(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String name = StringArgumentType.getString(context,"name");
         MCPaintballMatch Match = new MCPaintballMatch(name);
-        MCPaintballWorldData.INSTANCE.AddMatch(Match);
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_create",name),true);
+        MCPaintballWorldData.INSTANCE.AddMatch(Match,context.getSource().getPlayerOrException(),context.getSource().getServer());
         return 0;
     }
     private static int GameStart(CommandContext<CommandSourceStack> context)
