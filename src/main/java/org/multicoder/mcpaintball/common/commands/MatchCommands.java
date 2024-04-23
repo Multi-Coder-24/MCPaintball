@@ -6,39 +6,35 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.PlayerChatMessage;
 import org.multicoder.mcpaintball.common.data.MCPaintballMatch;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 
-public class MatchCommands
-{
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
-    {
+public class MatchCommands {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("start").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::GameStart))))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("stop").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::GameStop))))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("create").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::MatchCreate))))).createBuilder().build();
     }
 
     private static int MatchCreate(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        String name = StringArgumentType.getString(context,"name");
+        String name = StringArgumentType.getString(context, "name");
         MCPaintballMatch Match = new MCPaintballMatch(name);
-        MCPaintballWorldData.INSTANCE.AddMatch(Match,context.getSource().getPlayerOrException(),context.getSource().getServer());
+        MCPaintballWorldData.INSTANCE.AddMatch(Match, context.getSource().getPlayerOrException(), context.getSource().getServer());
         return 0;
     }
-    private static int GameStart(CommandContext<CommandSourceStack> context)
-    {
-        String name = StringArgumentType.getString(context,"name");
+
+    private static int GameStart(CommandContext<CommandSourceStack> context) {
+        String name = StringArgumentType.getString(context, "name");
         MCPaintballWorldData.INSTANCE.StartMatch(name);
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start",name),true);
+        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start", name), true);
         return 0;
     }
-    private static int GameStop(CommandContext<CommandSourceStack> context)
-    {
-        String name = StringArgumentType.getString(context,"name");
+
+    private static int GameStop(CommandContext<CommandSourceStack> context) {
+        String name = StringArgumentType.getString(context, "name");
         MCPaintballWorldData.INSTANCE.StopMatch(name);
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_stop",name),true);
+        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_stop", name), true);
         return 0;
     }
 }

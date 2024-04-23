@@ -1,10 +1,8 @@
 package org.multicoder.mcpaintball.common.utility;
 
-public class FormattingManagers
-{
-    public static PaintballTeam FormatTypeToTeam(String TypeName)
-    {
-        if(TypeName.contains("red")){
+public class FormattingManagers {
+    public static PaintballTeam FormatTypeToTeam(String TypeName) {
+        if (TypeName.contains("red")) {
             return PaintballTeam.RED;
         } else if (TypeName.contains("green")) {
             return PaintballTeam.GREEN;
@@ -24,7 +22,7 @@ public class FormattingManagers
             return PaintballTeam.PINK;
         } else if (TypeName.contains("purple")) {
             return PaintballTeam.PURPLE;
-        }else {
+        } else {
             return PaintballTeam.RED;
         }
     }

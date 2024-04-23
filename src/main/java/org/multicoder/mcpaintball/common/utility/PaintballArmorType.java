@@ -5,14 +5,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
-public enum PaintballArmorType implements ArmorMaterial
-{
+public enum PaintballArmorType implements ArmorMaterial {
     RED("red"),
     GREEN("green"),
     BLUE("blue"),
@@ -42,8 +40,7 @@ public enum PaintballArmorType implements ArmorMaterial
     private final Supplier<Ingredient> repairIngredient = () -> Ingredient.EMPTY;
 
 
-    PaintballArmorType(String name)
-    {
+    PaintballArmorType(String name) {
         this.name = name;
     }
 

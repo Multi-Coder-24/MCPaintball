@@ -11,12 +11,10 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
-import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.throwable.GrenadeEntity;
 
-public class GrenadeRenderer extends EntityRenderer<GrenadeEntity>
-{
+public class GrenadeRenderer extends EntityRenderer<GrenadeEntity> {
     public static final ResourceLocation R = new ResourceLocation("mcpaintball:textures/entity/projectiles/grenades/red_grenade.png");
     public static final ResourceLocation G = new ResourceLocation("mcpaintball:textures/entity/projectiles/grenades/green_grenade.png");
     public static final ResourceLocation B = new ResourceLocation("mcpaintball:textures/entity/projectiles/grenades/blue_grenade.png");
@@ -28,14 +26,16 @@ public class GrenadeRenderer extends EntityRenderer<GrenadeEntity>
     public static final ResourceLocation PI = new ResourceLocation("mcpaintball:textures/entity/projectiles/grenades/pink_grenade.png");
     public static final ResourceLocation PU = new ResourceLocation("mcpaintball:textures/entity/projectiles/grenades/purple_grenade.png");
 
-    public GrenadeRenderer(EntityRendererProvider.Context p_174008_)
-    {
+    public GrenadeRenderer(EntityRendererProvider.Context p_174008_) {
         super(p_174008_);
     }
 
+    private static void vertex(VertexConsumer vertexConsumer, Matrix4f matrix4f, Matrix3f matrix3f, int packedLight, float xVec, int yVec, int xUV, int yUV) {
+        vertexConsumer.vertex(matrix4f, xVec - 0.5F, (float) yVec - 0.25F, 0.0F).color(255, 255, 255, 255).uv((float) xUV, (float) yUV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(matrix3f, 0.0F, 1.0F, 0.0F).endVertex();
+    }
+
     @Override
-    public void render(GrenadeEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight)
-    {
+    public void render(GrenadeEntity entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight) {
         ResourceLocation TEXTURE = getTextureLocation(entity);
         poseStack.pushPose();
         poseStack.scale(0.75F, 0.75F, 0.75F);
@@ -55,34 +55,30 @@ public class GrenadeRenderer extends EntityRenderer<GrenadeEntity>
         poseStack.popPose();
         super.render(entity, entityYaw, partialTick, poseStack, multiBufferSource, packedLight);
     }
-    private static void vertex(VertexConsumer vertexConsumer, Matrix4f matrix4f, Matrix3f matrix3f, int packedLight, float xVec, int yVec, int xUV, int yUV)
-    {
-        vertexConsumer.vertex(matrix4f, xVec - 0.5F, (float) yVec - 0.25F, 0.0F).color(255, 255, 255, 255).uv((float) xUV, (float) yUV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(matrix3f, 0.0F, 1.0F, 0.0F).endVertex();
-    }
+
     @Override
-    public ResourceLocation getTextureLocation(GrenadeEntity entity)
-    {
-        if(entity.getType().equals(MCPaintballEntities.RED_GRENADE.get())){
+    public ResourceLocation getTextureLocation(GrenadeEntity entity) {
+        if (entity.getType().equals(MCPaintballEntities.RED_GRENADE.get())) {
             return R;
         } else if (entity.getType().equals(MCPaintballEntities.GREEN_GRENADE.get())) {
             return G;
-        }else if (entity.getType().equals(MCPaintballEntities.BLUE_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.BLUE_GRENADE.get())) {
             return B;
-        }else if (entity.getType().equals(MCPaintballEntities.CYAN_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.CYAN_GRENADE.get())) {
             return C;
-        }else if (entity.getType().equals(MCPaintballEntities.MAGENTA_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.MAGENTA_GRENADE.get())) {
             return M;
-        }else if (entity.getType().equals(MCPaintballEntities.YELLOW_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.YELLOW_GRENADE.get())) {
             return Y;
-        }else if (entity.getType().equals(MCPaintballEntities.LIME_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.LIME_GRENADE.get())) {
             return LI;
-        }else if (entity.getType().equals(MCPaintballEntities.LIGHT_BLUE_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.LIGHT_BLUE_GRENADE.get())) {
             return LB;
-        }else if (entity.getType().equals(MCPaintballEntities.PINK_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.PINK_GRENADE.get())) {
             return PI;
-        }else if (entity.getType().equals(MCPaintballEntities.PURPLE_GRENADE.get())) {
+        } else if (entity.getType().equals(MCPaintballEntities.PURPLE_GRENADE.get())) {
             return PU;
-        }else{
+        } else {
             return null;
         }
     }

@@ -8,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.saveddata.SavedData;
-import org.multicoder.mcpaintball.MCPaintball;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +15,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class MCPaintballWorldData extends SavedData
-{
+public class MCPaintballWorldData extends SavedData {
     public static final String SAVE_NAME = "mcpaintball";
 
     public static MCPaintballWorldData INSTANCE;
@@ -25,108 +23,101 @@ public class MCPaintballWorldData extends SavedData
     public String VERSION;
     public List<MCPaintballMatch> MATCHES;
 
-    public static MCPaintballWorldData create()
-    {
+    public static MCPaintballWorldData create() {
         MCPaintballWorldData data = new MCPaintballWorldData();
         data.VERSION = "2.0.0";
         data.MATCHES = new ArrayList<>();
         return data;
     }
-    public static MCPaintballWorldData load(CompoundTag nbt)
-    {
+
+    public static MCPaintballWorldData load(CompoundTag nbt) {
         MCPaintballWorldData data = new MCPaintballWorldData();
         data.VERSION = nbt.getString("version");
         data.MATCHES = new ArrayList<>();
         ListTag Matches = nbt.getList("matches", Tag.TAG_COMPOUND);
-        Matches.forEach(tag -> {CompoundTag NBT = (CompoundTag) tag;data.MATCHES.add(new MCPaintballMatch(NBT));});
+        Matches.forEach(tag -> {
+            CompoundTag NBT = (CompoundTag) tag;
+            data.MATCHES.add(new MCPaintballMatch(NBT));
+        });
         return data;
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag)
-    {
-        tag.putString("version",VERSION);
+    public CompoundTag save(CompoundTag tag) {
+        tag.putString("version", VERSION);
         ListTag Matches = new ListTag();
         MATCHES.forEach(match -> Matches.add(match.Serialize()));
-        tag.put("matches",Matches);
+        tag.put("matches", Matches);
         return tag;
     }
 
-    public void IncrementByName(String name,int Index)
-    {
+    public void IncrementByName(String name, int Index) {
         AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
         MATCHES.forEach(mcPaintballMatch -> {
-            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
                 Buffered.set(mcPaintballMatch);
             }
         });
-        if(Buffered.get() != null)
-        {
+        if (Buffered.get() != null) {
             MCPaintballMatch Match = Buffered.get();
             Match.IncrementByOrdinal(Index);
             setDirty(true);
         }
     }
 
-    public void StartMatch(String name){
+    public void StartMatch(String name) {
         AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
         MATCHES.forEach(mcPaintballMatch -> {
-            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
                 Buffered.set(mcPaintballMatch);
             }
         });
-        if(Buffered.get() != null)
-        {
+        if (Buffered.get() != null) {
             MCPaintballMatch Match = Buffered.get();
             Match.Started = true;
             setDirty();
         }
     }
-    public void StopMatch(String name){
+
+    public void StopMatch(String name) {
         AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
         MATCHES.forEach(mcPaintballMatch -> {
-            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
                 Buffered.set(mcPaintballMatch);
             }
         });
-        if(Buffered.get() != null)
-        {
+        if (Buffered.get() != null) {
             MCPaintballMatch Match = Buffered.get();
             Match.Started = false;
             setDirty();
         }
     }
-    public void AddMatch(MCPaintballMatch match, ServerPlayer player, MinecraftServer server)
-    {
+
+    public void AddMatch(MCPaintballMatch match, ServerPlayer player, MinecraftServer server) {
         AtomicBoolean Exists = new AtomicBoolean(false);
         MATCHES.forEach(Existing ->
         {
-            if(Objects.equals(Existing.Name, match.Name))
-            {
+            if (Objects.equals(Existing.Name, match.Name)) {
                 Exists.set(true);
             }
         });
-        if(Exists.get())
-        {
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match_exists",match.Name).withStyle(ChatFormatting.DARK_RED));
-        }
-        else
-        {
+        if (Exists.get()) {
+            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match_exists", match.Name).withStyle(ChatFormatting.DARK_RED));
+        } else {
             MATCHES.add(match);
             setDirty();
-            server.getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_create",match.Name),true);
+            server.getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_create", match.Name), true);
         }
     }
-    public boolean StartedByName(String name)
-    {
+
+    public boolean StartedByName(String name) {
         AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
         MATCHES.forEach(mcPaintballMatch -> {
-            if(mcPaintballMatch.Name.equalsIgnoreCase(name)){
+            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
                 Buffered.set(mcPaintballMatch);
             }
         });
-        if(Buffered.get() != null)
-        {
+        if (Buffered.get() != null) {
             MCPaintballMatch Match = Buffered.get();
             return Match.Started;
         }

@@ -1,7 +1,6 @@
 package org.multicoder.mcpaintball.common.utility;
 
-public enum PaintballClass
-{
+public enum PaintballClass {
     STANDARD,
     HEAVY,
     MEDICAL,
@@ -9,7 +8,7 @@ public enum PaintballClass
     SNIPER,
     GRENADIER;
 
-    public String GetTKey(){
+    public String GetTKey() {
         return "type." + this.name().toLowerCase();
     }
 }

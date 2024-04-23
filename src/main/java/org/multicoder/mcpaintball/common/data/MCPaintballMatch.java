@@ -1,10 +1,8 @@
 package org.multicoder.mcpaintball.common.data;
 
 import net.minecraft.nbt.CompoundTag;
-import org.multicoder.mcpaintball.MCPaintball;
 
-public class MCPaintballMatch
-{
+public class MCPaintballMatch {
     public String Name;
     public boolean Started;
     public int RED;
@@ -18,7 +16,7 @@ public class MCPaintballMatch
     public int PINK;
     public int PURPLE;
 
-    public MCPaintballMatch(String name){
+    public MCPaintballMatch(String name) {
         Name = name;
         RED = 0;
         GREEN = 0;
@@ -33,8 +31,7 @@ public class MCPaintballMatch
         Started = false;
     }
 
-    public MCPaintballMatch(CompoundTag nbt)
-    {
+    public MCPaintballMatch(CompoundTag nbt) {
         Name = nbt.getString("name");
         Started = nbt.getBoolean("started");
         RED = nbt.getInt("red");
@@ -49,28 +46,25 @@ public class MCPaintballMatch
         PURPLE = nbt.getInt("purple");
     }
 
-    public CompoundTag Serialize()
-    {
+    public CompoundTag Serialize() {
         CompoundTag nbt = new CompoundTag();
-        nbt.putString("name",Name);
-        nbt.putInt("red",RED);
-        nbt.putInt("green",GREEN);
-        nbt.putInt("blue",BLUE);
-        nbt.putInt("cyan",CYAN);
-        nbt.putInt("magenta",MAGENTA);
-        nbt.putInt("yellow",YELLOW);
-        nbt.putInt("lime",LIME);
-        nbt.putInt("light_blue",LIGHT_BLUE);
-        nbt.putInt("pink",PINK);
-        nbt.putInt("purple",PURPLE);
-        nbt.putBoolean("started",Started);
+        nbt.putString("name", Name);
+        nbt.putInt("red", RED);
+        nbt.putInt("green", GREEN);
+        nbt.putInt("blue", BLUE);
+        nbt.putInt("cyan", CYAN);
+        nbt.putInt("magenta", MAGENTA);
+        nbt.putInt("yellow", YELLOW);
+        nbt.putInt("lime", LIME);
+        nbt.putInt("light_blue", LIGHT_BLUE);
+        nbt.putInt("pink", PINK);
+        nbt.putInt("purple", PURPLE);
+        nbt.putBoolean("started", Started);
         return nbt;
     }
 
-    public void IncrementByOrdinal(int Index)
-    {
-        switch (Index)
-        {
+    public void IncrementByOrdinal(int Index) {
+        switch (Index) {
             case 0 -> RED++;
             case 1 -> GREEN++;
             case 2 -> BLUE++;

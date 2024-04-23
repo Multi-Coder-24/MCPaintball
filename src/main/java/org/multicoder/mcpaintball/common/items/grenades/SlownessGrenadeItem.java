@@ -1,6 +1,5 @@
 package org.multicoder.mcpaintball.common.items.grenades;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -15,28 +14,23 @@ import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.throwable.SlownessGrenadeEntity;
 
-public class SlownessGrenadeItem extends Item
-{
+public class SlownessGrenadeItem extends Item {
 
-    public SlownessGrenadeItem()
-    {
+    public SlownessGrenadeItem() {
         super(new Properties());
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
-    {
-        if(!level.isClientSide())
-        {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide()) {
             ServerPlayer SP = (ServerPlayer) player;
             SP.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
             {
-                if (MCPaintballWorldData.INSTANCE.StartedByName(cap.getName()))
-                {
-                    SlownessGrenadeEntity Grenade = new SlownessGrenadeEntity(MCPaintballEntities.SLOWNESS_GRENADE.get(),player,level);
-                    Grenade.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,3f,0f);
+                if (MCPaintballWorldData.INSTANCE.StartedByName(cap.getName())) {
+                    SlownessGrenadeEntity Grenade = new SlownessGrenadeEntity(MCPaintballEntities.SLOWNESS_GRENADE.get(), player, level);
+                    Grenade.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 3f, 0f);
                     level.addFreshEntity(Grenade);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1f,1f);
+                    level.playSound(null, player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS, 1f, 1f);
                 }
             });
         }

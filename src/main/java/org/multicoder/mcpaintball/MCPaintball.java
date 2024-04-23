@@ -4,7 +4,6 @@ package org.multicoder.mcpaintball;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -12,48 +11,54 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.neoforged.bus.api.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.common.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.energy.IEnergyStorage;
-import net.neoforged.neoforge.event.*;
+import net.neoforged.neoforge.event.AttachCapabilitiesEvent;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
-import org.multicoder.mcpaintball.common.commands.*;
+import org.multicoder.mcpaintball.common.commands.MatchCommands;
+import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
-import org.multicoder.mcpaintball.common.entity.*;
-import org.multicoder.mcpaintball.common.entity.paintball.*;
-import org.multicoder.mcpaintball.common.entity.throwable.*;
+import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
+import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
+import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
+import org.multicoder.mcpaintball.common.entity.throwable.BlindnessGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.throwable.GrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.throwable.SlownessGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.throwable.WeaknessGrenadeEntity;
 import org.multicoder.mcpaintball.common.entityrenderers.GrenadeRenderer;
-import org.multicoder.mcpaintball.common.entityrenderers.paintball.*;
+import org.multicoder.mcpaintball.common.entityrenderers.paintball.HeavyPaintballRenderer;
+import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEntityRenderer;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
 @Mod(MCPaintball.MOD_ID)
-public class MCPaintball
-{
+public class MCPaintball {
     public static final String MOD_ID = "mcpaintball";
-    public static Logger LOG = LogManager.getLogger(MOD_ID);
     public static final boolean DEBUG_MODE = true;
+    public static Logger LOG = LogManager.getLogger(MOD_ID);
 
-    public MCPaintball()
-    {
+    public MCPaintball() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::buildCreativeTabContents);
         eventBus.addListener(this::registerEntityRenderers);
         MCPaintballItems.ITEMS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
-        MCPaintballSounds.SOUNDS.register(eventBus);    }
+        MCPaintballSounds.SOUNDS.register(eventBus);
+    }
 
     @SuppressWarnings("unchecked")
-    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
-    {
+    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.RED_PAINTBALL.get(), PaintballEntityRenderer::new);
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.GREEN_PAINTBALL.get(), PaintballEntityRenderer::new);
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
@@ -92,12 +97,9 @@ public class MCPaintball
         event.registerEntityRenderer((EntityType<BlindnessGrenadeEntity>) MCPaintballEntities.BLINDNESS_GRENADE.get(), ThrownItemRenderer::new);
     }
 
-    public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
-    {
-        try
-        {
-            if(event.getTabKey().equals(CreativeModeTabs.COMBAT))
-            {
+    public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
+        try {
+            if (event.getTabKey().equals(CreativeModeTabs.COMBAT)) {
                 event.accept(MCPaintballItems.PISTOL.get());
                 event.accept(MCPaintballItems.RIFLE.get());
                 event.accept(MCPaintballItems.SHOTGUN.get());
@@ -154,8 +156,7 @@ public class MCPaintball
                 event.accept(MCPaintballItems.PURPLE_CHESTPLATE.get());
                 event.accept(MCPaintballItems.PURPLE_HELMET.get());
 
-            } else if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
-            {
+            } else if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES)) {
                 event.accept(MCPaintballItems.REMOTE.get());
                 event.accept(MCPaintballItems.GRENADE.get());
                 event.accept(MCPaintballItems.SLOW_GRENADE.get());
@@ -165,62 +166,50 @@ public class MCPaintball
                 event.accept(MCPaintballItems.SHELL_AMMO.get());
                 event.accept(MCPaintballItems.HEAVY_AMMO.get());
             }
-        }
-        catch (Exception exception)
-        {
+        } catch (Exception exception) {
             LOG.error(exception);
         }
     }
 
     @SuppressWarnings("unused")
-    @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID,bus = Mod.EventBusSubscriber.Bus.FORGE)
-    public static class NeoEvents
-    {
+    @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class NeoEvents {
         @SubscribeEvent
-        private static void onServerStarted(ServerStartedEvent event)
-        {
+        private static void onServerStarted(ServerStartedEvent event) {
             ServerLevel overworld = event.getServer().overworld();
             SavedData.Factory<MCPaintballWorldData> F = new SavedData.Factory<>(MCPaintballWorldData::create, MCPaintballWorldData::load);
-            MCPaintballWorldData.INSTANCE = overworld.getDataStorage().computeIfAbsent(F,MCPaintballWorldData.SAVE_NAME);
+            MCPaintballWorldData.INSTANCE = overworld.getDataStorage().computeIfAbsent(F, MCPaintballWorldData.SAVE_NAME);
         }
 
         @SubscribeEvent
-        private static void PlayerCloned(PlayerEvent.Clone event)
-        {
-            if(event.isWasDeath())
-            {
+        private static void PlayerCloned(PlayerEvent.Clone event) {
+            if (event.isWasDeath()) {
                 event.getEntity().reviveCaps();
-                event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(oldStore -> {
-                    event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(newStore -> {
-                        newStore.CopyFrom(oldStore);
-                    });
-                });
+                event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(oldStore -> event.getOriginal().getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(newStore -> newStore.CopyFrom(oldStore)));
                 event.getEntity().invalidateCaps();
             }
         }
     }
+
     @SuppressWarnings("unused")
     @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID)
-    public static class ModEvents
-    {
+    public static class ModEvents {
         @SubscribeEvent
-        public static void registerCommands(RegisterCommandsEvent event)
-        {
+        public static void registerCommands(RegisterCommandsEvent event) {
             CommandDispatcher<CommandSourceStack> Dispatcher = event.getDispatcher();
             TeamCommands.registerCommands(Dispatcher);
             MatchCommands.register(Dispatcher);
         }
+
         @SubscribeEvent
-        public static void RegisterCapabilities(RegisterCapabilitiesEvent event){
+        public static void RegisterCapabilities(RegisterCapabilitiesEvent event) {
             event.register(PaintballPlayer.class);
         }
+
         @SubscribeEvent
-        public static void AttachCapabilityPlayer(AttachCapabilitiesEvent<Entity> event)
-        {
-            if(event.getObject() instanceof Player player)
-            {
-                if(!player.getCapability(PaintballPlayerProvider.CAPABILITY).isPresent())
-                {
+        public static void AttachCapabilityPlayer(AttachCapabilitiesEvent<Entity> event) {
+            if (event.getObject() instanceof Player player) {
+                if (!player.getCapability(PaintballPlayerProvider.CAPABILITY).isPresent()) {
                     event.addCapability(new ResourceLocation(MCPaintball.MOD_ID, "paintball_player"), new PaintballPlayerProvider());
                 }
             }

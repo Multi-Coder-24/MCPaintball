@@ -19,33 +19,29 @@ import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
 import java.util.List;
 
-public class WeaknessGrenadeEntity extends ThrowableItemProjectile
-{
+public class WeaknessGrenadeEntity extends ThrowableItemProjectile {
 
 
-    public WeaknessGrenadeEntity(EntityType<?> p_37442_, Level p_37443_)
-    {
+    public WeaknessGrenadeEntity(EntityType<?> p_37442_, Level p_37443_) {
         super((EntityType<? extends ThrowableItemProjectile>) p_37442_, p_37443_);
     }
 
-    public WeaknessGrenadeEntity(EntityType<?> p_37438_, LivingEntity p_37439_, Level p_37440_)
-    {
+    public WeaknessGrenadeEntity(EntityType<?> p_37438_, LivingEntity p_37439_, Level p_37440_) {
         super((EntityType<? extends ThrowableItemProjectile>) p_37438_, p_37439_, p_37440_);
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult result)
-    {
+    protected void onHitBlock(BlockHitResult result) {
         BlockPos Position = result.getBlockPos();
         Level level = level();
-        Cow C = new Cow(EntityType.COW,level);
-        C.setPos(Position.getX(),Position.getY(),Position.getZ());
+        Cow C = new Cow(EntityType.COW, level);
+        C.setPos(Position.getX(), Position.getY(), Position.getZ());
         level.addFreshEntity(C);
-        AABB BB = new AABB(Position.offset(-5,-5,-5),Position.offset(5,5,5));
-        List<Player> Players = level.getNearbyPlayers(TargetingConditions.DEFAULT,C,BB);
+        AABB BB = new AABB(Position.offset(-5, -5, -5), Position.offset(5, 5, 5));
+        List<Player> Players = level.getNearbyPlayers(TargetingConditions.DEFAULT, C, BB);
         C.discard();
-        Players.forEach(player -> player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS,80)));
-        level.playSound(null,Position, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,1f,1f);
+        Players.forEach(player -> player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80)));
+        level.playSound(null, Position, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 1f, 1f);
         this.kill();
         this.discard();
         super.onHitBlock(result);
