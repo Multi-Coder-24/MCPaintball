@@ -18,6 +18,18 @@
   "item.mcpaintball.shell_ammo": "Shell Ammo",
   "item.mcpaintball.heavy_ammo": "Heavy Ammo",
 
+  "Comment_2": "Blocks",
+  "block.mcpaintball.red_explosive": "Red C4",
+  "block.mcpaintball.green_explosive": "Green C4",
+  "block.mcpaintball.blue_explosive": "Blue C4",
+  "block.mcpaintball.cyan_explosive": "Cyan C4",
+  "block.mcpaintball.magenta_explosive": "Magenta C4",
+  "block.mcpaintball.yellow_explosive": "Yellow C4",
+  "block.mcpaintball.lime_explosive": "Lime C4",
+  "block.mcpaintball.light_blue_explosive": "Light Blue C4",
+  "block.mcpaintball.pink_explosive": "Pink C4",
+  "block.mcpaintball.purple_explosive": "Purple C4",
+
   "team.red": "Red",
   "team.green": "Green",
   "team.blue": "Blue",

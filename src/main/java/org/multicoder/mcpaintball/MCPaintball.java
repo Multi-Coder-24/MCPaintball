@@ -25,6 +25,7 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
@@ -53,6 +54,7 @@ public class MCPaintball {
         eventBus.addListener(this::buildCreativeTabContents);
         eventBus.addListener(this::registerEntityRenderers);
         MCPaintballItems.ITEMS.register(eventBus);
+        MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
         MCPaintballSounds.SOUNDS.register(eventBus);
     }
@@ -165,6 +167,16 @@ public class MCPaintball {
                 event.accept(MCPaintballItems.BASIC_AMMO.get());
                 event.accept(MCPaintballItems.SHELL_AMMO.get());
                 event.accept(MCPaintballItems.HEAVY_AMMO.get());
+                event.accept(MCPaintballBlocks.RED_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.GREEN_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.BLUE_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.CYAN_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.MAGENTA_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.YELLOW_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.LIME_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.LIGHT_BLUE_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.PINK_EXPLOSIVE.get());
+                event.accept(MCPaintballBlocks.PURPLE_EXPLOSIVE.get());
             }
         } catch (Exception exception) {
             LOG.error(exception);
