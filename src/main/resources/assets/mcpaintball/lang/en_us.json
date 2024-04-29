@@ -30,6 +30,17 @@
   "block.mcpaintball.pink_explosive": "Pink C4",
   "block.mcpaintball.purple_explosive": "Purple C4",
 
+  "block.mcpaintball.red_respawn": "Red Respawn Anchor",
+  "block.mcpaintball.green_respawn": "Green Respawn Anchor",
+  "block.mcpaintball.blue_respawn": "Blue Respawn Anchor",
+  "block.mcpaintball.cyan_respawn": "Cyan Respawn Anchor",
+  "block.mcpaintball.magenta_respawn": "Magenta Respawn Anchor",
+  "block.mcpaintball.yellow_respawn": "Yellow Respawn Anchor",
+  "block.mcpaintball.lime_respawn": "Lime Respawn Anchor",
+  "block.mcpaintball.light_blue_respawn": "Light Blue Respawn Anchor",
+  "block.mcpaintball.pink_respawn": "Pink Respawn Anchor",
+  "block.mcpaintball.purple_respawn": "Purple Respawn Anchor",
+
   "team.red": "Red",
   "team.green": "Green",
   "team.blue": "Blue",

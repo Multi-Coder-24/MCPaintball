@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ExplosiveBlock extends Block {
 
     public ExplosiveBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion());
+        super(BlockBehaviour.Properties.copy(Blocks.REINFORCED_DEEPSLATE).noOcclusion());
     }
 
     @Override

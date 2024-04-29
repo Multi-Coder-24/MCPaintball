@@ -177,6 +177,17 @@ public class MCPaintball {
                 event.accept(MCPaintballBlocks.LIGHT_BLUE_EXPLOSIVE.get());
                 event.accept(MCPaintballBlocks.PINK_EXPLOSIVE.get());
                 event.accept(MCPaintballBlocks.PURPLE_EXPLOSIVE.get());
+
+                event.accept(MCPaintballBlocks.RED_RESPAWN.get());
+                event.accept(MCPaintballBlocks.GREEN_RESPAWN.get());
+                event.accept(MCPaintballBlocks.BLUE_RESPAWN.get());
+                event.accept(MCPaintballBlocks.CYAN_RESPAWN.get());
+                event.accept(MCPaintballBlocks.MAGENTA_RESPAWN.get());
+                event.accept(MCPaintballBlocks.YELLOW_RESPAWN.get());
+                event.accept(MCPaintballBlocks.LIME_RESPAWN.get());
+                event.accept(MCPaintballBlocks.LIGHT_BLUE_RESPAWN.get());
+                event.accept(MCPaintballBlocks.PINK_RESPAWN.get());
+                event.accept(MCPaintballBlocks.PURPLE_RESPAWN.get());
             }
         } catch (Exception exception) {
             LOG.error(exception);

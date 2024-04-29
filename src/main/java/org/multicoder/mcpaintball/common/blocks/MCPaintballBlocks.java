@@ -25,6 +25,16 @@ public class MCPaintballBlocks {
     public static final DeferredHolder<Block,?> PINK_EXPLOSIVE = RegisterBlock("pink_explosive",ExplosiveBlock::new);
     public static final DeferredHolder<Block,?> PURPLE_EXPLOSIVE = RegisterBlock("purple_explosive",ExplosiveBlock::new);
 
+    public static final DeferredHolder<Block,?> RED_RESPAWN = RegisterBlock("red_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> GREEN_RESPAWN = RegisterBlock("green_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> BLUE_RESPAWN = RegisterBlock("blue_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> CYAN_RESPAWN = RegisterBlock("cyan_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> MAGENTA_RESPAWN = RegisterBlock("magenta_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> YELLOW_RESPAWN = RegisterBlock("yellow_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> LIME_RESPAWN = RegisterBlock("lime_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> LIGHT_BLUE_RESPAWN = RegisterBlock("light_blue_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> PINK_RESPAWN = RegisterBlock("pink_respawn",RespawnBlock::new);
+    public static final DeferredHolder<Block,?> PURPLE_RESPAWN = RegisterBlock("purple_respawn",RespawnBlock::new);
 
     private static DeferredHolder<Block,?> RegisterBlock(String name, Supplier<Block> supplier)
     {
