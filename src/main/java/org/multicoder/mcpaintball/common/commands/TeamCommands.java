@@ -10,10 +10,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.server.command.EnumArgument;
+import org.multicoder.mcpaintball.common.blocks.RespawnBlock;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.utility.PaintballClass;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
+import java.rmi.AccessException;
 import java.util.Objects;
 
 public class TeamCommands {
@@ -28,8 +30,12 @@ public class TeamCommands {
 
     private static int getClassCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
-        player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap -> {
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.get", Component.translatable(cap.GetType().GetTKey()).getString()));
+        player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
+        {
+            try{
+                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.get", Component.translatable(cap.GetType(TeamCommands.class).GetTKey(TeamCommands.class)).getString()));
+            }
+            catch (Exception e){}
         });
         return 0;
     }
@@ -37,7 +43,9 @@ public class TeamCommands {
     private static int getTeamCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
         player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap -> {
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.get", Component.translatable(cap.GetTeam().GetTKey()).getString()));
+            try {
+                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.get", Component.translatable(cap.GetTeam(TeamCommands.class).GetTKey()).getString()));
+            } catch (AccessException e) {}
         });
         return 0;
     }
@@ -45,8 +53,12 @@ public class TeamCommands {
     private static int LeaveMatch(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         Player player = context.getSource().getPlayerOrException();
         player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap -> {
-            String Name = cap.getName();
-            cap.SetName("");
+            String Name = null;
+            try {
+                Name = cap.getName(TeamCommands.class);
+                cap.SetName("",TeamCommands.class);
+            } catch (AccessException e) {
+            }
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.left", Name));
         });
         return 0;
@@ -57,7 +69,9 @@ public class TeamCommands {
         Player player = context.getSource().getPlayerOrException();
         player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
         {
-            cap.SetName(Name);
+            try {
+                cap.SetName(Name,TeamCommands.class);
+            } catch (AccessException e) {}
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.joined", Name));
         });
         return 0;
@@ -69,10 +83,17 @@ public class TeamCommands {
         PaintballClass selected = context.getArgument("class", PaintballClass.class);
         player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
         {
-            if (Objects.equals(cap.getName(), "")) {
-                cap.SetType(selected);
-                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set", Component.translatable(selected.GetTKey()).getString()));
-                return;
+            try {
+                if (Objects.equals(cap.getName(TeamCommands.class), ""))
+                {
+                    cap.SetType(selected,TeamCommands.class);
+                    try{
+                        player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.get", Component.translatable(cap.GetType(TeamCommands.class).GetTKey(TeamCommands.class)).getString()));
+                    }
+                    catch (Exception e){}
+                    return;
+                }
+            } catch (AccessException e) {
             }
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.invalid"));
 
@@ -86,11 +107,13 @@ public class TeamCommands {
         PaintballTeam selected = context.getArgument("team", PaintballTeam.class);
         player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
         {
-            if (Objects.equals(cap.getName(), "")) {
-                cap.SetTeam(selected);
-                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set", Component.translatable(selected.GetTKey())));
-                return;
-            }
+            try {
+                if (Objects.equals(cap.getName(TeamCommands.class), "")) {
+                    cap.SetTeam(selected,TeamCommands.class);
+                    player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set", Component.translatable(selected.GetTKey())));
+                    return;
+                }
+            } catch (AccessException e) {}
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.invalid"));
         });
         return 0;

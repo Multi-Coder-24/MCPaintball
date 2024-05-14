@@ -4,33 +4,66 @@ import net.minecraft.nbt.CompoundTag;
 import org.multicoder.mcpaintball.common.utility.PaintballClass;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
+import java.rmi.AccessException;
+
 public class PaintballPlayer {
     private PaintballClass Type = PaintballClass.STANDARD;
     private PaintballTeam Team = PaintballTeam.RED;
     private String Name = "";
 
-    public void SetType(PaintballClass type) {
-        Type = type;
+    public void SetType(PaintballClass type,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            Type = type;
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
+        }
     }
 
-    public void SetTeam(PaintballTeam team) {
-        Team = team;
+    public void SetTeam(PaintballTeam team,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            Team = team;
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
+        }
+
     }
 
-    public void SetName(String name) {
-        Name = name;
+    public void SetName(String name,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            Name = name;
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
+        }
     }
 
-    public PaintballClass GetType() {
-        return Type;
+    public PaintballClass GetType(Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            return Type;
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
+        }
     }
 
-    public PaintballTeam GetTeam() {
-        return Team;
+    public PaintballTeam GetTeam(Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            return Team;
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
+        }
     }
 
-    public String getName() {
-        return Name;
+    public String getName(Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            return Name;
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
+        }
     }
 
 

@@ -10,6 +10,8 @@ import net.minecraft.network.chat.Component;
 import org.multicoder.mcpaintball.common.data.MCPaintballMatch;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 
+import java.rmi.AccessException;
+
 public class MatchCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("start").then(Commands.argument("name", StringArgumentType.string()).executes(MatchCommands::GameStart))))).createBuilder().build();
@@ -20,20 +22,26 @@ public class MatchCommands {
     private static int MatchCreate(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String name = StringArgumentType.getString(context, "name");
         MCPaintballMatch Match = new MCPaintballMatch(name);
-        MCPaintballWorldData.INSTANCE.AddMatch(Match, context.getSource().getPlayerOrException(), context.getSource().getServer());
+        try {
+            MCPaintballWorldData.INSTANCE.AddMatch(Match, context.getSource().getPlayerOrException(), context.getSource().getServer(), MatchCommands.class);
+        } catch (AccessException e) {}
         return 0;
     }
 
-    private static int GameStart(CommandContext<CommandSourceStack> context) {
+    private static int GameStart(CommandContext<CommandSourceStack> context){
         String name = StringArgumentType.getString(context, "name");
-        MCPaintballWorldData.INSTANCE.StartMatch(name);
+        try {
+            MCPaintballWorldData.INSTANCE.StartMatch(name, MatchCommands.class);
+        } catch (AccessException e) {}
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start", name), true);
         return 0;
     }
 
     private static int GameStop(CommandContext<CommandSourceStack> context) {
         String name = StringArgumentType.getString(context, "name");
-        MCPaintballWorldData.INSTANCE.StopMatch(name);
+        try {
+            MCPaintballWorldData.INSTANCE.StopMatch(name, MatchCommands.class);
+        } catch (AccessException e) {}
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_stop", name), true);
         return 0;
     }

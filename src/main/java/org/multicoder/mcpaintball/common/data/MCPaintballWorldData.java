@@ -9,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.saveddata.SavedData;
 
+import java.rmi.AccessException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -51,76 +52,102 @@ public class MCPaintballWorldData extends SavedData {
         return tag;
     }
 
-    public void IncrementByName(String name, int Index) {
-        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
-        MATCHES.forEach(mcPaintballMatch -> {
-            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
-                Buffered.set(mcPaintballMatch);
+    public void IncrementByName(String name, int Index,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+            MATCHES.forEach(mcPaintballMatch -> {
+                if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
+                    Buffered.set(mcPaintballMatch);
+                }
+            });
+            if (Buffered.get() != null) {
+                MCPaintballMatch Match = Buffered.get();
+                Match.IncrementByOrdinal(Index);
+                setDirty(true);
             }
-        });
-        if (Buffered.get() != null) {
-            MCPaintballMatch Match = Buffered.get();
-            Match.IncrementByOrdinal(Index);
-            setDirty(true);
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
         }
     }
 
-    public void StartMatch(String name) {
-        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
-        MATCHES.forEach(mcPaintballMatch -> {
-            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
-                Buffered.set(mcPaintballMatch);
+    public void StartMatch(String name,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+            MATCHES.forEach(mcPaintballMatch -> {
+                if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
+                    Buffered.set(mcPaintballMatch);
+                }
+            });
+            if (Buffered.get() != null) {
+                MCPaintballMatch Match = Buffered.get();
+                Match.Started = true;
+                setDirty();
             }
-        });
-        if (Buffered.get() != null) {
-            MCPaintballMatch Match = Buffered.get();
-            Match.Started = true;
-            setDirty();
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
         }
     }
 
-    public void StopMatch(String name) {
-        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
-        MATCHES.forEach(mcPaintballMatch -> {
-            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
-                Buffered.set(mcPaintballMatch);
+    public void StopMatch(String name,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+            MATCHES.forEach(mcPaintballMatch -> {
+                if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
+                    Buffered.set(mcPaintballMatch);
+                }
+            });
+            if (Buffered.get() != null) {
+                MCPaintballMatch Match = Buffered.get();
+                Match.Started = false;
+                setDirty();
             }
-        });
-        if (Buffered.get() != null) {
-            MCPaintballMatch Match = Buffered.get();
-            Match.Started = false;
-            setDirty();
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
+        }
+
+    }
+
+    public void AddMatch(MCPaintballMatch match, ServerPlayer player, MinecraftServer server,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            AtomicBoolean Exists = new AtomicBoolean(false);
+            MATCHES.forEach(Existing ->
+            {
+                if (Objects.equals(Existing.Name, match.Name)) {
+                    Exists.set(true);
+                }
+            });
+            if (Exists.get()) {
+                player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match_exists", match.Name).withStyle(ChatFormatting.DARK_RED));
+            } else {
+                MATCHES.add(match);
+                setDirty();
+                server.getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_create", match.Name), true);
+            }
+        }
+        else{
+            throw new AccessException("Cannot Access This Class");
         }
     }
 
-    public void AddMatch(MCPaintballMatch match, ServerPlayer player, MinecraftServer server) {
-        AtomicBoolean Exists = new AtomicBoolean(false);
-        MATCHES.forEach(Existing ->
-        {
-            if (Objects.equals(Existing.Name, match.Name)) {
-                Exists.set(true);
+    public boolean StartedByName(String name,Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
+            MATCHES.forEach(mcPaintballMatch -> {
+                if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
+                    Buffered.set(mcPaintballMatch);
+                }
+            });
+            if (Buffered.get() != null) {
+                MCPaintballMatch Match = Buffered.get();
+                return Match.Started;
             }
-        });
-        if (Exists.get()) {
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match_exists", match.Name).withStyle(ChatFormatting.DARK_RED));
-        } else {
-            MATCHES.add(match);
-            setDirty();
-            server.getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_create", match.Name), true);
+            return false;
         }
-    }
-
-    public boolean StartedByName(String name) {
-        AtomicReference<MCPaintballMatch> Buffered = new AtomicReference<>();
-        MATCHES.forEach(mcPaintballMatch -> {
-            if (mcPaintballMatch.Name.equalsIgnoreCase(name)) {
-                Buffered.set(mcPaintballMatch);
-            }
-        });
-        if (Buffered.get() != null) {
-            MCPaintballMatch Match = Buffered.get();
-            return Match.Started;
+        else{
+            throw new AccessException("Cannot Access This Class");
         }
-        return false;
     }
 }

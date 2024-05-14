@@ -19,6 +19,8 @@ import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 import org.multicoder.mcpaintball.common.utility.ReloadManager;
 
+import java.rmi.AccessException;
+
 public class RifleItem extends Item {
     public RifleItem() {
         super(new Properties().durability(64).setNoRepair());
@@ -31,24 +33,32 @@ public class RifleItem extends Item {
                 ServerPlayer SP = (ServerPlayer) player;
                 SP.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
                 {
-                    if (MCPaintballWorldData.INSTANCE.StartedByName(cap.getName())) {
-                        if (SP.getItemInHand(hand).getDamageValue() < 4) {
-                            PaintballTeam Team = cap.GetTeam();
-                            AbstractArrow Paintball = new PaintballEntity(Team.getPaintball(), player, level);
-                            Paintball.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 5f, 0f);
-                            level.addFreshEntity(Paintball);
-                            level.playSound(null, player.blockPosition(), MCPaintballSounds.SHOT.get(), SoundSource.PLAYERS, 1f, 1f);
-                            SP.getItemInHand(hand).setDamageValue(SP.getItemInHand(hand).getDamageValue() + 1);
-                            SP.getCooldowns().addCooldown(this, 10);
-                        } else {
-                            SP.displayClientMessage(Component.translatable("mcpaintball.response.reload").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.DARK_RED), true);
+                    try {
+                        if (MCPaintballWorldData.INSTANCE.StartedByName(cap.getName(RifleItem.class), RifleItem.class)) {
+                            if (SP.getItemInHand(hand).getDamageValue() < 4) {
+                                PaintballTeam Team = cap.GetTeam(RifleItem.class);
+                                AbstractArrow Paintball = null;
+                                try
+                                {
+                                    Paintball = new PaintballEntity(Team.getPaintball(RifleItem.class), player, level);
+                                } catch (AccessException e) {}
+                                Paintball.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 5f, 0f);
+                                level.addFreshEntity(Paintball);
+                                level.playSound(null, player.blockPosition(), MCPaintballSounds.SHOT.get(), SoundSource.PLAYERS, 1f, 1f);
+                                SP.getItemInHand(hand).setDamageValue(SP.getItemInHand(hand).getDamageValue() + 1);
+                                SP.getCooldowns().addCooldown(this, 10);
+                            } else {
+                                SP.displayClientMessage(Component.translatable("mcpaintball.response.reload").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.DARK_RED), true);
+                            }
                         }
-                    }
+                    } catch (AccessException e) {}
                 });
             } else {
                 ServerPlayer SP = (ServerPlayer) player;
                 ItemStack Weapon = SP.getItemInHand(hand);
-                ReloadManager.ReloadWeapon(Weapon, SP);
+                try {
+                    ReloadManager.ReloadWeapon(Weapon, SP, RifleItem.class);
+                } catch (AccessException e) {}
             }
         }
         return super.use(level, player, hand);

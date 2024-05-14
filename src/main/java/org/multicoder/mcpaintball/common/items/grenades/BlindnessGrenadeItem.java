@@ -14,6 +14,8 @@ import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.throwable.BlindnessGrenadeEntity;
 
+import java.rmi.AccessException;
+
 public class BlindnessGrenadeItem extends Item {
 
     public BlindnessGrenadeItem() {
@@ -26,12 +28,14 @@ public class BlindnessGrenadeItem extends Item {
             ServerPlayer SP = (ServerPlayer) player;
             SP.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap ->
             {
-                if (MCPaintballWorldData.INSTANCE.StartedByName(cap.getName())) {
-                    BlindnessGrenadeEntity Grenade = new BlindnessGrenadeEntity(MCPaintballEntities.BLINDNESS_GRENADE.get(), player, level);
-                    Grenade.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 3f, 0f);
-                    level.addFreshEntity(Grenade);
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS, 1f, 1f);
-                }
+                try {
+                    if (MCPaintballWorldData.INSTANCE.StartedByName(cap.getName(BlindnessGrenadeItem.class), BlindnessGrenadeItem.class)) {
+                        BlindnessGrenadeEntity Grenade = new BlindnessGrenadeEntity(MCPaintballEntities.BLINDNESS_GRENADE.get(), player, level);
+                        Grenade.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 3f, 0f);
+                        level.addFreshEntity(Grenade);
+                        level.playSound(null, player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS, 1f, 1f);
+                    }
+                } catch (AccessException e) {}
             });
         }
         return super.use(level, player, hand);

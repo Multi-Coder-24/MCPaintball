@@ -16,6 +16,8 @@ import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 
+import java.rmi.AccessException;
+
 @SuppressWarnings("all")
 public class PaintballEntity extends AbstractArrow {
     public PaintballEntity(EntityType<?> entityType, Level level) {
@@ -34,15 +36,21 @@ public class PaintballEntity extends AbstractArrow {
             if (hitResult.getEntity() instanceof ServerPlayer target) {
                 PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
                 PaintballPlayer TargetData = target.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-                if (OwnerData.getName().equals(TargetData.getName())) {
-                    if (OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal()) {
-                        MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(), OwnerData.GetTeam().ordinal());
-                        level().playSound(null, Owner.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+                try {
+                    if (OwnerData.getName(PaintballEntity.class).equals(TargetData.getName(PaintballEntity.class))) {
+                        if (OwnerData.GetTeam(PaintballEntity.class).ordinal() != TargetData.GetTeam(PaintballEntity.class).ordinal()) {
+                            try {
+                                MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(PaintballEntity.class), OwnerData.GetTeam(PaintballEntity.class).ordinal(), PaintballEntity.class);
+                            } catch (AccessException e) {}
+                            level().playSound(null, Owner.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+                        }
                     }
-                }
+                } catch (AccessException e) {}
             } else if (hitResult.getEntity() instanceof Cow && MCPaintball.DEBUG_MODE) {
                 PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-                MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(), OwnerData.GetTeam().ordinal());
+                try {
+                    MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(PaintballEntity.class), OwnerData.GetTeam(PaintballEntity.class).ordinal(), PaintballEntity.class);
+                } catch (AccessException e) {}
                 level().playSound(null, Owner.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
             }
         }

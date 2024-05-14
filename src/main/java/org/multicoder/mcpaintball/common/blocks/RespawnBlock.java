@@ -15,6 +15,8 @@ import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 
+import java.rmi.AccessException;
+
 public class RespawnBlock extends Block
 {
     public RespawnBlock()
@@ -29,27 +31,29 @@ public class RespawnBlock extends Block
         {
             ServerPlayer serverPlayer = (ServerPlayer) player;
             PaintballPlayer Cap = serverPlayer.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-            if(MCPaintballWorldData.INSTANCE.StartedByName(Cap.getName()))
-            {
-                Block Ref = null;
-                switch (Cap.GetTeam())
+            try {
+                if(MCPaintballWorldData.INSTANCE.StartedByName(Cap.getName(RespawnBlock.class), RespawnBlock.class))
                 {
-                    case RED -> Ref = MCPaintballBlocks.RED_RESPAWN.get();
-                    case BLUE -> Ref = MCPaintballBlocks.BLUE_RESPAWN.get();
-                    case GREEN -> Ref = MCPaintballBlocks.GREEN_RESPAWN.get();
-                    case CYAN -> Ref = MCPaintballBlocks.CYAN_RESPAWN.get();
-                    case MAGENTA -> Ref = MCPaintballBlocks.MAGENTA_RESPAWN.get();
-                    case YELLOW -> Ref = MCPaintballBlocks.YELLOW_RESPAWN.get();
-                    case LIME -> Ref = MCPaintballBlocks.LIME_RESPAWN.get();
-                    case LIGHT_BLUE -> Ref = MCPaintballBlocks.LIGHT_BLUE_RESPAWN.get();
-                    case PINK -> Ref = MCPaintballBlocks.PINK_RESPAWN.get();
-                    case PURPLE -> Ref = MCPaintballBlocks.PURPLE_RESPAWN.get();
+                    Block Ref = null;
+                    switch (Cap.GetTeam(RespawnBlock.class))
+                    {
+                        case RED -> Ref = MCPaintballBlocks.RED_RESPAWN.get();
+                        case BLUE -> Ref = MCPaintballBlocks.BLUE_RESPAWN.get();
+                        case GREEN -> Ref = MCPaintballBlocks.GREEN_RESPAWN.get();
+                        case CYAN -> Ref = MCPaintballBlocks.CYAN_RESPAWN.get();
+                        case MAGENTA -> Ref = MCPaintballBlocks.MAGENTA_RESPAWN.get();
+                        case YELLOW -> Ref = MCPaintballBlocks.YELLOW_RESPAWN.get();
+                        case LIME -> Ref = MCPaintballBlocks.LIME_RESPAWN.get();
+                        case LIGHT_BLUE -> Ref = MCPaintballBlocks.LIGHT_BLUE_RESPAWN.get();
+                        case PINK -> Ref = MCPaintballBlocks.PINK_RESPAWN.get();
+                        case PURPLE -> Ref = MCPaintballBlocks.PURPLE_RESPAWN.get();
+                    }
+                    if(state.getBlock() == Ref)
+                    {
+                        serverPlayer.setRespawnPosition(level.dimension(),pos.above(),0f,true,false);
+                    }
                 }
-                if(state.getBlock() == Ref)
-                {
-                    serverPlayer.setRespawnPosition(level.dimension(),pos.above(),0f,true,false);
-                }
-            }
+            } catch (AccessException e) {}
         }
         return super.use(state, level, pos, player, hand, result);
     }

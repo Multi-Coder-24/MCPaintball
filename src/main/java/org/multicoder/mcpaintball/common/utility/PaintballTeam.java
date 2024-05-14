@@ -3,6 +3,8 @@ package org.multicoder.mcpaintball.common.utility;
 import net.minecraft.world.entity.EntityType;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 
+import java.rmi.AccessException;
+
 public enum PaintballTeam {
     RED,
     GREEN,
@@ -15,40 +17,45 @@ public enum PaintballTeam {
     PINK,
     PURPLE;
 
-    public EntityType<?> getPaintball() {
-        switch (this) {
-            case RED -> {
-                return MCPaintballEntities.RED_PAINTBALL.get();
+    public EntityType<?> getPaintball(Class<?> Invoker) throws AccessException {
+        if(Invoker.getPackageName().startsWith("org.multicoder")){
+            switch (this) {
+                case RED -> {
+                    return MCPaintballEntities.RED_PAINTBALL.get();
+                }
+                case GREEN -> {
+                    return MCPaintballEntities.GREEN_PAINTBALL.get();
+                }
+                case BLUE -> {
+                    return MCPaintballEntities.BLUE_PAINTBALL.get();
+                }
+                case CYAN -> {
+                    return MCPaintballEntities.CYAN_PAINTBALL.get();
+                }
+                case MAGENTA -> {
+                    return MCPaintballEntities.MAGENTA_PAINTBALL.get();
+                }
+                case YELLOW -> {
+                    return MCPaintballEntities.YELLOW_PAINTBALL.get();
+                }
+                case LIME -> {
+                    return MCPaintballEntities.LIME_PAINTBALL.get();
+                }
+                case LIGHT_BLUE -> {
+                    return MCPaintballEntities.LIGHT_BLUE_PAINTBALL.get();
+                }
+                case PINK -> {
+                    return MCPaintballEntities.PINK_PAINTBALL.get();
+                }
+                case PURPLE -> {
+                    return MCPaintballEntities.PURPLE_PAINTBALL.get();
+                }
             }
-            case GREEN -> {
-                return MCPaintballEntities.GREEN_PAINTBALL.get();
-            }
-            case BLUE -> {
-                return MCPaintballEntities.BLUE_PAINTBALL.get();
-            }
-            case CYAN -> {
-                return MCPaintballEntities.CYAN_PAINTBALL.get();
-            }
-            case MAGENTA -> {
-                return MCPaintballEntities.MAGENTA_PAINTBALL.get();
-            }
-            case YELLOW -> {
-                return MCPaintballEntities.YELLOW_PAINTBALL.get();
-            }
-            case LIME -> {
-                return MCPaintballEntities.LIME_PAINTBALL.get();
-            }
-            case LIGHT_BLUE -> {
-                return MCPaintballEntities.LIGHT_BLUE_PAINTBALL.get();
-            }
-            case PINK -> {
-                return MCPaintballEntities.PINK_PAINTBALL.get();
-            }
-            case PURPLE -> {
-                return MCPaintballEntities.PURPLE_PAINTBALL.get();
-            }
+            return null;
         }
-        return null;
+        else {
+            throw new AccessException("Cannot Access This Class");
+        }
     }
 
     public EntityType<?> getHeavyPaintball() {

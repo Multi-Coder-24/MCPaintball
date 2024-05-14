@@ -11,10 +11,13 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
+
+import java.rmi.AccessException;
 
 @SuppressWarnings("all")
 public class HeavyPaintballEntity extends AbstractArrow {
@@ -32,17 +35,23 @@ public class HeavyPaintballEntity extends AbstractArrow {
         PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
         BlockPos Position = hitResult.getBlockPos();
         String TK = getTypeName().getString();
-        int EntityTeam = FormattingManagers.FormatTypeToTeam(TK).ordinal();
+        try {
+            int EntityTeam = FormattingManagers.FormatTypeToTeam(TK, HeavyPaintballEntity.class).ordinal();
+        } catch (Exception e) {}
         Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.MOB);
         E.getHitPlayers().keySet().forEach(player ->
         {
             ServerPlayer target = (ServerPlayer) player;
             PaintballPlayer TargetData = target.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-            if (OwnerData.getName().equals(TargetData.getName())) {
-                if (OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal()) {
-                    MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(), OwnerData.GetTeam().ordinal());
+            try {
+                if (OwnerData.getName(HeavyPaintballEntity.class).equals(TargetData.getName(HeavyPaintballEntity.class))) {
+                    if (OwnerData.GetTeam(HeavyPaintballEntity.class).ordinal() != TargetData.GetTeam(HeavyPaintballEntity.class).ordinal()) {
+                        try {
+                            MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(HeavyPaintballEntity.class), OwnerData.GetTeam(HeavyPaintballEntity.class).ordinal(), HeavyPaintballEntity.class);
+                        } catch (AccessException e) {}
+                    }
                 }
-            }
+            } catch (AccessException e) {}
         });
         this.kill();
         this.discard();

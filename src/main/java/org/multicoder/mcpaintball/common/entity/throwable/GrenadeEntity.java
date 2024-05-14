@@ -12,7 +12,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
+import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+
+import java.rmi.AccessException;
 
 public class GrenadeEntity extends ThrowableItemProjectile {
 
@@ -34,9 +37,13 @@ public class GrenadeEntity extends ThrowableItemProjectile {
             {
                 PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
                 PaintballPlayer TargetData = player.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
-                if (OwnerData.GetTeam().ordinal() != TargetData.GetTeam().ordinal()) {
-                    MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(), OwnerData.GetTeam().ordinal());
-                }
+                try {
+                    if (OwnerData.GetTeam(GrenadeEntity.class).ordinal() != TargetData.GetTeam(GrenadeEntity.class).ordinal()) {
+                        try {
+                            MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(GrenadeEntity.class), OwnerData.GetTeam(GrenadeEntity.class).ordinal(), GrenadeEntity.class);
+                        } catch (AccessException e) {}
+                    }
+                } catch (AccessException e) {}
             });
             this.kill();
             this.discard();
