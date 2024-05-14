@@ -10,6 +10,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.server.command.EnumArgument;
+import org.apache.logging.log4j.MarkerManager;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.blocks.RespawnBlock;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
 import org.multicoder.mcpaintball.common.utility.PaintballClass;
@@ -17,6 +19,7 @@ import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
 import java.rmi.AccessException;
 import java.util.Objects;
+import java.util.UUID;
 
 public class TeamCommands {
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -35,7 +38,7 @@ public class TeamCommands {
             try{
                 player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.get", Component.translatable(cap.GetType(TeamCommands.class).GetTKey(TeamCommands.class)).getString()));
             }
-            catch (Exception e){}
+            catch (Exception e){MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
         });
         return 0;
     }
@@ -45,7 +48,8 @@ public class TeamCommands {
         player.getCapability(PaintballPlayerProvider.CAPABILITY).ifPresent(cap -> {
             try {
                 player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.get", Component.translatable(cap.GetTeam(TeamCommands.class).GetTKey()).getString()));
-            } catch (AccessException e) {}
+            } catch (AccessException e) {
+                MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
         });
         return 0;
     }
@@ -57,8 +61,7 @@ public class TeamCommands {
             try {
                 Name = cap.getName(TeamCommands.class);
                 cap.SetName("",TeamCommands.class);
-            } catch (AccessException e) {
-            }
+            } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.left", Name));
         });
         return 0;
@@ -71,7 +74,7 @@ public class TeamCommands {
         {
             try {
                 cap.SetName(Name,TeamCommands.class);
-            } catch (AccessException e) {}
+            } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.match.joined", Name));
         });
         return 0;
@@ -90,11 +93,10 @@ public class TeamCommands {
                     try{
                         player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.get", Component.translatable(cap.GetType(TeamCommands.class).GetTKey(TeamCommands.class)).getString()));
                     }
-                    catch (Exception e){}
+                    catch (Exception e){MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
                     return;
                 }
-            } catch (AccessException e) {
-            }
+            } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.invalid"));
 
         });
@@ -113,7 +115,7 @@ public class TeamCommands {
                     player.sendSystemMessage(Component.translatable("mcpaintball.command.response.team.set", Component.translatable(selected.GetTKey())));
                     return;
                 }
-            } catch (AccessException e) {}
+            } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
             player.sendSystemMessage(Component.translatable("mcpaintball.command.response.invalid"));
         });
         return 0;

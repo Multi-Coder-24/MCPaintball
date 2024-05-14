@@ -10,6 +10,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import org.apache.logging.log4j.MarkerManager;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
@@ -41,16 +42,16 @@ public class PaintballEntity extends AbstractArrow {
                         if (OwnerData.GetTeam(PaintballEntity.class).ordinal() != TargetData.GetTeam(PaintballEntity.class).ordinal()) {
                             try {
                                 MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(PaintballEntity.class), OwnerData.GetTeam(PaintballEntity.class).ordinal(), PaintballEntity.class);
-                            } catch (AccessException e) {}
+                            } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
                             level().playSound(null, Owner.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
                         }
                     }
-                } catch (AccessException e) {}
+                } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
             } else if (hitResult.getEntity() instanceof Cow && MCPaintball.DEBUG_MODE) {
                 PaintballPlayer OwnerData = Owner.getCapability(PaintballPlayerProvider.CAPABILITY).resolve().get();
                 try {
                     MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(PaintballEntity.class), OwnerData.GetTeam(PaintballEntity.class).ordinal(), PaintballEntity.class);
-                } catch (AccessException e) {}
+                } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
                 level().playSound(null, Owner.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
             }
         }

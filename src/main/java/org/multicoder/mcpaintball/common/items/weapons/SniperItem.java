@@ -12,6 +12,8 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.apache.logging.log4j.MarkerManager;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
@@ -40,7 +42,8 @@ public class SniperItem extends Item {
                                 AbstractArrow Paintball = null;
                                 try {
                                     Paintball = new PaintballEntity(Team.getPaintball(SniperItem.class), player, level);
-                                } catch (AccessException e) {}
+                                } catch (AccessException e) {
+                                    MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
                                 Paintball.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 5f, 0f);
                                 level.addFreshEntity(Paintball);
                                 level.playSound(null, player.blockPosition(), MCPaintballSounds.SHOT.get(), SoundSource.PLAYERS, 1f, 1f);
@@ -50,14 +53,14 @@ public class SniperItem extends Item {
                                 SP.displayClientMessage(Component.translatable("mcpaintball.response.reload").withStyle(ChatFormatting.BOLD).withStyle(ChatFormatting.DARK_RED), true);
                             }
                         }
-                    } catch (AccessException e) {}
+                    } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
                 });
             } else {
                 ServerPlayer SP = (ServerPlayer) player;
                 ItemStack Weapon = SP.getItemInHand(hand);
                 try {
                     ReloadManager.ReloadWeapon(Weapon, SP, SniperItem.class);
-                } catch (AccessException e) {}
+                } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
             }
         }
         return super.use(level, player, hand);

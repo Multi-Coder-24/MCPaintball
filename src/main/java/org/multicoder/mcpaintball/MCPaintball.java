@@ -48,8 +48,12 @@ public class MCPaintball {
     public static final String MOD_ID = "mcpaintball";
     public static final boolean DEBUG_MODE = true;
     public static Logger LOG = LogManager.getLogger(MOD_ID);
+    public static Logger SECURITY_LOG = LogManager.getLogger(MOD_ID + "-Security");
 
-    public MCPaintball() {
+    public MCPaintball()
+    {
+        LOG.info("MCPaintball Started");
+        SECURITY_LOG.info("MCPaintball Security Log Ready");
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::buildCreativeTabContents);
         eventBus.addListener(this::registerEntityRenderers);

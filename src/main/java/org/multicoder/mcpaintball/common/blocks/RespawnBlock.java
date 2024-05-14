@@ -11,6 +11,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.apache.logging.log4j.MarkerManager;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
@@ -53,7 +55,10 @@ public class RespawnBlock extends Block
                         serverPlayer.setRespawnPosition(level.dimension(),pos.above(),0f,true,false);
                     }
                 }
-            } catch (AccessException e) {}
+            } catch (AccessException e)
+            {
+                MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");
+            }
         }
         return super.use(state, level, pos, player, hand, result);
     }

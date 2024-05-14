@@ -9,6 +9,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import org.apache.logging.log4j.MarkerManager;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayer;
 import org.multicoder.mcpaintball.common.data.capability.PaintballPlayerProvider;
@@ -41,9 +43,10 @@ public class GrenadeEntity extends ThrowableItemProjectile {
                     if (OwnerData.GetTeam(GrenadeEntity.class).ordinal() != TargetData.GetTeam(GrenadeEntity.class).ordinal()) {
                         try {
                             MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(GrenadeEntity.class), OwnerData.GetTeam(GrenadeEntity.class).ordinal(), GrenadeEntity.class);
-                        } catch (AccessException e) {}
+                        } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
                     }
-                } catch (AccessException e) {}
+                } catch (AccessException e) {
+                    MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
             });
             this.kill();
             this.discard();

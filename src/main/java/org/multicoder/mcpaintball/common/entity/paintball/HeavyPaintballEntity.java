@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import org.apache.logging.log4j.MarkerManager;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
@@ -37,7 +39,7 @@ public class HeavyPaintballEntity extends AbstractArrow {
         String TK = getTypeName().getString();
         try {
             int EntityTeam = FormattingManagers.FormatTypeToTeam(TK, HeavyPaintballEntity.class).ordinal();
-        } catch (Exception e) {}
+        } catch (Exception e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
         Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.MOB);
         E.getHitPlayers().keySet().forEach(player ->
         {
@@ -48,10 +50,11 @@ public class HeavyPaintballEntity extends AbstractArrow {
                     if (OwnerData.GetTeam(HeavyPaintballEntity.class).ordinal() != TargetData.GetTeam(HeavyPaintballEntity.class).ordinal()) {
                         try {
                             MCPaintballWorldData.INSTANCE.IncrementByName(OwnerData.getName(HeavyPaintballEntity.class), OwnerData.GetTeam(HeavyPaintballEntity.class).ordinal(), HeavyPaintballEntity.class);
-                        } catch (AccessException e) {}
+                        } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
                     }
                 }
-            } catch (AccessException e) {}
+            } catch (AccessException e) {
+                MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
         });
         this.kill();
         this.discard();

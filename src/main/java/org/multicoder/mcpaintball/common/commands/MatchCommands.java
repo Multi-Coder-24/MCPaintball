@@ -7,6 +7,8 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import org.apache.logging.log4j.MarkerManager;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.data.MCPaintballMatch;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 
@@ -24,7 +26,7 @@ public class MatchCommands {
         MCPaintballMatch Match = new MCPaintballMatch(name);
         try {
             MCPaintballWorldData.INSTANCE.AddMatch(Match, context.getSource().getPlayerOrException(), context.getSource().getServer(), MatchCommands.class);
-        } catch (AccessException e) {}
+        } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
         return 0;
     }
 
@@ -32,7 +34,8 @@ public class MatchCommands {
         String name = StringArgumentType.getString(context, "name");
         try {
             MCPaintballWorldData.INSTANCE.StartMatch(name, MatchCommands.class);
-        } catch (AccessException e) {}
+        } catch (AccessException e) {
+            MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start", name), true);
         return 0;
     }
@@ -41,7 +44,7 @@ public class MatchCommands {
         String name = StringArgumentType.getString(context, "name");
         try {
             MCPaintballWorldData.INSTANCE.StopMatch(name, MatchCommands.class);
-        } catch (AccessException e) {}
+        } catch (AccessException e) {MCPaintball.SECURITY_LOG.fatal(MarkerManager.getMarker("MCPaintball"),"An attempt Was made to access an anti-cheat protected class");}
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_stop", name), true);
         return 0;
     }
