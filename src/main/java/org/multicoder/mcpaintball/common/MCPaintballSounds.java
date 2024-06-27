@@ -1,6 +1,5 @@
 package org.multicoder.mcpaintball.common;
 
-import net.minecraft.client.resources.sounds.SoundEventRegistration;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

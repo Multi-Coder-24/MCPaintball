@@ -41,7 +41,6 @@ public enum PaintballTeam
             case RED -> {return "mcpaintball:red_paintball";}
             case GREEN -> {return "mcpaintball:green_paintball";}
             case BLUE -> {return "mcpaintball:blue_paintball";}
-            case CYAN -> {return "mcpaintball:cyan_paintball";}
         }
         return null;
     }

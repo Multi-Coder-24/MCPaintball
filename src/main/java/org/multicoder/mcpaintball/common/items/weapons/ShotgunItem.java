@@ -9,7 +9,10 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
+import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
 
@@ -23,12 +26,13 @@ public class ShotgunItem extends Item
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
-        if(!level.isClientSide()){
-            CompoundTag PersistData = player.getPersistentData();
-            if(PersistData.contains("mcpaintball.teamsTag")){
-                CompoundTag TeamData = PersistData.getCompound("mcpaintball.teamsTag");
-                if(TeamData.contains("team")){
-                    PaintballTeam Team = PaintballTeam.values()[TeamData.getInt("team")];
+        if(!level.isClientSide())
+        {
+            if(MCPaintballTeamsDataHelper.HasTeam(player))
+            {
+                if(MCPaintballWorldData.INSTANCE.MatchStarted)
+                {
+                    PaintballTeam Team = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
                     AbstractArrow Paintball_1 = new PaintballEntity(Team.getPaintball(),player,level);
                     AbstractArrow Paintball_2 = new PaintballEntity(Team.getPaintball(),player,level);
                     AbstractArrow Paintball_3 = new PaintballEntity(Team.getPaintball(),player,level);
@@ -39,9 +43,10 @@ public class ShotgunItem extends Item
                     level.addFreshEntity(Paintball_2);
                     level.addFreshEntity(Paintball_3);
                     level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT.get(), SoundSource.PLAYERS,1f,1f);
+                    return InteractionResultHolder.consume(player.getItemInHand(hand));
                 }
             }
         }
-        return super.use(level, player, hand);
+        return InteractionResultHolder.fail(player.getItemInHand(hand));
     }
 }

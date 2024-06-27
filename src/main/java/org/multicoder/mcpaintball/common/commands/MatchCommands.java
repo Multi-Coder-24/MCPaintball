@@ -6,7 +6,15 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class MatchCommands
 {
@@ -16,27 +24,46 @@ public class MatchCommands
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("match").then(Commands.literal("stop").executes(MatchCommands::MatchStop)))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("start").executes(MatchCommands::GameStart)))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("stop").executes(MatchCommands::GameStop)))).createBuilder().build();
+        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("winner").executes(MatchCommands::Winner)))).createBuilder().build();
+    }
+
+    private static int Winner(CommandContext<CommandSourceStack> context)
+    {
+        List<Integer> Points = new ArrayList<>();
+        Points.add(MCPaintballWorldData.INSTANCE.RED_POINTS);
+        Points.add(MCPaintballWorldData.INSTANCE.GREEN_POINTS);
+        Points.add(MCPaintballWorldData.INSTANCE.BLUE_POINTS);
+        int Index = Points.indexOf(Points.stream().max(Comparator.naturalOrder()).get());
+        PaintballTeam WinningTeam = PaintballTeam.values()[Index];
+        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.winner",WinningTeam.name()),true);
+        MCPaintballWorldData.INSTANCE.GREEN_POINTS = 0;
+        MCPaintballWorldData.INSTANCE.BLUE_POINTS = 0;
+        MCPaintballWorldData.INSTANCE.RED_POINTS = 0;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
 
     private static int MatchStart(CommandContext<CommandSourceStack> context)
     {
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_start"),true);
         MCPaintballWorldData.INSTANCE.MatchStarted = true;
-        return 1;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
     private static int MatchStop(CommandContext<CommandSourceStack> context)
     {
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_stop"),true);
         MCPaintballWorldData.INSTANCE.MatchStarted = false;
-        return 1;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
 
     private static int GameStart(CommandContext<CommandSourceStack> context)
     {
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game_start"),true);
-        MCPaintballWorldData.INSTANCE.MatchStarted = true;
         MCPaintballWorldData.INSTANCE.GameStarted = true;
-        return 1;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
     private static int GameStop(CommandContext<CommandSourceStack> context)
     {
@@ -45,12 +72,12 @@ public class MatchCommands
         MCPaintballWorldData.INSTANCE.GameStarted = false;
         context.getSource().getServer().getPlayerList().getPlayers().forEach(serverPlayer ->
         {
-            CompoundTag Persist = serverPlayer.getPersistentData();
-            if(Persist.contains("mcpaintball.teamsTag"))
+            if(MCPaintballTeamsDataHelper.HasTeam(serverPlayer))
             {
-                Persist.remove("mcpaintball.teamsTag");
+                MCPaintballTeamsDataHelper.ResetAll(serverPlayer);
             }
         });
-        return 1;
+        MCPaintballWorldData.INSTANCE.setDirty();
+        return 0;
     }
 }

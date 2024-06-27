@@ -4,12 +4,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
@@ -30,18 +33,19 @@ public class PaintballEntity extends AbstractArrow
     {
         if(!level().isClientSide())
         {
-            String TN = getTypeName().getString();
-            PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
-            if(hitResult.getEntity() instanceof Player player)
+            if(MCPaintballWorldData.INSTANCE.MatchStarted)
             {
-                CompoundTag Persist = player.getPersistentData();
-                if(Persist.contains("mcpaintball.teamsTag"))
+                String TN = getTypeName().getString().toLowerCase();
+                PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
+                if(hitResult.getEntity() instanceof Player player)
                 {
-                    CompoundTag TeamsData = Persist.getCompound("mcpaintball.teamsTag");
-                    PaintballTeam T = PaintballTeam.values()[TeamsData.getInt("team")];
-                    if(EntityTeam != T)
+                    if(MCPaintballTeamsDataHelper.HasTeam(player))
                     {
-                        MCPaintballWorldData.IncrementByTranslationKey(TN);
+                        PaintballTeam T = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                        if(EntityTeam != T)
+                        {
+                            MCPaintballWorldData.IncrementByTranslationKey(TN);
+                        }
                     }
                 }
             }

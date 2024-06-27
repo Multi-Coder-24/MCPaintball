@@ -15,12 +15,14 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
+import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.*;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
@@ -48,24 +50,10 @@ public class MCPaintball
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.RED_PAINTBALL.get(), PaintballEntityRenderer::new);
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.GREEN_PAINTBALL.get(), PaintballEntityRenderer::new);
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.CYAN_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.MAGENTA_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.YELLOW_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.LIME_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.LIGHT_BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.PINK_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.PURPLE_PAINTBALL.get(), PaintballEntityRenderer::new);
 
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.RED_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.GREEN_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.BLUE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.CYAN_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.MAGENTA_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.YELLOW_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.LIME_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.LIGHT_BLUE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.PINK_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.PURPLE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
     }
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
@@ -79,9 +67,6 @@ public class MCPaintball
                 event.accept(MCPaintballItems.SHOTGUN.get());
                 event.accept(MCPaintballItems.SNIPER.get());
                 event.accept(MCPaintballItems.BAZOOKA.get());
-            } else if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES))
-            {
-                event.accept(MCPaintballItems.REMOTE.get());
             }
         }
         catch (Exception exception)
@@ -100,6 +85,7 @@ public class MCPaintball
             ServerLevel overworld = event.getServer().overworld();
             SavedData.Factory<MCPaintballWorldData> F = new SavedData.Factory<>(MCPaintballWorldData::create, MCPaintballWorldData::load);
             MCPaintballWorldData.INSTANCE = overworld.getDataStorage().computeIfAbsent(F,MCPaintballWorldData.SAVE_NAME);
+            MCPaintballWorldData.INSTANCE.setDirty();
         }
     }
     @SuppressWarnings("unused")
@@ -112,6 +98,11 @@ public class MCPaintball
             CommandDispatcher<CommandSourceStack> Dispatcher = event.getDispatcher();
             TeamCommands.registerCommands(Dispatcher);
             MatchCommands.registerCommands(Dispatcher);
+        }
+        @SubscribeEvent
+        public static void PlayerJoined(PlayerEvent.PlayerLoggedInEvent event)
+        {
+            MCPaintballTeamsDataHelper.SetIfAbsent(event.getEntity());
         }
     }
 }
