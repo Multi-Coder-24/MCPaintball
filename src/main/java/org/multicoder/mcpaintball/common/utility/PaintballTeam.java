@@ -10,17 +10,9 @@ public enum PaintballTeam
     GREEN,
     BLUE;
 
-    public ChatFormatting getDisplayColor()
+
+    public EntityType<?> getPaintball()
     {
-        switch(this)
-        {
-            case RED ->{return ChatFormatting.DARK_RED;}
-            case GREEN ->{return ChatFormatting.DARK_GREEN;}
-            case BLUE ->{return ChatFormatting.DARK_BLUE;}
-        }
-        return ChatFormatting.BLACK;
-    }
-    public EntityType<?> getPaintball(){
         switch (this){
             case RED -> {return MCPaintballEntities.RED_PAINTBALL.get();}
             case GREEN -> {return MCPaintballEntities.GREEN_PAINTBALL.get();}
@@ -28,7 +20,17 @@ public enum PaintballTeam
         }
         return null;
     }
-    public EntityType<?> getHeavyPaintball(){
+    public EntityType<?> getGrenade()
+    {
+        switch (this){
+            case RED -> {return MCPaintballEntities.RED_GRENADE.get();}
+            case GREEN -> {return MCPaintballEntities.GREEN_GRENADE.get();}
+            case BLUE -> {return MCPaintballEntities.BLUE_GRENADE.get();}
+        }
+        return null;
+    }
+    public EntityType<?> getHeavyPaintball()
+    {
         switch (this){
             case RED -> {return MCPaintballEntities.RED_HEAVY_PAINTBALL.get();}
             case GREEN -> {return MCPaintballEntities.GREEN_HEAVY_PAINTBALL.get();}
@@ -36,12 +38,5 @@ public enum PaintballTeam
         }
         return null;
     }
-    public String getPaintballTranslation(){
-        switch (this){
-            case RED -> {return "mcpaintball:red_paintball";}
-            case GREEN -> {return "mcpaintball:green_paintball";}
-            case BLUE -> {return "mcpaintball:blue_paintball";}
-        }
-        return null;
-    }
+
 }

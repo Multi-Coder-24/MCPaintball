@@ -2,6 +2,8 @@ package org.multicoder.mcpaintball.common.entity.paintball;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Cow;
@@ -45,8 +47,15 @@ public class PaintballEntity extends AbstractArrow
                         if(EntityTeam != T)
                         {
                             MCPaintballWorldData.IncrementByTranslationKey(TN);
+                            Entity SoundSourceEntity = this.getOwner();
+                            level().playSound(null,SoundSourceEntity.blockPosition(),MCPaintballSounds.HIT.get(), SoundSource.PLAYERS,1f,1f);
                         }
                     }
+                } else if (hitResult.getEntity() instanceof Cow)
+                {
+                    MCPaintballWorldData.IncrementByTranslationKey(TN);
+                    Entity SoundSourceEntity = this.getOwner();
+                    level().playSound(null,SoundSourceEntity.blockPosition(),MCPaintballSounds.HIT.get(), SoundSource.PLAYERS,1f,1f);
                 }
             }
         }

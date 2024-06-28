@@ -4,7 +4,5 @@ public enum PaintballClass
 {
     STANDARD,
     HEAVY,
-    MEDICAL,
-    ENGINEER,
-    SNIPER;
+    MEDICAL;
 }

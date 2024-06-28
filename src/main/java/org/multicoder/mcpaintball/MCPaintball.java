@@ -25,6 +25,7 @@ import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.*;
+import org.multicoder.mcpaintball.common.entity.grenade.PaintballGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.*;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.*;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
@@ -54,6 +55,10 @@ public class MCPaintball
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.RED_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.GREEN_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.BLUE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
+
+        event.registerEntityRenderer((EntityType<PaintballGrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballGrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballGrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), GrenadeEntityRenderer::new);
     }
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
@@ -67,6 +72,22 @@ public class MCPaintball
                 event.accept(MCPaintballItems.SHOTGUN.get());
                 event.accept(MCPaintballItems.SNIPER.get());
                 event.accept(MCPaintballItems.BAZOOKA.get());
+                event.accept(MCPaintballItems.GRENADE);
+
+                event.accept(MCPaintballItems.RED_BOOTS);
+                event.accept(MCPaintballItems.RED_LEGGINGS);
+                event.accept(MCPaintballItems.RED_CHESTPLATE);
+                event.accept(MCPaintballItems.RED_HELMET);
+
+                event.accept(MCPaintballItems.GREEN_BOOTS);
+                event.accept(MCPaintballItems.GREEN_LEGGINGS);
+                event.accept(MCPaintballItems.GREEN_CHESTPLATE);
+                event.accept(MCPaintballItems.GREEN_HELMET);
+
+                event.accept(MCPaintballItems.BLUE_BOOTS);
+                event.accept(MCPaintballItems.BLUE_LEGGINGS);
+                event.accept(MCPaintballItems.BLUE_CHESTPLATE);
+                event.accept(MCPaintballItems.BLUE_HELMET);
             }
         }
         catch (Exception exception)

@@ -26,7 +26,7 @@ public class MCPaintballTeamsDataHelper
     {
         if(player.getPersistentData().contains("mcpaintball.team"))
         {
-            return player.getPersistentData().getCompound("mcpaintball.team").getInt("team") > 0;
+            return player.getPersistentData().getCompound("mcpaintball.team").getInt("team") >= 0;
         }
         return false;
     }
@@ -34,7 +34,7 @@ public class MCPaintballTeamsDataHelper
     {
         if(player.getPersistentData().contains("mcpaintball.team"))
         {
-            return player.getPersistentData().getCompound("mcpaintball.team").getInt("class") > 0;
+            return player.getPersistentData().getCompound("mcpaintball.team").getInt("class") >= 0;
         }
         return false;
     }

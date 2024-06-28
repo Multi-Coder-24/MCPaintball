@@ -1,9 +1,7 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
-# A URL to refer people to when problems occur with this mod
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
-# A list of mods - how many allowed here is determined by the individual mod loader
+issueTrackerURL="https://github.com/DDX5/MCPaintball/issues"
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
