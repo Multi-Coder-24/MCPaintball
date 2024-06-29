@@ -5,15 +5,17 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.server.command.EnumArgument;
-import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.PaintballClass;
 import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+import org.multicoder.mcpaintball.common.utility.TeamLoadoutManager;
+
+import java.util.List;
 
 public class TeamCommands
 {
@@ -21,6 +23,15 @@ public class TeamCommands
     {
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("team").then(Commands.literal("set").then(Commands.argument("team",EnumArgument.enumArgument(PaintballTeam.class)).executes(TeamCommands::setTeamCommand))))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("class").then(Commands.literal("set").then(Commands.argument("class",EnumArgument.enumArgument(PaintballClass.class)).executes(TeamCommands::setClassCommand))))).createBuilder().build();
+        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("kit").executes(TeamCommands::GiveKit))).createBuilder().build();
+    }
+
+    private static int GiveKit(CommandContext<CommandSourceStack> context) throws CommandSyntaxException
+    {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        List<ItemStack> Equipment = TeamLoadoutManager.FetchEquipment(player);
+        Equipment.forEach(player::addItem);
+        return 0;
     }
 
     private static int setClassCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException
