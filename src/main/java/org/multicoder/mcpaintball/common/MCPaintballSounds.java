@@ -1,0 +1,19 @@
+package org.multicoder.mcpaintball.common;
+
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import org.multicoder.mcpaintball.MCPaintball;
+
+public class MCPaintballSounds
+{
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, MCPaintball.MOD_ID);
+
+    public static final DeferredHolder<SoundEvent,SoundEvent> SHOT = SOUNDS.register("shot",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(MCPaintball.MOD_ID,"shot"),15f));
+    public static final DeferredHolder<SoundEvent,SoundEvent> HIT = SOUNDS.register("hit",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(MCPaintball.MOD_ID,"hit"),15f));
+    public static final DeferredHolder<SoundEvent,SoundEvent> SPLAT = SOUNDS.register("splat",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(MCPaintball.MOD_ID,"splat"),15f));
+    public static final DeferredHolder<SoundEvent,SoundEvent> GRENADE = SOUNDS.register("grenade",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(MCPaintball.MOD_ID,"grenade"),15f));
+    public static final DeferredHolder<SoundEvent,SoundEvent> BAZOOKA = SOUNDS.register("bazooka",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath(MCPaintball.MOD_ID,"bazooka"),15f));
+}

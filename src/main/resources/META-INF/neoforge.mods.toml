@@ -1,0 +1,22 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+issueTrackerURL="https://github.com/DDX5/MCPaintball/issues"
+[[mods]]
+modId="mcpaintball"
+version="2.0.0"
+displayName="${mod_name}"
+updateJSONURL="${mod_update_url}"
+displayURL="${mod_display_url}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+[[dependencies.mcpaintball]]
+    modId="neoforge"
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.mcpaintball]]
+    modId="minecraft"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
