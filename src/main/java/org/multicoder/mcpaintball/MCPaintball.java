@@ -7,8 +7,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.scores.Scoreboard;
-import net.minecraft.world.scores.ScoreboardSaveData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -26,13 +24,17 @@ import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.entity.*;
+import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.grenade.PaintballGrenadeEntity;
-import org.multicoder.mcpaintball.common.entity.paintball.*;
-import org.multicoder.mcpaintball.common.entityrenderers.paintball.*;
+import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
+import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
+import org.multicoder.mcpaintball.common.entityrenderers.paintball.GrenadeEntityRenderer;
+import org.multicoder.mcpaintball.common.entityrenderers.paintball.HeavyPaintballRenderer;
+import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEntityRenderer;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.PaintballArmorMaterial;
 
+@SuppressWarnings("all")
 @Mod(MCPaintball.MOD_ID)
 public class MCPaintball
 {

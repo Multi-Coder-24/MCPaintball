@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
-import org.multicoder.mcpaintball.common.entity.grenade.PaintballGrenadeEntity;
 
+@SuppressWarnings("all")
 public class GrenadeEntityRenderer extends ThrownItemRenderer
 {
     public static final ResourceLocation RED = ResourceLocation.fromNamespaceAndPath("mcpaintball","textures/entity/projectiles/grenades/red_grenade.png");

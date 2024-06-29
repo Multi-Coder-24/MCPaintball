@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 
+@SuppressWarnings("all")
 public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity>
 {
     public static final ResourceLocation R = ResourceLocation.fromNamespaceAndPath("mcpaintball","textures/entity/projectiles/paintball/red_paintball.png");

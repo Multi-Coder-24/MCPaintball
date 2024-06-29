@@ -3,6 +3,7 @@ package org.multicoder.mcpaintball.common.data;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 
+@SuppressWarnings("all")
 public class MCPaintballTeamsDataHelper
 {
     public static void SetIfAbsent(Player player)

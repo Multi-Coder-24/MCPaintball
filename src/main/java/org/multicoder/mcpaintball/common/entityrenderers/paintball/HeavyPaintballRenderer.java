@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
 
+@SuppressWarnings("all")
 public class HeavyPaintballRenderer extends ArrowRenderer<HeavyPaintballEntity>
 {
     public static final ResourceLocation R = ResourceLocation.fromNamespaceAndPath("mcpaintball","textures/entity/projectiles/paintball_heavy/red_paintball_heavy.png");
