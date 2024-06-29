@@ -2,13 +2,12 @@ package org.multicoder.mcpaintball.common.items.weapons;
 
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.multicoder.mcpaintball.common.utility.PaintballArmorMaterial;
 
+@SuppressWarnings("all")
 public class PaintballHelmet extends ArmorItem
 {
     public PaintballHelmet(ArmorMaterial material)

@@ -1,6 +1,5 @@
 package org.multicoder.mcpaintball.common.utility;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.EntityType;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 

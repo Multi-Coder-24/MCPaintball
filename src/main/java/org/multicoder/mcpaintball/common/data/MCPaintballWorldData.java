@@ -3,8 +3,8 @@ package org.multicoder.mcpaintball.common.data;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.saveddata.SavedData;
-import org.multicoder.mcpaintball.MCPaintball;
 
+@SuppressWarnings("all")
 public class MCPaintballWorldData extends SavedData
 {
     public static final String SAVE_NAME = "mcpaintball";
