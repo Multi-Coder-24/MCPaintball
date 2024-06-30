@@ -38,7 +38,7 @@
   "mcpaintball.command.response.match_start": "The match has begun",
   "mcpaintball.command.response.match_stop": "The match has ended",
   "mcpaintball.command.response.game_start": "The game has started, pick your team and class now.",
-  "mcpaintball.command.response.game_stop": "The game has finished, the winning team will be announced soon.",
+  "mcpaintball.command.response.game_stop": "The game has finished.",
   "mcpaintball.command.response.winner": "The winning team is %s.",
 
 
@@ -47,5 +47,10 @@
   "subtitle.mcpaintball.bazooka": "Bazooka Fired",
   "subtitle.mcpaintball.hit": "Player Hit",
   "subtitle.mcpaintball.splat": "Paintball Hit Block",
-  "subtitle.mcpaintball.grenade": "Grenade Thrown"
+  "subtitle.mcpaintball.grenade": "Grenade Thrown",
+
+  "Comment_5": "Text",
+  "text.mcpaintball.overlay.points": "Team Points: %s",
+  "text.mcpaintball.overlay.team": "Current Team: %s",
+  "text.mcpaintball.overlay.class": "Selected Class: %s"
 }

@@ -12,7 +12,7 @@ import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
-import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
 public class BazookaItem extends Item
@@ -31,8 +31,8 @@ public class BazookaItem extends Item
             {
                 if(MCPaintballWorldData.INSTANCE.MatchStarted)
                 {
-                    PaintballTeam Team = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                    AbstractArrow Paintball = new HeavyPaintballEntity(Team.getHeavyPaintball(),player,level);
+                    Team PTeam = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                    AbstractArrow Paintball = new HeavyPaintballEntity(PTeam.getHeavyPaintball(),player,level);
                     Paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0f,3f,0f);
                     level.addFreshEntity(Paintball);
                     level.playSound(null,player.blockPosition(), MCPaintballSounds.BAZOOKA.get(), SoundSource.PLAYERS,1f,1f);

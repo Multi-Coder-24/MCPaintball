@@ -6,13 +6,18 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 
-public enum PaintballArmorMaterial implements ArmorMaterial
-{
+@SuppressWarnings("all")
+public enum PaintballArmorMaterial implements ArmorMaterial {
     RED("mcpaintball:red"),
     GREEN("mcpaintball:green"),
     BLUE("mcpaintball:blue");
 
     String Name;
+
+    PaintballArmorMaterial(String name) {
+        Name = name;
+    }
+
     @Override
     public int getDurabilityForType(ArmorItem.Type type) {
         return 500;
@@ -51,10 +56,5 @@ public enum PaintballArmorMaterial implements ArmorMaterial
     @Override
     public float getKnockbackResistance() {
         return 0;
-    }
-
-    PaintballArmorMaterial(String name)
-    {
-        Name = name;
     }
 }
