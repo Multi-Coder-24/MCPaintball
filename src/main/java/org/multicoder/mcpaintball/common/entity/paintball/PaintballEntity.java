@@ -5,7 +5,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +16,7 @@ import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
 
 @SuppressWarnings("all")
 public class PaintballEntity extends AbstractArrow
@@ -44,12 +43,12 @@ public class PaintballEntity extends AbstractArrow
             if(MCPaintballWorldData.INSTANCE.MatchStarted)
             {
                 String TN = getTypeName().getString().toLowerCase();
-                PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
+                PaintballDataUtility.Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
                 if(hitResult.getEntity() instanceof Player player)
                 {
                     if(MCPaintballTeamsDataHelper.HasTeam(player))
                     {
-                        PaintballTeam T = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                        PaintballDataUtility.Team T = PaintballDataUtility.Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
                         if(EntityTeam != T)
                         {
                             MCPaintballWorldData.IncrementByTranslationKey(TN);
@@ -57,11 +56,6 @@ public class PaintballEntity extends AbstractArrow
                             level().playSound(null,SoundSourceEntity.blockPosition(),MCPaintballSounds.HIT.get(), SoundSource.PLAYERS,1f,1f);
                         }
                     }
-                } else if (hitResult.getEntity() instanceof Cow)
-                {
-                    MCPaintballWorldData.IncrementByTranslationKey(TN);
-                    Entity SoundSourceEntity = this.getOwner();
-                    level().playSound(null,SoundSourceEntity.blockPosition(),MCPaintballSounds.HIT.get(), SoundSource.PLAYERS,1f,1f);
                 }
             }
         }

@@ -12,7 +12,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
 public class PaintballGrenadeEntity extends ThrowableItemProjectile
@@ -36,10 +36,10 @@ public class PaintballGrenadeEntity extends ThrowableItemProjectile
             E.getHitPlayers().keySet().forEach(player ->
             {
                 String TK = getTypeName().getString().toLowerCase();
-                PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
+                Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
                 if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    PaintballTeam T = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                    Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
                     if(EntityTeam != T)
                     {
                         MCPaintballWorldData.IncrementByTranslationKey(TK);

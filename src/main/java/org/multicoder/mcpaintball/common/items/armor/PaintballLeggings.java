@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.common.items.weapons;
+package org.multicoder.mcpaintball.common.items.armor;
 
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.Entity;
@@ -8,11 +8,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 @SuppressWarnings("all")
-public class PaintballHelmet extends ArmorItem
+public class PaintballLeggings extends ArmorItem
 {
-    public PaintballHelmet(ArmorMaterial material)
+    public PaintballLeggings(ArmorMaterial material)
     {
-        super(Holder.direct(material), Type.HELMET, new Properties());
+        super(Holder.direct(material), Type.LEGGINGS, new Properties());
     }
 
     @Override

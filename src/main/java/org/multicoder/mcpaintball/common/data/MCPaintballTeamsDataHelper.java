@@ -11,23 +11,23 @@ public class MCPaintballTeamsDataHelper
         if(!player.getPersistentData().contains("mcpaintball.team"))
         {
             CompoundTag Default = new CompoundTag();
-            Default.putInt("team",-1);
-            Default.putInt("class",-1);
+            Default.putInt("team",0);
+            Default.putInt("class",0);
             player.getPersistentData().put("mcpaintball.team",Default);
         }
     }
     public static void ResetAll(Player player)
     {
         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-        Data.putInt("team",-1);
-        Data.putInt("class",-1);
+        Data.putInt("team",0);
+        Data.putInt("class",0);
         player.getPersistentData().put("mcpaintball.team",Data);
     }
     public static boolean HasTeam(Player player)
     {
         if(player.getPersistentData().contains("mcpaintball.team"))
         {
-            return player.getPersistentData().getCompound("mcpaintball.team").getInt("team") >= 0;
+            return player.getPersistentData().getCompound("mcpaintball.team").getInt("team") >= 1;
         }
         return false;
     }
@@ -35,7 +35,7 @@ public class MCPaintballTeamsDataHelper
     {
         if(player.getPersistentData().contains("mcpaintball.team"))
         {
-            return player.getPersistentData().getCompound("mcpaintball.team").getInt("class") >= 0;
+            return player.getPersistentData().getCompound("mcpaintball.team").getInt("class") >= 1;
         }
         return false;
     }

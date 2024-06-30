@@ -13,7 +13,7 @@ import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.utility.PaintballTeam;
+import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
 
 @SuppressWarnings("all")
 public class HeavyPaintballEntity extends AbstractArrow
@@ -36,10 +36,10 @@ public class HeavyPaintballEntity extends AbstractArrow
             E.getHitPlayers().keySet().forEach(player ->
             {
                 String TK = getTypeName().getString().toLowerCase();
-                PaintballTeam EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
+                PaintballDataUtility.Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
                 if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    PaintballTeam T = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                    PaintballDataUtility.Team T = PaintballDataUtility.Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
                     if(EntityTeam != T)
                     {
                         MCPaintballWorldData.IncrementByTranslationKey(TK);
