@@ -11,6 +11,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+@SuppressWarnings("all")
 public class PaintballC4ExplosiveBlock extends Block
 {
     public VoxelShape makeShape()

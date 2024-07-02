@@ -1,13 +1,7 @@
 package org.multicoder.mcpaintball.common.items.tools;
 
-import com.mojang.blaze3d.platform.ScreenManager;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.LongTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -17,17 +11,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.common.MCPaintballSounds;
-import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.NBTHelper;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
+@SuppressWarnings("all")
 public class PaintballC4RemoteItem extends Item
 {
 

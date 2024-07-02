@@ -1,10 +1,7 @@
 package org.multicoder.mcpaintball.common.blocks;
 
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
