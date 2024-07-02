@@ -6,7 +6,9 @@
   "item.mcpaintball.sniper": "Paintball Sniper",
   "item.mcpaintball.bazooka": "Paintball Bazooka",
   "item.mcpaintball.debug_wand": "Debugging Wand",
-  "item.mcpaintball.grenade": "Paintball Grenade",
+  "item.mcpaintball.red_grenade": "Red Paintball Grenade",
+  "item.mcpaintball.green_grenade": "Green Paintball Grenade",
+  "item.mcpaintball.blue_grenade": "Blue Paintball Grenade",
   "item.mcpaintball.red_boots": "Red Team Boots",
   "item.mcpaintball.red_leggings": "Red Team Leggings",
   "item.mcpaintball.red_chestplate": "Red Team Chestplate",
@@ -51,6 +53,9 @@
   "subtitle.mcpaintball.hit": "Player Hit",
   "subtitle.mcpaintball.splat": "Paintball Hit Block",
   "subtitle.mcpaintball.grenade": "Grenade Thrown",
+  "subtitle.mcpaintball.c4_added": "C4 Added To Remote",
+  "subtitle.mcpaintball.c4_removed": "C4 Removed From Remote",
+  "subtitle.mcpaintball.c4_detonate": "C4 Detonate",
 
   "Comment_5": "Text",
   "text.mcpaintball.overlay.points": "Team Points: %s",
@@ -60,5 +65,9 @@
   "Comment_6": "Blocks",
   "block.mcpaintball.red_c4": "Red C4 Explosive",
   "block.mcpaintball.green_c4": "Green C4 Explosive",
-  "block.mcpaintball.blue_c4": "Blue C4 Explosive"
+  "block.mcpaintball.blue_c4": "Blue C4 Explosive",
+  "block.mcpaintball.red_team_station": "Red Team Station",
+  "block.mcpaintball.green_team_station": "Green Team Station",
+  "block.mcpaintball.blue_team_station": "Blue Team Station"
+
 }

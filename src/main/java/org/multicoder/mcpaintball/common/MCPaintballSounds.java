@@ -15,4 +15,7 @@ public class MCPaintballSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> SPLAT = SOUNDS.register("splat", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "splat"), 15f));
     public static final DeferredHolder<SoundEvent, SoundEvent> GRENADE = SOUNDS.register("grenade", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "grenade"), 15f));
     public static final DeferredHolder<SoundEvent, SoundEvent> BAZOOKA = SOUNDS.register("bazooka", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "bazooka"), 15f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> C4_ADDED = SOUNDS.register("c4_added", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "c4_added"), 15f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> C4_REMOVED = SOUNDS.register("c4_removed", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "c4_removed"), 15f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> C4_EXPLODE = SOUNDS.register("c4_detonate", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "c4_detonate"), 15f));
 }

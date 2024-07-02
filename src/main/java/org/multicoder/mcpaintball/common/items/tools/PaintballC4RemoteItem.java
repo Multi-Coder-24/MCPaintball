@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.LongTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -17,8 +18,15 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
+import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.utility.NBTHelper;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PaintballC4RemoteItem extends Item
 {
@@ -34,50 +42,35 @@ public class PaintballC4RemoteItem extends Item
         ItemStack stack = player.getItemInHand(hand);
         if(!level.isClientSide())
         {
-            CompoundTag Data = stack.getOrCreateTag();
-            if(Data.contains("devices"))
+            if(MCPaintballWorldData.INSTANCE.MatchStarted)
             {
-                ListTag Devices = Data.getList("devices",Tag.TAG_LONG);
-                if(!Devices.isEmpty())
+                if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    if(Screen.hasControlDown())
+                    int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
+                    if(Team == 1 && stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()))
                     {
-                        Devices.forEach(tag ->
-                        {
-                            LongTag posTag = (LongTag) tag;
-                            BlockPos Pos = BlockPos.of(posTag.getAsLong());
-                            if(stack.getItem().equals(MCPaintballItems.RED_REMOTE))
-                            {
-                                if(level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.RED_C4))
-                                {
-                                    level.explode(null,Pos.getX(),Pos.getY(),Pos.getZ(),5f, Level.ExplosionInteraction.NONE);
-                                    level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
-                                }
-                            } else if (stack.getItem().equals(MCPaintballItems.GREEN_REMOTE))
-                            {
-                                if(level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.GREEN_C4))
-                                {
-                                    level.explode(null,Pos.getX(),Pos.getY(),Pos.getZ(),5f, Level.ExplosionInteraction.NONE);
-                                    level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
-                                }
-                            } else if (stack.getItem().equals(MCPaintballItems.BLUE_REMOTE))
-                            {
-                                if(level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.BLUE_C4))
-                                {
-                                    level.explode(null,Pos.getX(),Pos.getY(),Pos.getZ(),5f, Level.ExplosionInteraction.NONE);
-                                    level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
-                                }
-                            }
-                        });
-                        stack.setTag(new CompoundTag());
+                        CompoundTag Data = stack.getOrCreateTag();
+                        NBTHelper.C4Det(Data,stack,level,player);
+                        return InteractionResultHolder.consume(stack);
+                    } else if (Team == 2 && stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()))
+                    {
+                        CompoundTag Data = stack.getOrCreateTag();
+                        NBTHelper.C4Det(Data,stack,level,player);
+                        return InteractionResultHolder.consume(stack);
+                    } else if (Team == 3 && stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()))
+                    {
+                        CompoundTag Data = stack.getOrCreateTag();
+                        NBTHelper.C4Det(Data,stack,level,player);
                         return InteractionResultHolder.consume(stack);
                     }
                 }
             }
+            return InteractionResultHolder.fail(stack);
         }
-        return super.use(level, player, hand);
+        return InteractionResultHolder.success(stack);
     }
 
+    //  Add/Remove Block
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
@@ -85,75 +78,36 @@ public class PaintballC4RemoteItem extends Item
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
         Level level = player.level();
-        if(!level.isClientSide())
-        {
-            Block Selected = level.getBlockState(pos).getBlock();
-            CompoundTag Data = stack.getOrCreateTag();
-            if(Data.contains("devices", Tag.TAG_LIST))
+        if(!level.isClientSide()) {
+            if (MCPaintballWorldData.INSTANCE.MatchStarted)
             {
-                ListTag Devices = Data.getList("devices",Tag.TAG_LONG);
-                if(stack.getItem().equals(MCPaintballItems.RED_REMOTE) && Selected.equals(MCPaintballBlocks.RED_C4))
+                if (MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    if(Screen.hasShiftDown())
+                    int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
+                    if (Team == 1 && stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()))
                     {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
+                        CompoundTag Data = stack.getOrCreateTag();
+                        Block Selected = level.getBlockState(pos).getBlock();
+                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
+                        return InteractionResult.CONSUME;
                     }
-                    else
+                    else if (Team == 2 && stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()))
                     {
-                        Devices.remove(LongTag.valueOf(pos.asLong()));
+                        Block Selected = level.getBlockState(pos).getBlock();
+                        CompoundTag Data = stack.getOrCreateTag();
+                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
                     }
-                } else if (stack.getItem().equals(MCPaintballItems.GREEN_REMOTE) && Selected.equals(MCPaintballBlocks.GREEN_C4))
-                {
-                    if(Screen.hasShiftDown())
+                    else if (Team == 3 && stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()))
                     {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
+                        Block Selected = level.getBlockState(pos).getBlock();
+                        CompoundTag Data = stack.getOrCreateTag();
+                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
                     }
-                    else
-                    {
-                        Devices.remove(LongTag.valueOf(pos.asLong()));
-                    }
-                } else if (stack.getItem().equals(MCPaintballItems.BLUE_REMOTE) && Selected.equals(MCPaintballBlocks.BLUE_C4))
-                {
-                    if(Screen.hasShiftDown())
-                    {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
-                    }
-                    else
-                    {
-                        Devices.remove(LongTag.valueOf(pos.asLong()));
-                    }
+                    return InteractionResult.CONSUME;
                 }
-                Data.put("devices",Devices);
-                stack.setTag(Data);
-
+                return InteractionResult.FAIL;
             }
-            else
-            {
-                ListTag Devices = new ListTag();
-                if(stack.getItem().equals(MCPaintballItems.RED_REMOTE) && Selected.equals(MCPaintballBlocks.RED_C4))
-                {
-                    if(Screen.hasShiftDown())
-                    {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
-                    }
-                } else if (stack.getItem().equals(MCPaintballItems.GREEN_REMOTE) && Selected.equals(MCPaintballBlocks.GREEN_C4))
-                {
-                    if(Screen.hasShiftDown())
-                    {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
-                    }
-                } else if (stack.getItem().equals(MCPaintballItems.BLUE_REMOTE) && Selected.equals(MCPaintballBlocks.BLUE_C4))
-                {
-                    if(Screen.hasShiftDown())
-                    {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
-                    }
-                }
-                Data.put("devices",Devices);
-                stack.setTag(Data);
-            }
-            return InteractionResult.CONSUME;
         }
-        return super.useOn(context);
+        return InteractionResult.SUCCESS;
     }
 }

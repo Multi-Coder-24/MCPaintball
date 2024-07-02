@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball;
 
 
 import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -35,10 +36,9 @@ import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
-import org.multicoder.mcpaintball.common.entity.grenade.PaintballGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.grenade.RedPaintballGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
-import org.multicoder.mcpaintball.common.entityrenderers.paintball.GrenadeEntityRenderer;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.HeavyPaintballRenderer;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEntityRenderer;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
@@ -74,20 +74,24 @@ public class MCPaintball {
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.GREEN_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.BLUE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
 
-        event.registerEntityRenderer((EntityType<PaintballGrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballGrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), GrenadeEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballGrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), GrenadeEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), ThrownItemRenderer::new);
     }
 
-    public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
-        try {
+    public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
+    {
+        try
+        {
             if (event.getTabKey().equals(CreativeModeTabs.COMBAT))
             {
                 event.accept(MCPaintballItems.PISTOL);
                 event.accept(MCPaintballItems.RIFLE);
                 event.accept(MCPaintballItems.SHOTGUN);
                 event.accept(MCPaintballItems.BAZOOKA);
-                event.accept(MCPaintballItems.GRENADE);
+                event.accept(MCPaintballItems.RED_GRENADE);
+                event.accept(MCPaintballItems.GREEN_GRENADE);
+                event.accept(MCPaintballItems.BLUE_GRENADE);
 
                 event.accept(MCPaintballItems.RED_REMOTE);
                 event.accept(MCPaintballItems.GREEN_REMOTE);
@@ -112,6 +116,10 @@ public class MCPaintball {
                 event.accept(new ItemStack(MCPaintballBlocks.RED_C4));
                 event.accept(new ItemStack(MCPaintballBlocks.GREEN_C4));
                 event.accept(new ItemStack(MCPaintballBlocks.BLUE_C4));
+
+                event.accept(new ItemStack(MCPaintballBlocks.RED_TEAM_STATION));
+                event.accept(new ItemStack(MCPaintballBlocks.GREEN_TEAM_STATION));
+                event.accept(new ItemStack(MCPaintballBlocks.BLUE_TEAM_STATION));
             }
         } catch (Exception exception) {
             LOG.error(exception);

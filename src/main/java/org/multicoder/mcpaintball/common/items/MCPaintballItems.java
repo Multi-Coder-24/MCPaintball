@@ -10,6 +10,7 @@ import org.multicoder.mcpaintball.common.items.armor.PaintballHelmet;
 import org.multicoder.mcpaintball.common.items.armor.PaintballLeggings;
 import org.multicoder.mcpaintball.common.items.tools.PaintballC4RemoteItem;
 import org.multicoder.mcpaintball.common.items.weapons.*;
+import org.multicoder.mcpaintball.common.items.weapons.grenade.GrenadeItem;
 import org.multicoder.mcpaintball.common.utility.PaintballArmorMaterial;
 
 public class MCPaintballItems {
@@ -20,7 +21,9 @@ public class MCPaintballItems {
     public static final DeferredItem<?> SHOTGUN = ITEMS.register("shotgun", ShotgunItem::new);
     public static final DeferredItem<?> BAZOOKA = ITEMS.register("bazooka", BazookaItem::new);
 
-    public static final DeferredItem<?> GRENADE = ITEMS.register("grenade", GrenadeItem::new);
+    public static final DeferredItem<?> RED_GRENADE = ITEMS.register("red_grenade", GrenadeItem::new);
+    public static final DeferredItem<?> GREEN_GRENADE = ITEMS.register("green_grenade", GrenadeItem::new);
+    public static final DeferredItem<?> BLUE_GRENADE = ITEMS.register("blue_grenade", GrenadeItem::new);
 
     public static final DeferredItem<?> RED_BOOTS = ITEMS.register("red_boots", () -> new PaintballBoots(PaintballArmorMaterial.RED));
     public static final DeferredItem<?> RED_LEGGINGS = ITEMS.register("red_leggings", () -> new PaintballLeggings(PaintballArmorMaterial.RED));

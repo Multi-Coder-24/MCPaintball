@@ -6,7 +6,9 @@ import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.common.entity.grenade.PaintballGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.grenade.BluePaintballGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.grenade.GreenPaintballGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.grenade.RedPaintballGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 
@@ -24,8 +26,8 @@ public class MCPaintballEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<?>> GREEN_HEAVY_PAINTBALL = ENTITIES.register("green_heavy_paintball", () -> EntityType.Builder.of(HeavyPaintballEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("green_heavy_paintball"));
     public static final DeferredHolder<EntityType<?>, EntityType<?>> BLUE_HEAVY_PAINTBALL = ENTITIES.register("blue_heavy_paintball", () -> EntityType.Builder.of(HeavyPaintballEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("blue_heavy_paintball"));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<?>> RED_GRENADE = ENTITIES.register("red_grenade", () -> EntityType.Builder.of(PaintballGrenadeEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("red_grenade"));
-    public static final DeferredHolder<EntityType<?>, EntityType<?>> GREEN_GRENADE = ENTITIES.register("green_grenade", () -> EntityType.Builder.of(PaintballGrenadeEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("green_grenade"));
-    public static final DeferredHolder<EntityType<?>, EntityType<?>> BLUE_GRENADE = ENTITIES.register("blue_grenade", () -> EntityType.Builder.of(PaintballGrenadeEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("blue_grenade"));
+    public static final DeferredHolder<EntityType<?>, EntityType<?>> RED_GRENADE = ENTITIES.register("red_grenade", () -> EntityType.Builder.of(RedPaintballGrenadeEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("red_grenade"));
+    public static final DeferredHolder<EntityType<?>, EntityType<?>> GREEN_GRENADE = ENTITIES.register("green_grenade", () -> EntityType.Builder.of(GreenPaintballGrenadeEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("green_grenade"));
+    public static final DeferredHolder<EntityType<?>, EntityType<?>> BLUE_GRENADE = ENTITIES.register("blue_grenade", () -> EntityType.Builder.of(BluePaintballGrenadeEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("blue_grenade"));
 
 }

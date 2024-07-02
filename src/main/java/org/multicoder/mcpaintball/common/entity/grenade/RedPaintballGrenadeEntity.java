@@ -3,6 +3,7 @@ package org.multicoder.mcpaintball.common.entity.grenade;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -11,17 +12,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
+import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
 import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
-public class PaintballGrenadeEntity extends ThrowableItemProjectile {
+public class RedPaintballGrenadeEntity extends ThrowableItemProjectile implements ItemSupplier {
 
-    public PaintballGrenadeEntity(EntityType<?> p_37442_, Level p_37443_) {
+    public RedPaintballGrenadeEntity(EntityType<?> p_37442_, Level p_37443_) {
         super((EntityType<? extends ThrowableItemProjectile>) p_37442_, p_37443_);
     }
 
-    public PaintballGrenadeEntity(EntityType<?> p_37438_, LivingEntity p_37439_, Level p_37440_) {
+    public RedPaintballGrenadeEntity(EntityType<?> p_37438_, LivingEntity p_37439_, Level p_37440_) {
         super((EntityType<? extends ThrowableItemProjectile>) p_37438_, p_37439_, p_37440_);
     }
 
@@ -29,7 +32,7 @@ public class PaintballGrenadeEntity extends ThrowableItemProjectile {
     protected void onHitBlock(BlockHitResult p_37258_) {
         if (MCPaintballWorldData.INSTANCE.MatchStarted) {
             BlockPos Position = p_37258_.getBlockPos();
-            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f, Level.ExplosionInteraction.MOB);
+            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f, Level.ExplosionInteraction.NONE);
             E.getHitPlayers().keySet().forEach(player ->
             {
                 String TK = getTypeName().getString().toLowerCase();
@@ -48,7 +51,8 @@ public class PaintballGrenadeEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    protected Item getDefaultItem() {
-        return Items.AIR;
+    protected Item getDefaultItem()
+    {
+        return MCPaintballItems.RED_GRENADE.get();
     }
 }

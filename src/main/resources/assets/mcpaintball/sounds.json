@@ -17,6 +17,24 @@
       "mcpaintball:hit"
     ]
   },
+  "c4_added": {
+    "subtitle": "subtitle.mcpaintball.c4_added",
+    "sounds": [
+      "mcpaintball:c4_added"
+    ]
+  },
+  "c4_removed": {
+    "subtitle": "subtitle.mcpaintball.c4_removed",
+    "sounds": [
+      "mcpaintball:c4_removed"
+    ]
+  },
+  "c4_detonate": {
+    "subtitle": "subtitle.mcpaintball.c4_detonate",
+    "sounds": [
+      "mcpaintball:c4_detonate"
+    ]
+  },
   "splat": {
     "subtitle": "subtitle.mcpaintball.splat",
     "sounds": [
