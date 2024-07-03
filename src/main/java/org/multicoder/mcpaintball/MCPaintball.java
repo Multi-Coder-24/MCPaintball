@@ -15,17 +15,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
@@ -44,6 +45,7 @@ import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEnti
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.networking.TeamDataSyncPayloadHandler;
 import org.multicoder.mcpaintball.common.networking.TeamsDataSyncPacket;
+import org.multicoder.mcpaintball.common.utility.PaintballArmorMaterial;
 import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
 import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
 
@@ -63,6 +65,7 @@ public class MCPaintball {
         MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
         MCPaintballSounds.SOUNDS.register(eventBus);
+        PaintballArmorMaterial.MATERIALS.register(eventBus);
     }
     @SuppressWarnings("unchecked")
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -126,18 +129,18 @@ public class MCPaintball {
         }
     }
 
-    public void OverlayRegister(RegisterGuiOverlaysEvent event)
+    public void OverlayRegister(RegisterGuiLayersEvent event)
     {
-        event.registerAboveAll(new ResourceLocation(MCPaintball.MOD_ID,"paintball_info"),new PaintballOverlay());
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(MCPaintball.MOD_ID,"paintball_info"),new PaintballOverlay());
     }
-    public void RegisterPayloads(final RegisterPayloadHandlerEvent event)
+    public void RegisterPayloads(final RegisterPayloadHandlersEvent event)
     {
-        final IPayloadRegistrar registrar = event.registrar(MCPaintball.MOD_ID);
-        registrar.play(TeamsDataSyncPacket.ID,TeamsDataSyncPacket::new,handler -> handler.client(TeamDataSyncPayloadHandler::Handle));
+        final PayloadRegistrar registrar = event.registrar(MCPaintball.MOD_ID);
+        registrar.playToClient(TeamsDataSyncPacket.TYPE,TeamsDataSyncPacket.STREAM_CODEC, new TeamDataSyncPayloadHandler());
     }
 
     @SuppressWarnings("unused")
-    @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    @EventBusSubscriber(modid = MCPaintball.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
     public static class NeoEvents {
         @SubscribeEvent
         private static void onServerStarted(ServerStartedEvent event)
@@ -150,7 +153,7 @@ public class MCPaintball {
     }
 
     @SuppressWarnings("unused")
-    @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID)
+    @EventBusSubscriber(modid = MCPaintball.MOD_ID)
     public static class ModEvents {
         @SubscribeEvent
         public static void registerCommands(RegisterCommandsEvent event) {
@@ -160,7 +163,7 @@ public class MCPaintball {
         }
 
         @SubscribeEvent
-        public static void PlayerTick(LivingEvent.LivingTickEvent event)
+        public static void PlayerTick(PlayerTickEvent.Post event)
         {
             if(event.getEntity() instanceof Player player)
             {
@@ -182,7 +185,7 @@ public class MCPaintball {
                             case GREEN -> Points = MCPaintballWorldData.INSTANCE.GREEN_POINTS;
                         }
                     }
-                    PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,PTeam,PClass));
+                    PacketDistributor.sendToPlayer((ServerPlayer) player,new TeamsDataSyncPacket(Points,PTeam.ordinal(),PClass.ordinal()));
 
                 }
             }

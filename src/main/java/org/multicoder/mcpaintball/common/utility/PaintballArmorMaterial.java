@@ -1,60 +1,39 @@
 package org.multicoder.mcpaintball.common.utility;
 
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.Util;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import org.multicoder.mcpaintball.MCPaintball;
 
-@SuppressWarnings("all")
-public enum PaintballArmorMaterial implements ArmorMaterial {
-    RED("mcpaintball:red"),
-    GREEN("mcpaintball:green"),
-    BLUE("mcpaintball:blue");
+import java.util.EnumMap;
+import java.util.List;
 
-    String Name;
+public class PaintballArmorMaterial
+{
+    public static final DeferredRegister<ArmorMaterial> MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, MCPaintball.MOD_ID);
 
-    PaintballArmorMaterial(String name) {
-        Name = name;
-    }
+    public static final DeferredHolder<?,?> RED_ARMOR = MATERIALS.register("red",() -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), p_323384_ -> {p_323384_.put(ArmorItem.Type.BOOTS, 0);p_323384_.put(ArmorItem.Type.LEGGINGS, 0);p_323384_.put(ArmorItem.Type.CHESTPLATE, 0);p_323384_.put(ArmorItem.Type.HELMET, 0);p_323384_.put(ArmorItem.Type.BODY, 0);}),
+             0,
+             SoundEvents.ARMOR_EQUIP_GENERIC,
+             () -> Ingredient.EMPTY,
+             List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath("mcpaintball","red"), "", false)), 0.0f, 0.0f));
 
-    @Override
-    public int getDurabilityForType(ArmorItem.Type type) {
-        return 500;
-    }
+    public static final DeferredHolder<?,?> GREEN_ARMOR = MATERIALS.register("green",() -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), p_323384_ -> {p_323384_.put(ArmorItem.Type.BOOTS, 0);p_323384_.put(ArmorItem.Type.LEGGINGS, 0);p_323384_.put(ArmorItem.Type.CHESTPLATE, 0);p_323384_.put(ArmorItem.Type.HELMET, 0);p_323384_.put(ArmorItem.Type.BODY, 0);}),
+            0,
+            SoundEvents.ARMOR_EQUIP_GENERIC,
+            () -> Ingredient.EMPTY,
+            List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath("mcpaintball","green"), "", false)), 0.0f, 0.0f));
 
-    @Override
-    public int getDefenseForType(ArmorItem.Type type) {
-        return 0;
-    }
+    public static final DeferredHolder<?,?> BLUE_ARMOR = MATERIALS.register("blue",() -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), p_323384_ -> {p_323384_.put(ArmorItem.Type.BOOTS, 0);p_323384_.put(ArmorItem.Type.LEGGINGS, 0);p_323384_.put(ArmorItem.Type.CHESTPLATE, 0);p_323384_.put(ArmorItem.Type.HELMET, 0);p_323384_.put(ArmorItem.Type.BODY, 0);}),
+            0,
+            SoundEvents.ARMOR_EQUIP_GENERIC,
+            () -> Ingredient.EMPTY,
+            List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath("mcpaintball","blue"), "", false)), 0.0f, 0.0f));
 
-    @Override
-    public int getEnchantmentValue() {
-        return 0;
-    }
-
-    @Override
-    public SoundEvent getEquipSound() {
-        return SoundEvents.ARMOR_EQUIP_GENERIC;
-    }
-
-    @Override
-    public Ingredient getRepairIngredient() {
-        return Ingredient.EMPTY;
-    }
-
-    @Override
-    public String getName() {
-        return Name;
-    }
-
-    @Override
-    public float getToughness() {
-        return 0;
-    }
-
-    @Override
-    public float getKnockbackResistance() {
-        return 0;
-    }
 }

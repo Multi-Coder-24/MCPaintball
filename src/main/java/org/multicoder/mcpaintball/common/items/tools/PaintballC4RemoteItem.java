@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.common.items.tools;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
@@ -29,6 +31,7 @@ public class PaintballC4RemoteItem extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
         ItemStack stack = player.getItemInHand(hand);
+        CompoundTag RemoteNBT = player.getPersistentData();
         if(!level.isClientSide())
         {
             if(MCPaintballWorldData.INSTANCE.MatchStarted)
@@ -38,25 +41,22 @@ public class PaintballC4RemoteItem extends Item
                     int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
                     if(Team == 1 && stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()))
                     {
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4Det(Data,stack,level,player);
+                        NBTHelper.C4Det(RemoteNBT,stack,level,player);
                         return InteractionResultHolder.consume(stack);
                     } else if (Team == 2 && stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()))
                     {
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4Det(Data,stack,level,player);
+                        NBTHelper.C4Det(RemoteNBT,stack,level,player);
                         return InteractionResultHolder.consume(stack);
                     } else if (Team == 3 && stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()))
                     {
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4Det(Data,stack,level,player);
+                        NBTHelper.C4Det(RemoteNBT,stack,level,player);
                         return InteractionResultHolder.consume(stack);
                     }
                 }
             }
             return InteractionResultHolder.fail(stack);
         }
-        return InteractionResultHolder.success(stack);
+        return super.use(level, player, hand);
     }
 
     //  Add/Remove Block
@@ -67,6 +67,7 @@ public class PaintballC4RemoteItem extends Item
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
         Level level = player.level();
+        CompoundTag RemoteNBT = player.getPersistentData();
         if(!level.isClientSide()) {
             if (MCPaintballWorldData.INSTANCE.MatchStarted)
             {
@@ -75,22 +76,19 @@ public class PaintballC4RemoteItem extends Item
                     int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
                     if (Team == 1 && stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()))
                     {
-                        CompoundTag Data = stack.getOrCreateTag();
                         Block Selected = level.getBlockState(pos).getBlock();
-                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
+                        NBTHelper.C4SetRem(RemoteNBT,stack,Selected,level,pos,player);
                         return InteractionResult.CONSUME;
                     }
                     else if (Team == 2 && stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()))
                     {
                         Block Selected = level.getBlockState(pos).getBlock();
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
+                        NBTHelper.C4SetRem(RemoteNBT,stack,Selected,level,pos,player);
                     }
                     else if (Team == 3 && stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()))
                     {
                         Block Selected = level.getBlockState(pos).getBlock();
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
+                        NBTHelper.C4SetRem(RemoteNBT,stack,Selected,level,pos,player);
                     }
                     return InteractionResult.CONSUME;
                 }

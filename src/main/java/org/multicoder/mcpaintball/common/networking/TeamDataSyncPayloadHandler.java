@@ -1,16 +1,19 @@
 package org.multicoder.mcpaintball.common.networking;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
+import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
 
 @SuppressWarnings("all")
-public class TeamDataSyncPayloadHandler
+public class TeamDataSyncPayloadHandler implements IPayloadHandler<TeamsDataSyncPacket>
 {
     public static final TeamDataSyncPayloadHandler INSTANCE = new TeamDataSyncPayloadHandler();
 
-    public static void Handle(final TeamsDataSyncPacket packet, final PlayPayloadContext context)
+    public void handle(final TeamsDataSyncPacket packet, final IPayloadContext context)
     {
-        PaintballOverlay.PClass = packet.PClass();
-        PaintballOverlay.PTeam = packet.PTeam();
+        PaintballOverlay.PClass =  PaintballDataUtility.Class.values()[packet.PClass()];
+        PaintballOverlay.PTeam = PaintballDataUtility.Team.values()[packet.PTeam()];
         PaintballOverlay.TPoints = packet.Points();
     }
 }

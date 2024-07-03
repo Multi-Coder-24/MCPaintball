@@ -64,4 +64,5 @@ public class PaintballDataUtility {
         HEAVY,
         SHOTGUNNER
     }
+
 }

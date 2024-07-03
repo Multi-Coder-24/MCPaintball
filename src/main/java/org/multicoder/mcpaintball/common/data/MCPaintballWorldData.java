@@ -1,5 +1,6 @@
 package org.multicoder.mcpaintball.common.data;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.saveddata.SavedData;
 import org.multicoder.mcpaintball.MCPaintball;
@@ -47,7 +48,7 @@ public class MCPaintballWorldData extends SavedData
         data.GameStarted = false;
         return data;
     }
-    public static MCPaintballWorldData load(CompoundTag nbt)
+    public static MCPaintballWorldData load(CompoundTag nbt, HolderLookup.Provider p_323640_)
     {
         MCPaintballWorldData data = new MCPaintballWorldData();
         data.RED_POINTS = nbt.getInt("red");
@@ -60,7 +61,7 @@ public class MCPaintballWorldData extends SavedData
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag)
+    public CompoundTag save(CompoundTag tag, HolderLookup.Provider p_323640_)
     {
         tag.putInt("red",RED_POINTS);
         tag.putInt("green",GREEN_POINTS);

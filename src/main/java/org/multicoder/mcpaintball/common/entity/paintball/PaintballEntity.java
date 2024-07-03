@@ -8,38 +8,52 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import org.jetbrains.annotations.Nullable;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
 
 @SuppressWarnings("all")
-public class PaintballEntity extends AbstractArrow {
-    public PaintballEntity(EntityType<?> entityType, Level level) {
-        super((EntityType<? extends AbstractArrow>) entityType, level, ItemStack.EMPTY);
+public class PaintballEntity extends AbstractArrow
+{
+
+    public PaintballEntity(EntityType<?> p_36721_, LivingEntity p_345310_, Level p_36722_, ItemStack p_309145_, @Nullable ItemStack p_345000_) {
+        super((EntityType<? extends AbstractArrow>)p_36721_, p_345310_, p_36722_, p_309145_, p_345000_);
     }
 
-    public PaintballEntity(EntityType<?> entityType, LivingEntity shooter, Level level) {
-        super((EntityType<? extends AbstractArrow>) entityType, shooter, level, ItemStack.EMPTY);
+    public PaintballEntity(EntityType<?> entityType, Level level) {
+        super((EntityType<? extends AbstractArrow>) entityType, level);
+    }
+
+    public PaintballEntity(EntityType<?> paintball, Player player, Level level) {
+        super((EntityType<? extends AbstractArrow>)paintball, (LivingEntity) player, level,new ItemStack(Items.ARROW), new ItemStack(Items.BOW));
     }
 
 
     @Override
-    protected void onHitEntity(EntityHitResult hitResult) {
-        if (!level().isClientSide()) {
-            if (MCPaintballWorldData.INSTANCE.MatchStarted) {
+    protected void onHitEntity(EntityHitResult hitResult)
+    {
+        if(!level().isClientSide())
+        {
+            if(MCPaintballWorldData.INSTANCE.MatchStarted)
+            {
                 String TN = getTypeName().getString().toLowerCase();
-                Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
-                if (hitResult.getEntity() instanceof Player player) {
-                    if (MCPaintballTeamsDataHelper.HasTeam(player)) {
-                        Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                        if (EntityTeam != T) {
+                PaintballDataUtility.Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
+                if(hitResult.getEntity() instanceof Player player)
+                {
+                    if(MCPaintballTeamsDataHelper.HasTeam(player))
+                    {
+                        PaintballDataUtility.Team T = PaintballDataUtility.Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                        if(EntityTeam != T)
+                        {
                             MCPaintballWorldData.IncrementByTranslationKey(TN);
                             Entity SoundSourceEntity = this.getOwner();
-                            level().playSound(null, SoundSourceEntity.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+                            level().playSound(null,SoundSourceEntity.blockPosition(),MCPaintballSounds.HIT.get(), SoundSource.PLAYERS,1f,1f);
                         }
                     }
                 }
@@ -50,21 +64,23 @@ public class PaintballEntity extends AbstractArrow {
     }
 
     @Override
-    public void tick() {
+    public void tick()
+    {
         super.tick();
-        if (this.inGroundTime == 100) {
+        if(this.inGroundTime == 100) {
             this.kill();
             this.discard();
         }
     }
 
     @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
+    protected SoundEvent getDefaultHitGroundSoundEvent()
+    {
         return MCPaintballSounds.SPLAT.get();
     }
 
     @Override
-    protected ItemStack getPickupItem() {
+    protected ItemStack getDefaultPickupItem() {
         return ItemStack.EMPTY;
     }
 }
