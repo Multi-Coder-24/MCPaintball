@@ -8,9 +8,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.entity.grenade.BluePaintballGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.grenade.GreenPaintballGrenadeEntity;
-import org.multicoder.mcpaintball.common.entity.grenade.PaintballGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.grenade.RedPaintballGrenadeEntity;
-import org.multicoder.mcpaintball.common.entity.paintball.*;
+import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
+import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
 
 public class MCPaintballEntities
 {

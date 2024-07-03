@@ -1,14 +1,11 @@
 package org.multicoder.mcpaintball.common.networking;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
 
 @SuppressWarnings("all")
 public record TeamsDataSyncPacket(int Points, int PTeam,int PClass) implements CustomPacketPayload
