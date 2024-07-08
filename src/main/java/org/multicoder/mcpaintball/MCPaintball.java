@@ -169,24 +169,32 @@ public class MCPaintball {
             {
                 if(!player.level().isClientSide())
                 {
-                    CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-                    Team PTeam = Team.values()[Data.getInt("team")];
-                    Class PClass = Class.values()[Data.getInt("class")];
-                    int Points = 0;
-                    if(PTeam == Team.NONE)
+                    if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
                     {
-                        Points = -1;
-                    }
-                    else{
-                        switch (PTeam)
+                        CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
+                        Team PTeam = Team.values()[Data.getInt("team")];
+                        Class PClass = Class.values()[Data.getInt("class")];
+                        int Points = 0;
+                        if(PTeam == Team.NONE)
                         {
-                            case RED -> Points = MCPaintballWorldData.INSTANCE.RED_POINTS;
-                            case BLUE -> Points = MCPaintballWorldData.INSTANCE.BLUE_POINTS;
-                            case GREEN -> Points = MCPaintballWorldData.INSTANCE.GREEN_POINTS;
+                            Points = -1;
                         }
+                        else{
+                            switch (PTeam)
+                            {
+                                case RED -> Points = MCPaintballWorldData.INSTANCE.RED_POINTS;
+                                case BLUE -> Points = MCPaintballWorldData.INSTANCE.BLUE_POINTS;
+                                case GREEN -> Points = MCPaintballWorldData.INSTANCE.GREEN_POINTS;
+                            }
+                        }
+                        PacketDistributor.sendToPlayer((ServerPlayer) player,new TeamsDataSyncPacket(Points,PTeam.ordinal(),PClass.ordinal(), MCPaintballWorldData.INSTANCE.GAME_TYPE));                    } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
+                    {
+                        CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
+                        Team PTeam = Team.values()[Data.getInt("team")];
+                        Class PClass = Class.values()[Data.getInt("class")];
+                        int Points = Data.getInt("points");
+                        PacketDistributor.sendToPlayer((ServerPlayer) player,new TeamsDataSyncPacket(Points,PTeam.ordinal(),PClass.ordinal(), MCPaintballWorldData.INSTANCE.GAME_TYPE));
                     }
-                    PacketDistributor.sendToPlayer((ServerPlayer) player,new TeamsDataSyncPacket(Points,PTeam.ordinal(),PClass.ordinal()));
-
                 }
             }
         }

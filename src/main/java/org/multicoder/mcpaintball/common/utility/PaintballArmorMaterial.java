@@ -36,4 +36,9 @@ public class PaintballArmorMaterial
             () -> Ingredient.EMPTY,
             List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath("mcpaintball","blue"), "", false)), 0.0f, 0.0f));
 
+    public static final DeferredHolder<?,?> GRAY_ARMOR = MATERIALS.register("gray",() -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), p_323384_ -> {p_323384_.put(ArmorItem.Type.BOOTS, 0);p_323384_.put(ArmorItem.Type.LEGGINGS, 0);p_323384_.put(ArmorItem.Type.CHESTPLATE, 0);p_323384_.put(ArmorItem.Type.HELMET, 0);p_323384_.put(ArmorItem.Type.BODY, 0);}),
+            0,
+            SoundEvents.ARMOR_EQUIP_GENERIC,
+            () -> Ingredient.EMPTY,
+            List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath("mcpaintball","gray"), "", false)), 0.0f, 0.0f));
 }

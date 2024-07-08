@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.ArrayUtils;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.blockentities.SoloC4PaintballBlockEntity;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+@SuppressWarnings("all")
 public class NBTHelper
 {
     public static void C4SetRem(CompoundTag Data, ItemStack stack, Block Selected, Level level, BlockPos pos, Player player)
@@ -61,6 +63,21 @@ public class NBTHelper
                     level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
                 }
             }
+            else if(stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && Selected.equals(MCPaintballBlocks.SOLO_C4.value()))
+            {
+                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(pos);
+                if(E.IsSamePlayer(player))
+                {
+                    if (Screen.hasShiftDown())
+                    {
+                        Locations.add(pos.asLong());
+                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    } else {
+                        Locations.remove(pos.asLong());
+                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    }
+                }
+            }
             Data.putLongArray("mcpaintball.remote.devices", Locations);
         }
         else
@@ -88,6 +105,18 @@ public class NBTHelper
                 {
                     Locations.add(pos.asLong());
                     level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                }
+            }
+            else if (stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && Selected.equals(MCPaintballBlocks.SOLO_C4.value()))
+            {
+                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(pos);
+                if(E.IsSamePlayer(player))
+                {
+                    if (Screen.hasShiftDown())
+                    {
+                        Locations.add(pos.asLong());
+                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    }
                 }
             }
             Data.putLongArray("mcpaintball.remote.devices", Locations);
@@ -122,6 +151,19 @@ public class NBTHelper
                                 level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
                                 level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
                                 Trigger.set(true);
+                            }
+                        }
+                        else if (stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()))
+                        {
+                            if (level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.SOLO_C4.value()))
+                            {
+                                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(Pos);
+                                if(E.IsSamePlayer(player))
+                                {
+                                    level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                                    level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
+                                    Trigger.set(true);
+                                }
                             }
                         }
                     });

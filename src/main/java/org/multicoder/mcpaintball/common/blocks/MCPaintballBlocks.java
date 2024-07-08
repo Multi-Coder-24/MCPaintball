@@ -15,10 +15,12 @@ public class MCPaintballBlocks
     public static final DeferredBlock<Block> RED_C4 = RegisterBlock("red_c4",PaintballC4ExplosiveBlock::new);
     public static final DeferredBlock<Block> BLUE_C4 = RegisterBlock("blue_c4",PaintballC4ExplosiveBlock::new);
     public static final DeferredBlock<Block> GREEN_C4 = RegisterBlock("green_c4",PaintballC4ExplosiveBlock::new);
+    public static final DeferredBlock<Block> SOLO_C4 = RegisterBlock("gray_c4",SoloPaintballC4ExplosiveBlock::new);
 
     public static final DeferredBlock<Block> RED_TEAM_STATION = RegisterBlock("red_team_station",PaintballTeamStationBlock::new);
     public static final DeferredBlock<Block> GREEN_TEAM_STATION = RegisterBlock("green_team_station",PaintballTeamStationBlock::new);
     public static final DeferredBlock<Block> BLUE_TEAM_STATION = RegisterBlock("blue_team_station",PaintballTeamStationBlock::new);
+    public static final DeferredBlock<Block> SOLO_TEAM_STATION = RegisterBlock("gray_team_station",SoloPaintballTeamStationBlock::new);
 
     public static DeferredBlock<Block> RegisterBlock(String name, Supplier<Block> supplier)
     {

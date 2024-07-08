@@ -15,5 +15,6 @@ public class TeamDataSyncPayloadHandler implements IPayloadHandler<TeamsDataSync
         PaintballOverlay.PClass =  PaintballDataUtility.Class.values()[packet.PClass()];
         PaintballOverlay.PTeam = PaintballDataUtility.Team.values()[packet.PTeam()];
         PaintballOverlay.TPoints = packet.Points();
+        PaintballOverlay.Type =PaintballDataUtility.GameType.values()[packet.Type()];
     }
 }

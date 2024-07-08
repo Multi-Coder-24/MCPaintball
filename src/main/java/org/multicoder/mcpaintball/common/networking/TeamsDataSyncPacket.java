@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.multicoder.mcpaintball.MCPaintball;
 
 @SuppressWarnings("all")
-public record TeamsDataSyncPacket(int Points, int PTeam,int PClass) implements CustomPacketPayload
+public record TeamsDataSyncPacket(int Points, int PTeam,int PClass,int Type) implements CustomPacketPayload
 {
     public static final CustomPacketPayload.Type TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(MCPaintball.MOD_ID,"teamdatasync"));
 
@@ -19,6 +19,8 @@ public record TeamsDataSyncPacket(int Points, int PTeam,int PClass) implements C
             TeamsDataSyncPacket::PTeam,
             ByteBufCodecs.INT,
             TeamsDataSyncPacket::PClass,
+            ByteBufCodecs.INT,
+            TeamsDataSyncPacket::Type,
             TeamsDataSyncPacket::new
     );
 

@@ -9,7 +9,8 @@ public class PaintballDataUtility {
         NONE,
         RED,
         GREEN,
-        BLUE;
+        BLUE,
+        SOLO;
 
         public EntityType<?> getPaintball() {
             switch (this) {
@@ -21,6 +22,8 @@ public class PaintballDataUtility {
                 }
                 case BLUE -> {
                     return MCPaintballEntities.BLUE_PAINTBALL.get();
+                }case SOLO -> {
+                    return MCPaintballEntities.SOLO_PAINTBALL.get();
                 }
             }
             return null;
@@ -36,6 +39,8 @@ public class PaintballDataUtility {
                 }
                 case BLUE -> {
                     return MCPaintballEntities.BLUE_GRENADE.get();
+                }case SOLO -> {
+                    return MCPaintballEntities.SOLO_GRENADE.get();
                 }
             }
             return null;
@@ -51,6 +56,8 @@ public class PaintballDataUtility {
                 }
                 case BLUE -> {
                     return MCPaintballEntities.BLUE_HEAVY_PAINTBALL.get();
+                }case SOLO -> {
+                    return MCPaintballEntities.SOLO_HEAVY_PAINTBALL.get();
                 }
             }
             return null;
@@ -62,7 +69,14 @@ public class PaintballDataUtility {
         NONE,
         STANDARD,
         HEAVY,
-        SHOTGUNNER
+        SHOTGUNNER,
+        SOLO
+    }
+
+    public enum GameType
+    {
+        TEAM,
+        SOLO
     }
 
 }

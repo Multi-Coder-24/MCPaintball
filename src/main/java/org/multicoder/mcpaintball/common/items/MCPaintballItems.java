@@ -9,6 +9,7 @@ import org.multicoder.mcpaintball.common.items.armor.PaintballBoots;
 import org.multicoder.mcpaintball.common.items.armor.PaintballChestplate;
 import org.multicoder.mcpaintball.common.items.armor.PaintballHelmet;
 import org.multicoder.mcpaintball.common.items.armor.PaintballLeggings;
+import org.multicoder.mcpaintball.common.items.tools.GrayPaintballC4RemoteItem;
 import org.multicoder.mcpaintball.common.items.tools.PaintballC4RemoteItem;
 import org.multicoder.mcpaintball.common.items.weapons.*;
 import org.multicoder.mcpaintball.common.items.weapons.grenade.GrenadeItem;
@@ -25,6 +26,7 @@ public class MCPaintballItems {
     public static final DeferredItem<?> RED_GRENADE = ITEMS.register("red_grenade", GrenadeItem::new);
     public static final DeferredItem<?> GREEN_GRENADE = ITEMS.register("green_grenade", GrenadeItem::new);
     public static final DeferredItem<?> BLUE_GRENADE = ITEMS.register("blue_grenade", GrenadeItem::new);
+    public static final DeferredItem<?> SOLO_GRENADE = ITEMS.register("gray_grenade", GrenadeItem::new);
 
     public static final DeferredItem<?> RED_BOOTS = ITEMS.register("red_boots", () -> new PaintballBoots((ArmorMaterial) PaintballArmorMaterial.RED_ARMOR.get()));
     public static final DeferredItem<?> RED_LEGGINGS = ITEMS.register("red_leggings", () -> new PaintballLeggings((ArmorMaterial) PaintballArmorMaterial.RED_ARMOR.get()));
@@ -41,7 +43,13 @@ public class MCPaintballItems {
     public static final DeferredItem<?> BLUE_CHESTPLATE = ITEMS.register("blue_chestplate", () -> new PaintballChestplate((ArmorMaterial) PaintballArmorMaterial.BLUE_ARMOR.get()));
     public static final DeferredItem<?> BLUE_HELMET = ITEMS.register("blue_helmet", () -> new PaintballHelmet((ArmorMaterial) PaintballArmorMaterial.BLUE_ARMOR.get()));
 
+    public static final DeferredItem<?> SOLO_BOOTS = ITEMS.register("gray_boots", () -> new PaintballBoots((ArmorMaterial) PaintballArmorMaterial.GRAY_ARMOR.get()));
+    public static final DeferredItem<?> SOLO_LEGGINGS = ITEMS.register("gray_leggings", () -> new PaintballLeggings((ArmorMaterial) PaintballArmorMaterial.GRAY_ARMOR.get()));
+    public static final DeferredItem<?> SOLO_CHESTPLATE = ITEMS.register("gray_chestplate", () -> new PaintballChestplate((ArmorMaterial) PaintballArmorMaterial.GRAY_ARMOR.get()));
+    public static final DeferredItem<?> SOLO_HELMET = ITEMS.register("gray_helmet", () -> new PaintballHelmet((ArmorMaterial) PaintballArmorMaterial.GRAY_ARMOR.get()));
+
     public static final DeferredItem<Item> RED_REMOTE = ITEMS.register("red_remote", PaintballC4RemoteItem::new);
     public static final DeferredItem<Item> GREEN_REMOTE = ITEMS.register("green_remote", PaintballC4RemoteItem::new);
     public static final DeferredItem<Item> BLUE_REMOTE = ITEMS.register("blue_remote", PaintballC4RemoteItem::new);
+    public static final DeferredItem<Item> SOLO_REMOTE = ITEMS.register("gray_remote", GrayPaintballC4RemoteItem::new);
 }
