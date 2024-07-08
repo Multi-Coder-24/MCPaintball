@@ -10,7 +10,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 public enum PaintballArmorMaterial implements ArmorMaterial {
     RED("mcpaintball:red"),
     GREEN("mcpaintball:green"),
-    BLUE("mcpaintball:blue");
+    BLUE("mcpaintball:blue"),
+    GRAY("mcpaintball:gray");
 
     String Name;
 

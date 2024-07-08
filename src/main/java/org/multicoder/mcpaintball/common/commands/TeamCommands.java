@@ -17,7 +17,8 @@ import org.multicoder.mcpaintball.common.utility.TeamLoadoutManager;
 
 import java.util.List;
 
-public class TeamCommands {
+public class TeamCommands
+{
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("team").then(Commands.literal("set").then(Commands.argument("team", EnumArgument.enumArgument(Team.class)).executes(TeamCommands::setTeamCommand))))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("class").then(Commands.literal("set").then(Commands.argument("class", EnumArgument.enumArgument(Class.class)).executes(TeamCommands::setClassCommand))))).createBuilder().build();

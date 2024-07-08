@@ -29,6 +29,7 @@ import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.blockentities.MCPaintballBlockEntities;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
@@ -37,13 +38,18 @@ import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.grenade.RedPaintballGrenadeEntity;
+import org.multicoder.mcpaintball.common.entity.paintball.GrayHeavyPaintballEntity;
+import org.multicoder.mcpaintball.common.entity.paintball.GrayPaintballEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
+import org.multicoder.mcpaintball.common.entityrenderers.paintball.GrayHeavyPaintballRenderer;
+import org.multicoder.mcpaintball.common.entityrenderers.paintball.GrayPaintballEntityRenderer;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.HeavyPaintballRenderer;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEntityRenderer;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.networking.TeamDataSyncPayloadHandler;
 import org.multicoder.mcpaintball.common.networking.TeamsDataSyncPacket;
+import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
 import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
 import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
 
@@ -63,20 +69,24 @@ public class MCPaintball {
         MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
         MCPaintballSounds.SOUNDS.register(eventBus);
+        MCPaintballBlockEntities.BLOCK_ENTITIES.register(eventBus);
     }
     @SuppressWarnings("unchecked")
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.RED_PAINTBALL.get(), PaintballEntityRenderer::new);
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.GREEN_PAINTBALL.get(), PaintballEntityRenderer::new);
         event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<GrayPaintballEntity>) MCPaintballEntities.SOLO_PAINTBALL.get(), GrayPaintballEntityRenderer::new);
 
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.RED_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.GREEN_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
         event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.BLUE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
+        event.registerEntityRenderer((EntityType<GrayHeavyPaintballEntity>) MCPaintballEntities.SOLO_HEAVY_PAINTBALL.get(), GrayHeavyPaintballRenderer::new);
 
         event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.SOLO_GRENADE.get(), ThrownItemRenderer::new);
     }
 
     public void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event)
@@ -92,10 +102,12 @@ public class MCPaintball {
                 event.accept(MCPaintballItems.RED_GRENADE);
                 event.accept(MCPaintballItems.GREEN_GRENADE);
                 event.accept(MCPaintballItems.BLUE_GRENADE);
+                event.accept(MCPaintballItems.SOLO_GRENADE);
 
                 event.accept(MCPaintballItems.RED_REMOTE);
                 event.accept(MCPaintballItems.GREEN_REMOTE);
                 event.accept(MCPaintballItems.BLUE_REMOTE);
+                event.accept(MCPaintballItems.SOLO_REMOTE);
 
                 event.accept(MCPaintballItems.RED_BOOTS);
                 event.accept(MCPaintballItems.RED_LEGGINGS);
@@ -111,15 +123,23 @@ public class MCPaintball {
                 event.accept(MCPaintballItems.BLUE_LEGGINGS);
                 event.accept(MCPaintballItems.BLUE_CHESTPLATE);
                 event.accept(MCPaintballItems.BLUE_HELMET);
+
+                event.accept(MCPaintballItems.SOLO_BOOTS);
+                event.accept(MCPaintballItems.SOLO_LEGGINGS);
+                event.accept(MCPaintballItems.SOLO_CHESTPLATE);
+                event.accept(MCPaintballItems.SOLO_HELMET);
+
             } else if (event.getTabKey().equals(CreativeModeTabs.FUNCTIONAL_BLOCKS))
             {
                 event.accept(new ItemStack(MCPaintballBlocks.RED_C4));
                 event.accept(new ItemStack(MCPaintballBlocks.GREEN_C4));
                 event.accept(new ItemStack(MCPaintballBlocks.BLUE_C4));
+                event.accept(new ItemStack(MCPaintballBlocks.SOLO_C4));
 
                 event.accept(new ItemStack(MCPaintballBlocks.RED_TEAM_STATION));
                 event.accept(new ItemStack(MCPaintballBlocks.GREEN_TEAM_STATION));
                 event.accept(new ItemStack(MCPaintballBlocks.BLUE_TEAM_STATION));
+                event.accept(new ItemStack(MCPaintballBlocks.SOLO_TEAM_STATION));
             }
         } catch (Exception exception) {
             LOG.error(exception);
@@ -166,24 +186,33 @@ public class MCPaintball {
             {
                 if(!player.level().isClientSide())
                 {
-                    CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-                    Team PTeam = Team.values()[Data.getInt("team")];
-                    Class PClass = Class.values()[Data.getInt("class")];
-                    int Points = 0;
-                    if(PTeam == Team.NONE)
+                    if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
                     {
-                        Points = -1;
-                    }
-                    else{
-                        switch (PTeam)
+                        CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
+                        Team PTeam = Team.values()[Data.getInt("team")];
+                        Class PClass = Class.values()[Data.getInt("class")];
+                        int Points = 0;
+                        if(PTeam == Team.NONE)
                         {
-                            case RED -> Points = MCPaintballWorldData.INSTANCE.RED_POINTS;
-                            case BLUE -> Points = MCPaintballWorldData.INSTANCE.BLUE_POINTS;
-                            case GREEN -> Points = MCPaintballWorldData.INSTANCE.GREEN_POINTS;
+                            Points = -1;
                         }
+                        else{
+                            switch (PTeam)
+                            {
+                                case RED -> Points = MCPaintballWorldData.INSTANCE.RED_POINTS;
+                                case BLUE -> Points = MCPaintballWorldData.INSTANCE.BLUE_POINTS;
+                                case GREEN -> Points = MCPaintballWorldData.INSTANCE.GREEN_POINTS;
+                            }
+                        }
+                        PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,PTeam,PClass, PaintballDataUtility.GameType.values()[MCPaintballWorldData.INSTANCE.GAME_TYPE]));
+                    } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
+                    {
+                        CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
+                        Team PTeam = Team.values()[Data.getInt("team")];
+                        Class PClass = Class.values()[Data.getInt("class")];
+                        int Points = Data.getInt("points");
+                        PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,PTeam,PClass, PaintballDataUtility.GameType.values()[MCPaintballWorldData.INSTANCE.GAME_TYPE]));
                     }
-                    PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,PTeam,PClass));
-
                 }
             }
         }

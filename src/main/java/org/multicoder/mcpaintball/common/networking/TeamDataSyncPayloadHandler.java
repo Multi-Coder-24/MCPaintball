@@ -12,5 +12,6 @@ public class TeamDataSyncPayloadHandler
         PaintballOverlay.PClass = packet.PClass();
         PaintballOverlay.PTeam = packet.PTeam();
         PaintballOverlay.TPoints = packet.Points();
+        PaintballOverlay.Type = packet.Type();
     }
 }

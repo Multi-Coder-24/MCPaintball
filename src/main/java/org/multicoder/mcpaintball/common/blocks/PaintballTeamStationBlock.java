@@ -22,7 +22,8 @@ import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 @SuppressWarnings("all")
 public class PaintballTeamStationBlock extends Block
 {
-    public VoxelShape makeShape(){
+    public VoxelShape makeShape()
+    {
         VoxelShape shape = Shapes.empty();
         shape = Shapes.join(shape, Shapes.box(0, 0, 0, 1, 0.25, 1), BooleanOp.OR);
         shape = Shapes.join(shape, Shapes.box(0, 0.25, 0, 0.125, 0.75, 0.125), BooleanOp.OR);
@@ -112,9 +113,15 @@ public class PaintballTeamStationBlock extends Block
                             }
                         }
                     }
+                    else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
+                    {
+                        player.addItem(new ItemStack(MCPaintballItems.SOLO_GRENADE.value(),16));
+                        player.addItem(new ItemStack(MCPaintballBlocks.SOLO_C4.value(),6));
+                    }
                 }
             }
         }
         return InteractionResult.SUCCESS;
     }
+
 }
