@@ -13,11 +13,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.blockentities.SoloC4PaintballBlockEntity;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+@SuppressWarnings("all")
 public class NBTHelper
 {
     public static void C4SetRem(CompoundTag Data, ItemStack stack, Block Selected, Level level, BlockPos pos, Player player)
@@ -60,6 +62,21 @@ public class NBTHelper
                     level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
                 }
             }
+            else if(stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && Selected.equals(MCPaintballBlocks.SOLO_C4.value()))
+            {
+                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(pos);
+                if(E.IsSamePlayer(player))
+                {
+                    if (Screen.hasShiftDown())
+                    {
+                        Devices.add(LongTag.valueOf(pos.asLong()));
+                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    } else {
+                        Devices.remove(LongTag.valueOf(pos.asLong()));
+                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    }
+                }
+            }
             Data.put("devices", Devices);
             stack.setTag(Data);
         }
@@ -88,6 +105,17 @@ public class NBTHelper
                 {
                     Devices.add(LongTag.valueOf(pos.asLong()));
                     level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                }
+            }else if (stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && Selected.equals(MCPaintballBlocks.SOLO_C4.value()))
+            {
+                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(pos);
+                if(E.IsSamePlayer(player))
+                {
+                    if (Screen.hasShiftDown())
+                    {
+                        Devices.add(LongTag.valueOf(pos.asLong()));
+                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    }
                 }
             }
             Data.put("devices", Devices);
@@ -123,6 +151,18 @@ public class NBTHelper
                                 level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
                                 level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
                                 Trigger.set(true);
+                            }
+                        } else if (stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()))
+                        {
+                            if (level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.SOLO_C4.value()))
+                            {
+                                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(Pos);
+                                if(E.IsSamePlayer(player))
+                                {
+                                    level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                                    level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
+                                    Trigger.set(true);
+                                }
                             }
                         }
                     });
