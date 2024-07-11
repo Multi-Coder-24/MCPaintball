@@ -33,6 +33,7 @@ import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
+import org.multicoder.mcpaintball.common.data.MCPaintballDataContainers;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
@@ -66,6 +67,7 @@ public class MCPaintball {
         MCPaintballEntities.ENTITIES.register(eventBus);
         MCPaintballSounds.SOUNDS.register(eventBus);
         PaintballArmorMaterial.MATERIALS.register(eventBus);
+        MCPaintballDataContainers.DATA_COMPONENTS.register(eventBus);
     }
     @SuppressWarnings("unchecked")
     public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {

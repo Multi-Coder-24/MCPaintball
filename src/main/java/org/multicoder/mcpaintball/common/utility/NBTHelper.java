@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.common.utility;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundSource;
@@ -14,6 +15,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.blockentities.SoloC4PaintballBlockEntity;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.data.C4LocationData;
+import org.multicoder.mcpaintball.common.data.MCPaintballDataContainers;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ public class NBTHelper
 {
     public static void C4SetRem(CompoundTag Data, ItemStack stack, Block Selected, Level level, BlockPos pos, Player player)
     {
+
         if (Data.contains("mcpaintball.remote.devices", Tag.TAG_LIST))
         {
             List<Long> Locations = new ArrayList<>(List.of(ArrayUtils.toObject(Data.getLongArray("mcpaintball.remote.devices"))));

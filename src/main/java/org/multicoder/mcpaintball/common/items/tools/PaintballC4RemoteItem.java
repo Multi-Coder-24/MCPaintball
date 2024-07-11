@@ -1,6 +1,8 @@
 package org.multicoder.mcpaintball.common.items.tools;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentHolder;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -11,10 +13,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import org.multicoder.mcpaintball.common.data.C4LocationData;
+import org.multicoder.mcpaintball.common.data.MCPaintballDataContainers;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.NBTHelper;
+
+import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PaintballC4RemoteItem extends Item
@@ -22,7 +28,7 @@ public class PaintballC4RemoteItem extends Item
 
     public PaintballC4RemoteItem()
     {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).component(MCPaintballDataContainers.STACK,new C4LocationData(new ArrayList<>())));
     }
 
     @Override
@@ -65,6 +71,7 @@ public class PaintballC4RemoteItem extends Item
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
         Level level = player.level();
+        stack.set(MCPaintballDataContainers.STACK,new C4LocationData(new ArrayList<>()));
         CompoundTag RemoteNBT = player.getPersistentData();
         if(!level.isClientSide()) {
             if (MCPaintballWorldData.INSTANCE.MatchStarted)
