@@ -5,8 +5,8 @@ import net.minecraft.world.item.ItemStack;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 import java.util.ArrayList;
 import java.util.List;

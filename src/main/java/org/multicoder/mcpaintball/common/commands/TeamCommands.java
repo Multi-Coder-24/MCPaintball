@@ -11,8 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 import org.multicoder.mcpaintball.common.utility.TeamLoadoutManager;
 
 import java.util.List;

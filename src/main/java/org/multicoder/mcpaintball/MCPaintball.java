@@ -49,9 +49,9 @@ import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEnti
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.networking.TeamDataSyncPayloadHandler;
 import org.multicoder.mcpaintball.common.networking.TeamsDataSyncPacket;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
 @Mod(MCPaintball.MOD_ID)
@@ -186,7 +186,7 @@ public class MCPaintball {
             {
                 if(!player.level().isClientSide())
                 {
-                    if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
+                    if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
                     {
                         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
                         Team PTeam = Team.values()[Data.getInt("team")];
@@ -205,7 +205,7 @@ public class MCPaintball {
                             }
                         }
                         PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,PTeam,PClass, PaintballDataUtility.GameType.values()[MCPaintballWorldData.INSTANCE.GAME_TYPE]));
-                    } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
+                    } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 3)
                     {
                         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
                         Team PTeam = Team.values()[Data.getInt("team")];

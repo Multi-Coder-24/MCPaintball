@@ -13,7 +13,7 @@ import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
 public class HeavyPaintballEntity extends AbstractArrow {
@@ -26,22 +26,43 @@ public class HeavyPaintballEntity extends AbstractArrow {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult hitResult) {
-        if (MCPaintballWorldData.INSTANCE.MatchStarted) {
+    protected void onHitBlock(BlockHitResult hitResult)
+    {
+        if (MCPaintballWorldData.INSTANCE.MatchStarted)
+        {
             BlockPos Position = hitResult.getBlockPos();
-            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.NONE);
-            E.getHitPlayers().keySet().forEach(player ->
+            if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
             {
-                String TK = getTypeName().getString().toLowerCase();
-                Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-                if (MCPaintballTeamsDataHelper.HasTeam(player)) {
-                    Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                    if (EntityTeam != T)
-                    {
-                        MCPaintballWorldData.IncrementByTranslationKey(TK);
+                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.TNT);
+                E.getHitPlayers().keySet().forEach(player ->
+                {
+                    String TK = getTypeName().getString().toLowerCase();
+                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
+                    if (MCPaintballTeamsDataHelper.HasTeam(player)) {
+                        Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                        if (EntityTeam != T)
+                        {
+                            MCPaintballWorldData.IncrementByTranslationKey(TK);
+                        }
                     }
-                }
-            });
+                });
+            }
+            else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
+            {
+                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                E.getHitPlayers().keySet().forEach(player ->
+                {
+                    String TK = getTypeName().getString().toLowerCase();
+                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
+                    if (MCPaintballTeamsDataHelper.HasTeam(player)) {
+                        Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                        if (EntityTeam != T)
+                        {
+                            MCPaintballWorldData.IncrementByTranslationKey(TK);
+                        }
+                    }
+                });
+            }
         }
         this.kill();
         this.discard();

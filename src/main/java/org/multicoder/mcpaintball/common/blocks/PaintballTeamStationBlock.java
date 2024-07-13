@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.common.blocks;
 
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -56,6 +57,8 @@ public class PaintballTeamStationBlock extends Block
                     int Class = MCPaintballTeamsDataHelper.FetchClass(player);
                     if(Team == 1 && state.getBlock().equals(MCPaintballBlocks.RED_TEAM_STATION.value()))
                     {
+                        ServerPlayer SP = (ServerPlayer) player;
+                        SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
                         switch (Class)
                         {
                             case 1 ->
@@ -77,6 +80,8 @@ public class PaintballTeamStationBlock extends Block
                     }
                     else if(Team == 2 && state.getBlock().equals(MCPaintballBlocks.GREEN_TEAM_STATION.value()))
                     {
+                        ServerPlayer SP = (ServerPlayer) player;
+                        SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
                         switch (Class) {
                             case 1 -> {
                                 player.addItem(new ItemStack(MCPaintballItems.GREEN_GRENADE.value(), 8));
@@ -94,6 +99,8 @@ public class PaintballTeamStationBlock extends Block
                     }
                     else if(Team == 3 && state.getBlock().equals(MCPaintballBlocks.BLUE_TEAM_STATION.value()))
                     {
+                        ServerPlayer SP = (ServerPlayer) player;
+                        SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
                         switch (Class)
                         {
                             case 1 ->
@@ -112,11 +119,6 @@ public class PaintballTeamStationBlock extends Block
                                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_C4.value(),6));
                             }
                         }
-                    }
-                    else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
-                    {
-                        player.addItem(new ItemStack(MCPaintballItems.SOLO_GRENADE.value(),16));
-                        player.addItem(new ItemStack(MCPaintballBlocks.SOLO_C4.value(),6));
                     }
                 }
             }

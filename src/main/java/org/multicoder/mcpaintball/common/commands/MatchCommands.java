@@ -8,8 +8,8 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -30,13 +30,13 @@ public class MatchCommands
     private static int GameTypeSet(CommandContext<CommandSourceStack> context)
     {
         MCPaintballWorldData.INSTANCE.GAME_TYPE = context.getArgument("Type", PaintballDataUtility.GameType.class).ordinal();
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game.mode",context.getArgument("Type", PaintballDataUtility.GameType.class).name().toLowerCase()),true);
+        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game.mode",context.getArgument("Type", PaintballDataUtility.GameType.class).name().toLowerCase().replace('_',' ')),true);
         return 0;
     }
 
     private static int Winner(CommandContext<CommandSourceStack> context)
     {
-        if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
+        if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
         {
             List<Integer> Points = new ArrayList<>();
             Points.add(MCPaintballWorldData.INSTANCE.NULL_POINTS);
@@ -51,7 +51,7 @@ public class MatchCommands
             MCPaintballWorldData.INSTANCE.RED_POINTS = 0;
             MCPaintballWorldData.INSTANCE.NULL_POINTS = -1;
             MCPaintballWorldData.INSTANCE.setDirty();
-        } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
+        } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 3)
         {
             List<String> NAMES = new ArrayList<>();
             List<Integer> POINTS = new ArrayList<>();

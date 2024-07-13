@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.common.utility;
+package org.multicoder.mcpaintball.common.data;
 
 import net.minecraft.world.entity.EntityType;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
@@ -75,6 +75,8 @@ public class PaintballDataUtility {
     public enum GameType
     {
         TEAM,
-        SOLO
+        SOLO,
+        TEAM_DEATH,
+        SOLO_DEATH
     }
 }

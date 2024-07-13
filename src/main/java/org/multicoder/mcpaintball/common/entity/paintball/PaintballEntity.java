@@ -14,7 +14,7 @@ import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
 public class PaintballEntity extends AbstractArrow {
@@ -28,18 +28,46 @@ public class PaintballEntity extends AbstractArrow {
 
 
     @Override
-    protected void onHitEntity(EntityHitResult hitResult) {
-        if (!level().isClientSide()) {
-            if (MCPaintballWorldData.INSTANCE.MatchStarted) {
-                String TN = getTypeName().getString().toLowerCase();
-                Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
-                if (hitResult.getEntity() instanceof Player player) {
-                    if (MCPaintballTeamsDataHelper.HasTeam(player)) {
-                        Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                        if (EntityTeam != T) {
-                            MCPaintballWorldData.IncrementByTranslationKey(TN);
-                            Entity SoundSourceEntity = this.getOwner();
-                            level().playSound(null, SoundSourceEntity.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+    protected void onHitEntity(EntityHitResult hitResult)
+    {
+        if (!level().isClientSide())
+        {
+            if (MCPaintballWorldData.INSTANCE.MatchStarted)
+            {
+                if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
+                {
+                    String TN = getTypeName().getString().toLowerCase();
+                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
+                    if (hitResult.getEntity() instanceof Player player)
+                    {
+                        if (MCPaintballTeamsDataHelper.HasTeam(player))
+                        {
+                            Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                            if (EntityTeam != T)
+                            {
+                                player.hurt(level().damageSources().arrow(this,getOwner()),2f);
+                                MCPaintballWorldData.IncrementByTranslationKey(TN);
+                                Entity SoundSourceEntity = this.getOwner();
+                                level().playSound(null, SoundSourceEntity.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+                            }
+                        }
+                    }
+                }
+                else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
+                {
+                    String TN = getTypeName().getString().toLowerCase();
+                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
+                    if (hitResult.getEntity() instanceof Player player)
+                    {
+                        if (MCPaintballTeamsDataHelper.HasTeam(player))
+                        {
+                            Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                            if (EntityTeam != T)
+                            {
+                                MCPaintballWorldData.IncrementByTranslationKey(TN);
+                                Entity SoundSourceEntity = this.getOwner();
+                                level().playSound(null, SoundSourceEntity.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+                            }
                         }
                     }
                 }

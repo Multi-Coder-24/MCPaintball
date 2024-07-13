@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.common.blocks;
 
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -59,6 +60,8 @@ public class SoloPaintballTeamStationBlock extends Block implements EntityBlock
                     SoloPaintballTeamStationBlockEntity E = (SoloPaintballTeamStationBlockEntity) level.getBlockEntity(pos);
                     if(E.IsSamePlayer(player))
                     {
+                        ServerPlayer SP = (ServerPlayer) player;
+                        SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
                         player.addItem(new ItemStack(MCPaintballItems.SOLO_GRENADE.value(),12));
                         player.addItem(new ItemStack(MCPaintballBlocks.SOLO_C4.value(),6));
                     }

@@ -4,9 +4,9 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
 
 @SuppressWarnings("all")
 public record TeamsDataSyncPacket(int Points, Team PTeam, Class PClass, PaintballDataUtility.GameType Type) implements CustomPacketPayload

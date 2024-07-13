@@ -1,6 +1,6 @@
 package org.multicoder.mcpaintball.common.utility;
 
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 public class FormattingManagers {
     public static Team FormatTypeToTeam(String TypeName) {
