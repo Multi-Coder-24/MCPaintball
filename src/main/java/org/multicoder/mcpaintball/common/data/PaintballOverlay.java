@@ -6,9 +6,8 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.network.chat.Component;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
 
 @SuppressWarnings("all")
 public class PaintballOverlay implements LayeredDraw.Layer

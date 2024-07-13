@@ -30,10 +30,11 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.blockentities.MCPaintballBlockEntities;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
-import org.multicoder.mcpaintball.common.data.MCPaintballDataContainers;
+import org.multicoder.mcpaintball.common.data.containers.MCPaintballDataContainers;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
@@ -47,8 +48,8 @@ import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.networking.TeamDataSyncPayloadHandler;
 import org.multicoder.mcpaintball.common.networking.TeamsDataSyncPacket;
 import org.multicoder.mcpaintball.common.utility.PaintballArmorMaterial;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Class;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
 @Mod(MCPaintball.MOD_ID)
@@ -67,6 +68,7 @@ public class MCPaintball {
         MCPaintballEntities.ENTITIES.register(eventBus);
         MCPaintballSounds.SOUNDS.register(eventBus);
         PaintballArmorMaterial.MATERIALS.register(eventBus);
+        MCPaintballBlockEntities.BLOCK_ENTITIES.register(eventBus);
         MCPaintballDataContainers.DATA_COMPONENTS.register(eventBus);
     }
     @SuppressWarnings("unchecked")
@@ -171,7 +173,7 @@ public class MCPaintball {
             {
                 if(!player.level().isClientSide())
                 {
-                    if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
+                    if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
                     {
                         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
                         Team PTeam = Team.values()[Data.getInt("team")];
@@ -189,7 +191,8 @@ public class MCPaintball {
                                 case GREEN -> Points = MCPaintballWorldData.INSTANCE.GREEN_POINTS;
                             }
                         }
-                        PacketDistributor.sendToPlayer((ServerPlayer) player,new TeamsDataSyncPacket(Points,PTeam.ordinal(),PClass.ordinal(), MCPaintballWorldData.INSTANCE.GAME_TYPE));                    } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
+                        PacketDistributor.sendToPlayer((ServerPlayer) player,new TeamsDataSyncPacket(Points,PTeam.ordinal(),PClass.ordinal(), MCPaintballWorldData.INSTANCE.GAME_TYPE));
+                    } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 3)
                     {
                         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
                         Team PTeam = Team.values()[Data.getInt("team")];

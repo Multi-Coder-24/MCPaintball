@@ -30,12 +30,26 @@ public class GrayPaintballEntity extends AbstractArrow {
         {
             if (MCPaintballWorldData.INSTANCE.MatchStarted)
             {
-                if (hitResult.getEntity() instanceof Player player)
+                if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 3)
                 {
-                    if (MCPaintballTeamsDataHelper.HasTeam(player))
+                    if (hitResult.getEntity() instanceof Player player)
                     {
-                        Player shooter = (Player) getOwner();
-                        MCPaintballTeamsDataHelper.AddPoint(shooter);
+                        if (MCPaintballTeamsDataHelper.HasTeam(player))
+                        {
+                            Player shooter = (Player) getOwner();
+                            player.hurt(level().damageSources().arrow(this,shooter),2f);
+                            MCPaintballTeamsDataHelper.AddPoint(shooter);
+                        }
+                    }
+                } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
+                {
+                    if (hitResult.getEntity() instanceof Player player)
+                    {
+                        if (MCPaintballTeamsDataHelper.HasTeam(player))
+                        {
+                            Player shooter = (Player) getOwner();
+                            MCPaintballTeamsDataHelper.AddPoint(shooter);
+                        }
                     }
                 }
             }

@@ -3,7 +3,7 @@ package org.multicoder.mcpaintball.common.networking;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
-import org.multicoder.mcpaintball.common.utility.PaintballDataUtility;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
 
 @SuppressWarnings("all")
 public class TeamDataSyncPayloadHandler implements IPayloadHandler<TeamsDataSyncPacket>

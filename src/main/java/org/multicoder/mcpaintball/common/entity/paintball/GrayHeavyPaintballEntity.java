@@ -25,18 +25,33 @@ public class GrayHeavyPaintballEntity extends AbstractArrow {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult hitResult) {
-        if (MCPaintballWorldData.INSTANCE.MatchStarted) {
-            BlockPos Position = hitResult.getBlockPos();
-            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.NONE);
-            E.getHitPlayers().keySet().forEach(player ->
-            {
-                if (MCPaintballTeamsDataHelper.HasTeam(player))
+    protected void onHitBlock(BlockHitResult hitResult)
+    {
+        if (MCPaintballWorldData.INSTANCE.MatchStarted)
+        {
+            if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 3){
+                BlockPos Position = hitResult.getBlockPos();
+                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.TNT);
+                E.getHitPlayers().keySet().forEach(player ->
                 {
-                    Player shooter = (Player) getOwner();
-                    MCPaintballTeamsDataHelper.AddPoint(shooter);
-                }
-            });
+                    if (MCPaintballTeamsDataHelper.HasTeam(player))
+                    {
+                        Player shooter = (Player) getOwner();
+                        MCPaintballTeamsDataHelper.AddPoint(shooter);
+                    }
+                });
+            } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1) {
+                BlockPos Position = hitResult.getBlockPos();
+                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                E.getHitPlayers().keySet().forEach(player ->
+                {
+                    if (MCPaintballTeamsDataHelper.HasTeam(player))
+                    {
+                        Player shooter = (Player) getOwner();
+                        MCPaintballTeamsDataHelper.AddPoint(shooter);
+                    }
+                });
+            }
         }
         this.kill();
         this.discard();

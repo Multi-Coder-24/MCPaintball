@@ -1,12 +1,9 @@
-package org.multicoder.mcpaintball.common.data;
+package org.multicoder.mcpaintball.common.data.containers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 public record C4LocationData(List<Long> Positions)
 {
