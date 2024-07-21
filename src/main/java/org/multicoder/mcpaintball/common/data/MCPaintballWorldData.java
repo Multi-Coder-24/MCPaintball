@@ -18,7 +18,6 @@ public class MCPaintballWorldData extends SavedData
     public int GAME_TYPE;
     public boolean MatchStarted;
     public boolean GameStarted;
-
     public static void IncrementByTranslationKey(String Key)
     {
         if(Key.contains("red"))

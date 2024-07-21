@@ -18,7 +18,9 @@ import java.util.List;
 @SuppressWarnings("all")
 public class MatchCommands
 {
-    public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
+    public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher)
+    {
+
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("match").then(Commands.literal("start").executes(MatchCommands::MatchStart)))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("match").then(Commands.literal("stop").executes(MatchCommands::MatchStop)))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("start").executes(MatchCommands::GameStart)))).createBuilder().build();
@@ -26,6 +28,7 @@ public class MatchCommands
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("winner").executes(MatchCommands::Winner)))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("mode").then(Commands.argument("Type", EnumArgument.enumArgument(PaintballDataUtility.GameType.class)).executes(MatchCommands::GameTypeSet))))).createBuilder().build();
     }
+
 
     private static int GameTypeSet(CommandContext<CommandSourceStack> context)
     {
