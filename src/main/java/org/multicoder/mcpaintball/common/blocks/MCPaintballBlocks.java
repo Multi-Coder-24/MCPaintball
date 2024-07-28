@@ -22,6 +22,8 @@ public class MCPaintballBlocks
     public static final DeferredBlock<Block> BLUE_TEAM_STATION = RegisterBlock("blue_team_station",PaintballTeamStationBlock::new);
     public static final DeferredBlock<Block> SOLO_TEAM_STATION = RegisterBlock("gray_team_station",SoloPaintballTeamStationBlock::new);
 
+    public static final DeferredBlock<Block> TEAM_FLAG = RegisterBlock("flag_block",FlagBlock::new);
+
     public static DeferredBlock<Block> RegisterBlock(String name, Supplier<Block> supplier)
     {
         DeferredBlock<Block> Block = BLOCKS.register(name,supplier);

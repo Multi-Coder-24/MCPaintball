@@ -35,6 +35,9 @@ import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
+import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.grenade.RedPaintballGrenadeEntity;
@@ -49,9 +52,6 @@ import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEnti
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.networking.TeamDataSyncPayloadHandler;
 import org.multicoder.mcpaintball.common.networking.TeamsDataSyncPacket;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 
 @SuppressWarnings("all")
 @Mod(MCPaintball.MOD_ID)
@@ -140,6 +140,8 @@ public class MCPaintball {
                 event.accept(new ItemStack(MCPaintballBlocks.GREEN_TEAM_STATION));
                 event.accept(new ItemStack(MCPaintballBlocks.BLUE_TEAM_STATION));
                 event.accept(new ItemStack(MCPaintballBlocks.SOLO_TEAM_STATION));
+
+                event.accept(new ItemStack(MCPaintballBlocks.TEAM_FLAG));
             }
         } catch (Exception exception) {
             LOG.error(exception);

@@ -73,7 +73,6 @@
   "text.mcpaintball.overlay.team": "Current Team: %s",
   "text.mcpaintball.overlay.class": "Selected Class: %s",
   "text.mcpaintball.overlay.type": "Game Type: %s",
-  "text.mcpaintball.overlay.timer": "Time Left %s:%s",
 
   "Comment_6": "Blocks",
   "block.mcpaintball.red_c4": "Red C4 Explosive",
@@ -83,6 +82,7 @@
   "block.mcpaintball.red_team_station": "Red Team Station",
   "block.mcpaintball.green_team_station": "Green Team Station",
   "block.mcpaintball.blue_team_station": "Blue Team Station",
-  "block.mcpaintball.gray_team_station": "Solo Team Station"
+  "block.mcpaintball.gray_team_station": "Solo Team Station",
+  "block.mcpaintball.flag_block": "Team Flag"
 
 }
