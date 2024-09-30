@@ -5,8 +5,8 @@ import net.minecraft.world.item.ItemStack;
 import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballClass;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ public class TeamLoadoutManager
     public static List<ItemStack> FetchEquipment(Player player)
     {
         List<ItemStack> Equipment = new ArrayList<>();
-        Team PTeam = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-        Class PClass = Class.values()[MCPaintballTeamsDataHelper.FetchClass(player)];
+        PaintballTeam PTeam = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+        PaintballClass PClass = PaintballClass.values()[MCPaintballTeamsDataHelper.FetchClass(player)];
         switch (PTeam) {
             case RED -> {
                 switch (PClass) {

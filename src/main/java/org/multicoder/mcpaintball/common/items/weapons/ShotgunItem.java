@@ -12,7 +12,7 @@ import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.entity.paintball.PaintballEntity;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
 
 @SuppressWarnings("all")
 public class ShotgunItem extends Item {
@@ -25,7 +25,7 @@ public class ShotgunItem extends Item {
         if (!level.isClientSide()) {
             if (MCPaintballTeamsDataHelper.HasTeam(player)) {
                 if (MCPaintballWorldData.INSTANCE.MatchStarted) {
-                    Team PTeam = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                    PaintballTeam PTeam = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
                     AbstractArrow Paintball_1 = new PaintballEntity(PTeam.getPaintball(), player, level);
                     AbstractArrow Paintball_2 = new PaintballEntity(PTeam.getPaintball(), player, level);
                     AbstractArrow Paintball_3 = new PaintballEntity(PTeam.getPaintball(), player, level);

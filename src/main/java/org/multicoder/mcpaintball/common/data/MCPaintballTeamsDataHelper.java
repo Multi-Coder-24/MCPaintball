@@ -10,8 +10,8 @@ public class MCPaintballTeamsDataHelper
         if (!player.getPersistentData().contains("mcpaintball.team"))
         {
             CompoundTag Default = new CompoundTag();
-            Default.putInt("team", 0);
-            Default.putInt("class", 0);
+            Default.putInt("team", -1);
+            Default.putInt("class", -1);
             Default.putInt("points", 0);
             Default.putBoolean("active",false);
             player.getPersistentData().put("mcpaintball.team", Default);
@@ -21,8 +21,8 @@ public class MCPaintballTeamsDataHelper
     public static void ResetAll(Player player)
     {
         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-        Data.putInt("team", 0);
-        Data.putInt("class", 0);
+        Data.putInt("team", -1);
+        Data.putInt("class", -1);
         Data.putInt("points", 0);
         Data.putBoolean("active",false);
         player.getPersistentData().put("mcpaintball.team", Data);

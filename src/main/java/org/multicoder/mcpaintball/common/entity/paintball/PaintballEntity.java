@@ -10,11 +10,13 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
+
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class PaintballEntity extends AbstractArrow {
@@ -34,40 +36,16 @@ public class PaintballEntity extends AbstractArrow {
         {
             if (MCPaintballWorldData.INSTANCE.MatchStarted)
             {
-                if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
+                float Damage = (MCPaintballWorldData.INSTANCE.GAME_TYPE == 3) ? 2f : 0f;
+                PaintballTeam Team = PaintballTeam.getFromEntityType(getTypeName().getString().toLowerCase());
+                if (hitResult.getEntity() instanceof Player player && Objects.nonNull(Team))
                 {
-                    String TN = getTypeName().getString().toLowerCase();
-                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
-                    if (hitResult.getEntity() instanceof Player player)
-                    {
-                        if (MCPaintballTeamsDataHelper.HasTeam(player))
-                        {
-                            Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                            if (EntityTeam != T)
-                            {
-                                player.hurt(level().damageSources().arrow(this,getOwner()),2f);
-                                MCPaintballWorldData.IncrementByTranslationKey(TN);
-                                Entity SoundSourceEntity = this.getOwner();
-                                level().playSound(null, SoundSourceEntity.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
-                            }
-                        }
-                    }
-                }
-                else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
-                {
-                    String TN = getTypeName().getString().toLowerCase();
-                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TN);
-                    if (hitResult.getEntity() instanceof Player player)
-                    {
-                        if (MCPaintballTeamsDataHelper.HasTeam(player))
-                        {
-                            Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                            if (EntityTeam != T)
-                            {
-                                MCPaintballWorldData.IncrementByTranslationKey(TN);
-                                Entity SoundSourceEntity = this.getOwner();
-                                level().playSound(null, SoundSourceEntity.blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
-                            }
+                    if (MCPaintballTeamsDataHelper.HasTeam(player)) {
+                        PaintballTeam TargetTeam = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                        Player shooter = (Player) getOwner();
+                        if (!Objects.equals(Team, TargetTeam)) {
+                            player.hurt(level().damageSources().arrow(this, shooter), Damage);
+                            MCPaintballTeamsDataHelper.AddPoint(shooter);
                         }
                     }
                 }

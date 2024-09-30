@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
 
 @SuppressWarnings("all")
 public class FlagBlock extends Block
@@ -51,8 +50,7 @@ public class FlagBlock extends Block
                         {
                             level.setBlockAndUpdate(pos,state.setValue(TEAM,MCPaintballTeamsDataHelper.FetchTeam(player)).setValue(LOCKED,true));
                             level.scheduleTick(pos,this,100);
-                            PaintballDataUtility.Team T = PaintballDataUtility.Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                            MCPaintballWorldData.IncrementByTranslationKey(T.name().toLowerCase());
+                            MCPaintballWorldData.incrementByOrdinal(MCPaintballTeamsDataHelper.FetchTeam(player));
                             MCPaintballWorldData.INSTANCE.setDirty();
                         }
                     }

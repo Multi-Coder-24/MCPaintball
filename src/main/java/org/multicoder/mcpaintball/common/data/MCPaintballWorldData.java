@@ -2,10 +2,9 @@ package org.multicoder.mcpaintball.common.data;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.saveddata.SavedData;
-import org.multicoder.mcpaintball.MCPaintball;
+import org.jetbrains.annotations.NotNull;
 
 
-@SuppressWarnings("all")
 public class MCPaintballWorldData extends SavedData
 {
     public static final String SAVE_NAME = "mcpaintball";
@@ -18,26 +17,26 @@ public class MCPaintballWorldData extends SavedData
     public int GAME_TYPE;
     public boolean MatchStarted;
     public boolean GameStarted;
-    public static void IncrementByTranslationKey(String Key)
+    public static void incrementByOrdinal(int Ordinal)
     {
-        if(Key.contains("red"))
+        switch (Ordinal)
         {
-            INSTANCE.RED_POINTS += 1;
-            INSTANCE.setDirty();
-        } else if (Key.contains("green"))
-        {
-            INSTANCE.GREEN_POINTS += 1;
-            INSTANCE.setDirty();
-        } else if (Key.contains("blue"))
-        {
-            INSTANCE.BLUE_POINTS += 1;
-            INSTANCE.setDirty();
+            case 0 -> {
+                INSTANCE.RED_POINTS++;
+                INSTANCE.setDirty();
+            }
+            case 1 ->{
+                INSTANCE.GREEN_POINTS++;
+                INSTANCE.setDirty();
+            }
+            case 2 -> {
+                INSTANCE.BLUE_POINTS++;
+                INSTANCE.setDirty();
+            }
         }
-        INSTANCE.setDirty();
     }
     public static MCPaintballWorldData create()
     {
-        MCPaintball.LOG.info("New World Data");
         MCPaintballWorldData data = new MCPaintballWorldData();
         data.BLUE_POINTS = 0;
         data.GREEN_POINTS = 0;
@@ -62,7 +61,7 @@ public class MCPaintballWorldData extends SavedData
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag)
+    public @NotNull CompoundTag save(CompoundTag tag)
     {
         tag.putInt("red",RED_POINTS);
         tag.putInt("green",GREEN_POINTS);

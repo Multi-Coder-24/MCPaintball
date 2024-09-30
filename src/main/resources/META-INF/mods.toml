@@ -10,6 +10,7 @@ updateJSONURL="${mod_update_url}"
 displayURL="${mod_display_url}"
 authors="${mod_authors}"
 description='''${mod_description}'''
+mod_prj_id="${mod_prj_id}"
 [[dependencies.${mod_id}]]
     modId="neoforge"
     versionRange="${neo_version_range}"

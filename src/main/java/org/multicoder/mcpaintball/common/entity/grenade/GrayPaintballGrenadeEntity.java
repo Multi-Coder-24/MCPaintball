@@ -12,8 +12,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
-import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
+
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class GrayPaintballGrenadeEntity extends ThrowableItemProjectile implements ItemSupplier {
@@ -31,34 +32,16 @@ public class GrayPaintballGrenadeEntity extends ThrowableItemProjectile implemen
     {
         if (MCPaintballWorldData.INSTANCE.MatchStarted)
         {
-            if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 3)
+            BlockPos Position = p_37258_.getBlockPos();
+            Level.ExplosionInteraction Interaction = (MCPaintballWorldData.INSTANCE.GAME_TYPE == 3) ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE;
+            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f,Interaction);
+            E.getHitPlayers().keySet().forEach(player ->
             {
-                BlockPos Position = p_37258_.getBlockPos();
-                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f, Level.ExplosionInteraction.TNT);
-                E.getHitPlayers().keySet().forEach(player ->
+                if (MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    String TK = getTypeName().getString().toLowerCase();
-                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-                    if (MCPaintballTeamsDataHelper.HasTeam(player))
-                    {
-                        MCPaintballTeamsDataHelper.AddPoint(player);
-                    }
-                });
-            }
-            else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
-            {
-                BlockPos Position = p_37258_.getBlockPos();
-                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f, Level.ExplosionInteraction.NONE);
-                E.getHitPlayers().keySet().forEach(player ->
-                {
-                    String TK = getTypeName().getString().toLowerCase();
-                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-                    if (MCPaintballTeamsDataHelper.HasTeam(player))
-                    {
-                        MCPaintballTeamsDataHelper.AddPoint(player);
-                    }
-                });
-            }
+                    MCPaintballTeamsDataHelper.AddPoint(player);
+                }
+            });
         }
         this.kill();
         this.discard();

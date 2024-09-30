@@ -16,6 +16,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLConstructModEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -35,9 +36,6 @@ import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Class;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
 import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.grenade.RedPaintballGrenadeEntity;
@@ -52,6 +50,9 @@ import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEnti
 import org.multicoder.mcpaintball.common.items.MCPaintballItems;
 import org.multicoder.mcpaintball.common.networking.TeamDataSyncPayloadHandler;
 import org.multicoder.mcpaintball.common.networking.TeamsDataSyncPacket;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
+
+import java.util.Objects;
 
 @SuppressWarnings("all")
 @Mod(MCPaintball.MOD_ID)
@@ -65,6 +66,7 @@ public class MCPaintball {
         eventBus.addListener(this::registerEntityRenderers);
         eventBus.addListener(this::OverlayRegister);
         eventBus.addListener(this::RegisterPayloads);
+        eventBus.addListener(this::Initialize);
         MCPaintballItems.ITEMS.register(eventBus);
         MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
@@ -143,7 +145,8 @@ public class MCPaintball {
 
                 event.accept(new ItemStack(MCPaintballBlocks.TEAM_FLAG));
             }
-        } catch (Exception exception) {
+        } catch (Exception exception)
+        {
             LOG.error(exception);
         }
     }
@@ -156,6 +159,11 @@ public class MCPaintball {
     {
         final IPayloadRegistrar registrar = event.registrar(MCPaintball.MOD_ID);
         registrar.play(TeamsDataSyncPacket.ID,TeamsDataSyncPacket::new,handler -> handler.client(TeamDataSyncPayloadHandler::Handle));
+    }
+
+    public void Initialize(final FMLConstructModEvent event)
+    {
+
     }
 
     @SuppressWarnings("unused")
@@ -191,29 +199,31 @@ public class MCPaintball {
                     if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
                     {
                         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-                        Team PTeam = Team.values()[Data.getInt("team")];
-                        Class PClass = Class.values()[Data.getInt("class")];
+                        int Team = Data.getInt("team");
+                        int Class = Data.getInt("class");
                         int Points = 0;
-                        if(PTeam == Team.NONE)
+                        if(Objects.equals(Team,-1))
                         {
                             Points = -1;
                         }
-                        else{
-                            switch (PTeam)
+                        else
+                        {
+                            switch (PaintballTeam.values()[Team])
                             {
                                 case RED -> Points = MCPaintballWorldData.INSTANCE.RED_POINTS;
                                 case BLUE -> Points = MCPaintballWorldData.INSTANCE.BLUE_POINTS;
                                 case GREEN -> Points = MCPaintballWorldData.INSTANCE.GREEN_POINTS;
+                                case SOLO -> Points = Data.getInt("Points");
                             }
                         }
-                        PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,PTeam,PClass, PaintballDataUtility.GameType.values()[MCPaintballWorldData.INSTANCE.GAME_TYPE]));
+                        PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,Team,Class, MCPaintballWorldData.INSTANCE.GAME_TYPE));
                     } else if (MCPaintballWorldData.INSTANCE.GAME_TYPE == 1 || MCPaintballWorldData.INSTANCE.GAME_TYPE == 3)
                     {
                         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-                        Team PTeam = Team.values()[Data.getInt("team")];
-                        Class PClass = Class.values()[Data.getInt("class")];
+                        int Team = Data.getInt("team");
+                        int Class = Data.getInt("class");
                         int Points = Data.getInt("points");
-                        PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,PTeam,PClass, PaintballDataUtility.GameType.values()[MCPaintballWorldData.INSTANCE.GAME_TYPE]));
+                        PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,Team,Class, MCPaintballWorldData.INSTANCE.GAME_TYPE));
                     }
                 }
             }

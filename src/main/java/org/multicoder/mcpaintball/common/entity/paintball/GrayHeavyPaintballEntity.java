@@ -13,6 +13,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
+
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class GrayHeavyPaintballEntity extends AbstractArrow {
@@ -30,30 +33,17 @@ public class GrayHeavyPaintballEntity extends AbstractArrow {
         if (MCPaintballWorldData.INSTANCE.MatchStarted)
         {
             BlockPos Position = hitResult.getBlockPos();
-            if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 3)
+            Level.ExplosionInteraction Interaction = (MCPaintballWorldData.INSTANCE.GAME_TYPE == 3) ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE;
+            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f,Interaction);
+            E.getHitPlayers().keySet().forEach(player ->
             {
-                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.TNT);
-                E.getHitPlayers().keySet().forEach(player ->
+                if (MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    if (MCPaintballTeamsDataHelper.HasTeam(player))
-                    {
-                        Player shooter = (Player) getOwner();
-                        MCPaintballTeamsDataHelper.AddPoint(shooter);
-                    }
-                });
-            }
-            else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 1)
-            {
-                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.NONE);
-                E.getHitPlayers().keySet().forEach(player ->
-                {
-                    if (MCPaintballTeamsDataHelper.HasTeam(player))
-                    {
-                        Player shooter = (Player) getOwner();
-                        MCPaintballTeamsDataHelper.AddPoint(shooter);
-                    }
-                });
-            }
+                    int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
+                    Player shooter = (Player) getOwner();
+                    MCPaintballTeamsDataHelper.AddPoint(shooter);
+                }
+            });
         }
         this.kill();
         this.discard();

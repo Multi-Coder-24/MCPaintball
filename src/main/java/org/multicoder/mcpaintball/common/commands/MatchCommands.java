@@ -8,8 +8,8 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.utility.enums.GameType;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,14 +26,14 @@ public class MatchCommands
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("start").executes(MatchCommands::GameStart)))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("stop").executes(MatchCommands::GameStop)))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("winner").executes(MatchCommands::Winner)))).createBuilder().build();
-        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("mode").then(Commands.argument("Type", EnumArgument.enumArgument(PaintballDataUtility.GameType.class)).executes(MatchCommands::GameTypeSet))))).createBuilder().build();
+        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("game").then(Commands.literal("mode").then(Commands.argument("Type", EnumArgument.enumArgument(GameType.class)).executes(MatchCommands::GameTypeSet))))).createBuilder().build();
     }
 
 
     private static int GameTypeSet(CommandContext<CommandSourceStack> context)
     {
-        MCPaintballWorldData.INSTANCE.GAME_TYPE = context.getArgument("Type", PaintballDataUtility.GameType.class).ordinal();
-        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game.mode",context.getArgument("Type", PaintballDataUtility.GameType.class).name().toLowerCase().replace('_',' ')),true);
+        MCPaintballWorldData.INSTANCE.GAME_TYPE = context.getArgument("Type", GameType.class).ordinal();
+        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.game.mode",context.getArgument("Type", GameType.class).name().toLowerCase().replace('_',' ')),true);
         return 0;
     }
 
@@ -47,8 +47,7 @@ public class MatchCommands
             Points.add(MCPaintballWorldData.INSTANCE.GREEN_POINTS);
             Points.add(MCPaintballWorldData.INSTANCE.BLUE_POINTS);
             int Index = Points.indexOf(Points.stream().max(Comparator.naturalOrder()).get());
-            Team WinningTeam = Team.values()[Index];
-            context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.winner", WinningTeam.name()), true);
+            context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.winner", PaintballTeam.getFromOrdinal(Index)), true);
             MCPaintballWorldData.INSTANCE.GREEN_POINTS = 0;
             MCPaintballWorldData.INSTANCE.BLUE_POINTS = 0;
             MCPaintballWorldData.INSTANCE.RED_POINTS = 0;

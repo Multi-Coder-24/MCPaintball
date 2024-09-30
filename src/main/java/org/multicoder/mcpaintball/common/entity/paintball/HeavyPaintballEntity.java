@@ -4,16 +4,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.utility.FormattingManagers;
-import org.multicoder.mcpaintball.common.data.PaintballDataUtility.Team;
+import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
+
+import java.util.Objects;
 
 @SuppressWarnings("all")
 public class HeavyPaintballEntity extends AbstractArrow {
@@ -31,38 +34,22 @@ public class HeavyPaintballEntity extends AbstractArrow {
         if (MCPaintballWorldData.INSTANCE.MatchStarted)
         {
             BlockPos Position = hitResult.getBlockPos();
-            if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 2)
+            Level.ExplosionInteraction Interaction = (MCPaintballWorldData.INSTANCE.GAME_TYPE == 2) ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE;
+            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f,Interaction);
+            String TypeName = getTypeName().getString().toLowerCase();
+            MCPaintball.LOG.info("Type Name: {}",TypeName);
+            PaintballTeam Team = PaintballTeam.getFromEntityType(getTypeName().getString().toLowerCase());
+            E.getHitPlayers().keySet().forEach(player ->
             {
-                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.TNT);
-                E.getHitPlayers().keySet().forEach(player ->
+                if (MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    String TK = getTypeName().getString().toLowerCase();
-                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-                    if (MCPaintballTeamsDataHelper.HasTeam(player)) {
-                        Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                        if (EntityTeam != T)
-                        {
-                            MCPaintballWorldData.IncrementByTranslationKey(TK);
-                        }
+                    PaintballTeam TargetTeam = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
+                    if (!Objects.equals(Team,TargetTeam))
+                    {
+                        MCPaintballWorldData.incrementByOrdinal(Team.ordinal());
                     }
-                });
-            }
-            else if(MCPaintballWorldData.INSTANCE.GAME_TYPE == 0)
-            {
-                Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 5f, Level.ExplosionInteraction.NONE);
-                E.getHitPlayers().keySet().forEach(player ->
-                {
-                    String TK = getTypeName().getString().toLowerCase();
-                    Team EntityTeam = FormattingManagers.FormatTypeToTeam(TK);
-                    if (MCPaintballTeamsDataHelper.HasTeam(player)) {
-                        Team T = Team.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                        if (EntityTeam != T)
-                        {
-                            MCPaintballWorldData.IncrementByTranslationKey(TK);
-                        }
-                    }
-                });
-            }
+                }
+            });
         }
         this.kill();
         this.discard();
