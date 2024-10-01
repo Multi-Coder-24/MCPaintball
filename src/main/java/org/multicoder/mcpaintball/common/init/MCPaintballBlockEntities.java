@@ -1,11 +1,12 @@
-package org.multicoder.mcpaintball.common.blockentities;
+package org.multicoder.mcpaintball.common.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.blockentities.SoloC4PaintballBlockEntity;
+import org.multicoder.mcpaintball.common.blockentities.SoloPaintballTeamStationBlockEntity;
 
 @SuppressWarnings("all")
 public class MCPaintballBlockEntities

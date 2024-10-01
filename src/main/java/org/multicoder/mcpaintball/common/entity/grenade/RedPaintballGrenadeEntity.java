@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.init.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
 
 import java.util.Objects;

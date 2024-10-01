@@ -18,7 +18,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.init.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.init.MCPaintballItems;
 
 @SuppressWarnings("all")
 public class PaintballTeamStationBlock extends Block

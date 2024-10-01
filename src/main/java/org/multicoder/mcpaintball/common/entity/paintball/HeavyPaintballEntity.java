@@ -4,16 +4,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
-import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.common.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.init.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
 
 import java.util.Objects;
@@ -37,7 +35,6 @@ public class HeavyPaintballEntity extends AbstractArrow {
             Level.ExplosionInteraction Interaction = (MCPaintballWorldData.INSTANCE.GAME_TYPE == 2) ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE;
             Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f,Interaction);
             String TypeName = getTypeName().getString().toLowerCase();
-            MCPaintball.LOG.info("Type Name: {}",TypeName);
             PaintballTeam Team = PaintballTeam.getFromEntityType(getTypeName().getString().toLowerCase());
             E.getHitPlayers().keySet().forEach(player ->
             {

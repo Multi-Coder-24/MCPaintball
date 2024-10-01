@@ -1,7 +1,7 @@
 package org.multicoder.mcpaintball.common.utility.enums;
 
 import net.minecraft.world.entity.EntityType;
-import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
+import org.multicoder.mcpaintball.common.init.MCPaintballEntities;
 
 import java.util.Objects;
 

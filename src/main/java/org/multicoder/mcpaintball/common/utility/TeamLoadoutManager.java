@@ -2,9 +2,9 @@ package org.multicoder.mcpaintball.common.utility;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.init.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
-import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.init.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.enums.PaintballClass;
 import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
 

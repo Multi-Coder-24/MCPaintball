@@ -24,7 +24,7 @@ public class FlagBlock extends Block
     public FlagBlock()
     {
         super(Properties.of());
-        registerDefaultState(defaultBlockState().setValue(TEAM,0).setValue(LOCKED,false));
+        registerDefaultState(defaultBlockState().setValue(TEAM,3).setValue(LOCKED,false));
     }
 
     @Override

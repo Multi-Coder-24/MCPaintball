@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.common;
+package org.multicoder.mcpaintball.common.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;

@@ -1,14 +1,17 @@
 package org.multicoder.mcpaintball;
 
 
+import com.google.common.eventbus.DeadEvent;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +24,8 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.EntityEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
@@ -29,15 +34,15 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
 import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.multicoder.mcpaintball.common.MCPaintballSounds;
-import org.multicoder.mcpaintball.common.blockentities.MCPaintballBlockEntities;
-import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.init.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.init.MCPaintballBlockEntities;
+import org.multicoder.mcpaintball.common.init.MCPaintballBlocks;
 import org.multicoder.mcpaintball.common.commands.MatchCommands;
 import org.multicoder.mcpaintball.common.commands.TeamCommands;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.common.data.PaintballOverlay;
-import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
+import org.multicoder.mcpaintball.common.init.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.grenade.RedPaintballGrenadeEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.GrayHeavyPaintballEntity;
 import org.multicoder.mcpaintball.common.entity.paintball.GrayPaintballEntity;
@@ -47,7 +52,7 @@ import org.multicoder.mcpaintball.common.entityrenderers.paintball.GrayHeavyPain
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.GrayPaintballEntityRenderer;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.HeavyPaintballRenderer;
 import org.multicoder.mcpaintball.common.entityrenderers.paintball.PaintballEntityRenderer;
-import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.init.MCPaintballItems;
 import org.multicoder.mcpaintball.common.networking.TeamDataSyncPayloadHandler;
 import org.multicoder.mcpaintball.common.networking.TeamsDataSyncPacket;
 import org.multicoder.mcpaintball.common.utility.enums.PaintballTeam;
@@ -66,7 +71,6 @@ public class MCPaintball {
         eventBus.addListener(this::registerEntityRenderers);
         eventBus.addListener(this::OverlayRegister);
         eventBus.addListener(this::RegisterPayloads);
-        eventBus.addListener(this::Initialize);
         MCPaintballItems.ITEMS.register(eventBus);
         MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
@@ -161,11 +165,6 @@ public class MCPaintball {
         registrar.play(TeamsDataSyncPacket.ID,TeamsDataSyncPacket::new,handler -> handler.client(TeamDataSyncPayloadHandler::Handle));
     }
 
-    public void Initialize(final FMLConstructModEvent event)
-    {
-
-    }
-
     @SuppressWarnings("unused")
     @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class NeoEvents {
@@ -181,7 +180,9 @@ public class MCPaintball {
 
     @SuppressWarnings("unused")
     @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID)
-    public static class ModEvents {
+    public static class ModEvents
+    {
+        static Inventory Cached_Inventory;
         @SubscribeEvent
         public static void registerCommands(RegisterCommandsEvent event) {
             CommandDispatcher<CommandSourceStack> Dispatcher = event.getDispatcher();
@@ -231,6 +232,16 @@ public class MCPaintball {
         @SubscribeEvent
         public static void PlayerJoined(PlayerEvent.PlayerLoggedInEvent event) {
             MCPaintballTeamsDataHelper.SetIfAbsent(event.getEntity());
+        }
+        @SubscribeEvent
+        public static void PlayerClone(PlayerEvent.Clone event)
+        {
+            if(event.isWasDeath())
+            {
+                event.getEntity().getInventory().load(event.getOriginal().getInventory().save(new ListTag()));
+            }
+            CompoundTag Tag = event.getOriginal().getPersistentData().getCompound("mcpaintball.team");
+            event.getEntity().getPersistentData().put("mcpaintball.team",Tag);
         }
     }
 }

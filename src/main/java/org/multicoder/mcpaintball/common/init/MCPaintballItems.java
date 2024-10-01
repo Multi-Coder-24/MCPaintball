@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.common.items;
+package org.multicoder.mcpaintball.common.init;
 
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;

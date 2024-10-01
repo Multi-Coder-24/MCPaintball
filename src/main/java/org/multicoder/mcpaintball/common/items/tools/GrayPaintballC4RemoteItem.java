@@ -34,8 +34,7 @@ public class GrayPaintballC4RemoteItem extends Item
             {
                 if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    CompoundTag Data = stack.getOrCreateTag();
-                    NBTHelper.C4Det(Data,stack,level,player);
+                    NBTHelper.C4Det(stack,level,player);
                     return InteractionResultHolder.consume(stack);
                 }
             }
@@ -44,7 +43,6 @@ public class GrayPaintballC4RemoteItem extends Item
         return InteractionResultHolder.success(stack);
     }
 
-    //  Add/Remove Block
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
@@ -57,9 +55,8 @@ public class GrayPaintballC4RemoteItem extends Item
             {
                 if (MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    CompoundTag Data = stack.getOrCreateTag();
                     Block Selected = level.getBlockState(pos).getBlock();
-                    NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
+                    NBTHelper.C4SetRem(stack,Selected,level,pos,player);
                     return InteractionResult.CONSUME;
                 }
                 return InteractionResult.FAIL;

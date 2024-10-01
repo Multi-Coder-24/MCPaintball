@@ -5,6 +5,7 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.GameRules;
 import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
@@ -75,13 +76,16 @@ public class MatchCommands
 
     private static int MatchStart(CommandContext<CommandSourceStack> context)
     {
+        context.getSource().getServer().getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(true,context.getSource().getServer());
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_start"), true);
         MCPaintballWorldData.INSTANCE.MatchStarted = true;
         MCPaintballWorldData.INSTANCE.setDirty();
         return 0;
     }
 
-    private static int MatchStop(CommandContext<CommandSourceStack> context) {
+    private static int MatchStop(CommandContext<CommandSourceStack> context)
+    {
+        context.getSource().getServer().getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set(false,context.getSource().getServer());
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("mcpaintball.command.response.match_stop"), true);
         MCPaintballWorldData.INSTANCE.MatchStarted = false;
         MCPaintballWorldData.INSTANCE.setDirty();

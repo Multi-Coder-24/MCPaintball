@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.init.MCPaintballItems;
 import org.multicoder.mcpaintball.common.utility.NBTHelper;
 
 @SuppressWarnings("all")
@@ -36,22 +36,8 @@ public class PaintballC4RemoteItem extends Item
                 if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
                     int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
-                    if(Team == 1 && stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()))
-                    {
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4Det(Data,stack,level,player);
-                        return InteractionResultHolder.consume(stack);
-                    } else if (Team == 2 && stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()))
-                    {
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4Det(Data,stack,level,player);
-                        return InteractionResultHolder.consume(stack);
-                    } else if (Team == 3 && stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()))
-                    {
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4Det(Data,stack,level,player);
-                        return InteractionResultHolder.consume(stack);
-                    }
+                    NBTHelper.C4Det(stack,level,player);
+                    return InteractionResultHolder.consume(stack);
                 }
             }
             return InteractionResultHolder.fail(stack);
@@ -72,26 +58,9 @@ public class PaintballC4RemoteItem extends Item
             {
                 if (MCPaintballTeamsDataHelper.HasTeam(player))
                 {
-                    int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
-                    if (Team == 1 && stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()))
-                    {
-                        CompoundTag Data = stack.getOrCreateTag();
-                        Block Selected = level.getBlockState(pos).getBlock();
-                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
-                        return InteractionResult.CONSUME;
-                    }
-                    else if (Team == 2 && stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()))
-                    {
-                        Block Selected = level.getBlockState(pos).getBlock();
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
-                    }
-                    else if (Team == 3 && stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()))
-                    {
-                        Block Selected = level.getBlockState(pos).getBlock();
-                        CompoundTag Data = stack.getOrCreateTag();
-                        NBTHelper.C4SetRem(Data,stack,Selected,level,pos,player);
-                    }
+                    CompoundTag Data = stack.getOrCreateTag();
+                    Block Selected = level.getBlockState(pos).getBlock();
+                    NBTHelper.C4SetRem(stack,Selected,level,pos,player);
                     return InteractionResult.CONSUME;
                 }
                 return InteractionResult.FAIL;

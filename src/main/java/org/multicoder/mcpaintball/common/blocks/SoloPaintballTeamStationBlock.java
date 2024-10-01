@@ -23,7 +23,8 @@ import org.jetbrains.annotations.Nullable;
 import org.multicoder.mcpaintball.common.blockentities.SoloPaintballTeamStationBlockEntity;
 import org.multicoder.mcpaintball.common.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.init.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.init.MCPaintballItems;
 
 @SuppressWarnings("all")
 public class SoloPaintballTeamStationBlock extends Block implements EntityBlock

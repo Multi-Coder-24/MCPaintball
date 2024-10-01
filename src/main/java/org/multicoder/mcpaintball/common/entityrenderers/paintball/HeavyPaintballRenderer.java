@@ -3,7 +3,7 @@ package org.multicoder.mcpaintball.common.entityrenderers.paintball;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import org.multicoder.mcpaintball.common.entity.MCPaintballEntities;
+import org.multicoder.mcpaintball.common.init.MCPaintballEntities;
 import org.multicoder.mcpaintball.common.entity.paintball.HeavyPaintballEntity;
 
 @SuppressWarnings("all")

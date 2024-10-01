@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.common.entity;
+package org.multicoder.mcpaintball.common.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;

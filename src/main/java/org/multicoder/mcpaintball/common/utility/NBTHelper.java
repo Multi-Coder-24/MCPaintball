@@ -12,165 +12,126 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import org.multicoder.mcpaintball.common.MCPaintballSounds;
+import org.multicoder.mcpaintball.common.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.common.init.MCPaintballSounds;
 import org.multicoder.mcpaintball.common.blockentities.SoloC4PaintballBlockEntity;
-import org.multicoder.mcpaintball.common.blocks.MCPaintballBlocks;
-import org.multicoder.mcpaintball.common.items.MCPaintballItems;
+import org.multicoder.mcpaintball.common.init.MCPaintballBlocks;
+import org.multicoder.mcpaintball.common.init.MCPaintballItems;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("all")
 public class NBTHelper
 {
-    public static void C4SetRem(CompoundTag Data, ItemStack stack, Block Selected, Level level, BlockPos pos, Player player)
+    public static void C4SetRem(ItemStack stack, Block Selected, Level level, BlockPos pos, Player player)
     {
-        if (Data.contains("devices", Tag.TAG_LIST))
+        CompoundTag StackTag = stack.getOrCreateTag();
+        ListTag Devices = StackTag.contains("devices") ? StackTag.getList("devices",Tag.TAG_LONG) : new ListTag();
+        if(stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()) && Selected.equals(MCPaintballBlocks.RED_C4.value()))
         {
-            ListTag Devices = Data.getList("devices", Tag.TAG_LONG);
-            if (stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()) && Selected.equals(MCPaintballBlocks.RED_C4.value()))
+            if(player.isShiftKeyDown())
             {
-                if (Screen.hasShiftDown())
-                {
-                    Devices.add(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
-                } else
-                {
-                    Devices.remove(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
-                }
+                Devices.add(LongTag.valueOf(pos.asLong()));
+                level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_ADDED.get(),SoundSource.PLAYERS);
             }
-            else if (stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()) && Selected.equals(MCPaintballBlocks.GREEN_C4.value()))
+            else
             {
-                if (Screen.hasShiftDown())
-                {
-                    Devices.add(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
-                } else
-                {
-                    Devices.remove(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
-                }
+                Devices.remove(LongTag.valueOf(pos.asLong()));
+                level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_REMOVED.get(),SoundSource.PLAYERS);
             }
-            else if (stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()) && Selected.equals(MCPaintballBlocks.BLUE_C4.value()))
-            {
-                if (Screen.hasShiftDown())
-                {
-                    Devices.add(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
-                } else {
-                    Devices.remove(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
-                }
-            }
-            else if(stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && Selected.equals(MCPaintballBlocks.SOLO_C4.value()))
-            {
-                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(pos);
-                if(E.IsSamePlayer(player))
-                {
-                    if (Screen.hasShiftDown())
-                    {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
-                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
-                    } else {
-                        Devices.remove(LongTag.valueOf(pos.asLong()));
-                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_REMOVED.get(), SoundSource.PLAYERS, 1f, 1f);
-                    }
-                }
-            }
-            Data.put("devices", Devices);
-            stack.setTag(Data);
+            StackTag.put("devices",Devices);
+            stack.setTag(StackTag);
+            return;
         }
-        else
+        if(stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()) && Selected.equals(MCPaintballBlocks.GREEN_C4.value()))
         {
-            ListTag Devices = new ListTag();
-            if (stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()) && Selected.equals(MCPaintballBlocks.RED_C4.value()))
+            if(player.isShiftKeyDown())
             {
-                if (Screen.hasShiftDown())
+                Devices.add(LongTag.valueOf(pos.asLong()));
+                level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_ADDED.get(),SoundSource.PLAYERS);
+            }
+            else
+            {
+                Devices.remove(LongTag.valueOf(pos.asLong()));
+                level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_REMOVED.get(),SoundSource.PLAYERS);
+            }
+            StackTag.put("devices",Devices);
+            stack.setTag(StackTag);
+            return;
+        }
+        if(stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()) && Selected.equals(MCPaintballBlocks.BLUE_C4.value()))
+        {
+            if(player.isShiftKeyDown())
+            {
+                Devices.add(LongTag.valueOf(pos.asLong()));
+                level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_ADDED.get(),SoundSource.PLAYERS);
+            }
+            else
+            {
+                Devices.remove(LongTag.valueOf(pos.asLong()));
+                level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_REMOVED.get(),SoundSource.PLAYERS);
+            }
+            StackTag.put("devices",Devices);
+            stack.setTag(StackTag);
+            return;
+        }
+        if(stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && Selected.equals(MCPaintballBlocks.SOLO_C4.value()))
+        {
+            if(((SoloC4PaintballBlockEntity)level.getBlockEntity(pos)).IsSamePlayer(player))
+            {
+                if(player.isShiftKeyDown())
                 {
                     Devices.add(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_ADDED.get(),SoundSource.PLAYERS);
                 }
-            }
-            else if (stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()) && Selected.equals(MCPaintballBlocks.GREEN_C4.value()))
-            {
-                if (Screen.hasShiftDown())
+                else
                 {
-                    Devices.add(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
+                    Devices.remove(LongTag.valueOf(pos.asLong()));
+                    level.playSound(null,player.blockPosition(),MCPaintballSounds.C4_REMOVED.get(),SoundSource.PLAYERS);
                 }
+                StackTag.put("devices",Devices);
+                stack.setTag(StackTag);
+                return;
             }
-            else if (stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()) && Selected.equals(MCPaintballBlocks.BLUE_C4.value()))
-            {
-                if (Screen.hasShiftDown())
-                {
-                    Devices.add(LongTag.valueOf(pos.asLong()));
-                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
-                }
-            }else if (stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && Selected.equals(MCPaintballBlocks.SOLO_C4.value()))
-            {
-                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(pos);
-                if(E.IsSamePlayer(player))
-                {
-                    if (Screen.hasShiftDown())
-                    {
-                        Devices.add(LongTag.valueOf(pos.asLong()));
-                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_ADDED.get(), SoundSource.PLAYERS, 1f, 1f);
-                    }
-                }
-            }
-            Data.put("devices", Devices);
-            stack.setTag(Data);
+            return;
         }
     }
-    public static void C4Det(CompoundTag Data, ItemStack stack, Level level, Player player)
-    {
-        AtomicBoolean Trigger = new AtomicBoolean(false);
-        if(Data.contains("devices"))
-        {
-            ListTag Devices = Data.getList("devices", Tag.TAG_LONG);
-            if (!Devices.isEmpty()) {
-                if (Screen.hasControlDown()) {
-                    Devices.forEach(tag ->
-                    {
-                        LongTag posTag = (LongTag) tag;
-                        BlockPos Pos = BlockPos.of(posTag.getAsLong());
-                        if (stack.getItem().equals(MCPaintballItems.RED_REMOTE.value())) {
-                            if (level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.RED_C4.value())) {
-                                level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
-                                level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
-                                Trigger.set(true);
-                            }
-                        } else if (stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value())) {
-                            if (level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.GREEN_C4.value())) {
-                                level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
-                                level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
-                                Trigger.set(true);
-                            }
-                        } else if (stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value())) {
-                            if (level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.BLUE_C4.value())) {
-                                level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
-                                level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
-                                Trigger.set(true);
-                            }
-                        } else if (stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()))
-                        {
-                            if (level.getBlockState(Pos).getBlock().equals(MCPaintballBlocks.SOLO_C4.value()))
-                            {
-                                SoloC4PaintballBlockEntity E = (SoloC4PaintballBlockEntity) level.getBlockEntity(Pos);
-                                if(E.IsSamePlayer(player))
-                                {
-                                    level.explode(null, Pos.getX(), Pos.getY(), Pos.getZ(), 5f, Level.ExplosionInteraction.NONE);
-                                    level.setBlockAndUpdate(Pos, Blocks.AIR.defaultBlockState());
-                                    Trigger.set(true);
-                                }
-                            }
-                        }
-                    });
-                    stack.setTag(new CompoundTag());
-                    if (Trigger.get()) {
-                        level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_EXPLODE.get(), SoundSource.PLAYERS, 1f, 1f);
+    public static void C4Det(ItemStack stack, Level level, Player player) {
+        CompoundTag StackTag = stack.getOrCreateTag();
+        ListTag Devices = StackTag.contains("devices") ? StackTag.getList("devices", Tag.TAG_LONG) : new ListTag();
+        if (!Devices.isEmpty()) {
+            if (player.isShiftKeyDown()) {
+                AtomicBoolean Trigger = new AtomicBoolean(false);
+                Devices.forEach(position ->
+                {
+                    BlockPos blockPosition = BlockPos.of(((LongTag) position).getAsLong());
+                    if (stack.getItem().equals(MCPaintballItems.RED_REMOTE.value()) && level.getBlockState(blockPosition).getBlock().equals(MCPaintballBlocks.RED_C4.value())) {
+                        Trigger.set(true);
+                        level.explode(null, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                        level.setBlockAndUpdate(blockPosition, Blocks.AIR.defaultBlockState());
                     }
-                }
+                    if (stack.getItem().equals(MCPaintballItems.GREEN_REMOTE.value()) && level.getBlockState(blockPosition).getBlock().equals(MCPaintballBlocks.GREEN_C4.value())) {
+                        Trigger.set(true);
+                        level.explode(null, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                        level.setBlockAndUpdate(blockPosition, Blocks.AIR.defaultBlockState());
+                    }
+                    if (stack.getItem().equals(MCPaintballItems.BLUE_REMOTE.value()) && level.getBlockState(blockPosition).getBlock().equals(MCPaintballBlocks.BLUE_C4.value())) {
+                        Trigger.set(true);
+                        level.explode(null, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                        level.setBlockAndUpdate(blockPosition, Blocks.AIR.defaultBlockState());
+                    }
+                    if (stack.getItem().equals(MCPaintballItems.SOLO_REMOTE.value()) && level.getBlockState(blockPosition).getBlock().equals(MCPaintballBlocks.SOLO_C4.value())) {
+                        if (((SoloC4PaintballBlockEntity) level.getBlockEntity(blockPosition)).IsSamePlayer(player)) {
+                            Trigger.set(true);
+                            level.explode(null, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ(), 5f, Level.ExplosionInteraction.NONE);
+                            level.setBlockAndUpdate(blockPosition, Blocks.AIR.defaultBlockState());
+                        }
+                    }
+                });
+                if (Trigger.get())
+                    level.playSound(null, player.blockPosition(), MCPaintballSounds.C4_EXPLODE.get(), SoundSource.PLAYERS, 1f, 1f);
+                stack.setTag(new CompoundTag());
             }
         }
     }
