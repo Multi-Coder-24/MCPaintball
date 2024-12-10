@@ -9,7 +9,6 @@
   "item.mcpaintball.red_grenade": "Red Paintball Grenade",
   "item.mcpaintball.green_grenade": "Green Paintball Grenade",
   "item.mcpaintball.blue_grenade": "Blue Paintball Grenade",
-  "item.mcpaintball.gray_grenade": "Solo Paintball Grenade",
   "item.mcpaintball.red_boots": "Red Team Boots",
   "item.mcpaintball.red_leggings": "Red Team Leggings",
   "item.mcpaintball.red_chestplate": "Red Team Chestplate",
@@ -22,28 +21,20 @@
   "item.mcpaintball.blue_leggings": "Blue Team Leggings",
   "item.mcpaintball.blue_chestplate": "Blue Team Chestplate",
   "item.mcpaintball.blue_helmet": "Blue Team Helmet",
-  "item.mcpaintball.gray_boots": "Solo Team Boots",
-  "item.mcpaintball.gray_leggings": "Solo Team Leggings",
-  "item.mcpaintball.gray_chestplate": "Solo Team Chestplate",
-  "item.mcpaintball.gray_helmet": "Solo Team Helmet",
   "item.mcpaintball.red_remote": "Red C4 Remote",
   "item.mcpaintball.green_remote": "Green C4 Remote",
   "item.mcpaintball.blue_remote": "Blue C4 Remote",
-  "item.mcpaintball.gray_remote": "Solo C4 Remote",
 
   "Comment_2": "Entities",
   "entity.mcpaintball.red_paintball": "Red Paintball",
   "entity.mcpaintball.green_paintball": "Green Paintball",
   "entity.mcpaintball.blue_paintball": "Blue Paintball",
-  "entity.mcpaintball.gray_paintball": "Solo Paintball",
   "entity.mcpaintball.red_heavy_paintball": "Red Heavy Paintball",
   "entity.mcpaintball.green_heavy_paintball": "Green Heavy Paintball",
   "entity.mcpaintball.blue_heavy_paintball": "Blue Heavy Paintball",
-  "entity.mcpaintball.gray_heavy_paintball": "Solo Heavy Paintball",
   "entity.mcpaintball.red_grenade": "Red Grenade",
   "entity.mcpaintball.green_grenade": "Green Grenade",
   "entity.mcpaintball.blue_grenade": "Blue Grenade",
-  "entity.mcpaintball.gray_grenade": "Solo Grenade",
 
 
   "Comment_3": "Command Responses",
@@ -55,7 +46,6 @@
   "mcpaintball.command.response.game_stop": "The game has finished.",
   "mcpaintball.command.response.game.mode": "The game mode has been set to %s",
   "mcpaintball.command.response.winner": "The winning team is %s.",
-  "mcpaintball.command.response.winner.solo": "The winner is %s.",
 
 
   "Comment_4": "Subtitles",
@@ -78,11 +68,12 @@
   "block.mcpaintball.red_c4": "Red C4 Explosive",
   "block.mcpaintball.green_c4": "Green C4 Explosive",
   "block.mcpaintball.blue_c4": "Blue C4 Explosive",
-  "block.mcpaintball.gray_c4": "Solo C4 Explosive",
   "block.mcpaintball.red_team_station": "Red Team Station",
   "block.mcpaintball.green_team_station": "Green Team Station",
   "block.mcpaintball.blue_team_station": "Blue Team Station",
-  "block.mcpaintball.gray_team_station": "Solo Team Station",
-  "block.mcpaintball.flag_block": "Team Flag"
+  "block.mcpaintball.flag_block": "Team Flag",
+
+  "Comment_7": "Creative Mode Tabs",
+  "tab.mcpaintball.paintball": "Paintballing"
 
 }
