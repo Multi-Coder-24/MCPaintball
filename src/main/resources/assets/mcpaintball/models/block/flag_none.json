@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "mcpaintball:item/plain/silver",
-		"1": "mcpaintball:item/plain/gray",
+		"1": "mcpaintball:item/plain/silver",
 		"particle": "mcpaintball:item/plain/silver"
 	},
 	"elements": [
