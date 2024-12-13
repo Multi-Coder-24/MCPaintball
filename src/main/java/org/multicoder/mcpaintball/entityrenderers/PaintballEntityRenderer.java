@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.entityrenderers.paintball;
+package org.multicoder.mcpaintball.entityrenderers;
 
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

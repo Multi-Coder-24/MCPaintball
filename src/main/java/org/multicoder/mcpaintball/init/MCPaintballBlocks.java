@@ -12,15 +12,15 @@ public class MCPaintballBlocks
 {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
 
-    public static final DeferredBlock<Block> RED_C4 = RegisterBlock("red_c4", PaintballC4ExplosiveBlock::new);
-    public static final DeferredBlock<Block> BLUE_C4 = RegisterBlock("blue_c4",PaintballC4ExplosiveBlock::new);
-    public static final DeferredBlock<Block> GREEN_C4 = RegisterBlock("green_c4",PaintballC4ExplosiveBlock::new);
+    public static final DeferredBlock<Block> RED_C4 = RegisterBlock("explosives/red_c4", PaintballC4ExplosiveBlock::new);
+    public static final DeferredBlock<Block> BLUE_C4 = RegisterBlock("explosives/blue_c4",PaintballC4ExplosiveBlock::new);
+    public static final DeferredBlock<Block> GREEN_C4 = RegisterBlock("explosives/green_c4",PaintballC4ExplosiveBlock::new);
 
     public static final DeferredBlock<Block> RED_TEAM_STATION = RegisterBlock("red_team_station", PaintballTeamStationBlock::new);
     public static final DeferredBlock<Block> GREEN_TEAM_STATION = RegisterBlock("green_team_station",PaintballTeamStationBlock::new);
     public static final DeferredBlock<Block> BLUE_TEAM_STATION = RegisterBlock("blue_team_station",PaintballTeamStationBlock::new);
 
-    public static final DeferredBlock<Block> TEAM_FLAG = RegisterBlock("flag_block", FlagBlock::new);
+    public static final DeferredBlock<Block> TEAM_FLAG = RegisterBlock("flag/flag_block", FlagBlock::new);
 
     public static DeferredBlock<Block> RegisterBlock(String name, Supplier<Block> supplier)
     {

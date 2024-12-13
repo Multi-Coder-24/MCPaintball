@@ -12,7 +12,6 @@ import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.utility.TeamLoadoutManager;
-import org.multicoder.mcpaintball.utility.enums.PaintballClass;
 import org.multicoder.mcpaintball.utility.enums.PaintballTeam;
 
 import java.util.List;
@@ -21,7 +20,6 @@ public class TeamCommands
 {
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("team").then(Commands.literal("set").then(Commands.argument("team", EnumArgument.enumArgument(PaintballTeam.class)).executes(TeamCommands::setTeamCommand))))).createBuilder().build();
-        dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("class").then(Commands.literal("set").then(Commands.argument("class", EnumArgument.enumArgument(PaintballClass.class)).executes(TeamCommands::setClassCommand))))).createBuilder().build();
         dispatcher.register(Commands.literal("mcpaintball").then(Commands.literal("kit").executes(TeamCommands::GiveKit))).createBuilder().build();
     }
 
@@ -32,17 +30,6 @@ public class TeamCommands
         return 0;
     }
 
-    private static int setClassCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        CommandSourceStack source = context.getSource();
-        ServerPlayer player = source.getPlayerOrException();
-        if (MCPaintballWorldData.INSTANCE.GameStarted && !MCPaintballWorldData.INSTANCE.MatchStarted) {
-            PaintballClass selected = context.getArgument("class", PaintballClass.class);
-            MCPaintballTeamsDataHelper.UpdateClass(selected.ordinal(), player);
-            player.sendSystemMessage(Component.translatable("mcpaintball.command.response.class.set", selected.name().toLowerCase()));
-            return 0;
-        }
-        return -1;
-    }
 
     private static int setTeamCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();

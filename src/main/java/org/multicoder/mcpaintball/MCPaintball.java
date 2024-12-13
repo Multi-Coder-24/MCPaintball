@@ -1,21 +1,15 @@
 package org.multicoder.mcpaintball;
 
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.server.level.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -23,21 +17,11 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
 import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
-import org.multicoder.mcpaintball.commands.MatchCommands;
-import org.multicoder.mcpaintball.commands.TeamCommands;
-import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
-import org.multicoder.mcpaintball.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.data.PaintballOverlay;
-import org.multicoder.mcpaintball.entity.grenade.BluePaintballGrenadeEntity;
-import org.multicoder.mcpaintball.entity.grenade.GreenPaintballGrenadeEntity;
-import org.multicoder.mcpaintball.entity.grenade.RedPaintballGrenadeEntity;
-import org.multicoder.mcpaintball.entity.paintball.HeavyPaintballEntity;
-import org.multicoder.mcpaintball.entity.paintball.PaintballEntity;
-import org.multicoder.mcpaintball.entityrenderers.paintball.HeavyPaintballRenderer;
-import org.multicoder.mcpaintball.entityrenderers.paintball.PaintballEntityRenderer;
+import org.multicoder.mcpaintball.commands.*;
+import org.multicoder.mcpaintball.data.*;
+import org.multicoder.mcpaintball.entityrenderers.EntityRenderers;
 import org.multicoder.mcpaintball.init.*;
-import org.multicoder.mcpaintball.networking.TeamDataSyncPayloadHandler;
-import org.multicoder.mcpaintball.networking.TeamsDataSyncPacket;
+import org.multicoder.mcpaintball.networking.*;
 
 @SuppressWarnings("all")
 @Mod(MCPaintball.MOD_ID)
@@ -46,7 +30,7 @@ public class MCPaintball {
 
     public MCPaintball(IEventBus eventBus)
     {
-        eventBus.addListener(this::registerEntityRenderers);
+        eventBus.addListener(EntityRenderers::RegisterRenderers);
         eventBus.addListener(this::OverlayRegister);
         eventBus.addListener(this::RegisterPayloads);
         MCPaintballItems.ITEMS.register(eventBus);
@@ -55,20 +39,6 @@ public class MCPaintball {
         MCPaintballEntities.ENTITIES.register(eventBus);
         MCPaintballSounds.SOUNDS.register(eventBus);
 
-    }
-    @SuppressWarnings("unchecked")
-    public void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.RED_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.GREEN_PAINTBALL.get(), PaintballEntityRenderer::new);
-        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
-
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.RED_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.GREEN_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-        event.registerEntityRenderer((EntityType<HeavyPaintballEntity>) MCPaintballEntities.BLUE_HEAVY_PAINTBALL.get(), HeavyPaintballRenderer::new);
-
-        event.registerEntityRenderer((EntityType<RedPaintballGrenadeEntity>) MCPaintballEntities.RED_GRENADE.get(), ThrownItemRenderer::new);
-        event.registerEntityRenderer((EntityType<GreenPaintballGrenadeEntity>) MCPaintballEntities.GREEN_GRENADE.get(), ThrownItemRenderer::new);
-        event.registerEntityRenderer((EntityType<BluePaintballGrenadeEntity>) MCPaintballEntities.BLUE_GRENADE.get(), ThrownItemRenderer::new);
     }
 
     public void OverlayRegister(RegisterGuiOverlaysEvent event)
@@ -81,7 +51,6 @@ public class MCPaintball {
         registrar.play(TeamsDataSyncPacket.ID,TeamsDataSyncPacket::new,handler -> handler.client(TeamDataSyncPayloadHandler::Handle));
     }
 
-    @SuppressWarnings("unused")
     @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class NeoEvents
     {
@@ -115,9 +84,8 @@ public class MCPaintball {
                 {
                     CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
                     int Team = Data.getInt("team");
-                    int Class = Data.getInt("class");
                     int Points = MCPaintballWorldData.getPointsFromIndex(Team);
-                    PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,Team,Class));
+                    PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,Team));
                 }
             }
         }

@@ -5,7 +5,6 @@ import net.minecraft.world.item.ItemStack;
 import org.multicoder.mcpaintball.init.MCPaintballBlocks;
 import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.init.MCPaintballItems;
-import org.multicoder.mcpaintball.utility.enums.PaintballClass;
 import org.multicoder.mcpaintball.utility.enums.PaintballTeam;
 
 import java.util.ArrayList;
@@ -17,80 +16,32 @@ public class TeamLoadoutManager
     {
         List<ItemStack> Equipment = new ArrayList<>();
         PaintballTeam PTeam = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-        PaintballClass PClass = PaintballClass.values()[MCPaintballTeamsDataHelper.FetchClass(player)];
         switch (PTeam) {
             case RED -> {
-                switch (PClass) {
-                    case STANDARD -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.RIFLE.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.RED_GRENADE.get(), 8));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.RED_C4.get(), 2));
-                    }
-                    case SHOTGUNNER -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.SHOTGUN.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.RED_GRENADE.get(), 12));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.RED_C4.get(), 4));
-                    }
-                    case HEAVY -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.BAZOOKA.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.RED_GRENADE.get(), 16));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.RED_C4.get(), 6));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.RED_TEAM_STATION.get(), 4));
-                    }
-                }
+                Equipment.add(new ItemStack(MCPaintballItems.RED_GRENADE.get(), 16));
+                Equipment.add(new ItemStack(MCPaintballBlocks.RED_C4.get(), 6));
+                Equipment.add(new ItemStack(MCPaintballBlocks.RED_TEAM_STATION.get(), 4));
                 Equipment.add(new ItemStack(MCPaintballItems.RED_REMOTE.get()));
-                Equipment.add(new ItemStack(MCPaintballItems.PISTOL.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.RED_BOOTS.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.RED_LEGGINGS.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.RED_CHESTPLATE.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.RED_HELMET.get()));
             }
             case GREEN -> {
-                switch (PClass) {
-                    case STANDARD -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.RIFLE.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.GREEN_GRENADE.get(), 8));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.GREEN_C4.get(), 2));
-                    }
-                    case SHOTGUNNER -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.SHOTGUN.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.GREEN_GRENADE.get(), 12));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.GREEN_C4.get(), 4));
-                    }
-                    case HEAVY -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.BAZOOKA.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.GREEN_GRENADE.get(), 16));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.GREEN_C4.get(), 6));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.GREEN_TEAM_STATION.get(), 4));
-                    }
-                }
-                Equipment.add(new ItemStack(MCPaintballItems.PISTOL.get()));
+                Equipment.add(new ItemStack(MCPaintballItems.GREEN_GRENADE.get(), 16));
+                Equipment.add(new ItemStack(MCPaintballBlocks.GREEN_C4.get(), 6));
+                Equipment.add(new ItemStack(MCPaintballBlocks.GREEN_TEAM_STATION.get(), 4));
                 Equipment.add(new ItemStack(MCPaintballItems.GREEN_REMOTE.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.GREEN_BOOTS.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.GREEN_LEGGINGS.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.GREEN_CHESTPLATE.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.GREEN_HELMET.get()));
+
             }
             case BLUE -> {
-                switch (PClass) {
-                    case STANDARD -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.RIFLE.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.BLUE_GRENADE.get(), 8));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.BLUE_C4.get(), 2));
-                    }
-                    case SHOTGUNNER -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.SHOTGUN.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.BLUE_GRENADE.get(), 12));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.BLUE_C4.get(), 4));
-                    }
-                    case HEAVY -> {
-                        Equipment.add(new ItemStack(MCPaintballItems.BAZOOKA.get()));
-                        Equipment.add(new ItemStack(MCPaintballItems.BLUE_GRENADE.get(), 16));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.BLUE_C4.get(), 6));
-                        Equipment.add(new ItemStack(MCPaintballBlocks.BLUE_TEAM_STATION.get(), 4));
-                    }
-                }
-                Equipment.add(new ItemStack(MCPaintballItems.PISTOL.get()));
+                Equipment.add(new ItemStack(MCPaintballItems.BLUE_GRENADE.get(), 16));
+                Equipment.add(new ItemStack(MCPaintballBlocks.BLUE_C4.get(), 6));
+                Equipment.add(new ItemStack(MCPaintballBlocks.BLUE_TEAM_STATION.get(), 4));
                 Equipment.add(new ItemStack(MCPaintballItems.BLUE_REMOTE.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.BLUE_BOOTS.get()));
                 Equipment.add(new ItemStack(MCPaintballItems.BLUE_LEGGINGS.get()));
@@ -99,6 +50,9 @@ public class TeamLoadoutManager
             }
         }
         Equipment.add(new ItemStack(MCPaintballBlocks.TEAM_FLAG.get(),2));
+        Equipment.add(new ItemStack(MCPaintballItems.RIFLE.get()));
+        Equipment.add(new ItemStack(MCPaintballItems.SHOTGUN.get()));
+        Equipment.add(new ItemStack(MCPaintballItems.PISTOL.get()));
         return Equipment;
     }
 }

@@ -9,7 +9,6 @@ public class TeamDataSyncPayloadHandler
 
     public static void Handle(final TeamsDataSyncPacket packet, PlayPayloadContext context)
     {
-        PaintballOverlay.Class = packet.PClass();
         PaintballOverlay.Team = packet.PTeam();
         PaintballOverlay.Points = packet.Points();
     }

@@ -68,20 +68,4 @@ public enum PaintballTeam
         }
         return null;
     }
-
-    public EntityType<?> getHeavyPaintball() {
-        switch (this) {
-            case RED -> {
-                return MCPaintballEntities.RED_HEAVY_PAINTBALL.get();
-            }
-            case GREEN -> {
-                return MCPaintballEntities.GREEN_HEAVY_PAINTBALL.get();
-            }
-            case BLUE -> {
-                return MCPaintballEntities.BLUE_HEAVY_PAINTBALL.get();
-            }
-        }
-        return null;
-    }
-
 }

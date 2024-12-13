@@ -5,12 +5,6 @@
       "mcpaintball:shot"
     ]
   },
-  "bazooka": {
-    "subtitle": "subtitle.mcpaintball.bazooka",
-    "sounds": [
-      "mcpaintball:bazooka"
-    ]
-  },
   "hit": {
     "subtitle": "subtitle.mcpaintball.hit",
     "sounds": [

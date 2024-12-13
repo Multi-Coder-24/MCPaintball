@@ -11,7 +11,6 @@ public class MCPaintballTeamsDataHelper
         {
             CompoundTag Default = new CompoundTag();
             Default.putInt("team", -1);
-            Default.putInt("class", -1);
             Default.putInt("points", 0);
             Default.putBoolean("active",false);
             player.getPersistentData().put("mcpaintball.team", Default);
@@ -22,7 +21,6 @@ public class MCPaintballTeamsDataHelper
     {
         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
         Data.putInt("team", -1);
-        Data.putInt("class", -1);
         Data.putInt("points", -1);
         Data.putBoolean("active",false);
         player.getPersistentData().put("mcpaintball.team", Data);
@@ -44,10 +42,6 @@ public class MCPaintballTeamsDataHelper
         return player.getPersistentData().getCompound("mcpaintball.team").getInt("team");
     }
 
-    public static int FetchClass(Player player)
-    {
-        return player.getPersistentData().getCompound("mcpaintball.team").getInt("class");
-    }
     public static void AddPoint(Player player)
     {
         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
@@ -60,14 +54,6 @@ public class MCPaintballTeamsDataHelper
     {
         CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
         Data.putInt("team", Team);
-        Data.putBoolean("active",true);
-        player.getPersistentData().put("mcpaintball.team", Data);
-    }
-
-    public static void UpdateClass(int Class, Player player)
-    {
-        CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-        Data.putInt("class", Class);
         Data.putBoolean("active",true);
         player.getPersistentData().put("mcpaintball.team", Data);
     }

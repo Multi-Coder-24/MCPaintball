@@ -6,11 +6,11 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.MCPaintball;
 
-public record TeamsDataSyncPacket(int Points, int PTeam, int PClass) implements CustomPacketPayload
+public record TeamsDataSyncPacket(int Points, int PTeam) implements CustomPacketPayload
 {
     public TeamsDataSyncPacket(final FriendlyByteBuf buffer)
     {
-        this(buffer.readInt(),buffer.readInt(),buffer.readInt());
+        this(buffer.readInt(),buffer.readInt());
     }
 
     public static final ResourceLocation ID = new ResourceLocation(MCPaintball.MOD_ID,"teamdatasync");
@@ -20,7 +20,6 @@ public record TeamsDataSyncPacket(int Points, int PTeam, int PClass) implements 
     {
         buffer.writeInt(Points);
         buffer.writeInt(PTeam);
-        buffer.writeInt(PClass);
     }
 
     @Override

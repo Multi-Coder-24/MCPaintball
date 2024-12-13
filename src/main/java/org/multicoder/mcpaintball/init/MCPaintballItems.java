@@ -15,29 +15,28 @@ import org.multicoder.mcpaintball.utility.PaintballArmorMaterial;
 public class MCPaintballItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MCPaintball.MOD_ID);
 
-    public static final DeferredItem<?> PISTOL = ITEMS.register("pistol", PistolItem::new);
-    public static final DeferredItem<?> RIFLE = ITEMS.register("rifle", RifleItem::new);
-    public static final DeferredItem<?> SHOTGUN = ITEMS.register("shotgun", ShotgunItem::new);
-    public static final DeferredItem<?> BAZOOKA = ITEMS.register("bazooka", BazookaItem::new);
+    public static final DeferredItem<?> PISTOL = ITEMS.register("weapon/pistol", PistolItem::new);
+    public static final DeferredItem<?> RIFLE = ITEMS.register("weapon/rifle", RifleItem::new);
+    public static final DeferredItem<?> SHOTGUN = ITEMS.register("weapon/shotgun", ShotgunItem::new);
 
-    public static final DeferredItem<?> RED_GRENADE = ITEMS.register("red_grenade", GrenadeItem::new);
-    public static final DeferredItem<?> GREEN_GRENADE = ITEMS.register("green_grenade", GrenadeItem::new);
-    public static final DeferredItem<?> BLUE_GRENADE = ITEMS.register("blue_grenade", GrenadeItem::new);
+    public static final DeferredItem<?> RED_GRENADE = ITEMS.register("explosives/red_grenade", GrenadeItem::new);
+    public static final DeferredItem<?> GREEN_GRENADE = ITEMS.register("explosives/green_grenade", GrenadeItem::new);
+    public static final DeferredItem<?> BLUE_GRENADE = ITEMS.register("explosives/blue_grenade", GrenadeItem::new);
 
-    public static final DeferredItem<?> RED_BOOTS = ITEMS.register("red_boots", () -> new PaintballBoots(PaintballArmorMaterial.RED));
-    public static final DeferredItem<?> RED_LEGGINGS = ITEMS.register("red_leggings", () -> new PaintballLeggings(PaintballArmorMaterial.RED));
-    public static final DeferredItem<?> RED_CHESTPLATE = ITEMS.register("red_chestplate", () -> new PaintballChestplate(PaintballArmorMaterial.RED));
-    public static final DeferredItem<?> RED_HELMET = ITEMS.register("red_helmet", () -> new PaintballHelmet(PaintballArmorMaterial.RED));
+    public static final DeferredItem<?> RED_BOOTS = ITEMS.register("armor/red_boots", () -> new PaintballBoots(PaintballArmorMaterial.RED));
+    public static final DeferredItem<?> RED_LEGGINGS = ITEMS.register("armor/red_leggings", () -> new PaintballLeggings(PaintballArmorMaterial.RED));
+    public static final DeferredItem<?> RED_CHESTPLATE = ITEMS.register("armor/red_chestplate", () -> new PaintballChestplate(PaintballArmorMaterial.RED));
+    public static final DeferredItem<?> RED_HELMET = ITEMS.register("armor/red_helmet", () -> new PaintballHelmet(PaintballArmorMaterial.RED));
 
-    public static final DeferredItem<?> GREEN_BOOTS = ITEMS.register("green_boots", () -> new PaintballBoots(PaintballArmorMaterial.GREEN));
-    public static final DeferredItem<?> GREEN_LEGGINGS = ITEMS.register("green_leggings", () -> new PaintballLeggings(PaintballArmorMaterial.GREEN));
-    public static final DeferredItem<?> GREEN_CHESTPLATE = ITEMS.register("green_chestplate", () -> new PaintballChestplate(PaintballArmorMaterial.GREEN));
-    public static final DeferredItem<?> GREEN_HELMET = ITEMS.register("green_helmet", () -> new PaintballHelmet(PaintballArmorMaterial.GREEN));
+    public static final DeferredItem<?> GREEN_BOOTS = ITEMS.register("armor/green_boots", () -> new PaintballBoots(PaintballArmorMaterial.GREEN));
+    public static final DeferredItem<?> GREEN_LEGGINGS = ITEMS.register("armor/green_leggings", () -> new PaintballLeggings(PaintballArmorMaterial.GREEN));
+    public static final DeferredItem<?> GREEN_CHESTPLATE = ITEMS.register("armor/green_chestplate", () -> new PaintballChestplate(PaintballArmorMaterial.GREEN));
+    public static final DeferredItem<?> GREEN_HELMET = ITEMS.register("armor/green_helmet", () -> new PaintballHelmet(PaintballArmorMaterial.GREEN));
 
-    public static final DeferredItem<?> BLUE_BOOTS = ITEMS.register("blue_boots", () -> new PaintballBoots(PaintballArmorMaterial.BLUE));
-    public static final DeferredItem<?> BLUE_LEGGINGS = ITEMS.register("blue_leggings", () -> new PaintballLeggings(PaintballArmorMaterial.BLUE));
-    public static final DeferredItem<?> BLUE_CHESTPLATE = ITEMS.register("blue_chestplate", () -> new PaintballChestplate(PaintballArmorMaterial.BLUE));
-    public static final DeferredItem<?> BLUE_HELMET = ITEMS.register("blue_helmet", () -> new PaintballHelmet(PaintballArmorMaterial.BLUE));
+    public static final DeferredItem<?> BLUE_BOOTS = ITEMS.register("armor/blue_boots", () -> new PaintballBoots(PaintballArmorMaterial.BLUE));
+    public static final DeferredItem<?> BLUE_LEGGINGS = ITEMS.register("armor/blue_leggings", () -> new PaintballLeggings(PaintballArmorMaterial.BLUE));
+    public static final DeferredItem<?> BLUE_CHESTPLATE = ITEMS.register("armor/blue_chestplate", () -> new PaintballChestplate(PaintballArmorMaterial.BLUE));
+    public static final DeferredItem<?> BLUE_HELMET = ITEMS.register("armor/blue_helmet", () -> new PaintballHelmet(PaintballArmorMaterial.BLUE));
 
     public static final DeferredItem<Item> RED_REMOTE = ITEMS.register("red_remote", PaintballC4RemoteItem::new);
     public static final DeferredItem<Item> GREEN_REMOTE = ITEMS.register("green_remote", PaintballC4RemoteItem::new);

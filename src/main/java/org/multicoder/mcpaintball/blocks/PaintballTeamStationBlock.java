@@ -56,71 +56,26 @@ public class PaintballTeamStationBlock extends Block
                 if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
                     int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
-                    int Class = MCPaintballTeamsDataHelper.FetchClass(player);
                     if(Team == 0 && state.getBlock().equals(MCPaintballBlocks.RED_TEAM_STATION.value()))
                     {
                         ServerPlayer SP = (ServerPlayer) player;
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
-                        switch (Class)
-                        {
-                            case 0 ->
-                            {
-                                player.addItem(new ItemStack(MCPaintballItems.RED_GRENADE.value(),8));
-                                player.addItem(new ItemStack(MCPaintballBlocks.RED_C4.value(),2));
-                            }
-                            case 1 ->
-                            {
-                                player.addItem(new ItemStack(MCPaintballItems.RED_GRENADE.value(),12));
-                                player.addItem(new ItemStack(MCPaintballBlocks.RED_C4.value(),4));
-                            }
-                            case 2 ->
-                            {
-                                player.addItem(new ItemStack(MCPaintballItems.RED_GRENADE.value(),16));
-                                player.addItem(new ItemStack(MCPaintballBlocks.RED_C4.value(),6));
-                            }
-                        }
+                        player.addItem(new ItemStack(MCPaintballItems.RED_GRENADE.value(),8));
+                        player.addItem(new ItemStack(MCPaintballBlocks.RED_C4.value(),2));
                     }
                     else if(Team == 1 && state.getBlock().equals(MCPaintballBlocks.GREEN_TEAM_STATION.value()))
                     {
                         ServerPlayer SP = (ServerPlayer) player;
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
-                        switch (Class) {
-                            case 0 -> {
-                                player.addItem(new ItemStack(MCPaintballItems.GREEN_GRENADE.value(), 8));
-                                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_C4.value(), 2));
-                            }
-                            case 1 -> {
-                                player.addItem(new ItemStack(MCPaintballItems.GREEN_GRENADE.value(), 12));
-                                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_C4.value(), 4));
-                            }
-                            case 2 -> {
-                                player.addItem(new ItemStack(MCPaintballItems.GREEN_GRENADE.value(), 16));
-                                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_C4.value(), 6));
-                            }
-                        }
+                        player.addItem(new ItemStack(MCPaintballItems.GREEN_GRENADE.value(), 8));
+                        player.addItem(new ItemStack(MCPaintballBlocks.GREEN_C4.value(), 2));
                     }
                     else if(Team == 2 && state.getBlock().equals(MCPaintballBlocks.BLUE_TEAM_STATION.value()))
                     {
                         ServerPlayer SP = (ServerPlayer) player;
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
-                        switch (Class)
-                        {
-                            case 0 ->
-                            {
-                                player.addItem(new ItemStack(MCPaintballItems.BLUE_GRENADE.value(),8));
-                                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_C4.value(),2));
-                            }
-                            case 1 ->
-                            {
-                                player.addItem(new ItemStack(MCPaintballItems.BLUE_GRENADE.value(),12));
-                                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_C4.value(),4));
-                            }
-                            case 2 ->
-                            {
-                                player.addItem(new ItemStack(MCPaintballItems.BLUE_GRENADE.value(),16));
-                                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_C4.value(),6));
-                            }
-                        }
+                        player.addItem(new ItemStack(MCPaintballItems.BLUE_GRENADE.value(),8));
+                        player.addItem(new ItemStack(MCPaintballBlocks.BLUE_C4.value(),2));
                     }
                 }
             }
