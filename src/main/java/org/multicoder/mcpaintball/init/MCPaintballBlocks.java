@@ -1,12 +1,12 @@
 package org.multicoder.mcpaintball.init;
 
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.*;
 import org.multicoder.mcpaintball.blocks.*;
 import java.util.function.Supplier;
 
 import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
+import static org.multicoder.mcpaintball.init.MCPaintballItems.ITEMS;
 
 public class MCPaintballBlocks
 {
@@ -25,7 +25,7 @@ public class MCPaintballBlocks
     public static DeferredBlock<Block> RegisterBlock(String name, Supplier<Block> supplier)
     {
         DeferredBlock<Block> Block = BLOCKS.register(name,supplier);
-        MCPaintballItems.ITEMS.registerSimpleBlockItem(Block);
+        ITEMS.registerSimpleBlockItem(Block);
         return Block;
     }
 

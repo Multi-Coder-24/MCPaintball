@@ -17,6 +17,9 @@ import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
 import org.multicoder.mcpaintball.data.MCPaintballWorldData;
 
+import static net.minecraft.world.InteractionResult.SUCCESS;
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.INSTANCE;
+
 @SuppressWarnings("all")
 public class FlagBlock extends Block
 {
@@ -40,7 +43,7 @@ public class FlagBlock extends Block
     {
         if(!player.level().isClientSide())
         {
-            if(MCPaintballWorldData.INSTANCE.MatchStarted)
+            if(INSTANCE.MatchStarted)
             {
                 if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
@@ -50,12 +53,12 @@ public class FlagBlock extends Block
                         level.setBlockAndUpdate(pos,state.setValue(TEAM,MCPaintballTeamsDataHelper.FetchTeam(player)).setValue(LOCKED,true));
                         level.scheduleTick(pos,this,100);
                         MCPaintballWorldData.incrementByIndex(MCPaintballTeamsDataHelper.FetchTeam(player));
-                        MCPaintballWorldData.INSTANCE.setDirty();
+                        INSTANCE.setDirty();
                     }
                 }
             }
         }
-        return InteractionResult.SUCCESS;
+        return SUCCESS;
     }
 
     @Override

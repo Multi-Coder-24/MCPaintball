@@ -1,11 +1,11 @@
 package org.multicoder.mcpaintball.entityrenderers;
 
-import net.minecraft.client.renderer.entity.ArrowRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import org.multicoder.mcpaintball.init.MCPaintballEntities;
 import org.multicoder.mcpaintball.entity.paintball.PaintballEntity;
+
+import static org.multicoder.mcpaintball.init.MCPaintballEntities.*;
 
 
 public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity> {
@@ -19,11 +19,11 @@ public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity> {
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(PaintballEntity entity) {
-        if (entity.getType().equals(MCPaintballEntities.RED_PAINTBALL.get())) {
+        if (entity.getType().equals(RED_PAINTBALL.get())) {
             return R;
-        } else if (entity.getType().equals(MCPaintballEntities.GREEN_PAINTBALL.get())) {
+        } else if (entity.getType().equals(GREEN_PAINTBALL.get())) {
             return G;
-        } else if (entity.getType().equals(MCPaintballEntities.BLUE_PAINTBALL.get())) {
+        } else if (entity.getType().equals(BLUE_PAINTBALL.get())) {
             return B;
         } else {
             return R;

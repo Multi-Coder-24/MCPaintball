@@ -10,7 +10,7 @@ import org.multicoder.mcpaintball.items.armor.PaintballHelmet;
 import org.multicoder.mcpaintball.items.armor.PaintballLeggings;
 import org.multicoder.mcpaintball.items.tools.PaintballC4RemoteItem;
 import org.multicoder.mcpaintball.items.weapons.*;
-import org.multicoder.mcpaintball.utility.PaintballArmorMaterial;
+import org.multicoder.mcpaintball.utility.enums.PaintballArmorMaterial;
 
 public class MCPaintballItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MCPaintball.MOD_ID);

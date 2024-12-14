@@ -2,19 +2,18 @@ package org.multicoder.mcpaintball.entity.grenade;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.*;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
-import org.multicoder.mcpaintball.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.init.MCPaintballItems;
-import org.multicoder.mcpaintball.utility.enums.PaintballTeam;
-
+import org.multicoder.mcpaintball.data.*;
 import java.util.Objects;
+
+import static net.minecraft.world.level.Level.ExplosionInteraction.NONE;
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.INSTANCE;
+import static org.multicoder.mcpaintball.init.MCPaintballItems.GREEN_GRENADE;
+import static org.multicoder.mcpaintball.utility.enums.PaintballTeam.GREEN;
 
 @SuppressWarnings("all")
 public class GreenPaintballGrenadeEntity extends ThrowableItemProjectile implements ItemSupplier {
@@ -26,18 +25,18 @@ public class GreenPaintballGrenadeEntity extends ThrowableItemProjectile impleme
     @Override
     protected void onHitBlock(@NotNull BlockHitResult hitResult)
     {
-        if (MCPaintballWorldData.INSTANCE.MatchStarted)
+        if (INSTANCE.MatchStarted)
         {
             BlockPos Position = hitResult.getBlockPos();
-            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f,Level.ExplosionInteraction.NONE);
+            Explosion E = level().explode(this, Position.getX(), Position.getY(), Position.getZ(), 2f,NONE);
             E.getHitPlayers().keySet().forEach(player ->
             {
                 if (MCPaintballTeamsDataHelper.HasTeam(player))
                 {
                     int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
-                    if (!Objects.equals(Team, PaintballTeam.GREEN.ordinal()))
+                    if (!Objects.equals(Team, GREEN.ordinal()))
                     {
-                        MCPaintballWorldData.incrementByIndex(PaintballTeam.GREEN.ordinal());
+                        MCPaintballWorldData.incrementByIndex(GREEN.ordinal());
                     }
                 }
             });
@@ -49,6 +48,6 @@ public class GreenPaintballGrenadeEntity extends ThrowableItemProjectile impleme
     @Override
     protected @NotNull Item getDefaultItem()
     {
-        return MCPaintballItems.GREEN_GRENADE.get();
+        return GREEN_GRENADE.get();
     }
 }

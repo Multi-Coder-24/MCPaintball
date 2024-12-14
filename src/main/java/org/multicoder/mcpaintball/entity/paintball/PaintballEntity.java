@@ -8,12 +8,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.NotNull;
-import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
-import org.multicoder.mcpaintball.data.MCPaintballWorldData;
+import org.multicoder.mcpaintball.data.*;
 import org.multicoder.mcpaintball.init.MCPaintballSounds;
 import org.multicoder.mcpaintball.utility.enums.PaintballTeam;
 
 import java.util.Objects;
+
+import static org.multicoder.mcpaintball.init.MCPaintballSounds.HIT;
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.INSTANCE;
 
 @SuppressWarnings("all")
 public class PaintballEntity extends AbstractArrow {
@@ -26,7 +28,7 @@ public class PaintballEntity extends AbstractArrow {
     {
         if (!level().isClientSide())
         {
-            if (MCPaintballWorldData.INSTANCE.MatchStarted)
+            if (INSTANCE.MatchStarted)
             {
                 PaintballTeam Team = PaintballTeam.getFromEntityType(getTypeName().getString().toLowerCase());
                 if (hitResult.getEntity() instanceof Player player && Objects.nonNull(Team))
@@ -37,7 +39,7 @@ public class PaintballEntity extends AbstractArrow {
                         Player shooter = (Player) getOwner();
                         if (!Objects.equals(Team, TargetTeam))
                         {
-                            shooter.playSound(MCPaintballSounds.HIT.get(),1f,1f);
+                            shooter.playSound(HIT.get(),1f,1f);
                             MCPaintballWorldData.incrementByIndex(Team.ordinal());
                             MCPaintballTeamsDataHelper.AddPoint(shooter);
                         }

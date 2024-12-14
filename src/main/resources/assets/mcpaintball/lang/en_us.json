@@ -42,12 +42,10 @@
 
   "Comment_4": "Command Responses",
   "mcpaintball.command.response.team.set": "Your team has been set to %s",
-  "mcpaintball.command.response.class.set": "Your class has been set to %s",
   "mcpaintball.command.response.match_start": "The match has begun",
   "mcpaintball.command.response.match_stop": "The match has ended",
-  "mcpaintball.command.response.game_start": "The game has started, pick your team and class now.",
+  "mcpaintball.command.response.game_start": "The game has started, pick your team.",
   "mcpaintball.command.response.game_stop": "The game has finished.",
-  "mcpaintball.command.response.game.mode": "The game mode has been set to %s",
   "mcpaintball.command.response.winner": "The winning team is %s.",
 
 
@@ -63,8 +61,6 @@
   "Comment_6": "Text",
   "text.mcpaintball.overlay.points": "Team Points: %s",
   "text.mcpaintball.overlay.team": "Current Team: %s",
-  "text.mcpaintball.overlay.class": "Selected Class: %s",
-  "text.mcpaintball.overlay.type": "Game Type: %s",
 
   "Comment_7": "Creative Mode Tabs",
   "tab.mcpaintball.paintball": "Paintballing"

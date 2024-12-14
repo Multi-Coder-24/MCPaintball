@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.utility;
+package org.multicoder.mcpaintball.utility.enums;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

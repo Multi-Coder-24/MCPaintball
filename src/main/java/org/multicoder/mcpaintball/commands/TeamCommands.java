@@ -3,18 +3,17 @@ package org.multicoder.mcpaintball.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
+import net.minecraft.commands.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.server.command.EnumArgument;
 import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
-import org.multicoder.mcpaintball.data.MCPaintballWorldData;
 import org.multicoder.mcpaintball.utility.TeamLoadoutManager;
 import org.multicoder.mcpaintball.utility.enums.PaintballTeam;
-
 import java.util.List;
+
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.INSTANCE;
 
 public class TeamCommands
 {
@@ -34,7 +33,7 @@ public class TeamCommands
     private static int setTeamCommand(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
         ServerPlayer player = source.getPlayerOrException();
-        if (MCPaintballWorldData.INSTANCE.GameStarted && !MCPaintballWorldData.INSTANCE.MatchStarted)
+        if (INSTANCE.GameStarted && !INSTANCE.MatchStarted)
         {
             PaintballTeam selected = context.getArgument("team", PaintballTeam.class);
             MCPaintballTeamsDataHelper.UpdateTeam(selected.ordinal(), player);

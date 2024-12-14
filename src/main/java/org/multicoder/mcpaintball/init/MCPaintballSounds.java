@@ -1,14 +1,14 @@
 package org.multicoder.mcpaintball.init;
 
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.*;
 import org.multicoder.mcpaintball.MCPaintball;
 
+import static net.minecraft.core.registries.Registries.SOUND_EVENT;
+
 public class MCPaintballSounds {
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, MCPaintball.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(SOUND_EVENT, MCPaintball.MOD_ID);
 
     public static final DeferredHolder<SoundEvent, SoundEvent> SHOT = SOUNDS.register("shot", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "shot"), 15f));
     public static final DeferredHolder<SoundEvent, SoundEvent> HIT = SOUNDS.register("hit", () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(MCPaintball.MOD_ID, "hit"), 15f));

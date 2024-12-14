@@ -1,15 +1,16 @@
 package org.multicoder.mcpaintball.networking;
 
 import net.neoforged.neoforge.network.handling.PlayPayloadContext;
-import org.multicoder.mcpaintball.data.PaintballOverlay;
 
-@SuppressWarnings("all")
+import static org.multicoder.mcpaintball.data.PaintballOverlay.*;
+
+
 public class TeamDataSyncPayloadHandler
 {
 
-    public static void Handle(final TeamsDataSyncPacket packet, PlayPayloadContext context)
+    public static void Handle(final TeamsDataSyncPacket packet, PlayPayloadContext ignoredContext)
     {
-        PaintballOverlay.Team = packet.PTeam();
-        PaintballOverlay.Points = packet.Points();
+        Team = packet.PTeam();
+        Points = packet.Points();
     }
 }

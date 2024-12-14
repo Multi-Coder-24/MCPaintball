@@ -3,24 +3,21 @@ package org.multicoder.mcpaintball.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.*;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
-import org.multicoder.mcpaintball.data.MCPaintballWorldData;
-import org.multicoder.mcpaintball.init.MCPaintballBlocks;
-import org.multicoder.mcpaintball.init.MCPaintballItems;
+
+import static net.minecraft.world.InteractionResult.SUCCESS;
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.INSTANCE;
+import static org.multicoder.mcpaintball.init.MCPaintballBlocks.*;
+import static org.multicoder.mcpaintball.init.MCPaintballItems.*;
 
 @SuppressWarnings("all")
 public class PaintballTeamStationBlock extends Block
@@ -51,36 +48,36 @@ public class PaintballTeamStationBlock extends Block
     {
         if(!level.isClientSide())
         {
-            if(MCPaintballWorldData.INSTANCE.MatchStarted)
+            if(INSTANCE.MatchStarted)
             {
                 if(MCPaintballTeamsDataHelper.HasTeam(player))
                 {
                     int Team = MCPaintballTeamsDataHelper.FetchTeam(player);
-                    if(Team == 0 && state.getBlock().equals(MCPaintballBlocks.RED_TEAM_STATION.value()))
+                    if(Team == 0 && state.getBlock().equals(RED_TEAM_STATION.value()))
                     {
                         ServerPlayer SP = (ServerPlayer) player;
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
-                        player.addItem(new ItemStack(MCPaintballItems.RED_GRENADE.value(),8));
-                        player.addItem(new ItemStack(MCPaintballBlocks.RED_C4.value(),2));
+                        player.addItem(new ItemStack(RED_GRENADE.value(),8));
+                        player.addItem(new ItemStack(RED_C4.value(),2));
                     }
-                    else if(Team == 1 && state.getBlock().equals(MCPaintballBlocks.GREEN_TEAM_STATION.value()))
+                    else if(Team == 1 && state.getBlock().equals(GREEN_TEAM_STATION.value()))
                     {
                         ServerPlayer SP = (ServerPlayer) player;
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
-                        player.addItem(new ItemStack(MCPaintballItems.GREEN_GRENADE.value(), 8));
-                        player.addItem(new ItemStack(MCPaintballBlocks.GREEN_C4.value(), 2));
+                        player.addItem(new ItemStack(GREEN_GRENADE.value(), 8));
+                        player.addItem(new ItemStack(GREEN_C4.value(), 2));
                     }
-                    else if(Team == 2 && state.getBlock().equals(MCPaintballBlocks.BLUE_TEAM_STATION.value()))
+                    else if(Team == 2 && state.getBlock().equals(BLUE_TEAM_STATION.value()))
                     {
                         ServerPlayer SP = (ServerPlayer) player;
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
-                        player.addItem(new ItemStack(MCPaintballItems.BLUE_GRENADE.value(),8));
-                        player.addItem(new ItemStack(MCPaintballBlocks.BLUE_C4.value(),2));
+                        player.addItem(new ItemStack(BLUE_GRENADE.value(),8));
+                        player.addItem(new ItemStack(BLUE_C4.value(),2));
                     }
                 }
             }
         }
-        return InteractionResult.SUCCESS;
+        return SUCCESS;
     }
 
 }

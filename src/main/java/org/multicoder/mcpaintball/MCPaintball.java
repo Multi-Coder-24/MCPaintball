@@ -1,30 +1,34 @@
 package org.multicoder.mcpaintball;
 
-import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
-import org.multicoder.mcpaintball.commands.*;
+import org.multicoder.mcpaintball.commands. *;
 import org.multicoder.mcpaintball.data.*;
 import org.multicoder.mcpaintball.entityrenderers.EntityRenderers;
-import org.multicoder.mcpaintball.init.*;
 import org.multicoder.mcpaintball.networking.*;
 
-@SuppressWarnings("all")
-@Mod(MCPaintball.MOD_ID)
+import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.*;
+import static org.multicoder.mcpaintball.init.MCPaintballBlocks.BLOCKS;
+import static org.multicoder.mcpaintball.init.MCPaintballItems.ITEMS;
+import static org.multicoder.mcpaintball.init.MCPaintballCreativeTabs.TABS;
+import static org.multicoder.mcpaintball.init.MCPaintballSounds.SOUNDS;
+import static org.multicoder.mcpaintball.init.MCPaintballEntities.ENTITIES;
+import static net.neoforged.neoforge.network.PacketDistributor.PLAYER;
+import static net.neoforged.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
+import static org.multicoder.mcpaintball.networking.TeamsDataSyncPacket.ID;
+
+
+@Mod(MOD_ID)
 public class MCPaintball {
     public static final String MOD_ID = "mcpaintball";
 
@@ -33,60 +37,53 @@ public class MCPaintball {
         eventBus.addListener(EntityRenderers::RegisterRenderers);
         eventBus.addListener(this::OverlayRegister);
         eventBus.addListener(this::RegisterPayloads);
-        MCPaintballItems.ITEMS.register(eventBus);
-        MCPaintballBlocks.BLOCKS.register(eventBus);
-        MCPaintballCreativeTabs.TABS.register(eventBus);
-        MCPaintballEntities.ENTITIES.register(eventBus);
-        MCPaintballSounds.SOUNDS.register(eventBus);
+        ITEMS.register(eventBus);
+        BLOCKS.register(eventBus);
+        TABS.register(eventBus);
+        ENTITIES.register(eventBus);
+        SOUNDS.register(eventBus);
 
     }
 
     public void OverlayRegister(RegisterGuiOverlaysEvent event)
     {
-        event.registerAboveAll(new ResourceLocation(MCPaintball.MOD_ID,"paintball_info"),new PaintballOverlay());
+        event.registerAboveAll(new ResourceLocation(MOD_ID,"paintball_info"),new PaintballOverlay());
     }
     public void RegisterPayloads(final RegisterPayloadHandlerEvent event)
     {
-        IPayloadRegistrar registrar = event.registrar(MCPaintball.MOD_ID);
-        registrar.play(TeamsDataSyncPacket.ID,TeamsDataSyncPacket::new,handler -> handler.client(TeamDataSyncPayloadHandler::Handle));
+        event.registrar(MOD_ID).play(ID,TeamsDataSyncPacket::new,handler -> handler.client(TeamDataSyncPayloadHandler::Handle));
     }
 
-    @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = FORGE)
     public static class NeoEvents
     {
         @SubscribeEvent
         private static void onServerStarted(ServerStartedEvent event)
         {
-            ServerLevel overworld = event.getServer().overworld();
-            SavedData.Factory<MCPaintballWorldData> saveDataFactory = new SavedData.Factory<>(MCPaintballWorldData::create, MCPaintballWorldData::load);
-            MCPaintballWorldData.INSTANCE = overworld.getDataStorage().computeIfAbsent(saveDataFactory, MCPaintballWorldData.SAVE_NAME);
-            MCPaintballWorldData.INSTANCE.setDirty();
+            INSTANCE = event.getServer().overworld().getDataStorage().computeIfAbsent(new SavedData.Factory<>(MCPaintballWorldData::create, MCPaintballWorldData::load), SAVE_NAME);
+            INSTANCE.setDirty();
         }
     }
 
-    @SuppressWarnings("unused")
-    @Mod.EventBusSubscriber(modid = MCPaintball.MOD_ID)
+    @Mod.EventBusSubscriber(modid = MOD_ID)
     public static class ModEvents
     {
         @SubscribeEvent
-        public static void registerCommands(RegisterCommandsEvent event) {
-            CommandDispatcher<CommandSourceStack> Dispatcher = event.getDispatcher();
-            TeamCommands.registerCommands(Dispatcher);
-            MatchCommands.registerCommands(Dispatcher);
+        public static void registerCommands(RegisterCommandsEvent event)
+        {
+            TeamCommands.registerCommands(event.getDispatcher());
+            MatchCommands.registerCommands(event.getDispatcher());
         }
 
         @SubscribeEvent
-        public static void PlayerTick(LivingEvent.LivingTickEvent event)
+        public static void PlayerTick(PlayerEvent.LivingTickEvent event)
         {
-            if(event.getEntity() instanceof Player player)
+            if(!event.getEntity().level().isClientSide())
             {
-                if(!player.level().isClientSide())
-                {
-                    CompoundTag Data = player.getPersistentData().getCompound("mcpaintball.team");
-                    int Team = Data.getInt("team");
-                    int Points = MCPaintballWorldData.getPointsFromIndex(Team);
-                    PacketDistributor.PLAYER.with((ServerPlayer) player).send(new TeamsDataSyncPacket(Points,Team));
-                }
+                CompoundTag Data = event.getEntity().getPersistentData().getCompound("mcpaintball.team");
+                int Team = Data.getInt("team");
+                int Points = MCPaintballWorldData.getPointsFromIndex(Team);
+                PLAYER.with((ServerPlayer) event.getEntity()).send(new TeamsDataSyncPacket(Points,Team));
             }
         }
         @SubscribeEvent
@@ -97,10 +94,6 @@ public class MCPaintball {
         @SubscribeEvent
         public static void PlayerClone(PlayerEvent.Clone event)
         {
-            if(event.isWasDeath())
-            {
-                event.getEntity().getInventory().load(event.getOriginal().getInventory().save(new ListTag()));
-            }
             CompoundTag Tag = event.getOriginal().getPersistentData().getCompound("mcpaintball.team");
             event.getEntity().getPersistentData().put("mcpaintball.team",Tag);
         }
