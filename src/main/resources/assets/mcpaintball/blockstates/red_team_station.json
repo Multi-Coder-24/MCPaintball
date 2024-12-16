@@ -1,6 +1,24 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
+      "model": "mcpaintball:block/red_team_station"
+    },
+    "facing=east": {
+      "model": "mcpaintball:block/red_team_station",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mcpaintball:block/red_team_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mcpaintball:block/red_team_station",
+      "y": -90
+    },
+    "facing=up": {
+      "model": "mcpaintball:block/red_team_station"
+    },
+    "facing=down": {
       "model": "mcpaintball:block/red_team_station"
     }
   }

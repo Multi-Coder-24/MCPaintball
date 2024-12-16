@@ -6,12 +6,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.multicoder.mcpaintball.data.MCPaintballTeamsDataHelper;
 
 import static net.minecraft.world.InteractionResult.SUCCESS;
@@ -22,27 +25,18 @@ import static org.multicoder.mcpaintball.init.MCPaintballItems.*;
 @SuppressWarnings("all")
 public class PaintballTeamStationBlock extends Block
 {
-    public VoxelShape makeShape()
-    {
-        VoxelShape shape = Shapes.empty();
-        shape = Shapes.join(shape, Shapes.box(0, 0, 0, 1, 0.25, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0, 0.25, 0, 0.125, 0.75, 0.125), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.875, 0.25, 0.875, 1, 0.75, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0, 0.25, 0.875, 0.125, 0.75, 1), BooleanOp.OR);
-        shape = Shapes.join(shape, Shapes.box(0.875, 0.25, 0, 1, 0.75, 0.125), BooleanOp.OR);
-        return shape;
-    }
-
+    public static final DirectionProperty FACING = DirectionProperty.create("facing");
     public PaintballTeamStationBlock()
     {
         super(Properties.of().noOcclusion().destroyTime(3f));
     }
 
     @Override
-    public @NotNull VoxelShape getShape(@NotNull BlockState p_60555_, @NotNull BlockGetter p_60556_, @NotNull BlockPos p_60557_, @NotNull CollisionContext p_60558_)
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext p_49820_)
     {
-        return makeShape();
+        return defaultBlockState().setValue(FACING, p_49820_.getHorizontalDirection());
     }
+
     @Override
     public InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result)
     {
@@ -80,4 +74,9 @@ public class PaintballTeamStationBlock extends Block
         return SUCCESS;
     }
 
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_49915_) {
+        p_49915_.add(FACING);
+        super.createBlockStateDefinition(p_49915_);
+    }
 }

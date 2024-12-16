@@ -3,6 +3,7 @@ package org.multicoder.mcpaintball;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.Mod;
@@ -11,20 +12,21 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import org.multicoder.mcpaintball.commands. *;
+import org.multicoder.mcpaintball.commands.*;
 import org.multicoder.mcpaintball.data.*;
 import org.multicoder.mcpaintball.entityrenderers.EntityRenderers;
 import org.multicoder.mcpaintball.networking.*;
 
-import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
-import static org.multicoder.mcpaintball.data.MCPaintballWorldData.*;
-import static org.multicoder.mcpaintball.init.MCPaintballBlocks.BLOCKS;
-import static org.multicoder.mcpaintball.init.MCPaintballItems.ITEMS;
-import static org.multicoder.mcpaintball.init.MCPaintballCreativeTabs.TABS;
-import static org.multicoder.mcpaintball.init.MCPaintballSounds.SOUNDS;
-import static org.multicoder.mcpaintball.init.MCPaintballEntities.ENTITIES;
-import static net.neoforged.neoforge.network.PacketDistributor.PLAYER;
 import static net.neoforged.fml.common.Mod.EventBusSubscriber.Bus.FORGE;
+import static net.neoforged.neoforge.network.PacketDistributor.PLAYER;
+import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.INSTANCE;
+import static org.multicoder.mcpaintball.data.MCPaintballWorldData.SAVE_NAME;
+import static org.multicoder.mcpaintball.init.MCPaintballBlocks.BLOCKS;
+import static org.multicoder.mcpaintball.init.MCPaintballCreativeTabs.TABS;
+import static org.multicoder.mcpaintball.init.MCPaintballEntities.ENTITIES;
+import static org.multicoder.mcpaintball.init.MCPaintballItems.ITEMS;
+import static org.multicoder.mcpaintball.init.MCPaintballSounds.SOUNDS;
 import static org.multicoder.mcpaintball.networking.TeamsDataSyncPacket.ID;
 
 
@@ -78,12 +80,15 @@ public class MCPaintball {
         @SubscribeEvent
         public static void PlayerTick(PlayerEvent.LivingTickEvent event)
         {
-            if(!event.getEntity().level().isClientSide())
+            if(event.getEntity() instanceof Player)
             {
-                CompoundTag Data = event.getEntity().getPersistentData().getCompound("mcpaintball.team");
-                int Team = Data.getInt("team");
-                int Points = MCPaintballWorldData.getPointsFromIndex(Team);
-                PLAYER.with((ServerPlayer) event.getEntity()).send(new TeamsDataSyncPacket(Points,Team));
+                if(!event.getEntity().level().isClientSide())
+                {
+                    CompoundTag Data = event.getEntity().getPersistentData().getCompound("mcpaintball.team");
+                    int Team = Data.getInt("team");
+                    int Points = MCPaintballWorldData.getPointsFromIndex(Team);
+                    PLAYER.with((ServerPlayer) event.getEntity()).send(new TeamsDataSyncPacket(Points,Team));
+                }
             }
         }
         @SubscribeEvent
