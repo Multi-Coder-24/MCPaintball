@@ -21,6 +21,9 @@
   "item.mcpaintball.red_remote": "Red C4 Remote",
   "item.mcpaintball.green_remote": "Green C4 Remote",
   "item.mcpaintball.blue_remote": "Blue C4 Remote",
+  "item.mcpaintball.blue_tub": "Tub Of 50 Paintballs (Blue)",
+  "item.mcpaintball.green_tub": "Tub Of 50 Paintballs (Green)",
+  "item.mcpaintball.red_tub": "Tub Of 50 Paintballs (Red)",
 
   "Comment_2": "Blocks",
   "block.mcpaintball.explosives.red_c4": "Red C4 Explosive",
@@ -61,6 +64,7 @@
   "Comment_6": "Text",
   "text.mcpaintball.overlay.points": "Team Points: %s",
   "text.mcpaintball.overlay.team": "Current Team: %s",
+  "text.mcpaintball.weapon.reload": "Please Reload Weapon",
 
   "Comment_7": "Creative Mode Tabs",
   "tab.mcpaintball.paintball": "Paintballing"

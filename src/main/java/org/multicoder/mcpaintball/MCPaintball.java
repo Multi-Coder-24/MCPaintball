@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -36,7 +37,7 @@ public class MCPaintball {
 
     public MCPaintball(IEventBus eventBus)
     {
-        eventBus.addListener(EntityRenderers::RegisterRenderers);
+        eventBus.addListener(this::RegisterRenderers);
         eventBus.addListener(this::OverlayRegister);
         eventBus.addListener(this::RegisterPayloads);
         ITEMS.register(eventBus);
@@ -45,6 +46,11 @@ public class MCPaintball {
         ENTITIES.register(eventBus);
         SOUNDS.register(eventBus);
 
+    }
+
+    private void RegisterRenderers(EntityRenderersEvent.RegisterRenderers event)
+    {
+        EntityRenderers.RegisterRenderers(event);
     }
 
     public void OverlayRegister(RegisterGuiOverlaysEvent event)

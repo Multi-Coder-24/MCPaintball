@@ -25,7 +25,7 @@ public class GrenadeItem extends Item {
             if (MCPaintballTeamsDataHelper.HasTeam(player)) {
                 if (INSTANCE.MatchStarted) {
                     PaintballTeam PTeam = PaintballTeam.values()[MCPaintballTeamsDataHelper.FetchTeam(player)];
-                    RedPaintballGrenadeEntity Grenade = new RedPaintballGrenadeEntity(PTeam.getGrenade(), level);
+                    RedPaintballGrenadeEntity Grenade = new RedPaintballGrenadeEntity(PTeam.getGrenade(),player, level);
                     Grenade.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 3f, 0f);
                     level.addFreshEntity(Grenade);
                     level.playSound(null, player.blockPosition(), GRENADE.get(), PLAYERS, 1f, 1f);

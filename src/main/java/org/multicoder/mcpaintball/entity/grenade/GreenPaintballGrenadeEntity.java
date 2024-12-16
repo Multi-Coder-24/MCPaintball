@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.entity.grenade;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.*;
@@ -20,6 +21,10 @@ public class GreenPaintballGrenadeEntity extends ThrowableItemProjectile impleme
 
     public GreenPaintballGrenadeEntity(EntityType<?> p_37442_, Level p_37443_) {
         super((EntityType<? extends ThrowableItemProjectile>) p_37442_, p_37443_);
+    }
+
+    public GreenPaintballGrenadeEntity(EntityType<?> p_37442_, LivingEntity shooter, Level p_37443_) {
+        super((EntityType<? extends ThrowableItemProjectile>) p_37442_,shooter, p_37443_);
     }
 
     @Override

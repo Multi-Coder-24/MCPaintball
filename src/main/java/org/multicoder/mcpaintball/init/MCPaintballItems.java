@@ -41,4 +41,8 @@ public class MCPaintballItems {
     public static final DeferredItem<Item> RED_REMOTE = ITEMS.register("red_remote", PaintballC4RemoteItem::new);
     public static final DeferredItem<Item> GREEN_REMOTE = ITEMS.register("green_remote", PaintballC4RemoteItem::new);
     public static final DeferredItem<Item> BLUE_REMOTE = ITEMS.register("blue_remote", PaintballC4RemoteItem::new);
+
+    public static final DeferredItem<Item> RED_PAINTBALL_TUB = ITEMS.register("red_tub", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> GREEN_PAINTBALL_TUB = ITEMS.register("green_tub", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> BLUE_PAINTBALL_TUB = ITEMS.register("blue_tub", () -> new Item(new Item.Properties().stacksTo(16)));
 }

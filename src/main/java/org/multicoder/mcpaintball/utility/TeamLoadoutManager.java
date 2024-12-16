@@ -27,6 +27,7 @@ public class TeamLoadoutManager
                 Equipment.add(new ItemStack(RED_LEGGINGS.get()));
                 Equipment.add(new ItemStack(RED_CHESTPLATE.get()));
                 Equipment.add(new ItemStack(RED_HELMET.get()));
+                Equipment.add(new ItemStack(RED_PAINTBALL_TUB.get(),16));
             }
             case GREEN -> {
                 Equipment.add(new ItemStack(GREEN_GRENADE.get(), 16));
@@ -37,6 +38,7 @@ public class TeamLoadoutManager
                 Equipment.add(new ItemStack(GREEN_LEGGINGS.get()));
                 Equipment.add(new ItemStack(GREEN_CHESTPLATE.get()));
                 Equipment.add(new ItemStack(GREEN_HELMET.get()));
+                Equipment.add(new ItemStack(GREEN_PAINTBALL_TUB.get(),16));
 
             }
             case BLUE -> {
@@ -48,6 +50,7 @@ public class TeamLoadoutManager
                 Equipment.add(new ItemStack(BLUE_LEGGINGS.get()));
                 Equipment.add(new ItemStack(BLUE_CHESTPLATE.get()));
                 Equipment.add(new ItemStack(BLUE_HELMET.get()));
+                Equipment.add(new ItemStack(BLUE_PAINTBALL_TUB.get(),16));
             }
         }
         Equipment.add(new ItemStack(TEAM_FLAG.get(),2));

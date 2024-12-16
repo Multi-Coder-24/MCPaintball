@@ -53,6 +53,7 @@ public class PaintballTeamStationBlock extends Block
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
                         player.addItem(new ItemStack(RED_GRENADE.value(),8));
                         player.addItem(new ItemStack(RED_C4.value(),2));
+                        player.addItem(new ItemStack(RED_PAINTBALL_TUB.value(),16));
                     }
                     else if(Team == 1 && state.getBlock().equals(GREEN_TEAM_STATION.value()))
                     {
@@ -60,6 +61,7 @@ public class PaintballTeamStationBlock extends Block
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
                         player.addItem(new ItemStack(GREEN_GRENADE.value(), 8));
                         player.addItem(new ItemStack(GREEN_C4.value(), 2));
+                        player.addItem(new ItemStack(GREEN_PAINTBALL_TUB.value(), 16));
                     }
                     else if(Team == 2 && state.getBlock().equals(BLUE_TEAM_STATION.value()))
                     {
@@ -67,6 +69,7 @@ public class PaintballTeamStationBlock extends Block
                         SP.setRespawnPosition(player.level().dimension(),pos.above(),0f,true,true);
                         player.addItem(new ItemStack(BLUE_GRENADE.value(),8));
                         player.addItem(new ItemStack(BLUE_C4.value(),2));
+                        player.addItem(new ItemStack(BLUE_PAINTBALL_TUB.value(),16));
                     }
                 }
             }

@@ -1,12 +1,14 @@
 package org.multicoder.mcpaintball.entity.paintball;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.*;
 import org.multicoder.mcpaintball.init.MCPaintballSounds;
@@ -23,6 +25,9 @@ public class PaintballEntity extends AbstractArrow {
         super((EntityType<? extends AbstractArrow>) entityType, level, ItemStack.EMPTY);
     }
 
+    public PaintballEntity(EntityType<?> entityType, LivingEntity shooter, Level level) {
+        super((EntityType<? extends AbstractArrow>) entityType, shooter, level, ItemStack.EMPTY);
+    }
     @Override
     protected void onHitEntity(@NotNull EntityHitResult hitResult)
     {
@@ -52,10 +57,17 @@ public class PaintballEntity extends AbstractArrow {
     }
 
     @Override
+    protected void onHitBlock(BlockHitResult p_36755_)
+    {
+        BlockPos pos = p_36755_.getBlockPos();
+        level().playSound(this,pos,MCPaintballSounds.SPLAT.get(), SoundSource.PLAYERS,1f,1f);
+        super.onHitBlock(p_36755_);
+    }
+
+    @Override
     public void tick() {
         super.tick();
         if (this.inGroundTime == 100) {
-            this.kill();
             this.discard();
         }
     }
