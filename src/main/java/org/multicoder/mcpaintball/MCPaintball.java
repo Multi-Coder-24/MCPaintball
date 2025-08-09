@@ -1,6 +1,5 @@
 package org.multicoder.mcpaintball;
 
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
@@ -9,10 +8,12 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.item.MCPaintballWeapons;
 import org.multicoder.mcpaintball.item.armor.MCPaintballArmor;
 import org.multicoder.mcpaintball.item.armor.material.MCPaintballArmorMaterial;
 
+@SuppressWarnings("unused")
 @Mod(MCPaintball.MOD_ID)
 public class MCPaintball {
     public static final String MOD_ID = "mcpaintball";
@@ -20,6 +21,7 @@ public class MCPaintball {
 
     public MCPaintball(IEventBus eventBus, ModContainer modContainer)
     {
+        MCPaintballDataComponents.COMPONENTS.register(eventBus);
         MCPaintballWeapons.WEAPONS.register(eventBus);
         MCPaintballArmorMaterial.MATERIALS.register(eventBus);
         MCPaintballArmor.ARMORS.register(eventBus);

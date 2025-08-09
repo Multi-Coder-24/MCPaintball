@@ -8,17 +8,21 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.data.component.WeaponTeamDataComponent;
 
 public class AssaultRifleItem extends Item {
 
     public AssaultRifleItem() {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).component(MCPaintballDataComponents.WEAPON_TEAM.value(),new WeaponTeamDataComponent(0)));
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand usedHand)
     {
-        Arrow P1 = new Arrow(level,player,new ItemStack(Items.AIR),null);
+        ItemStack stack = player.getItemInHand(usedHand);
+        Arrow P1 = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
         P1.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,0.0F);
         level.addFreshEntity(P1);
         player.getCooldowns().addCooldown(this, 20);
