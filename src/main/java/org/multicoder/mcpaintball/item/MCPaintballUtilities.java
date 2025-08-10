@@ -23,4 +23,15 @@ public class MCPaintballUtilities
     public static final DeferredHolder<Item,Item> PINK_TEAM_TOKEN = UTILITIES.register("util/pink_team_token", PinkTeamTokenItem::new);
     public static final DeferredHolder<Item,Item> WHITE_TEAM_TOKEN = UTILITIES.register("util/white_team_token", WhiteTeamTokenItem::new);
     public static final DeferredHolder<Item,Item> TEAM_REMOVER_TOKEN = UTILITIES.register("util/team_remover_token", TeamRemoverTokenItem::new);
+
+    public static final DeferredHolder<Item,Item> RED_AMMO_HOPPER = UTILITIES.register("util/red_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> GREEN_AMMO_HOPPER = UTILITIES.register("util/green_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> BLUE_AMMO_HOPPER = UTILITIES.register("util/blue_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> CYAN_AMMO_HOPPER = UTILITIES.register("util/cyan_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> MAGENTA_AMMO_HOPPER = UTILITIES.register("util/magenta_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> YELLOW_AMMO_HOPPER = UTILITIES.register("util/yellow_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> LIME_AMMO_HOPPER = UTILITIES.register("util/lime_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> LIGHT_BLUE_AMMO_HOPPER = UTILITIES.register("util/light_blue_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> PINK_AMMO_HOPPER = UTILITIES.register("util/pink_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> WHITE_AMMO_HOPPER = UTILITIES.register("util/white_ammo_hopper", AmmoHopper::new);
 }

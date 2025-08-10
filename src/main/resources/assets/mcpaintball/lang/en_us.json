@@ -46,7 +46,6 @@
   "item.mcpaintball.armor.light_blue_helmet": "Light Blue Team Helmet",
   "item.mcpaintball.armor.pink_helmet": "Pink Team Helmet",
   "item.mcpaintball.armor.white_helmet": "White Team Helmet",
-
   "item.mcpaintball.util.red_team_token": "Red Team Token",
   "item.mcpaintball.util.green_team_token": "Green Team Token",
   "item.mcpaintball.util.blue_team_token": "Blue Team Token",
@@ -58,6 +57,16 @@
   "item.mcpaintball.util.pink_team_token": "Pink Team Token",
   "item.mcpaintball.util.white_team_token": "White Team Token",
   "item.mcpaintball.util.team_remover_token": "Team Remover Token",
+  "item.mcpaintball.util.red_ammo_hopper": "Red Ammo Hopper",
+  "item.mcpaintball.util.green_ammo_hopper": "Green Ammo Hopper",
+  "item.mcpaintball.util.blue_ammo_hopper": "Blue Ammo Hopper",
+  "item.mcpaintball.util.cyan_ammo_hopper": "Cyan Ammo Hopper",
+  "item.mcpaintball.util.magenta_ammo_hopper": "Magenta Ammo Hopper",
+  "item.mcpaintball.util.yellow_ammo_hopper": "Yellow Ammo Hopper",
+  "item.mcpaintball.util.lime_ammo_hopper": "Lime Ammo Hopper",
+  "item.mcpaintball.util.light_blue_ammo_hopper": "Light Blue Ammo Hopper",
+  "item.mcpaintball.util.pink_ammo_hopper": "Pink Ammo Hopper",
+  "item.mcpaintball.util.white_ammo_hopper": "White Ammo Hopper",
 
   "Comment_2": "Entities",
 
@@ -71,7 +80,7 @@
 
 
   "Comment_5": "Text",
-
+  "text.mcpaintball.ammo_hopper_empty": "No Ammo Left In Hopper",
 
   "Comment_6": "Blocks"
 

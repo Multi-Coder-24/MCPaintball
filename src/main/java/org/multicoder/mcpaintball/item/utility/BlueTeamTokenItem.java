@@ -8,6 +8,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.multicoder.mcpaintball.item.MCPaintballArmor;
+import org.multicoder.mcpaintball.item.MCPaintballUtilities;
 
 public class BlueTeamTokenItem extends Item {
 
@@ -19,6 +21,13 @@ public class BlueTeamTokenItem extends Item {
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand usedHand)
     {
+        player.addItem(new ItemStack(MCPaintballArmor.BLUE_BOOTS));
+        player.addItem(new ItemStack(MCPaintballArmor.BLUE_LEGGINGS));
+        player.addItem(new ItemStack(MCPaintballArmor.BLUE_CHESTPLATE));
+        player.addItem(new ItemStack(MCPaintballArmor.BLUE_HELMET));
+        player.addItem(new ItemStack(MCPaintballUtilities.BLUE_AMMO_HOPPER));
+        player.addItem(new ItemStack(MCPaintballUtilities.TEAM_REMOVER_TOKEN));
+        player.getItemInHand(usedHand).shrink(1);
         return super.use(level, player, usedHand);
     }
 }

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "boat",
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "D": {
+      "item": "minecraft:white_dye"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "DSD",
+    "SWS",
+    "DSD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mcpaintball:util/white_team_token"
+  }
+}

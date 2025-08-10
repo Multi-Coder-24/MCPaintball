@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.data.component.WeaponTeamDataComponent;
+import org.multicoder.mcpaintball.item.utility.AmmoHopper;
 
 public class ShotgunItem extends Item {
 
@@ -18,19 +19,26 @@ public class ShotgunItem extends Item {
         super(new Properties().stacksTo(1).component(MCPaintballDataComponents.WEAPON_TEAM.value(),new WeaponTeamDataComponent(0)));    }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand usedHand)
-    {
-        ItemStack stack = player.getItemInHand(usedHand);
-        Arrow P1 = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
-        Arrow P2 = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
-        Arrow P3 = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
-        P1.shootFromRotation(player,player.getXRot(),player.getYRot() - 30.0F,0.0F,3.0F,0.0F);
-        P2.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.0F);
-        P3.shootFromRotation(player,player.getXRot(),player.getYRot() + 30.0F,0.0F,3.0F,0.0F);
-        level.addFreshEntity(P1);
-        level.addFreshEntity(P2);
-        level.addFreshEntity(P3);
-        player.getCooldowns().addCooldown(this, 80);
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand usedHand) {
+        if(!level.isClientSide) {
+            if (player.getOffhandItem().getItem() instanceof AmmoHopper) {
+                ItemStack Ammo = player.getOffhandItem();
+                if (Ammo.getDamageValue() < Ammo.getMaxDamage()) {
+                    Ammo.setDamageValue(Ammo.getDamageValue() + 1);
+                    ItemStack stack = player.getItemInHand(usedHand);
+                    Arrow P1 = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
+                    Arrow P2 = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
+                    Arrow P3 = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
+                    P1.shootFromRotation(player,player.getXRot(),player.getYRot() - 30.0F,0.0F,3.0F,0.0F);
+                    P2.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.0F);
+                    P3.shootFromRotation(player,player.getXRot(),player.getYRot() + 30.0F,0.0F,3.0F,0.0F);
+                    level.addFreshEntity(P1);
+                    level.addFreshEntity(P2);
+                    level.addFreshEntity(P3);
+                    player.getCooldowns().addCooldown(this, 80);
+                }
+            }
+        }
         return super.use(level, player, usedHand);
     }
 }
