@@ -9,8 +9,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
-import org.multicoder.mcpaintball.item.MCPaintballWeapons;
-import org.multicoder.mcpaintball.item.armor.MCPaintballArmor;
+import org.multicoder.mcpaintball.item.*;
 import org.multicoder.mcpaintball.item.armor.material.MCPaintballArmorMaterial;
 
 @SuppressWarnings("unused")
@@ -19,20 +18,23 @@ public class MCPaintball {
     public static final String MOD_ID = "mcpaintball";
     public static Logger LOG = LogManager.getLogger(MOD_ID);
 
-    public MCPaintball(IEventBus eventBus, ModContainer modContainer)
-    {
+    public MCPaintball(IEventBus eventBus, ModContainer modContainer) {
         MCPaintballDataComponents.COMPONENTS.register(eventBus);
         MCPaintballWeapons.WEAPONS.register(eventBus);
         MCPaintballArmorMaterial.MATERIALS.register(eventBus);
         MCPaintballArmor.ARMORS.register(eventBus);
+        MCPaintballUtilities.UTILITIES.register(eventBus);
         eventBus.addListener(this::AppendCreativeTabs);
 
     }
 
     public void AppendCreativeTabs(BuildCreativeModeTabContentsEvent event){
-        if(event.getTabKey() == CreativeModeTabs.COMBAT){
+        if(event.getTabKey() == CreativeModeTabs.COMBAT) {
             MCPaintballWeapons.WEAPONS.getEntries().forEach(entry -> event.accept(new ItemStack(entry.value())));
             MCPaintballArmor.ARMORS.getEntries().forEach(entry -> event.accept(new ItemStack(entry.value())));
+        }
+        if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES){
+            MCPaintballUtilities.UTILITIES.getEntries().forEach(entry -> event.accept(new ItemStack(entry.value())));
         }
     }
 }

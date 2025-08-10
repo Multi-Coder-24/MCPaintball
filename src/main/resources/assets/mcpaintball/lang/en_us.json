@@ -6,7 +6,6 @@
   "item.mcpaintball.weapon.sniper": "Paintball Sniper",
   "item.mcpaintball.weapon.bazooka": "Paintball Bazooka",
   "item.mcpaintball.weapon.burst": "Paintball Burst Rifle",
-
   "item.mcpaintball.armor.red_boots": "Red Team Boots",
   "item.mcpaintball.armor.green_boots": "Green Team Boots",
   "item.mcpaintball.armor.blue_boots": "Blue Team Boots",
@@ -17,7 +16,6 @@
   "item.mcpaintball.armor.light_blue_boots": "Light Blue Team Boots",
   "item.mcpaintball.armor.pink_boots": "Pink Team Boots",
   "item.mcpaintball.armor.white_boots": "White Team Boots",
-
   "item.mcpaintball.armor.red_leggings": "Red Team Leggings",
   "item.mcpaintball.armor.green_leggings": "Green Team Leggings",
   "item.mcpaintball.armor.blue_leggings": "Blue Team Leggings",
@@ -28,7 +26,6 @@
   "item.mcpaintball.armor.light_blue_leggings": "Light Blue Team Leggings",
   "item.mcpaintball.armor.pink_leggings": "Pink Team Leggings",
   "item.mcpaintball.armor.white_leggings": "White Team Leggings",
-
   "item.mcpaintball.armor.red_chestplate": "Red Team Chestplate",
   "item.mcpaintball.armor.green_chestplate": "Green Team Chestplate",
   "item.mcpaintball.armor.blue_chestplate": "Blue Team Chestplate",
@@ -39,7 +36,6 @@
   "item.mcpaintball.armor.light_blue_chestplate": "Light Blue Team Chestplate",
   "item.mcpaintball.armor.pink_chestplate": "Pink Team Chestplate",
   "item.mcpaintball.armor.white_chestplate": "White Team Chestplate",
-
   "item.mcpaintball.armor.red_helmet": "Red Team Helmet",
   "item.mcpaintball.armor.green_helmet": "Green Team Helmet",
   "item.mcpaintball.armor.blue_helmet": "Blue Team Helmet",
@@ -50,6 +46,18 @@
   "item.mcpaintball.armor.light_blue_helmet": "Light Blue Team Helmet",
   "item.mcpaintball.armor.pink_helmet": "Pink Team Helmet",
   "item.mcpaintball.armor.white_helmet": "White Team Helmet",
+
+  "item.mcpaintball.util.red_team_token": "Red Team Token",
+  "item.mcpaintball.util.green_team_token": "Green Team Token",
+  "item.mcpaintball.util.blue_team_token": "Blue Team Token",
+  "item.mcpaintball.util.cyan_team_token": "Cyan Team Token",
+  "item.mcpaintball.util.magenta_team_token": "Magenta Team Token",
+  "item.mcpaintball.util.yellow_team_token": "Yellow Team Token",
+  "item.mcpaintball.util.lime_team_token": "Lime Team Token",
+  "item.mcpaintball.util.light_blue_team_token": "Light Blue Team Token",
+  "item.mcpaintball.util.pink_team_token": "Pink Team Token",
+  "item.mcpaintball.util.white_team_token": "White Team Token",
+  "item.mcpaintball.util.team_remover_token": "Team Remover Token",
 
   "Comment_2": "Entities",
 
