@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.multicoder.mcpaintball.block.MCPaintballBlocks;
 import org.multicoder.mcpaintball.item.MCPaintballArmor;
 import org.multicoder.mcpaintball.item.MCPaintballUtilities;
 
@@ -26,6 +27,7 @@ public class CyanTeamTokenItem extends Item {
         player.addItem(new ItemStack(MCPaintballArmor.CYAN_HELMET));
         player.addItem(new ItemStack(MCPaintballUtilities.CYAN_AMMO_HOPPER));
         player.addItem(new ItemStack(MCPaintballUtilities.TEAM_REMOVER_TOKEN));
+        player.addItem(new ItemStack(MCPaintballBlocks.CYAN_REFILL_STATION.value().asItem()));
         player.getItemInHand(usedHand).shrink(1);
         return super.use(level, player, usedHand);
     }

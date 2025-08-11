@@ -17,4 +17,5 @@ public class MCPaintballWeapons
     public static final DeferredHolder<Item,Item> ASSAULT_RIFLE = WEAPONS.register("weapon/rifle", AssaultRifleItem::new);
     public static final DeferredHolder<Item,Item> SNIPER_RIFLE = WEAPONS.register("weapon/sniper", SniperRifleItem::new);
     public static final DeferredHolder<Item,Item> BURST_RIFLE = WEAPONS.register("weapon/burst", BurstRifleItem::new);
+        public static final DeferredHolder<Item,Item> BAZOOKA = WEAPONS.register("weapon/bazooka", BazookaItem::new);
 }
