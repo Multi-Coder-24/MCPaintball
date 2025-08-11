@@ -28,6 +28,11 @@ public class LightBlueTeamTokenItem extends Item {
         player.addItem(new ItemStack(MCPaintballUtilities.LIGHT_BLUE_AMMO_HOPPER));
         player.addItem(new ItemStack(MCPaintballUtilities.TEAM_REMOVER_TOKEN));
         player.addItem(new ItemStack(MCPaintballBlocks.LIGHT_BLUE_REFILL_STATION.value().asItem()));
+        player.addItem(new ItemStack(MCPaintballUtilities.STANDARD_CLASS_TOKEN));
+        player.addItem(new ItemStack(MCPaintballUtilities.SNIPER_CLASS_TOKEN));
+        player.addItem(new ItemStack(MCPaintballUtilities.MEDIC_CLASS_TOKEN));
+        player.addItem(new ItemStack(MCPaintballUtilities.HEAVY_CLASS_TOKEN));
+        player.addItem(new ItemStack(MCPaintballUtilities.ASSAULT_CLASS_TOKEN));
         player.getItemInHand(usedHand).shrink(1);
         return super.use(level, player, usedHand);
     }

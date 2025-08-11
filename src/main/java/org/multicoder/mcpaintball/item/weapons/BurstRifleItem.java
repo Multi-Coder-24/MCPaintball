@@ -42,7 +42,7 @@ public class BurstRifleItem extends Item {
                     });
                     thread.start();
                     Ammo.setDamageValue(Ammo.getDamageValue() + 1);
-                    player.getCooldowns().addCooldown(this,20);
+                    player.getCooldowns().addCooldown(this,60);
                 }
                 else {
                     player.displayClientMessage(Component.translatable("text.mcpaintball.ammo_hopper_empty").withStyle(ChatFormatting.DARK_RED),true);

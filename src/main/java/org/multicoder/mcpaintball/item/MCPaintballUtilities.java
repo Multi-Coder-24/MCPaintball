@@ -35,9 +35,9 @@ public class MCPaintballUtilities
     public static final DeferredHolder<Item,Item> PINK_AMMO_HOPPER = UTILITIES.register("util/pink_ammo_hopper", AmmoHopper::new);
     public static final DeferredHolder<Item,Item> WHITE_AMMO_HOPPER = UTILITIES.register("util/white_ammo_hopper", AmmoHopper::new);
 
-    public static final DeferredHolder<Item,Item> STANDARD_CLASS_TOKEN = UTILITIES.register("util/standard_class_token", ClassTokenItem::new);
-    public static final DeferredHolder<Item,Item> HEAVY_CLASS_TOKEN = UTILITIES.register("util/heavy_class_token", ClassTokenItem::new);
-    public static final DeferredHolder<Item,Item> ASSAULT_CLASS_TOKEN = UTILITIES.register("util/assault_class_token", ClassTokenItem::new);
-    public static final DeferredHolder<Item,Item> SNIPER_CLASS_TOKEN = UTILITIES.register("util/sniper_class_token", ClassTokenItem::new);
-    public static final DeferredHolder<Item,Item> MEDIC_CLASS_TOKEN = UTILITIES.register("util/medic_class_token", ClassTokenItem::new);
+    public static final DeferredHolder<Item,Item> STANDARD_CLASS_TOKEN = UTILITIES.register("util/standard_class_token", StandardClassTokenItem::new);
+    public static final DeferredHolder<Item,Item> HEAVY_CLASS_TOKEN = UTILITIES.register("util/heavy_class_token", HeavyClassTokenItem::new);
+    public static final DeferredHolder<Item,Item> ASSAULT_CLASS_TOKEN = UTILITIES.register("util/assault_class_token", AssaultClassTokenItem::new);
+    public static final DeferredHolder<Item,Item> SNIPER_CLASS_TOKEN = UTILITIES.register("util/sniper_class_token", SniperClassTokenItem::new);
+    public static final DeferredHolder<Item,Item> MEDIC_CLASS_TOKEN = UTILITIES.register("util/medic_class_token", MedicClassTokenItem::new);
 }

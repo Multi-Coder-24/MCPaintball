@@ -68,6 +68,12 @@
   "item.mcpaintball.util.pink_ammo_hopper": "Pink Ammo Hopper",
   "item.mcpaintball.util.white_ammo_hopper": "White Ammo Hopper",
 
+  "item.mcpaintball.util.standard_class_token": "Standard Class Token",
+  "item.mcpaintball.util.heavy_class_token": "Heavy Class Token",
+  "item.mcpaintball.util.medic_class_token": "Medic Class Token",
+  "item.mcpaintball.util.sniper_class_token": "Sniper Class Token",
+  "item.mcpaintball.util.assault_class_token": "Assault Class Token",
+
   "Comment_2": "Entities",
 
 

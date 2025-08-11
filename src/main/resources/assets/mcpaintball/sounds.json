@@ -46,5 +46,11 @@
     "sounds": [
       "mcpaintball:grenade"
     ]
+  },
+  "burst_shot": {
+    "subtitle": "subtitle.mcpaintball.burst_shot",
+    "sounds": [
+      "mcpaintball:burst_shot"
+    ]
   }
 }

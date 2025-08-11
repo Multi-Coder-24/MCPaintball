@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mcpaintball:item/util/medic_class_token"
+  }
+}
