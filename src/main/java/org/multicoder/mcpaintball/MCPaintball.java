@@ -8,6 +8,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.multicoder.mcpaintball.block.MCPaintballBlocks;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.item.*;
 import org.multicoder.mcpaintball.item.armor.material.MCPaintballArmorMaterial;
@@ -24,6 +25,8 @@ public class MCPaintball {
         MCPaintballArmorMaterial.MATERIALS.register(eventBus);
         MCPaintballArmor.ARMORS.register(eventBus);
         MCPaintballUtilities.UTILITIES.register(eventBus);
+        MCPaintballBlocks.BLOCKS.register(eventBus);
+        MCPaintballBlocks.ITEMS.register(eventBus);
         eventBus.addListener(this::AppendCreativeTabs);
 
     }
@@ -35,6 +38,7 @@ public class MCPaintball {
         }
         if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES){
             MCPaintballUtilities.UTILITIES.getEntries().forEach(entry -> event.accept(new ItemStack(entry.value())));
+            MCPaintballBlocks.ITEMS.getEntries().forEach(entry -> event.accept(new ItemStack(entry.value())));
         }
     }
 }
