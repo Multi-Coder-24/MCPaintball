@@ -41,7 +41,7 @@ public class BurstRifleItem extends Item {
                         }
                     });
                     thread.start();
-                    Ammo.setDamageValue(Ammo.getDamageValue() + 1);
+                    Ammo.setDamageValue(Math.min(Ammo.getMaxDamage(), Ammo.getDamageValue() + 5));
                     player.getCooldowns().addCooldown(this,60);
                 }
                 else {
