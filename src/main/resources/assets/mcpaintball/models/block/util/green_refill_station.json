@@ -1,8 +1,7 @@
 {
-	"format_version": "1.21.6",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "mcpaintball:block/util/green_post",
+		"0": "mcpaintball:block/util/green",
 		"1": "mcpaintball:block/base",
 		"particle": "mcpaintball:block/base"
 	},

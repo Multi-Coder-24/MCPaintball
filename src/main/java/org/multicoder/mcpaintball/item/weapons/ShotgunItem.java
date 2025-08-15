@@ -1,5 +1,6 @@
 package org.multicoder.mcpaintball.item.weapons;
 
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.data.component.WeaponTeamDataComponent;
 import org.multicoder.mcpaintball.item.utility.AmmoHopper;
+import org.multicoder.mcpaintball.sounds.MCPaintballSounds;
 
 public class ShotgunItem extends Item {
 
@@ -36,6 +38,7 @@ public class ShotgunItem extends Item {
                     level.addFreshEntity(P2);
                     level.addFreshEntity(P3);
                     player.getCooldowns().addCooldown(this, 80);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SINGLE_SHOT.get(), SoundSource.PLAYERS,1.0F,1.0F);
                 }
             }
         }

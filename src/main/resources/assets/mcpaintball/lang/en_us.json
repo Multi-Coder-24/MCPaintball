@@ -82,7 +82,15 @@
 
 
   "Comment_4": "Subtitles",
-
+  "subtitle.mcpaintball.single_shot": "Paintball Shot",
+  "subtitle.mcpaintball.burst_shot": "Paintball Shots",
+  "subtitle.mcpaintball.c4_added": "C4 Added To Remote",
+  "subtitle.mcpaintball.c4_removed": "C4 Removed From Remote",
+  "subtitle.mcpaintball.c4_detonated": "Remote C4 Detonator Triggered",
+  "subtitle.mcpaintball.bazooka": "Paint Bazooka Fired",
+  "subtitle.mcpaintball.hit": "Paintball Hit A Player",
+  "subtitle.mcpaintball.splat": "Paintball Hit A Block",
+  "subtitle.mcpaintball.grenade": "Grenade Pin Pulled",
 
   "Comment_5": "Text",
   "text.mcpaintball.ammo_hopper_empty": "No Ammo Left In Hopper",
@@ -97,5 +105,15 @@
   "block.mcpaintball.util.lime_refill_station": "Lime Team Refill Station",
   "block.mcpaintball.util.light_blue_refill_station": "Light Blue Team Refill Station",
   "block.mcpaintball.util.pink_refill_station": "Pink Team Refill Station",
-  "block.mcpaintball.util.white_refill_station": "White Team Refill Station"
+  "block.mcpaintball.util.white_refill_station": "White Team Refill Station",
+  "block.mcpaintball.util.red_c4_explosive": "Red C4 Explosive",
+  "block.mcpaintball.util.green_c4_explosive": "Green C4 Explosive",
+  "block.mcpaintball.util.blue_c4_explosive": "Blue C4 Explosive",
+  "block.mcpaintball.util.cyan_c4_explosive": "Cyan C4 Explosive",
+  "block.mcpaintball.util.magenta_c4_explosive": "Magenta C4 Explosive",
+  "block.mcpaintball.util.yellow_c4_explosive": "Yellow C4 Explosive",
+  "block.mcpaintball.util.lime_c4_explosive": "Lime C4 Explosive",
+  "block.mcpaintball.util.light_blue_c4_explosive": "Light Blue C4 Explosive",
+  "block.mcpaintball.util.pink_c4_explosive": "Pink C4 Explosive",
+  "block.mcpaintball.util.white_c4_explosive": "White C4 Explosive"
 }

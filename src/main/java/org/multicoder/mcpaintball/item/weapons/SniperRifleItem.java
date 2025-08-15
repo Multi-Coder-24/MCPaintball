@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.item.weapons;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.data.component.WeaponTeamDataComponent;
 import org.multicoder.mcpaintball.item.utility.AmmoHopper;
+import org.multicoder.mcpaintball.sounds.MCPaintballSounds;
 
 public class SniperRifleItem extends Item {
 
@@ -32,6 +34,7 @@ public class SniperRifleItem extends Item {
                     P1.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,7.5F,0.0F);
                     level.addFreshEntity(P1);
                     player.getCooldowns().addCooldown(this, 60);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SINGLE_SHOT.get(), SoundSource.PLAYERS,1.0F,1.0F);
                 }
                 else {
                     player.displayClientMessage(Component.translatable("text.mcpaintball.ammo_hopper_empty").withStyle(ChatFormatting.DARK_RED),true);

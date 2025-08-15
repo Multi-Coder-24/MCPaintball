@@ -1,8 +1,8 @@
 {
-  "shot": {
-    "subtitle": "subtitle.mcpaintball.shot",
+  "single_shot": {
+    "subtitle": "subtitle.mcpaintball.single_shot",
     "sounds": [
-      "mcpaintball:shot"
+      "mcpaintball:single_shot"
     ]
   },
   "bazooka": {
@@ -29,10 +29,10 @@
       "mcpaintball:c4_removed"
     ]
   },
-  "c4_detonate": {
-    "subtitle": "subtitle.mcpaintball.c4_detonate",
+  "c4_detonated": {
+    "subtitle": "subtitle.mcpaintball.c4_detonated",
     "sounds": [
-      "mcpaintball:c4_detonate"
+      "mcpaintball:c4_detonated"
     ]
   },
   "splat": {

@@ -12,6 +12,7 @@ import org.multicoder.mcpaintball.block.MCPaintballBlocks;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.item.*;
 import org.multicoder.mcpaintball.item.armor.material.MCPaintballArmorMaterial;
+import org.multicoder.mcpaintball.sounds.MCPaintballSounds;
 
 @SuppressWarnings("unused")
 @Mod(MCPaintball.MOD_ID)
@@ -20,6 +21,7 @@ public class MCPaintball {
     public static Logger LOG = LogManager.getLogger(MOD_ID);
 
     public MCPaintball(IEventBus eventBus, ModContainer modContainer) {
+        MCPaintballSounds.SOUNDS.register(eventBus);
         MCPaintballDataComponents.COMPONENTS.register(eventBus);
         MCPaintballWeapons.WEAPONS.register(eventBus);
         MCPaintballArmorMaterial.MATERIALS.register(eventBus);
@@ -28,7 +30,6 @@ public class MCPaintball {
         MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballBlocks.ITEMS.register(eventBus);
         eventBus.addListener(this::AppendCreativeTabs);
-
     }
 
     public void AppendCreativeTabs(BuildCreativeModeTabContentsEvent event){
