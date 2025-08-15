@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class C4ExplosiveBlock extends Block {
 
     public C4ExplosiveBlock() {
-        super(Properties.of().dynamicShape().noOcclusion());
+        super(Properties.of().dynamicShape().noOcclusion().strength(5f,20f));
     }
 
     @Override

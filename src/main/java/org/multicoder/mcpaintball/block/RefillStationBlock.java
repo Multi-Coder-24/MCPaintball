@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RefillStationBlock extends Block {
     public RefillStationBlock() {
-        super(BlockBehaviour.Properties.of().dynamicShape().noOcclusion());
+        super(BlockBehaviour.Properties.of().dynamicShape().noOcclusion().strength(5f,20f));
     }
 
     @Override
