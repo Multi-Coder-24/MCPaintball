@@ -10,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.block.RefillStationBlockItem;
+import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.data.attachments.PlayerTeamDataAttachment;
 import org.multicoder.mcpaintball.item.armor.PaintballBoots;
 import org.multicoder.mcpaintball.item.armor.PaintballChestplate;
 import org.multicoder.mcpaintball.item.armor.PaintballHelmet;
@@ -39,6 +41,11 @@ public class TeamRemoverTokenItem extends Item {
         ContainerHelper.clearOrCountMatchingItems(player.getInventory(),x -> x.getItem() instanceof BazookaItem,5,false);
         ContainerHelper.clearOrCountMatchingItems(player.getInventory(),x -> x.getItem() instanceof RefillStationBlockItem,5,false);
         player.getItemInHand(usedHand).shrink(1);
+        PlayerTeamDataAttachment Team = player.getData(MCPaintballDataAttachments.PLAYER_TEAM.get());
+        Team.Team = 0;
+        Team.Class = 0;
+        Team.Points = 0;
+        player.setData(MCPaintballDataAttachments.PLAYER_TEAM.get(), Team);
         return super.use(level, player, usedHand);
     }
 }
