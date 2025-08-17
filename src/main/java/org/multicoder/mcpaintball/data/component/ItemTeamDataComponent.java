@@ -1,4 +1,4 @@
 package org.multicoder.mcpaintball.data.component;
 
-public record WeaponTeamDataComponent(int team) {}
+public record ItemTeamDataComponent(int team) {}
 

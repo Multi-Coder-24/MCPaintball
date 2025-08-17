@@ -10,15 +10,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
-import org.multicoder.mcpaintball.data.component.WeaponTeamDataComponent;
 import org.multicoder.mcpaintball.item.utility.AmmoHopper;
 import org.multicoder.mcpaintball.sounds.MCPaintballSounds;
 
 public class ShotgunItem extends Item {
 
     public ShotgunItem() {
-        super(new Properties().stacksTo(1).component(MCPaintballDataComponents.WEAPON_TEAM.value(),new WeaponTeamDataComponent(0)));    }
+        super(new Properties().stacksTo(1).component(MCPaintballDataComponents.ITEM_TEAM.value(),new ItemTeamDataComponent(0)));    }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, @NotNull Player player, @NotNull InteractionHand usedHand) {

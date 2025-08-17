@@ -8,6 +8,6 @@ import net.minecraft.network.codec.StreamCodec;
 
 public class ComponentCodecs
 {
-    public static final Codec<WeaponTeamDataComponent> WEAPON_TEAM_CODEC = RecordCodecBuilder.create(instance -> instance.group(Codec.INT.fieldOf("team").forGetter(WeaponTeamDataComponent::team)).apply(instance, WeaponTeamDataComponent::new));
-    public static final StreamCodec<ByteBuf,WeaponTeamDataComponent> WEAPON_TEAM_NETWORKED_CODEC = StreamCodec.composite(ByteBufCodecs.INT, WeaponTeamDataComponent::team, WeaponTeamDataComponent::new);
+    public static final Codec<ItemTeamDataComponent> ITEM_TEAM_CODEC = RecordCodecBuilder.create(instance -> instance.group(Codec.INT.fieldOf("team").forGetter(ItemTeamDataComponent::team)).apply(instance, ItemTeamDataComponent::new));
+    public static final StreamCodec<ByteBuf,ItemTeamDataComponent> ITEM_TEAM_NETWORKED_CODEC = StreamCodec.composite(ByteBufCodecs.INT, ItemTeamDataComponent::team, ItemTeamDataComponent::new);
 }

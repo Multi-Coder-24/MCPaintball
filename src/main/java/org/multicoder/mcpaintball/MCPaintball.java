@@ -3,12 +3,17 @@ package org.multicoder.mcpaintball;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.block.MCPaintballBlocks;
+import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.data.attachments.PlayerTeamDataAttachment;
 import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.item.*;
 import org.multicoder.mcpaintball.item.armor.material.MCPaintballArmorMaterial;
@@ -16,6 +21,7 @@ import org.multicoder.mcpaintball.sounds.MCPaintballSounds;
 
 @SuppressWarnings("unused")
 @Mod(MCPaintball.MOD_ID)
+@EventBusSubscriber(modid = MCPaintball.MOD_ID, bus = EventBusSubscriber.Bus.GAME)
 public class MCPaintball {
     public static final String MOD_ID = "mcpaintball";
     public static Logger LOG = LogManager.getLogger(MOD_ID);
@@ -23,6 +29,7 @@ public class MCPaintball {
     public MCPaintball(IEventBus eventBus, ModContainer modContainer) {
         MCPaintballSounds.SOUNDS.register(eventBus);
         MCPaintballDataComponents.COMPONENTS.register(eventBus);
+        MCPaintballDataAttachments.DATA_ATTACHMENTS.register(eventBus);
         MCPaintballWeapons.WEAPONS.register(eventBus);
         MCPaintballArmorMaterial.MATERIALS.register(eventBus);
         MCPaintballArmor.ARMORS.register(eventBus);
@@ -41,5 +48,9 @@ public class MCPaintball {
             MCPaintballUtilities.UTILITIES.getEntries().forEach(entry -> event.accept(new ItemStack(entry.value())));
             MCPaintballBlocks.ITEMS.getEntries().forEach(entry -> event.accept(new ItemStack(entry.value())));
         }
+    }
+    @SubscribeEvent
+    public static void PlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
+        event.getEntity().setData(MCPaintballDataAttachments.PLAYER_TEAM.get(),new PlayerTeamDataAttachment());
     }
 }
