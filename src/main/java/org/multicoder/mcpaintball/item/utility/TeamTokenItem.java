@@ -1,19 +1,14 @@
 package org.multicoder.mcpaintball.item.utility;
 
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.block.MCPaintballBlocks;
-import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
-import org.multicoder.mcpaintball.data.attachments.PlayerTeamDataAttachment;
-import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
-import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
-import org.multicoder.mcpaintball.item.MCPaintballArmor;
-import org.multicoder.mcpaintball.item.MCPaintballUtilities;
+import org.multicoder.mcpaintball.data.attachments.*;
+import org.multicoder.mcpaintball.data.component.*;
+import org.multicoder.mcpaintball.item.*;
 
 @SuppressWarnings("all")
 public class TeamTokenItem extends Item {

@@ -24,20 +24,32 @@ public class MCPaintballUtilities
     public static final DeferredHolder<Item,Item> WHITE_TEAM_TOKEN = UTILITIES.register("util/white_team_token", () -> new TeamTokenItem(10));
     public static final DeferredHolder<Item,Item> TEAM_REMOVER_TOKEN = UTILITIES.register("util/team_remover_token", TeamRemoverTokenItem::new);
 
-    public static final DeferredHolder<Item,Item> RED_AMMO_HOPPER = UTILITIES.register("util/red_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> GREEN_AMMO_HOPPER = UTILITIES.register("util/green_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> BLUE_AMMO_HOPPER = UTILITIES.register("util/blue_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> CYAN_AMMO_HOPPER = UTILITIES.register("util/cyan_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> MAGENTA_AMMO_HOPPER = UTILITIES.register("util/magenta_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> YELLOW_AMMO_HOPPER = UTILITIES.register("util/yellow_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> LIME_AMMO_HOPPER = UTILITIES.register("util/lime_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> LIGHT_BLUE_AMMO_HOPPER = UTILITIES.register("util/light_blue_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> PINK_AMMO_HOPPER = UTILITIES.register("util/pink_ammo_hopper", AmmoHopper::new);
-    public static final DeferredHolder<Item,Item> WHITE_AMMO_HOPPER = UTILITIES.register("util/white_ammo_hopper", AmmoHopper::new);
+    public static final DeferredHolder<Item,Item> RED_AMMO_HOPPER = UTILITIES.register("util/red_ammo_hopper", () -> new AmmoHopper(1));
+    public static final DeferredHolder<Item,Item> GREEN_AMMO_HOPPER = UTILITIES.register("util/green_ammo_hopper", () -> new AmmoHopper(2));
+    public static final DeferredHolder<Item,Item> BLUE_AMMO_HOPPER = UTILITIES.register("util/blue_ammo_hopper", () -> new AmmoHopper(3));
+    public static final DeferredHolder<Item,Item> CYAN_AMMO_HOPPER = UTILITIES.register("util/cyan_ammo_hopper", () -> new AmmoHopper(4));
+    public static final DeferredHolder<Item,Item> MAGENTA_AMMO_HOPPER = UTILITIES.register("util/magenta_ammo_hopper", () -> new AmmoHopper(5));
+    public static final DeferredHolder<Item,Item> YELLOW_AMMO_HOPPER = UTILITIES.register("util/yellow_ammo_hopper", () -> new AmmoHopper(6));
+    public static final DeferredHolder<Item,Item> LIME_AMMO_HOPPER = UTILITIES.register("util/lime_ammo_hopper", () -> new AmmoHopper(7));
+    public static final DeferredHolder<Item,Item> LIGHT_BLUE_AMMO_HOPPER = UTILITIES.register("util/light_blue_ammo_hopper", () -> new AmmoHopper(8));
+    public static final DeferredHolder<Item,Item> PINK_AMMO_HOPPER = UTILITIES.register("util/pink_ammo_hopper", () -> new AmmoHopper(9));
+    public static final DeferredHolder<Item,Item> WHITE_AMMO_HOPPER = UTILITIES.register("util/white_ammo_hopper", () -> new AmmoHopper(10));
 
     public static final DeferredHolder<Item,Item> STANDARD_CLASS_TOKEN = UTILITIES.register("util/standard_class_token", () -> new ClassTokenItem(1));
     public static final DeferredHolder<Item,Item> HEAVY_CLASS_TOKEN = UTILITIES.register("util/heavy_class_token", () -> new ClassTokenItem(2));
     public static final DeferredHolder<Item,Item> ASSAULT_CLASS_TOKEN = UTILITIES.register("util/assault_class_token", () -> new ClassTokenItem(5));
     public static final DeferredHolder<Item,Item> SNIPER_CLASS_TOKEN = UTILITIES.register("util/sniper_class_token", () -> new ClassTokenItem(3));
     public static final DeferredHolder<Item,Item> MEDIC_CLASS_TOKEN = UTILITIES.register("util/medic_class_token", () -> new ClassTokenItem(4));
+
+    public static final DeferredHolder<Item,Item> RED_MED_KIT = UTILITIES.register("util/red_med_kit", () -> new MedKitItem(1));
+    public static final DeferredHolder<Item,Item> GREEN_MED_KIT = UTILITIES.register("util/green_med_kit",  () -> new MedKitItem(2));
+    public static final DeferredHolder<Item,Item> BLUE_MED_KIT = UTILITIES.register("util/blue_med_kit",  () -> new MedKitItem(3));
+    public static final DeferredHolder<Item,Item> CYAN_MED_KIT = UTILITIES.register("util/cyan_med_kit",  () -> new MedKitItem(4));
+    public static final DeferredHolder<Item,Item> MAGENTA_MED_KIT = UTILITIES.register("util/magenta_med_kit",  () -> new MedKitItem(5));
+    public static final DeferredHolder<Item,Item> YELLOW_MED_KIT = UTILITIES.register("util/yellow_med_kit",  () -> new MedKitItem(6));
+    public static final DeferredHolder<Item,Item> LIME_MED_KIT = UTILITIES.register("util/lime_med_kit",  () -> new MedKitItem(7));
+    public static final DeferredHolder<Item,Item> LIGHT_BLUE_MED_KIT = UTILITIES.register("util/light_blue_med_kit",  () -> new MedKitItem(8));
+    public static final DeferredHolder<Item,Item> PINK_MED_KIT = UTILITIES.register("util/pink_med_kit",  () -> new MedKitItem(9));
+    public static final DeferredHolder<Item,Item> WHITE_MED_KIT = UTILITIES.register("util/white_med_kit",  () -> new MedKitItem(10));
+
 }

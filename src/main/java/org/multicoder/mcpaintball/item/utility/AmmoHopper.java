@@ -9,10 +9,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.block.RefillStationBlock;
+import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
+import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
 
 public class AmmoHopper extends Item {
-    public AmmoHopper() {
-        super(new Properties().stacksTo(1).durability(128));
+    public AmmoHopper(int Team) {
+        super(new Properties().stacksTo(1).durability(128).component(MCPaintballDataComponents.ITEM_TEAM.get(),new ItemTeamDataComponent(Team)));
     }
 
     @SuppressWarnings("all")

@@ -67,12 +67,22 @@
   "item.mcpaintball.util.light_blue_ammo_hopper": "Light Blue Ammo Hopper",
   "item.mcpaintball.util.pink_ammo_hopper": "Pink Ammo Hopper",
   "item.mcpaintball.util.white_ammo_hopper": "White Ammo Hopper",
-
   "item.mcpaintball.util.standard_class_token": "Standard Class Token",
   "item.mcpaintball.util.heavy_class_token": "Heavy Class Token",
   "item.mcpaintball.util.medic_class_token": "Medic Class Token",
   "item.mcpaintball.util.sniper_class_token": "Sniper Class Token",
   "item.mcpaintball.util.assault_class_token": "Assault Class Token",
+  "item.mcpaintball.util.red_med_kit": "Red Med Kit",
+  "item.mcpaintball.util.green_med_kit": "Green Med Kit",
+  "item.mcpaintball.util.blue_med_kit": "Blue Med Kit",
+  "item.mcpaintball.util.cyan_med_kit": "Cyan Med Kit",
+  "item.mcpaintball.util.magenta_med_kit": "Magenta Med Kit",
+  "item.mcpaintball.util.yellow_med_kit": "Yellow Med Kit",
+  "item.mcpaintball.util.lime_med_kit": "Lime Med Kit",
+  "item.mcpaintball.util.light_blue_med_kit": "Light Blue Med Kit",
+  "item.mcpaintball.util.pink_med_kit": "Pink Med Kit",
+  "item.mcpaintball.util.white_med_kit": "White Med Kit",
+
 
   "Comment_2": "Entities",
 
