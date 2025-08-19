@@ -13,9 +13,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
-import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.item.utility.AmmoHopper;
-import org.multicoder.mcpaintball.sounds.MCPaintballSounds;
+import org.multicoder.mcpaintball.init.MCPaintballSounds;
 
 public class BurstRifleItem extends Item {
 

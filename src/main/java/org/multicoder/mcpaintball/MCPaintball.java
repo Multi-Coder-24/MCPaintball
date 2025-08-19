@@ -11,13 +11,10 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.multicoder.mcpaintball.block.MCPaintballBlocks;
+import org.multicoder.mcpaintball.init.*;
 import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.attachments.PlayerTeamDataAttachment;
-import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
-import org.multicoder.mcpaintball.item.*;
 import org.multicoder.mcpaintball.item.armor.material.MCPaintballArmorMaterial;
-import org.multicoder.mcpaintball.sounds.MCPaintballSounds;
 
 @SuppressWarnings("unused")
 @Mod(MCPaintball.MOD_ID)
@@ -36,7 +33,9 @@ public class MCPaintball {
         MCPaintballUtilities.UTILITIES.register(eventBus);
         MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballBlocks.ITEMS.register(eventBus);
+        MCPaintballExplosives.EXPLOSIVES_REGISTER.register(eventBus);
         eventBus.addListener(this::AppendCreativeTabs);
+        eventBus.addListener(MCPaintballEntityRenderers::RegisterRenderers);
     }
 
     public void AppendCreativeTabs(BuildCreativeModeTabContentsEvent event){

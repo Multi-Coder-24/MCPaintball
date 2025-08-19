@@ -5,10 +5,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.multicoder.mcpaintball.block.MCPaintballBlocks;
+import org.multicoder.mcpaintball.init.MCPaintballBlocks;
 import org.multicoder.mcpaintball.data.attachments.*;
 import org.multicoder.mcpaintball.data.component.*;
-import org.multicoder.mcpaintball.item.*;
+import org.multicoder.mcpaintball.init.MCPaintballArmor;
+import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.init.MCPaintballUtilities;
 
 @SuppressWarnings("all")
 public class TeamTokenItem extends Item {

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.block.RefillStationBlock;
 import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
-import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
 
 public class AmmoHopper extends Item {
     public AmmoHopper(int Team) {

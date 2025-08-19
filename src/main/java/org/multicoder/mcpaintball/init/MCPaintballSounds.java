@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.sounds;
+package org.multicoder.mcpaintball.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "mcpaintball:item/util/light_blue_c4_remote"
+  }
+}

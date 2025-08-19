@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "mcpaintball:item/explosives/pink_paint_grenade"
+  }
+}

@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.block;
+package org.multicoder.mcpaintball.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
@@ -6,13 +6,17 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.block.C4ExplosiveBlock;
+import org.multicoder.mcpaintball.block.C4ExplosiveBlockItem;
+import org.multicoder.mcpaintball.block.RefillStationBlock;
+import org.multicoder.mcpaintball.block.RefillStationBlockItem;
 
 @SuppressWarnings("unused")
 public class MCPaintballBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, MCPaintball.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, MCPaintball.MOD_ID);
 
-    public static final DeferredHolder<Block,Block> RED_REFILL_STATION = BLOCKS.register("util/red_refill_station",RefillStationBlock::new);
+    public static final DeferredHolder<Block,Block> RED_REFILL_STATION = BLOCKS.register("util/red_refill_station", RefillStationBlock::new);
     public static final DeferredHolder<Block,Block> GREEN_REFILL_STATION = BLOCKS.register("util/green_refill_station",RefillStationBlock::new);
     public static final DeferredHolder<Block,Block> BLUE_REFILL_STATION = BLOCKS.register("util/blue_refill_station",RefillStationBlock::new);
     public static final DeferredHolder<Block,Block> CYAN_REFILL_STATION = BLOCKS.register("util/cyan_refill_station",RefillStationBlock::new);
@@ -23,7 +27,7 @@ public class MCPaintballBlocks {
     public static final DeferredHolder<Block,Block> PINK_REFILL_STATION = BLOCKS.register("util/pink_refill_station",RefillStationBlock::new);
     public static final DeferredHolder<Block,Block> WHITE_REFILL_STATION = BLOCKS.register("util/white_refill_station",RefillStationBlock::new);
 
-    public static final DeferredHolder<Block,Block> RED_C4_EXPLOSIVE = BLOCKS.register("util/red_c4_explosive",C4ExplosiveBlock::new);
+    public static final DeferredHolder<Block,Block> RED_C4_EXPLOSIVE = BLOCKS.register("util/red_c4_explosive", C4ExplosiveBlock::new);
     public static final DeferredHolder<Block,Block> GREEN_C4_EXPLOSIVE = BLOCKS.register("util/green_c4_explosive",C4ExplosiveBlock::new);
     public static final DeferredHolder<Block,Block> BLUE_C4_EXPLOSIVE = BLOCKS.register("util/blue_c4_explosive",C4ExplosiveBlock::new);
     public static final DeferredHolder<Block,Block> CYAN_C4_EXPLOSIVE = BLOCKS.register("util/cyan_c4_explosive",C4ExplosiveBlock::new);

@@ -1,10 +1,12 @@
-package org.multicoder.mcpaintball.item;
+package org.multicoder.mcpaintball.init;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.item.explosives.EMPGrenadeItem;
+import org.multicoder.mcpaintball.item.explosives.PaintGrenadeItem;
 import org.multicoder.mcpaintball.item.utility.*;
 
 @SuppressWarnings("unused")
@@ -51,5 +53,29 @@ public class MCPaintballUtilities
     public static final DeferredHolder<Item,Item> LIGHT_BLUE_MED_KIT = UTILITIES.register("util/light_blue_med_kit",  () -> new MedKitItem(8));
     public static final DeferredHolder<Item,Item> PINK_MED_KIT = UTILITIES.register("util/pink_med_kit",  () -> new MedKitItem(9));
     public static final DeferredHolder<Item,Item> WHITE_MED_KIT = UTILITIES.register("util/white_med_kit",  () -> new MedKitItem(10));
+
+    public static final DeferredHolder<Item,Item> RED_C4_REMOTE = UTILITIES.register("util/red_c4_remote", () -> new C4RemoteItem(1));
+    public static final DeferredHolder<Item,Item> GREEN_C4_REMOTE = UTILITIES.register("util/green_c4_remote",  () -> new C4RemoteItem(2));
+    public static final DeferredHolder<Item,Item> BLUE_C4_REMOTE = UTILITIES.register("util/blue_c4_remote",  () -> new C4RemoteItem(3));
+    public static final DeferredHolder<Item,Item> CYAN_C4_REMOTE = UTILITIES.register("util/cyan_c4_remote",  () -> new C4RemoteItem(4));
+    public static final DeferredHolder<Item,Item> MAGENTA_C4_REMOTE = UTILITIES.register("util/magenta_c4_remote",  () -> new C4RemoteItem(5));
+    public static final DeferredHolder<Item,Item> YELLOW_C4_REMOTE = UTILITIES.register("util/yellow_c4_remote",  () -> new C4RemoteItem(6));
+    public static final DeferredHolder<Item,Item> LIME_C4_REMOTE = UTILITIES.register("util/lime_c4_remote",  () -> new C4RemoteItem(7));
+    public static final DeferredHolder<Item,Item> LIGHT_BLUE_C4_REMOTE = UTILITIES.register("util/light_blue_c4_remote",  () -> new C4RemoteItem(8));
+    public static final DeferredHolder<Item,Item> PINK_C4_REMOTE = UTILITIES.register("util/pink_c4_remote",  () -> new C4RemoteItem(9));
+    public static final DeferredHolder<Item,Item> WHITE_C4_REMOTE = UTILITIES.register("util/white_c4_remote",  () -> new C4RemoteItem(10));
+
+    public static final DeferredHolder<Item,Item> RED_PAINT_GRENADE = UTILITIES.register("explosives/red_paint_grenade", () -> new PaintGrenadeItem(1));
+    public static final DeferredHolder<Item,Item> GREEN_PAINT_GRENADE = UTILITIES.register("explosives/green_paint_grenade",  () -> new PaintGrenadeItem(2));
+    public static final DeferredHolder<Item,Item> BLUE_PAINT_GRENADE = UTILITIES.register("explosives/blue_paint_grenade",  () -> new PaintGrenadeItem(3));
+    public static final DeferredHolder<Item,Item> CYAN_PAINT_GRENADE = UTILITIES.register("explosives/cyan_paint_grenade",  () -> new PaintGrenadeItem(4));
+    public static final DeferredHolder<Item,Item> MAGENTA_PAINT_GRENADE = UTILITIES.register("explosives/magenta_paint_grenade",  () -> new PaintGrenadeItem(5));
+    public static final DeferredHolder<Item,Item> YELLOW_PAINT_GRENADE = UTILITIES.register("explosives/yellow_paint_grenade",  () -> new PaintGrenadeItem(6));
+    public static final DeferredHolder<Item,Item> LIME_PAINT_GRENADE = UTILITIES.register("explosives/lime_paint_grenade",  () -> new PaintGrenadeItem(7));
+    public static final DeferredHolder<Item,Item> LIGHT_BLUE_PAINT_GRENADE = UTILITIES.register("explosives/light_blue_paint_grenade",  () -> new PaintGrenadeItem(8));
+    public static final DeferredHolder<Item,Item> PINK_PAINT_GRENADE = UTILITIES.register("explosives/pink_paint_grenade",  () -> new PaintGrenadeItem(9));
+    public static final DeferredHolder<Item,Item> WHITE_PAINT_GRENADE = UTILITIES.register("explosives/white_paint_grenade",  () -> new PaintGrenadeItem(10));
+
+    public static final DeferredHolder<Item,Item> EMP_GRENADE = UTILITIES.register("explosives/emp_grenade", EMPGrenadeItem::new);
 
 }

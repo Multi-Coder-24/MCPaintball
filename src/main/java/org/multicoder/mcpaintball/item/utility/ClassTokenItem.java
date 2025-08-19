@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.attachments.PlayerTeamDataAttachment;
 import org.multicoder.mcpaintball.data.component.ItemClassComponent;
-import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
-import org.multicoder.mcpaintball.item.MCPaintballWeapons;
+import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.init.MCPaintballWeapons;
 
 @SuppressWarnings("all")
 public class ClassTokenItem extends Item {

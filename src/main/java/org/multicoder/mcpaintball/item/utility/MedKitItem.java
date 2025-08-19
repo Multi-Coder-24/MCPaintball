@@ -2,7 +2,7 @@ package org.multicoder.mcpaintball.item.utility;
 
 import net.minecraft.world.item.Item;
 import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
-import org.multicoder.mcpaintball.data.component.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
 
 @SuppressWarnings("unused")
 public class MedKitItem extends Item {
