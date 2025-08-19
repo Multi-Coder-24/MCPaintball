@@ -146,5 +146,15 @@
   "block.mcpaintball.util.lime_c4_explosive": "Lime C4 Explosive",
   "block.mcpaintball.util.light_blue_c4_explosive": "Light Blue C4 Explosive",
   "block.mcpaintball.util.pink_c4_explosive": "Pink C4 Explosive",
-  "block.mcpaintball.util.white_c4_explosive": "White C4 Explosive"
+  "block.mcpaintball.util.white_c4_explosive": "White C4 Explosive",
+  "block.mcpaintball.util.red_flag_block": "Red Flag Block",
+  "block.mcpaintball.util.green_flag_block": "Green Flag Block",
+  "block.mcpaintball.util.blue_flag_block": "Blue Flag Block",
+  "block.mcpaintball.util.cyan_flag_block": "Cyan Flag Block",
+  "block.mcpaintball.util.magenta_flag_block": "Magenta Flag Block",
+  "block.mcpaintball.util.yellow_flag_block": "Yellow Flag Block",
+  "block.mcpaintball.util.lime_flag_block": "Lime Flag Block",
+  "block.mcpaintball.util.light_blue_flag_block": "Light Blue Flag Block",
+  "block.mcpaintball.util.pink_flag_block": "Pink Flag Block",
+  "block.mcpaintball.util.white_flag_block": "White Flag Block"
 }

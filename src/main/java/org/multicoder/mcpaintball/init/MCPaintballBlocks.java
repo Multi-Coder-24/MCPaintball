@@ -1,15 +1,14 @@
 package org.multicoder.mcpaintball.init;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.block.C4ExplosiveBlock;
-import org.multicoder.mcpaintball.block.C4ExplosiveBlockItem;
-import org.multicoder.mcpaintball.block.RefillStationBlock;
-import org.multicoder.mcpaintball.block.RefillStationBlockItem;
+import org.multicoder.mcpaintball.block.*;
+import org.multicoder.mcpaintball.block.flag.*;
 
 @SuppressWarnings("unused")
 public class MCPaintballBlocks {
@@ -26,6 +25,17 @@ public class MCPaintballBlocks {
     public static final DeferredHolder<Block,Block> LIGHT_BLUE_REFILL_STATION = BLOCKS.register("util/light_blue_refill_station",RefillStationBlock::new);
     public static final DeferredHolder<Block,Block> PINK_REFILL_STATION = BLOCKS.register("util/pink_refill_station",RefillStationBlock::new);
     public static final DeferredHolder<Block,Block> WHITE_REFILL_STATION = BLOCKS.register("util/white_refill_station",RefillStationBlock::new);
+
+    public static final DeferredHolder<Block,Block> RED_FLAG_BLOCK = BLOCKS.register("util/red_flag_block", RedFlagBlock::new);
+    public static final DeferredHolder<Block,Block> GREEN_FLAG_BLOCK = BLOCKS.register("util/green_flag_block", GreenFlagBlock::new);
+    public static final DeferredHolder<Block,Block> BLUE_FLAG_BLOCK = BLOCKS.register("util/blue_flag_block", BlueFlagBlock::new);
+    public static final DeferredHolder<Block,Block> CYAN_FLAG_BLOCK = BLOCKS.register("util/cyan_flag_block", CyanFlagBlock::new);
+    public static final DeferredHolder<Block,Block> MAGENTA_FLAG_BLOCK = BLOCKS.register("util/magenta_flag_block", MagentaFlagBlock::new);
+    public static final DeferredHolder<Block,Block> YELLOW_FLAG_BLOCK = BLOCKS.register("util/yellow_flag_block", YellowFlagBlock::new);
+    public static final DeferredHolder<Block,Block> LIME_FLAG_BLOCK = BLOCKS.register("util/lime_flag_block", LimeFlagBlock::new);
+    public static final DeferredHolder<Block,Block> LIGHT_BLUE_FLAG_BLOCK = BLOCKS.register("util/light_blue_flag_block", LightBlueFlagBlock::new);
+    public static final DeferredHolder<Block,Block> PINK_FLAG_BLOCK = BLOCKS.register("util/pink_flag_block", PinkFlagBlock::new);
+    public static final DeferredHolder<Block,Block> WHITE_FLAG_BLOCK = BLOCKS.register("util/white_flag_block", WhiteFlagBlock::new);
 
     public static final DeferredHolder<Block,Block> RED_C4_EXPLOSIVE = BLOCKS.register("util/red_c4_explosive", C4ExplosiveBlock::new);
     public static final DeferredHolder<Block,Block> GREEN_C4_EXPLOSIVE = BLOCKS.register("util/green_c4_explosive",C4ExplosiveBlock::new);
@@ -59,5 +69,16 @@ public class MCPaintballBlocks {
     public static final DeferredHolder<Item,Item> LIGHT_BLUE_C4_EXPLOSIVE_BI = ITEMS.register("util/light_blue_c4_explosive",() -> new C4ExplosiveBlockItem(LIGHT_BLUE_C4_EXPLOSIVE.value()));
     public static final DeferredHolder<Item,Item> PINK_C4_EXPLOSIVE_BI = ITEMS.register("util/pink_c4_explosive",() -> new C4ExplosiveBlockItem(PINK_C4_EXPLOSIVE.value()));
     public static final DeferredHolder<Item,Item> WHITE_C4_EXPLOSIVE_BI = ITEMS.register("util/white_c4_explosive",() -> new C4ExplosiveBlockItem(WHITE_C4_EXPLOSIVE.value()));
+
+    public static final DeferredHolder<Item,Item> RED_FLAG_BLOCK_BI = ITEMS.register("util/red_flag_block",() -> new BlockItem(RED_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> GREEN_FLAG_BLOCK_BI = ITEMS.register("util/green_flag_block",() -> new BlockItem(GREEN_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> BLUE_FLAG_BLOCK_BI = ITEMS.register("util/blue_flag_block",() -> new BlockItem(BLUE_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> CYAN_FLAG_BLOCK_BI = ITEMS.register("util/cyan_flag_block",() -> new BlockItem(CYAN_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> MAGENTA_FLAG_BLOCK_BI = ITEMS.register("util/magenta_flag_block",() -> new BlockItem(MAGENTA_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> YELLOW_FLAG_BLOCK_BI = ITEMS.register("util/yellow_flag_block",() -> new BlockItem(YELLOW_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> LIME_FLAG_BLOCK_BI = ITEMS.register("util/lime_flag_block",() -> new BlockItem(LIME_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> LIGHT_BLUE_FLAG_BLOCK_BI = ITEMS.register("util/light_blue_flag_block",() -> new BlockItem(LIGHT_BLUE_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> PINK_FLAG_BLOCK_BI = ITEMS.register("util/pink_flag_block",() -> new BlockItem(PINK_FLAG_BLOCK.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> WHITE_FLAG_BLOCK_BI = ITEMS.register("util/white_flag_block",() -> new BlockItem(WHITE_FLAG_BLOCK.value(),new Item.Properties()));
 
 }

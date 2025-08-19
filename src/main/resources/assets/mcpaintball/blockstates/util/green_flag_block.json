@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "mcpaintball:block/util/flag_bottom"
+    },
+    "half=upper": {
+      "model": "mcpaintball:block/util/green_flag_top"
+    }
+  }
+}
