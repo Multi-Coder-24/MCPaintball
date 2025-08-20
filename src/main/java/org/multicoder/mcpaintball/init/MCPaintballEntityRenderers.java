@@ -4,8 +4,10 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import org.multicoder.mcpaintball.entity.PaintballEntity;
+import org.multicoder.mcpaintball.entity.renderer.PaintballEntityRenderer;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unchecked")
 public class MCPaintballEntityRenderers {
     public static void RegisterRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer((EntityType<? extends ThrowableItemProjectile>) MCPaintballExplosives.RED_PAINT_GRENADE.get(), ThrownItemRenderer::new);
@@ -19,5 +21,16 @@ public class MCPaintballEntityRenderers {
         event.registerEntityRenderer((EntityType<? extends ThrowableItemProjectile>) MCPaintballExplosives.PINK_PAINT_GRENADE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer((EntityType<? extends ThrowableItemProjectile>) MCPaintballExplosives.WHITE_PAINT_GRENADE.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer((EntityType<? extends ThrowableItemProjectile>) MCPaintballExplosives.EMP_GRENADE.get(), ThrownItemRenderer::new);
+
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.RED_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.GREEN_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.CYAN_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.MAGENTA_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.YELLOW_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.LIME_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.LIGHT_BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.PINK_PAINTBALL.get(), PaintballEntityRenderer::new);
+        event.registerEntityRenderer((EntityType<PaintballEntity>) MCPaintballEntities.WHITE_PAINTBALL.get(), PaintballEntityRenderer::new);
     }
 }

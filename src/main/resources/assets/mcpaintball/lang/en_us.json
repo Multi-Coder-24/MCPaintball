@@ -72,6 +72,7 @@
   "item.mcpaintball.util.medic_class_token": "Medic Class Token",
   "item.mcpaintball.util.sniper_class_token": "Sniper Class Token",
   "item.mcpaintball.util.assault_class_token": "Assault Class Token",
+  "item.mcpaintball.util.specialist_class_token": "Specialist Class Token",
   "item.mcpaintball.util.red_med_kit": "Red Med Kit",
   "item.mcpaintball.util.green_med_kit": "Green Med Kit",
   "item.mcpaintball.util.blue_med_kit": "Blue Med Kit",
@@ -106,7 +107,16 @@
 
 
   "Comment_2": "Entities",
-
+  "entity.mcpaintball.red_paintball": "Red Paintball",
+  "entity.mcpaintball.green_paintball": "Green Paintball",
+  "entity.mcpaintball.blue_paintball": "Blue Paintball",
+  "entity.mcpaintball.cyan_paintball": "Cyan Paintball",
+  "entity.mcpaintball.magenta_paintball": "Magenta Paintball",
+  "entity.mcpaintball.yellow_paintball": "Yellow Paintball",
+  "entity.mcpaintball.lime_paintball": "Lime Paintball",
+  "entity.mcpaintball.light_blue_paintball": "Light Blue Paintball",
+  "entity.mcpaintball.pink_paintball": "Pink Paintball",
+  "entity.mcpaintball.white_paintball": "White Paintball",
 
   "Comment_3": "Command Responses",
 
@@ -156,5 +166,15 @@
   "block.mcpaintball.util.lime_flag_block": "Lime Flag Block",
   "block.mcpaintball.util.light_blue_flag_block": "Light Blue Flag Block",
   "block.mcpaintball.util.pink_flag_block": "Pink Flag Block",
-  "block.mcpaintball.util.white_flag_block": "White Flag Block"
+  "block.mcpaintball.util.white_flag_block": "White Flag Block",
+  "block.mcpaintball.util.red_respawn_station": "Red Respawn Station",
+  "block.mcpaintball.util.green_respawn_station": "Green Respawn Station",
+  "block.mcpaintball.util.blue_respawn_station": "Blue Respawn Station",
+  "block.mcpaintball.util.cyan_respawn_station": "Cyan Respawn Station",
+  "block.mcpaintball.util.magenta_respawn_station": "Magenta Respawn Station",
+  "block.mcpaintball.util.yellow_respawn_station": "Yellow Respawn Station",
+  "block.mcpaintball.util.lime_respawn_station": "Lime Respawn Station",
+  "block.mcpaintball.util.light_blue_respawn_station": "Light Blue Respawn Station",
+  "block.mcpaintball.util.pink_respawn_station": "Pink Respawn Station",
+  "block.mcpaintball.util.white_respawn_station": "White Respawn Station"
 }

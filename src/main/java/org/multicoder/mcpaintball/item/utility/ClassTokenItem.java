@@ -47,9 +47,14 @@ public class ClassTokenItem extends Item {
                     player.addItem(new ItemStack(MCPaintballWeapons.BURST_RIFLE));
                     player.addItem(new ItemStack(MCPaintballWeapons.ASSAULT_RIFLE));
                     break;
+                case 6:
+                    player.addItem(new ItemStack(MCPaintballWeapons.ASSAULT_RIFLE));
+                    player.addItem(new ItemStack(MCPaintballWeapons.PISTOL));
+                    break;
             }
             int Class = Stack.get(MCPaintballDataComponents.ITEM_CLASS.get()).Class();
             PlayerTeamDataAttachment Team = player.getData(MCPaintballDataAttachments.PLAYER_TEAM.get());
+            Team.Team = Team.Team;
             Team.Class = Class;
             player.setData(MCPaintballDataAttachments.PLAYER_TEAM.get(), Team);
             ContainerHelper.clearOrCountMatchingItems(player.getInventory(), x -> x.getItem() instanceof ClassTokenItem,7,false);

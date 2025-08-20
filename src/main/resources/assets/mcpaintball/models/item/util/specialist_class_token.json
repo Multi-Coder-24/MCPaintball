@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mcpaintball:item/util/specialist_class_token"
+  }
+}

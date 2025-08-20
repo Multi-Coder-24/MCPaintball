@@ -113,6 +113,7 @@ public class TeamTokenItem extends Item {
             player.addItem(new ItemStack(MCPaintballUtilities.MEDIC_CLASS_TOKEN));
             player.addItem(new ItemStack(MCPaintballUtilities.HEAVY_CLASS_TOKEN));
             player.addItem(new ItemStack(MCPaintballUtilities.ASSAULT_CLASS_TOKEN));
+            player.addItem(new ItemStack(MCPaintballUtilities.SPECIALIST_CLASS_TOKEN));
             int Team = itemStack.get(MCPaintballDataComponents.ITEM_TEAM.get()).team();
             PlayerTeamDataAttachment Data = player.getData(MCPaintballDataAttachments.PLAYER_TEAM.get());
             Data.Team = Team;

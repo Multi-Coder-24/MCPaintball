@@ -48,6 +48,17 @@ public class MCPaintballBlocks {
     public static final DeferredHolder<Block,Block> PINK_C4_EXPLOSIVE = BLOCKS.register("util/pink_c4_explosive",C4ExplosiveBlock::new);
     public static final DeferredHolder<Block,Block> WHITE_C4_EXPLOSIVE = BLOCKS.register("util/white_c4_explosive",C4ExplosiveBlock::new);
 
+    public static final DeferredHolder<Block,Block> RED_RESPAWN_STATION = BLOCKS.register("util/red_respawn_station", RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> GREEN_RESPAWN_STATION = BLOCKS.register("util/green_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> BLUE_RESPAWN_STATION = BLOCKS.register("util/blue_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> CYAN_RESPAWN_STATION = BLOCKS.register("util/cyan_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> MAGENTA_RESPAWN_STATION = BLOCKS.register("util/magenta_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> YELLOW_RESPAWN_STATION = BLOCKS.register("util/yellow_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> LIME_RESPAWN_STATION = BLOCKS.register("util/lime_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> LIGHT_BLUE_RESPAWN_STATION = BLOCKS.register("util/light_blue_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> PINK_RESPAWN_STATION = BLOCKS.register("util/pink_respawn_station",RespawnStationBlock::new);
+    public static final DeferredHolder<Block,Block> WHITE_RESPAWN_STATION = BLOCKS.register("util/white_respawn_station",RespawnStationBlock::new);
+
     public static final DeferredHolder<Item,Item> RED_REFILL_STATION_BI = ITEMS.register("util/red_refill_station",() -> new RefillStationBlockItem(RED_REFILL_STATION.value()));
     public static final DeferredHolder<Item,Item> GREEN_REFILL_STATION_BI = ITEMS.register("util/green_refill_station",() -> new RefillStationBlockItem(GREEN_REFILL_STATION.value()));
     public static final DeferredHolder<Item,Item> BLUE_REFILL_STATION_BI = ITEMS.register("util/blue_refill_station",() -> new RefillStationBlockItem(BLUE_REFILL_STATION.value()));
@@ -80,5 +91,17 @@ public class MCPaintballBlocks {
     public static final DeferredHolder<Item,Item> LIGHT_BLUE_FLAG_BLOCK_BI = ITEMS.register("util/light_blue_flag_block",() -> new BlockItem(LIGHT_BLUE_FLAG_BLOCK.value(),new Item.Properties()));
     public static final DeferredHolder<Item,Item> PINK_FLAG_BLOCK_BI = ITEMS.register("util/pink_flag_block",() -> new BlockItem(PINK_FLAG_BLOCK.value(),new Item.Properties()));
     public static final DeferredHolder<Item,Item> WHITE_FLAG_BLOCK_BI = ITEMS.register("util/white_flag_block",() -> new BlockItem(WHITE_FLAG_BLOCK.value(),new Item.Properties()));
+
+    public static final DeferredHolder<Item,Item> RED_RESPAWN_STATION_BI = ITEMS.register("util/red_respawn_station",() -> new BlockItem(RED_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> GREEN_RESPAWN_STATION_BI = ITEMS.register("util/green_respawn_station",() -> new BlockItem(GREEN_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> BLUE_RESPAWN_STATION_BI = ITEMS.register("util/blue_respawn_station",() -> new BlockItem(BLUE_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> CYAN_RESPAWN_STATION_BI = ITEMS.register("util/cyan_respawn_station",() -> new BlockItem(CYAN_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> MAGENTA_RESPAWN_STATION_BI = ITEMS.register("util/magenta_respawn_station",() -> new BlockItem(MAGENTA_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> YELLOW_RESPAWN_STATION_BI = ITEMS.register("util/yellow_respawn_station",() -> new BlockItem(YELLOW_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> LIME_RESPAWN_STATION_BI = ITEMS.register("util/lime_respawn_station",() -> new BlockItem(LIME_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> LIGHT_BLUE_RESPAWN_STATION_BI = ITEMS.register("util/light_blue_respawn_station",() -> new BlockItem(LIGHT_BLUE_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> PINK_RESPAWN_STATION_BI = ITEMS.register("util/pink_respawn_station",() -> new BlockItem(PINK_RESPAWN_STATION.value(),new Item.Properties()));
+    public static final DeferredHolder<Item,Item> WHITE_RESPAWN_STATION_BI = ITEMS.register("util/white_respawn_station",() -> new BlockItem(WHITE_RESPAWN_STATION.value(),new Item.Properties()));
+
 
 }

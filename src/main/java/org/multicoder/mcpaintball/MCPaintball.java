@@ -34,6 +34,7 @@ public class MCPaintball {
         MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballBlocks.ITEMS.register(eventBus);
         MCPaintballExplosives.EXPLOSIVES_REGISTER.register(eventBus);
+        MCPaintballEntities.PAINTBALLS.register(eventBus);
         eventBus.addListener(this::AppendCreativeTabs);
         eventBus.addListener(MCPaintballEntityRenderers::RegisterRenderers);
     }

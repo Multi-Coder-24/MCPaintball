@@ -42,6 +42,7 @@ public class MCPaintballUtilities
     public static final DeferredHolder<Item,Item> ASSAULT_CLASS_TOKEN = UTILITIES.register("util/assault_class_token", () -> new ClassTokenItem(5));
     public static final DeferredHolder<Item,Item> SNIPER_CLASS_TOKEN = UTILITIES.register("util/sniper_class_token", () -> new ClassTokenItem(3));
     public static final DeferredHolder<Item,Item> MEDIC_CLASS_TOKEN = UTILITIES.register("util/medic_class_token", () -> new ClassTokenItem(4));
+    public static final DeferredHolder<Item,Item> SPECIALIST_CLASS_TOKEN = UTILITIES.register("util/specialist_class_token", () -> new ClassTokenItem(6));
 
     public static final DeferredHolder<Item,Item> RED_MED_KIT = UTILITIES.register("util/red_med_kit", () -> new MedKitItem(1));
     public static final DeferredHolder<Item,Item> GREEN_MED_KIT = UTILITIES.register("util/green_med_kit",  () -> new MedKitItem(2));

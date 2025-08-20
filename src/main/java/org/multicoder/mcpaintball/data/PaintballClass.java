@@ -8,5 +8,6 @@ public enum PaintballClass
     HEAVY,
     SNIPER,
     MEDICAL,
-    ASSAULT
+    ASSAULT,
+    SPECIALIST
 }

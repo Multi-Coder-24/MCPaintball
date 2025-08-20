@@ -5,18 +5,22 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.multicoder.mcpaintball.data.PaintballTeam;
+import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
+import org.multicoder.mcpaintball.entity.PaintballEntity;
 import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.item.utility.AmmoHopper;
 import org.multicoder.mcpaintball.init.MCPaintballSounds;
 
+@SuppressWarnings("unchecked")
 public class BurstRifleItem extends Item {
 
     public BurstRifleItem() {
@@ -28,13 +32,13 @@ public class BurstRifleItem extends Item {
             if (player.getOffhandItem().getItem() instanceof AmmoHopper) {
                 ItemStack Ammo = player.getOffhandItem();
                 if (Ammo.getDamageValue() < Ammo.getMaxDamage()) {
-                    ItemStack stack = player.getItemInHand(usedHand);
                     Thread thread = new Thread(() -> {
                         try{
                             for(int i = 0; i < 5; i++){
-                                Arrow P1 = new Arrow(level, player, new ItemStack(Items.ARROW), stack);
-                                P1.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 4.5F, 0.0F);
-                                level.addFreshEntity(P1);
+                                PaintballTeam team = PaintballTeam.values()[player.getData(MCPaintballDataAttachments.PLAYER_TEAM).Team];
+                                PaintballEntity paintball = new PaintballEntity((EntityType<? extends AbstractArrow>) PaintballTeam.getEntityType(team),level);
+                                paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.0F);
+                                level.addFreshEntity(paintball);
                                 Thread.sleep(100);
                             }
                         }

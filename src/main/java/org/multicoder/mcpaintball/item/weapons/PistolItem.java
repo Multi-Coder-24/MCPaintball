@@ -5,18 +5,22 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import org.multicoder.mcpaintball.data.PaintballTeam;
+import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
+import org.multicoder.mcpaintball.entity.PaintballEntity;
 import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.item.utility.AmmoHopper;
 import org.multicoder.mcpaintball.init.MCPaintballSounds;
 
+@SuppressWarnings("unchecked")
 public class PistolItem extends Item {
 
     public PistolItem() {
@@ -29,10 +33,10 @@ public class PistolItem extends Item {
                 ItemStack Ammo = player.getOffhandItem();
                 if (Ammo.getDamageValue() < Ammo.getMaxDamage()) {
                     Ammo.setDamageValue(Ammo.getDamageValue() + 1);
-                    ItemStack stack = player.getItemInHand(hand);
-                    Arrow bullet = new Arrow(level,player,new ItemStack(Items.ARROW),stack);
-                    bullet.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,2.0F,0.0F);
-                    level.addFreshEntity(bullet);
+                    PaintballTeam team = PaintballTeam.values()[player.getData(MCPaintballDataAttachments.PLAYER_TEAM).Team];
+                    PaintballEntity paintball = new PaintballEntity((EntityType<? extends AbstractArrow>) PaintballTeam.getEntityType(team),level);
+                    paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,2.0F,0.0F);
+                    level.addFreshEntity(paintball);
                     player.getCooldowns().addCooldown(this,40);
                     level.playSound(null,player.blockPosition(), MCPaintballSounds.SINGLE_SHOT.get(), SoundSource.PLAYERS,1.0F,1.0F);
                 }
