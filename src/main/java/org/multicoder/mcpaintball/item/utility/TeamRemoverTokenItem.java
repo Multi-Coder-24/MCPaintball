@@ -44,7 +44,6 @@ public class TeamRemoverTokenItem extends Item {
         PlayerTeamDataAttachment Team = player.getData(MCPaintballDataAttachments.PLAYER_TEAM.get());
         Team.Team = 0;
         Team.Class = 0;
-        Team.Points = 0;
         player.setData(MCPaintballDataAttachments.PLAYER_TEAM.get(), Team);
         return super.use(level, player, usedHand);
     }

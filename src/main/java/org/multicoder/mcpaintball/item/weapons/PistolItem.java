@@ -34,7 +34,7 @@ public class PistolItem extends Item {
                 if (Ammo.getDamageValue() < Ammo.getMaxDamage()) {
                     Ammo.setDamageValue(Ammo.getDamageValue() + 1);
                     PaintballTeam team = PaintballTeam.values()[player.getData(MCPaintballDataAttachments.PLAYER_TEAM).Team];
-                    PaintballEntity paintball = new PaintballEntity((EntityType<? extends AbstractArrow>) PaintballTeam.getEntityType(team),level);
+                    PaintballEntity paintball = new PaintballEntity((EntityType<? extends AbstractArrow>) PaintballTeam.getEntityType(team),player,level);
                     paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,2.0F,0.0F);
                     level.addFreshEntity(paintball);
                     player.getCooldowns().addCooldown(this,40);

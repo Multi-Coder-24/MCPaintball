@@ -50,7 +50,10 @@ public class MCPaintball {
         }
     }
     @SubscribeEvent
-    public static void PlayerJoin(PlayerEvent.PlayerLoggedInEvent event){
-        event.getEntity().setData(MCPaintballDataAttachments.PLAYER_TEAM.get(),new PlayerTeamDataAttachment());
+    public static void PlayerJoin(PlayerEvent.PlayerLoggedInEvent event)
+    {
+        if(!event.getEntity().hasData(MCPaintballDataAttachments.PLAYER_TEAM)){
+            event.getEntity().setData(MCPaintballDataAttachments.PLAYER_TEAM.get(),new PlayerTeamDataAttachment());
+        }
     }
 }

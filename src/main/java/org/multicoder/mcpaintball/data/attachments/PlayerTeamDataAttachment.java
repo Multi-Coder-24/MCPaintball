@@ -10,11 +10,9 @@ public class PlayerTeamDataAttachment implements INBTSerializable<CompoundTag>
 {
     public int Team;
     public int Class;
-    public int Points;
     public PlayerTeamDataAttachment(){
         Team = 0;
         Class = 0;
-        Points = 0;
     }
 
     @Override
@@ -23,7 +21,6 @@ public class PlayerTeamDataAttachment implements INBTSerializable<CompoundTag>
         CompoundTag tag = new CompoundTag();
         tag.putInt("Team", Team);
         tag.putInt("Class", Class);
-        tag.putInt("Points", Points);
         return tag;
     }
 
@@ -32,6 +29,5 @@ public class PlayerTeamDataAttachment implements INBTSerializable<CompoundTag>
     {
         this.Team = compoundTag.getInt("Team");
         this.Class = compoundTag.getInt("Class");
-        this.Points = compoundTag.getInt("Points");
     }
 }

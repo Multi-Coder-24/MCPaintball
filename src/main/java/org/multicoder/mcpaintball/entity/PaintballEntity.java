@@ -1,8 +1,10 @@
 package org.multicoder.mcpaintball.entity;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -20,15 +22,18 @@ import java.util.Objects;
 
 public class PaintballEntity extends AbstractArrow
 {
-
-    public PaintballEntity(EntityType<? extends AbstractArrow> entityType, Level level)
+    public PaintballEntity(EntityType<? extends AbstractArrow> entityType, LivingEntity owner, Level level) 
     {
-        super(entityType, level);
+        super(entityType, owner, level, new ItemStack(Items.AIR), null);
+    }
+
+    public PaintballEntity(EntityType<?> entityEntityType, Level level) {
+        super((EntityType<? extends AbstractArrow>) entityEntityType,level);
     }
 
     @Override
     protected @NotNull ItemStack getDefaultPickupItem() {
-        return new ItemStack(Items.AIR);
+        return new ItemStack(Items.ARROW);
     }
 
     @Override
@@ -68,5 +73,14 @@ public class PaintballEntity extends AbstractArrow
     @Override
     protected SoundEvent getDefaultHitGroundSoundEvent() {
         return MCPaintballSounds.SPLAT.get();
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound)
+    {
+        compound.putByte("shake", (byte)this.shakeTime);
+        compound.putBoolean("inGround", this.inGround);
+        compound.putBoolean("crit", this.isCritArrow());
+        compound.putByte("PierceLevel", this.getPierceLevel());
     }
 }

@@ -36,7 +36,7 @@ public class BurstRifleItem extends Item {
                         try{
                             for(int i = 0; i < 5; i++){
                                 PaintballTeam team = PaintballTeam.values()[player.getData(MCPaintballDataAttachments.PLAYER_TEAM).Team];
-                                PaintballEntity paintball = new PaintballEntity((EntityType<? extends AbstractArrow>) PaintballTeam.getEntityType(team),level);
+                                PaintballEntity paintball = new PaintballEntity((EntityType<? extends AbstractArrow>) PaintballTeam.getEntityType(team),player,level);
                                 paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.0F);
                                 level.addFreshEntity(paintball);
                                 Thread.sleep(100);

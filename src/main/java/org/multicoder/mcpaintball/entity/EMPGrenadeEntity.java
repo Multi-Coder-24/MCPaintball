@@ -18,7 +18,7 @@ import org.multicoder.mcpaintball.item.weapons.*;
 
 import java.util.List;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unchecked")
 public class EMPGrenadeEntity extends ThrowableItemProjectile implements ItemSupplier {
     public EMPGrenadeEntity(EntityType<?> entityEntityType, Level level) {
         super((EntityType<? extends ThrowableItemProjectile>) entityEntityType, level);
