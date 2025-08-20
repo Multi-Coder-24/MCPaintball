@@ -132,6 +132,7 @@
   "subtitle.mcpaintball.hit": "Paintball Hit A Player",
   "subtitle.mcpaintball.splat": "Paintball Hit A Block",
   "subtitle.mcpaintball.grenade": "Grenade Pin Pulled",
+  "subtitle.mcpaintball.emp": "EMP Grenade Hit",
 
   "Comment_5": "Text",
   "text.mcpaintball.ammo_hopper_empty": "No Ammo Left In Hopper",

@@ -1,5 +1,6 @@
 package org.multicoder.mcpaintball.item.explosives;
 
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
 import org.multicoder.mcpaintball.entity.*;
 import org.multicoder.mcpaintball.init.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.init.MCPaintballSounds;
 
 import java.util.Objects;
 
@@ -77,6 +79,7 @@ public class PaintGrenadeItem extends Item {
                     break;
             }
             Stack.shrink(1);
+            level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1F,1F);
         }
         return super.use(level, player, usedHand);
     }

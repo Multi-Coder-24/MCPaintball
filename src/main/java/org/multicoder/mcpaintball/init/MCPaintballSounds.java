@@ -20,4 +20,5 @@ public class MCPaintballSounds {
     public static final DeferredHolder<SoundEvent,SoundEvent> C4_REMOVED = SOUNDS.register("c4_removed",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath("mcpaintball","c4_removed"),16F));
     public static final DeferredHolder<SoundEvent,SoundEvent> C4_DETONATED = SOUNDS.register("c4_detonated",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath("mcpaintball","c4_detonated"),16F));
     public static final DeferredHolder<SoundEvent,SoundEvent> GRENADE = SOUNDS.register("grenade",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath("mcpaintball","grenade"),16F));
+    public static final DeferredHolder<SoundEvent,SoundEvent> EMP = SOUNDS.register("emp",() -> SoundEvent.createFixedRangeEvent(ResourceLocation.fromNamespaceAndPath("mcpaintball","emp"),16F));
 }

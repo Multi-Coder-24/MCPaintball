@@ -52,5 +52,11 @@
     "sounds": [
       "mcpaintball:burst_shot"
     ]
+  },
+  "emp": {
+    "subtitle": "subtitle.mcpaintball.emp",
+    "sounds": [
+      "mcpaintball:emp"
+    ]
   }
 }

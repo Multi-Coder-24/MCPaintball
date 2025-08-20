@@ -12,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.data.PaintballTeam;
 import org.multicoder.mcpaintball.data.attachments.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.component.ItemTeamDataComponent;
@@ -42,6 +41,7 @@ public class AssaultRifleItem extends Item {
                     PaintballTeam team = PaintballTeam.values()[player.getData(MCPaintballDataAttachments.PLAYER_TEAM).Team];
                     PaintballEntity paintball = new PaintballEntity((EntityType<? extends AbstractArrow>) PaintballTeam.getEntityType(team),player,level);
                     paintball.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.0F);
+                    level.addFreshEntity(paintball);
                     player.getCooldowns().addCooldown(this, 20);
                     level.playSound(null,player.blockPosition(), MCPaintballSounds.SINGLE_SHOT.get(), SoundSource.PLAYERS,1.0F,1.0F);
                 }
