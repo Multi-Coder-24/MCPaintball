@@ -6,13 +6,19 @@ import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import org.multicoder.mcpaintball.core.MCPaintballEntities;
 
 public class RedPaintballEntity extends AbstractArrow {
     public RedPaintballEntity(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
     }
 
+    public RedPaintballEntity(Player mob, Level level, @Nullable ItemStack firedFromWeapon) {
+        super(MCPaintballEntities.RED_PAINTBALL, mob, level, new ItemStack(Items.ARROW), firedFromWeapon);
+    }
 
     @Override
     protected @NonNull ItemStack getDefaultPickupItem() {
@@ -28,5 +34,9 @@ public class RedPaintballEntity extends AbstractArrow {
         if(this.isInGround() && this.inGroundTime >= 80){
             this.discard();
         }
+    }
+    @Override
+    protected void onHitEntity(@NonNull EntityHitResult ignored) {
+        super.discard();
     }
 }

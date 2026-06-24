@@ -25,6 +25,8 @@ public class CreativeTabEvents {
         output.accept(MCPaintballItems.SHOTGUN);
         output.accept(MCPaintballItems.SNIPER_RIFLE);
         output.accept(MCPaintballItems.ASSAULT_RIFLE);
+        output.accept(MCPaintballItems.GRENADE_LAUNCHER);
+        output.accept(MCPaintballItems.BURST_RIFLE);
         output.accept(MCPaintballItems.RED_PAINT_GRENADE);
         output.accept(MCPaintballItems.GREEN_PAINT_GRENADE);
         output.accept(MCPaintballItems.BLUE_PAINT_GRENADE);

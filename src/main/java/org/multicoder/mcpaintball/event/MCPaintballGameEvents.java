@@ -22,21 +22,23 @@ import static net.minecraft.commands.Commands.literal;
 public class MCPaintballGameEvents {
     public static MCPaintballSaveData INSTANCE;
     public static void ServerStart(MinecraftServer server) {
-        MCPaintball.LOGGER.info("Server Started");
-        MCPaintball.LOGGER.info("Setting World Data");
+        MCPaintball.LOGGER.debug("Server Started");
+        MCPaintball.LOGGER.debug("Setting World Data");
         INSTANCE = server.overworld().getDataStorage().computeIfAbsent(MCPaintballSaveData.TYPE);
         Objects.requireNonNull(server.overworld().getDataStorage().get(MCPaintballSaveData.TYPE)).setDirty();
     }
 
     public static void Join(ServerPlayer player) {
-        MCPaintball.LOGGER.info("Player Joined");
-        MCPaintball.LOGGER.info("Setting Player Data");
+        MCPaintball.LOGGER.debug("Player Joined");
+        MCPaintball.LOGGER.debug("Setting Player Data");
         player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
     }
 
     public static void CommandRegister(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext ignored, Commands.CommandSelection ignored2) {
+        MCPaintball.LOGGER.debug("Registering Commands");
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.team_prefix").getString()).executes(MCPaintballCommands::CheckTeam).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("team",StringArgumentType.word()).executes(MCPaintballCommands::SetTeam))))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.type_prefix").getString()).executes(MCPaintballCommands::CheckType).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("type",StringArgumentType.word()).executes(MCPaintballCommands::SetType))))).createBuilder().build();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString())).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartGame).then(literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopGame)))).createBuilder().build();
+        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartGame)).then(literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopGame)))).createBuilder().build();
+        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartRound)).then(literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopRound)))).createBuilder().build();
     }
 }

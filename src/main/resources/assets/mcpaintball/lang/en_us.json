@@ -14,6 +14,7 @@
   "command.mcpaintball.kit": "kit",
 
   "Comment_1": "Command Responses",
+  "text.mcpaintball.game_start": "The game has started, Choose team and type now!",
   "text.mcpaintball.game_stopped": "The game has stopped",
   "text.mcpaintball.round_started": "The round has started, Weapons Free",
   "text.mcpaintball.round_ended": "The round has ended, Weapons Stopped",
@@ -29,6 +30,7 @@
 
   "Comment_2": "Command Error Responses",
   "text.mcpaintball.error_round_started": "Cannot change teams or type when there is a round running",
+  "text.mcpaintball.error_game_not_started": "Cannot start a round before starting a game",
   "text.mcpaintball.error_no_game": "Cannot set team or type when there is no game running",
   "text.mcpaintball.not_configured": "You have not set your team and/or type",
 

@@ -3,7 +3,6 @@ package org.multicoder.mcpaintball.item;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -11,18 +10,14 @@ import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
-import org.multicoder.mcpaintball.entity.BluePaintballEntity;
-import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
-import org.multicoder.mcpaintball.entity.RedPaintballEntity;
+import org.multicoder.mcpaintball.entity.*;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.Objects;
 
-public class SniperRifleItem extends Item {
+public class GrenadeLauncherItem extends Item {
 
-    public SniperRifleItem(Properties properties) {
-        super(properties);
-    }
+    public GrenadeLauncherItem(Properties properties) {super(properties);}
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
@@ -32,26 +27,26 @@ public class SniperRifleItem extends Item {
                 boolean Fired = false;
                 switch (data.Team){
                     case 1:
-                        RedPaintballEntity redPaintball = MCPaintballEntities.RED_PAINTBALL.create(level, EntitySpawnReason.TRIGGERED);
-                        Objects.requireNonNull(redPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,8.0F,0.0F);
-                        level.addFreshEntity(redPaintball);
+                        RedPaintGrenadeEntity redPaintGrenade = new RedPaintGrenadeEntity(MCPaintballEntities.RED_PAINT_GRENADE,player,level,player.getItemInHand(hand));
+                        Objects.requireNonNull(redPaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                        level.addFreshEntity(redPaintGrenade);
                         Fired = true;
                         break;
                     case 2:
-                        GreenPaintballEntity greenPaintball = MCPaintballEntities.GREEN_PAINTBALL.create(level, EntitySpawnReason.TRIGGERED);
-                        Objects.requireNonNull(greenPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,8.0F,0.0F);
-                        level.addFreshEntity(greenPaintball);
+                        GreenPaintGrenadeEntity greenPaintGrenade = new GreenPaintGrenadeEntity(MCPaintballEntities.GREEN_PAINT_GRENADE,player,level,player.getItemInHand(hand));
+                        Objects.requireNonNull(greenPaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                        level.addFreshEntity(greenPaintGrenade);
                         Fired = true;
                         break;
                     case 3:
-                        BluePaintballEntity bluePaintball = MCPaintballEntities.BLUE_PAINTBALL.create(level, EntitySpawnReason.TRIGGERED);
-                        Objects.requireNonNull(bluePaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,8.0F,1.0F);
-                        level.addFreshEntity(bluePaintball);
+                        BluePaintGrenadeEntity bluePaintGrenade = new BluePaintGrenadeEntity(MCPaintballEntities.BLUE_PAINT_GRENADE,player,level,player.getItemInHand(hand));
+                        Objects.requireNonNull(bluePaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                        level.addFreshEntity(bluePaintGrenade);
                         Fired = true;
                         break;
                 }
                 if(Fired){
-                    player.getCooldowns().addCooldown(player.getItemInHand(hand),60);
+                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
                     return InteractionResult.CONSUME;
                 }
             }

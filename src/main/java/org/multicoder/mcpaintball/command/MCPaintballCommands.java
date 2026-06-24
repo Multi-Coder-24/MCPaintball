@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 public class MCPaintballCommands {
     public static int SetTeam(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
@@ -57,26 +58,40 @@ public class MCPaintballCommands {
     public static int SetType(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String selectedType = StringArgumentType.getString(context, "type");
         ServerPlayer player = context.getSource().getPlayerOrException();
-        MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-        selectedType = selectedType.toLowerCase();
-        if(selectedType.equals("standard")){
-            data.Type = 1;
-            player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
-        }else if(selectedType.equals("medic")){
-            data.Type = 2;
-            player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
-        }else if(selectedType.equals("assault")){
-            data.Type = 3;
-            player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
-        }else if(selectedType.equals("heavy")){
-            data.Type = 4;
-            player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
-        }else{
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_type"));
+        if(MCPaintballGameEvents.INSTANCE.MatchStarted){
+            if(!MCPaintballGameEvents.INSTANCE.RoundStarted){
+                MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+                selectedType = selectedType.toLowerCase();
+                switch (selectedType) {
+                    case "standard" -> {
+                        data.Type = 1;
+                        player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
+                        player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                    }
+                    case "medic" -> {
+                        data.Type = 2;
+                        player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
+                        player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                    }
+                    case "assault" -> {
+                        data.Type = 3;
+                        player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
+                        player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                    }
+                    case "heavy" -> {
+                        data.Type = 4;
+                        player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
+                        player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                    }
+                    default -> player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_type"));
+                }
+            }
+            else{
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.error_round_started"));
+            }
+        }
+        else {
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.error_no_game"));
         }
         return 0;
     }
@@ -100,13 +115,46 @@ public class MCPaintballCommands {
         return 0;
     }
 
-    public static int StartGame(CommandContext<CommandSourceStack> context) {
-
+    public static int StartGame(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        MCPaintballGameEvents.INSTANCE.MatchStarted = true;
+        MCPaintballGameEvents.INSTANCE.setDirty();
+        player.sendSystemMessage(Component.translatable("text.mcpaintball.game_start"));
         return 0;
     }
 
-    public static int StopGame(CommandContext<CommandSourceStack> context) {
+    public static int StopGame(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        MCPaintballGameEvents.INSTANCE.MatchStarted = false;
+        MCPaintballGameEvents.INSTANCE.RoundStarted = false;
+        MCPaintballGameEvents.INSTANCE.setDirty();
+        player.sendSystemMessage(Component.translatable("text.mcpaintball.game_stopped"));
+        return 0;
+    }
 
+    public static int StopRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        if(MCPaintballGameEvents.INSTANCE.MatchStarted){
+            MCPaintballGameEvents.INSTANCE.RoundStarted = false;
+            MCPaintballGameEvents.INSTANCE.setDirty();
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.round_ended"));
+        }
+        else{
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.error_no_game"));
+        }
+        return 0;
+    }
+
+    public static int StartRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        if(MCPaintballGameEvents.INSTANCE.MatchStarted){
+            MCPaintballGameEvents.INSTANCE.RoundStarted = true;
+            MCPaintballGameEvents.INSTANCE.setDirty();
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.round_started"));
+        }
+        else{
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.error_game_not_started"));
+        }
         return 0;
     }
 }

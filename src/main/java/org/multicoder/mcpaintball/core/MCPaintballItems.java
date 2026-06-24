@@ -17,6 +17,8 @@ public class MCPaintballItems {
     public static final Item SHOTGUN = register("weapon/shotgun", ShotgunItem::new,new Item.Properties());
     public static final Item SNIPER_RIFLE = register("weapon/sniper_rifle", SniperRifleItem::new,new Item.Properties());
     public static final Item ASSAULT_RIFLE = register("weapon/assault_rifle", RifleItem::new,new Item.Properties());
+    public static final Item GRENADE_LAUNCHER = register("weapon/grenade_launcher", GrenadeLauncherItem::new,new Item.Properties());
+    public static final Item BURST_RIFLE = register("weapon/burst_rifle", BurstRifleItem::new,new Item.Properties());
 
     public static final Item RED_PAINT_GRENADE = register("explosives/red_grenade", RedPaintGrenadeItem::new,new Item.Properties().stacksTo(8));
     public static final Item GREEN_PAINT_GRENADE = register("explosives/green_grenade", GreenPaintGrenadeItem::new,new Item.Properties().stacksTo(8));
@@ -39,7 +41,7 @@ public class MCPaintballItems {
 
 
     public static void Initialize(){
-        MCPaintball.LOGGER.info("Initializing Items");
+        MCPaintball.LOGGER.debug("Initializing Items");
     }
 
 
