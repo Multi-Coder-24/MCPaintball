@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "mcpaintball",
+  "version": "1.0.0",
+  "name": "Minecraft Paintball",
+  "description": "Configurable Keeping Inventory Alternative",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/mcpaintball/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.multicoder.mcpaintball.client.MCPaintballClient"
+    ],
+    "main": [
+      "org.multicoder.mcpaintball.MCPaintball"
+    ]
+  },
+  "mixins": [
+    "mcpaintball.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "fabric-api": "*",
+    "minecraft": ">=26.1.1"
+  }
+}
