@@ -10,6 +10,10 @@ import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class MCPaintballCommands {
     public static int SetTeam(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String selectedTeam = StringArgumentType.getString(context, "team");
@@ -155,6 +159,27 @@ public class MCPaintballCommands {
         else{
             player.sendSystemMessage(Component.translatable("text.mcpaintball.error_game_not_started"));
         }
+        return 0;
+    }
+
+    public static int RoundWinner(CommandContext<CommandSourceStack> context) {
+        List<Integer> points = new ArrayList<>();
+        points.add(MCPaintballGameEvents.INSTANCE.RedPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.GreenPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.BluePoints);
+        int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).get());
+        String Team = switch (Winner){
+            case 0 -> "Red";
+            case 1 -> "Green";
+            case 2 -> "Blue";
+            default -> throw new IllegalStateException("Unexpected value: " + Winner);
+        };
+        context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
+        return 0;
+    }
+
+    public static int GiveKit(CommandContext<CommandSourceStack> ignored) {
+
         return 0;
     }
 }

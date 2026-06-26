@@ -1,7 +1,6 @@
 package org.multicoder.mcpaintball.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,8 +12,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import org.jspecify.annotations.NonNull;
+import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.core.MCPaintballParticles;
+import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+
+import java.util.Objects;
 
 public class RedPaintGrenadeEntity extends ThrowableItemProjectile {
     public RedPaintGrenadeEntity(EntityType<? extends ThrowableItemProjectile> type, Level level) {
@@ -40,7 +44,11 @@ public class RedPaintGrenadeEntity extends ThrowableItemProjectile {
             BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.RED_PAINT,true,true,pos.getX(),pos.getY(),pos.getZ(),5,0.2,0.2,0.2,0.01));
             level.getEntities(this,box).forEach(entity -> {
                 if(entity instanceof Player player){
-                    player.sendSystemMessage(Component.literal("Hit By Grenade!"));
+                    MCPaintballPlayerData targetData = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+                    if((Objects.requireNonNull(targetData).Team != 0 && Objects.requireNonNull(targetData).Type != 1)){
+                        MCPaintballGameEvents.INSTANCE.RedPoints++;
+                        MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    }
                 }
             });
         }

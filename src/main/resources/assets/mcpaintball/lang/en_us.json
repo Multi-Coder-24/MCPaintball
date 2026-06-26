@@ -37,6 +37,9 @@
   "Comment_3": "Player Information Messages",
   "text.mcpaintball.ammo_empty": "Out Of Ammo, Please Reload Weapon",
   "text.mcpaintball.invalid_use": "Weapons Are Not Enabled",
+  "text.mcpaintball.red_points": "Red Points: %s",
+  "text.mcpaintball.green_points": "Green Points: %s",
+  "text.mcpaintball.blue_points": "Blue Points: %s",
 
   "Comment_4": "Mob Effects",
   "effect.mcpaintball.spawning_grace": "Spawning Grace",

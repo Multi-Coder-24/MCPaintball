@@ -9,7 +9,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
+import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+
+import java.util.Objects;
 
 public class BluePaintballEntity extends AbstractArrow {
     public BluePaintballEntity(EntityType<? extends AbstractArrow> type, Level level) {
@@ -37,7 +42,16 @@ public class BluePaintballEntity extends AbstractArrow {
     }
 
     @Override
-    protected void onHitEntity(@NonNull EntityHitResult ignored) {
+    protected void onHitEntity(@NonNull EntityHitResult result) {
+        if(result.getEntity() instanceof Player Target){
+            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+                MCPaintballPlayerData TargetData = Target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+                if((Objects.requireNonNull(TargetData).Team != 0 && Objects.requireNonNull(TargetData).Type != 3)){
+                    MCPaintballGameEvents.INSTANCE.BluePoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                }
+            }
+        }
         super.discard();
     }
 }

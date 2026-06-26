@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.entity;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -9,7 +10,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
+import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+
+import java.util.Objects;
 
 public class RedPaintballEntity extends AbstractArrow {
     public RedPaintballEntity(EntityType<? extends AbstractArrow> type, Level level) {
@@ -36,7 +42,19 @@ public class RedPaintballEntity extends AbstractArrow {
         }
     }
     @Override
-    protected void onHitEntity(@NonNull EntityHitResult ignored) {
+    protected void onHitEntity(@NonNull EntityHitResult result) {
+        if(result.getEntity() instanceof Player Target){
+            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+                MCPaintballPlayerData TargetData = Target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+                if((Objects.requireNonNull(TargetData).Team != 0 && Objects.requireNonNull(TargetData).Type != 1)){
+                    MCPaintballGameEvents.INSTANCE.RedPoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                }
+            }
+        } else if (result.getEntity() instanceof Cow) {
+            MCPaintballGameEvents.INSTANCE.RedPoints++;
+            MCPaintballGameEvents.INSTANCE.setDirty(true);
+        }
         super.discard();
     }
 }
