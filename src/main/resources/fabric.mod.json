@@ -3,9 +3,13 @@
   "id": "mcpaintball",
   "version": "1.0.0",
   "name": "Minecraft Paintball",
-  "description": "Configurable Keeping Inventory Alternative",
-  "authors": [],
-  "contact": {},
+  "description": "Minecraft paintball mod adds a vanilla way to paintball and have fun with friends.\\nThe weapon models are Licenced under L-GPL by MrCrayFish We do not own the rights to the model",
+  "authors": ["Multicoder"],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/mc-paintball",
+    "issues": "https://github.com/Multi-Coder-24/MCPaintball/issues",
+    "sources": "https://github.com/Multi-Coder-24/MCPaintball"
+  },
   "license": "MIT",
   "icon": "assets/mcpaintball/icon.png",
   "environment": "*",
@@ -17,12 +21,9 @@
       "org.multicoder.mcpaintball.MCPaintball"
     ]
   },
-  "mixins": [
-    "mcpaintball.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=0.19.3",
-    "fabric-api": "*",
+    "fabric-api": ">=0.152.1+26.1.2",
     "minecraft": ">=26.1.1"
   }
 }
