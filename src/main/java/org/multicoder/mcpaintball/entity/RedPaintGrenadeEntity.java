@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,6 +16,7 @@ import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.core.MCPaintballParticles;
+import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
@@ -45,7 +47,8 @@ public class RedPaintGrenadeEntity extends ThrowableItemProjectile {
             level.getEntities(this,box).forEach(entity -> {
                 if(entity instanceof Player player){
                     MCPaintballPlayerData targetData = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                    if((Objects.requireNonNull(targetData).Team != 0 && Objects.requireNonNull(targetData).Type != 1)){
+                    if((Objects.requireNonNull(targetData).Team != 0 && Objects.requireNonNull(targetData).Team != 1)){
+                        level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(), MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
                         MCPaintballGameEvents.INSTANCE.RedPoints++;
                         MCPaintballGameEvents.INSTANCE.setDirty(true);
                     }

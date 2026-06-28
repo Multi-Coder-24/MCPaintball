@@ -1,15 +1,15 @@
 package org.multicoder.mcpaintball.item;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
-import org.multicoder.mcpaintball.core.MCPaintballEntities;
+import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.entity.BluePaintballEntity;
 import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
@@ -32,19 +32,19 @@ public class SniperRifleItem extends Item {
                 boolean Fired = false;
                 switch (data.Team){
                     case 1:
-                        RedPaintballEntity redPaintball = MCPaintballEntities.RED_PAINTBALL.create(level, EntitySpawnReason.TRIGGERED);
+                        RedPaintballEntity redPaintball = new RedPaintballEntity(player,level,player.getItemInHand(hand));
                         Objects.requireNonNull(redPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,8.0F,0.0F);
                         level.addFreshEntity(redPaintball);
                         Fired = true;
                         break;
                     case 2:
-                        GreenPaintballEntity greenPaintball = MCPaintballEntities.GREEN_PAINTBALL.create(level, EntitySpawnReason.TRIGGERED);
+                        GreenPaintballEntity greenPaintball = new GreenPaintballEntity(player,level,player.getItemInHand(hand));
                         Objects.requireNonNull(greenPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,8.0F,0.0F);
                         level.addFreshEntity(greenPaintball);
                         Fired = true;
                         break;
                     case 3:
-                        BluePaintballEntity bluePaintball = MCPaintballEntities.BLUE_PAINTBALL.create(level, EntitySpawnReason.TRIGGERED);
+                        BluePaintballEntity bluePaintball = new BluePaintballEntity(player,level,player.getItemInHand(hand));
                         Objects.requireNonNull(bluePaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,8.0F,1.0F);
                         level.addFreshEntity(bluePaintball);
                         Fired = true;
@@ -52,6 +52,7 @@ public class SniperRifleItem extends Item {
                 }
                 if(Fired){
                     player.getCooldowns().addCooldown(player.getItemInHand(hand),60);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
                     return InteractionResult.CONSUME;
                 }
             }

@@ -20,6 +20,8 @@ public class MCPaintballEntities {
     public static final EntityType<GreenPaintGrenadeEntity> GREEN_PAINT_GRENADE = register("green_paint_grenade",EntityType.Builder.of(GreenPaintGrenadeEntity::new,MobCategory.MISC));
     public static final EntityType<BluePaintGrenadeEntity> BLUE_PAINT_GRENADE = register("blue_paint_grenade",EntityType.Builder.of(BluePaintGrenadeEntity::new,MobCategory.MISC));
 
+    public static final EntityType<SmokeGrenadeEntity> SMOKE_GRENADE = register("smoke_grenade",EntityType.Builder.of(SmokeGrenadeEntity::new,MobCategory.MISC));
+
     public static void Initialize() {
         MCPaintball.LOGGER.debug("Initializing Entities");
     }

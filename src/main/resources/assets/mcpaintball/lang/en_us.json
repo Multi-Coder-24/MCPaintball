@@ -26,7 +26,7 @@
   "text.mcpaintball.type_check": "Your type is %s",
   "text.mcpaintball.type_not_set": "You do not have a type",
   "text.mcpaintball.invalid_team": "Please Choose From The Following; Red, Green, Blue",
-  "text.mcpaintball.invalid_type": "Please Choose From The Following; Standard, Medic, Assault, Heavy",
+  "text.mcpaintball.invalid_type": "Please Choose From The Following; Standard, Sniper, Assault, Heavy",
 
   "Comment_2": "Command Error Responses",
   "text.mcpaintball.error_round_started": "Cannot change teams or type when there is a round running",

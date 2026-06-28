@@ -1,5 +1,7 @@
 package org.multicoder.mcpaintball.entity;
 
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
@@ -11,6 +13,7 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
+import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
@@ -42,11 +45,17 @@ public class BluePaintballEntity extends AbstractArrow {
     }
 
     @Override
+    protected @NonNull SoundEvent getDefaultHitGroundSoundEvent() {
+        return MCPaintballSounds.SPLAT;
+    }
+
+    @Override
     protected void onHitEntity(@NonNull EntityHitResult result) {
         if(result.getEntity() instanceof Player Target){
             if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
                 MCPaintballPlayerData TargetData = Target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                if((Objects.requireNonNull(TargetData).Team != 0 && Objects.requireNonNull(TargetData).Type != 3)){
+                if((Objects.requireNonNull(TargetData).Team != 0 && Objects.requireNonNull(TargetData).Team != 3)){
+                    level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
                     MCPaintballGameEvents.INSTANCE.BluePoints++;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
                 }

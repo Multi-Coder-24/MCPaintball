@@ -9,6 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.util.KitHandler;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -131,6 +132,9 @@ public class MCPaintballCommands {
         ServerPlayer player = context.getSource().getPlayerOrException();
         MCPaintballGameEvents.INSTANCE.MatchStarted = false;
         MCPaintballGameEvents.INSTANCE.RoundStarted = false;
+        MCPaintballGameEvents.INSTANCE.RedPoints = 0;
+        MCPaintballGameEvents.INSTANCE.GreenPoints = 0;
+        MCPaintballGameEvents.INSTANCE.BluePoints = 0;
         MCPaintballGameEvents.INSTANCE.setDirty();
         player.sendSystemMessage(Component.translatable("text.mcpaintball.game_stopped"));
         return 0;
@@ -178,8 +182,14 @@ public class MCPaintballCommands {
         return 0;
     }
 
-    public static int GiveKit(CommandContext<CommandSourceStack> ignored) {
-
+    public static int GiveKit(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        if(MCPaintballGameEvents.INSTANCE.MatchStarted && !MCPaintballGameEvents.INSTANCE.RoundStarted){
+            ServerPlayer player = context.getSource().getPlayerOrException();
+            MCPaintballPlayerData data = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+            if(data != null && data.Team != 0 && data.Type != 0){
+                KitHandler.GrantKit(player, data.Team, data.Type);
+            }
+        }
         return 0;
     }
 }

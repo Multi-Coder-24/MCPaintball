@@ -30,5 +30,6 @@ public class CreativeTabEvents {
         output.accept(MCPaintballItems.RED_PAINT_GRENADE);
         output.accept(MCPaintballItems.GREEN_PAINT_GRENADE);
         output.accept(MCPaintballItems.BLUE_PAINT_GRENADE);
+        output.accept(MCPaintballItems.SMOKE_GRENADE);
     }
 }

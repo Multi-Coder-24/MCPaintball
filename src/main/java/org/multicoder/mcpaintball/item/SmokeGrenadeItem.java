@@ -9,17 +9,17 @@ import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
-import org.multicoder.mcpaintball.entity.GreenPaintGrenadeEntity;
+import org.multicoder.mcpaintball.entity.SmokeGrenadeEntity;
 
-public class GreenPaintGrenadeItem extends Item {
+public class SmokeGrenadeItem extends Item {
 
-    public GreenPaintGrenadeItem(Properties properties) {
+    public SmokeGrenadeItem(Properties properties) {
         super(properties);
     }
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
-        GreenPaintGrenadeEntity entity = new GreenPaintGrenadeEntity(MCPaintballEntities.GREEN_PAINT_GRENADE,player,level,player.getItemInHand(hand));
+        SmokeGrenadeEntity entity = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE,player,level,player.getItemInHand(hand));
         entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
         level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
         level.addFreshEntity(entity);

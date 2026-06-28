@@ -24,6 +24,8 @@ public class MCPaintballItems {
     public static final Item GREEN_PAINT_GRENADE = register("explosives/green_grenade", GreenPaintGrenadeItem::new,new Item.Properties().stacksTo(8));
     public static final Item BLUE_PAINT_GRENADE = register("explosives/blue_grenade", BluePaintGrenadeItem::new,new Item.Properties().stacksTo(8));
 
+    public static final Item SMOKE_GRENADE = register("explosives/smoke_grenade", SmokeGrenadeItem::new,new Item.Properties().stacksTo(16));
+
     public static final Item RED_BOOTS = register("armor/red_boots",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.RED_ARMOR_MATERIAL, ArmorType.BOOTS));
     public static final Item RED_LEGGINGS = register("armor/red_leggings",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.RED_ARMOR_MATERIAL, ArmorType.LEGGINGS));
     public static final Item RED_CHESTPLATE = register("armor/red_chestplate",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.RED_ARMOR_MATERIAL, ArmorType.CHESTPLATE));

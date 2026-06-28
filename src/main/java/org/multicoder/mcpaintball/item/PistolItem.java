@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.item;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.entity.BluePaintballEntity;
 import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
@@ -48,6 +50,7 @@ public class PistolItem extends Item {
                 }
                 if(Fired){
                     player.getCooldowns().addCooldown(player.getItemInHand(hand),30);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
                     return InteractionResult.CONSUME;
                 }
             }

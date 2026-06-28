@@ -32,9 +32,10 @@ public class MCPaintballClient implements ClientModInitializer {
         EntityRenderers.register(MCPaintballEntities.RED_PAINTBALL,RedPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL, GreenPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL, BluePaintballEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, RedPaintGrenadeRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, ThrownItemRenderer::new);
         EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE, ThrownItemRenderer::new);
         EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE, ThrownItemRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE, ThrownItemRenderer::new);
         CLIENT_LOGGER.info("Initializing Client Particles");
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.RED_PAINT, GlowParticle.ElectricSparkProvider::new);
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.GREEN_PAINT, GlowParticle.ElectricSparkProvider::new);

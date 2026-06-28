@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.item;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.entity.BluePaintballEntity;
 import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
@@ -35,6 +37,7 @@ public class BurstRifleItem extends Item {
                                     RedPaintballEntity redPaintball = new RedPaintballEntity(player,level,player.getItemInHand(hand));
                                     Objects.requireNonNull(redPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                                     level.addFreshEntity(redPaintball);
+                                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
                                     Thread.sleep(100);
                                 }
                             } catch (Exception e) {
@@ -51,6 +54,7 @@ public class BurstRifleItem extends Item {
                                     GreenPaintballEntity greenPaintball = new GreenPaintballEntity(player,level,player.getItemInHand(hand));
                                     Objects.requireNonNull(greenPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                                     level.addFreshEntity(greenPaintball);
+                                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
                                     Thread.sleep(100);
                                 }
                             } catch (Exception e) {
@@ -67,6 +71,7 @@ public class BurstRifleItem extends Item {
                                     BluePaintballEntity bluePaintball = new BluePaintballEntity(player,level,player.getItemInHand(hand));
                                     Objects.requireNonNull(bluePaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                                     level.addFreshEntity(bluePaintball);
+                                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
                                     Thread.sleep(100);
                                 }
                             } catch (Exception e) {
