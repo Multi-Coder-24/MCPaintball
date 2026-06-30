@@ -35,7 +35,7 @@ public class SmokeGrenadeEntity extends ThrowableItemProjectile {
                 ServerLevel level = (ServerLevel) this.level();
                 BlockPos current = this.blockPosition();
                 AABB box = AABB.encapsulatingFullBlocks(current.offset(-5,-2,-5),current.offset(5,2,5));
-                BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(ParticleTypes.LARGE_SMOKE,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.1,0.1,0.1,0.001));
+                BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(ParticleTypes.LARGE_SMOKE,true, true,pos.getX(), pos.getY(), pos.getZ(),10,1.0,1.0,1.0,0.001));
             }
         this.discard();
     }

@@ -14,8 +14,8 @@ public class PaintballDataOverlay implements HudElement {
 
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, @NonNull DeltaTracker deltaTracker) {
-        graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.red_points", MCPaintballClient.RedPoints),50,20, Color.WHITE.getRGB());
-        graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.green_points", MCPaintballClient.GreenPoints),50,30, Color.WHITE.getRGB());
-        graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.blue_points", MCPaintballClient.BluePoints),50,40, Color.WHITE.getRGB());
+        graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.red_points", MCPaintballClient.RedPoints),20,20, Color.WHITE.getRGB());
+        graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.green_points", MCPaintballClient.GreenPoints),20,30, Color.WHITE.getRGB());
+        graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.blue_points", MCPaintballClient.BluePoints),20,40, Color.WHITE.getRGB());
     }
 }

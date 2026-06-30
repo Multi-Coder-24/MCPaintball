@@ -7,9 +7,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
+import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
+import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.entity.RedPaintGrenadeEntity;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+
+import java.util.Objects;
 
 public class RedPaintGrenadeItem extends Item {
 
@@ -20,10 +25,15 @@ public class RedPaintGrenadeItem extends Item {
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         if(!level.isClientSide()){
-            RedPaintGrenadeEntity entity = new RedPaintGrenadeEntity(MCPaintballEntities.RED_PAINT_GRENADE,player,level,player.getItemInHand(hand));
-            entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
-            level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
-            level.addFreshEntity(entity);
+            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+                MCPaintballPlayerData data = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+                if(Objects.requireNonNull(data).Team == 1){
+                    RedPaintGrenadeEntity entity = new RedPaintGrenadeEntity(MCPaintballEntities.RED_PAINT_GRENADE,player,level,player.getItemInHand(hand));
+                    entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
+                    level.addFreshEntity(entity);
+                }
+            }
         }
         return InteractionResult.CONSUME;
     }
