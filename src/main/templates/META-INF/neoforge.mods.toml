@@ -6,9 +6,9 @@ issueTrackerURL="https://github.com/Multi-Coder-24/MCPaintball/issues"
 modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
-#updateJSONURL="https://change.me.example.invalid/updates.json"
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
-#logoFile="mcpaintball.png"
+updateJSONURL="https://api.modrinth.com/updates/mc-paintball/forge_updates.json?neoforge=only"
+displayURL="https://modrinth.com/project/mc-paintball"
+logoFile="assets/mcpaintball/icon.png"
 authors = "${mod_authors}"
 description = '''${mod_description}'''
 [[dependencies."${mod_id}"]]
