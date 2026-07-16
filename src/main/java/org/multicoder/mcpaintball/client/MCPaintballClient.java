@@ -16,6 +16,7 @@ import org.multicoder.mcpaintball.client.renderer.PaintballDataOverlay;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballParticles;
 import org.multicoder.mcpaintball.entity.renderer.*;
+import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 
 import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
@@ -42,6 +43,7 @@ public class MCPaintballClient implements ClientModInitializer {
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.BLUE_PAINT, GlowParticle.ElectricSparkProvider::new);
         CLIENT_LOGGER.info("Initializing Packet Handlers");
         ClientPlayNetworking.registerGlobalReceiver(PointSyncS2CPacket.TYPE,PointSyncS2CPacket::HandlePacket);
+        ClientPlayNetworking.registerGlobalReceiver(DataSyncS2CPacket.TYPE,DataSyncS2CPacket::HandlePacket);
         CLIENT_LOGGER.info("Registering Overlay");
         HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"overlay"), new PaintballDataOverlay());
         CLIENT_LOGGER.info("Initialized MCPaintball Client");

@@ -3,17 +3,22 @@ package org.multicoder.mcpaintball.command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.integration.MCPaintballVoiceChatPlugin;
+import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.util.KitHandler;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class MCPaintballCommands {
     public static int SetTeam(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
@@ -26,36 +31,30 @@ public class MCPaintballCommands {
                 data.Team = 1;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+                if(FabricLoader.getInstance().isModLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.RED);
+                }
             }
             case "green" -> {
                 data.Team = 2;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+                if(FabricLoader.getInstance().isModLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.GREEN);
+                }
             }
             case "blue" -> {
                 data.Team = 3;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+                if(FabricLoader.getInstance().isModLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.BLUE);
+                }
             }
             default -> player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_team"));
-        }
-        return 0;
-    }
-
-    public static int CheckTeam(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        ServerPlayer player = context.getSource().getPlayerOrException();
-        MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-        String team = switch (data.Team) {
-            case 1 -> "Red";
-            case 2 -> "Green";
-            case 3 -> "Blue";
-            default -> "";
-        };
-        if(team.isEmpty()){
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.team_not_set"));
-        }
-        else {
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.team_check",team));
         }
         return 0;
     }
@@ -72,21 +71,25 @@ public class MCPaintballCommands {
                         data.Type = 1;
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                        ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
                     }
-                    case "medic" -> {
+                    case "sniper" -> {
                         data.Type = 2;
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                        ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
                     }
                     case "assault" -> {
                         data.Type = 3;
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                        ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
                     }
                     case "heavy" -> {
                         data.Type = 4;
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
+                        ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
                     }
                     default -> player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_type"));
                 }
@@ -97,25 +100,6 @@ public class MCPaintballCommands {
         }
         else {
             player.sendSystemMessage(Component.translatable("text.mcpaintball.error_no_game"));
-        }
-        return 0;
-    }
-
-    public static int CheckType(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        ServerPlayer player = context.getSource().getPlayerOrException();
-        MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-        String type = switch (data.Type) {
-            case 1 -> "Standard";
-            case 2 -> "Medic";
-            case 3 -> "Assault";
-            case 4 -> "Heavy";
-            default -> "";
-        };
-        if(type.isEmpty()){
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.type_not_set"));
-        }
-        else {
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.type_check",type));
         }
         return 0;
     }

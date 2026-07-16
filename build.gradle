@@ -6,12 +6,24 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+    maven { url = 'https://maven.maxhenkel.de/repository/public' }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     implementation("net.fabricmc:fabric-loader:${project.loader_version}")
     implementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}")
+    implementation("de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}")
+    //runtimeOnly("maven.modrinth:simple-voice-chat:fabric-${voicechat_version}")
+    //runtimeOnly("de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}:fabric-stub")
+
 }
 loom {
 

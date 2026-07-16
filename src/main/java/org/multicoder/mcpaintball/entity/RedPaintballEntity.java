@@ -3,7 +3,6 @@ package org.multicoder.mcpaintball.entity;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.cow.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -60,10 +59,6 @@ public class RedPaintballEntity extends AbstractArrow {
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
                 }
             }
-        } else if (result.getEntity() instanceof Cow) {
-            level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-            MCPaintballGameEvents.INSTANCE.RedPoints++;
-            MCPaintballGameEvents.INSTANCE.setDirty(true);
         }
         super.discard();
     }
