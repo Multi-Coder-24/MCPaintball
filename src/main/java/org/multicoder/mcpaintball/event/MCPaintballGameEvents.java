@@ -36,6 +36,7 @@ import org.multicoder.mcpaintball.data.MCPaintballSaveData;
 import org.multicoder.mcpaintball.entity.renderer.BluePaintballEntityRenderer;
 import org.multicoder.mcpaintball.entity.renderer.GreenPaintballEntityRenderer;
 import org.multicoder.mcpaintball.entity.renderer.RedPaintballEntityRenderer;
+import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 import org.multicoder.mcpaintball.particle.BluePaintParticle;
 import org.multicoder.mcpaintball.particle.GreenPaintParticle;
@@ -84,6 +85,7 @@ public class MCPaintballGameEvents {
     public static void RegisterPayloads(RegisterPayloadHandlersEvent event){
         PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(PointSyncS2CPacket.TYPE,PointSyncS2CPacket.STREAM_CODEC);
+        registrar.playToClient(DataSyncS2CPacket.TYPE,DataSyncS2CPacket.STREAM_CODEC);
     }
 
     @SubscribeEvent
@@ -122,8 +124,8 @@ public class MCPaintballGameEvents {
     @SubscribeEvent
     public static void RegisterCommands(RegisterCommandsEvent event){
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.team_prefix").getString()).executes(MCPaintballCommands::CheckTeam).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("team", StringArgumentType.word()).executes(MCPaintballCommands::SetTeam))))).createBuilder().build();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.type_prefix").getString()).executes(MCPaintballCommands::CheckType).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("type",StringArgumentType.word()).executes(MCPaintballCommands::SetType))))).createBuilder().build();
+        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.team_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("team", StringArgumentType.word()).executes(MCPaintballCommands::SetTeam))))).createBuilder().build();
+        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.type_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("type",StringArgumentType.word()).executes(MCPaintballCommands::SetType))))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartGame)).then(literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopGame)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartRound)).then(literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopRound)).then(literal(Component.translatable("command.mcpaintball.winner").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::RoundWinner)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.kit").getString()).executes(MCPaintballCommands::GiveKit))).createBuilder().build();
@@ -154,6 +156,7 @@ public class MCPaintballGameEvents {
         @SubscribeEvent
         public static void RegisterClientReceiver(RegisterClientPayloadHandlersEvent event){
             event.register(PointSyncS2CPacket.TYPE,PointSyncS2CPacket::HandlePacket);
+            event.register(DataSyncS2CPacket.TYPE,DataSyncS2CPacket::HandlePacket);
         }
 
         @SubscribeEvent
