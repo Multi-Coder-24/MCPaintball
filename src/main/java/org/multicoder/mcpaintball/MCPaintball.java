@@ -25,8 +25,11 @@ public class MCPaintball implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
+        MCPaintballDataComponents.Initialize();
         MCPaintballItems.Initialize();
         MCPaintballEntities.Initialize();
+        MCPaintballBlocks.Initialize();
+        MCPaintballBlockEntities.Initialize();
         MCPaintballArmorMaterials.Initialize();
         MCPaintballParticles.Initialize();
         MCPaintballSounds.Initialize();

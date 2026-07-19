@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.item;
+package org.multicoder.mcpaintball.item.weapon;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
