@@ -2,7 +2,9 @@ package org.multicoder.mcpaintball.event;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -10,9 +12,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permissions;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import org.multicoder.mcpaintball.command.MCPaintballCommands;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballDataComponents;
+import org.multicoder.mcpaintball.core.MCPaintballItems;
+import org.multicoder.mcpaintball.core.MCPaintballKeybinding;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
+import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 
 import java.util.Objects;
@@ -50,5 +58,15 @@ public class MCPaintballGameEvents {
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartGame)).then(literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopGame)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartRound)).then(literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopRound)).then(literal(Component.translatable("command.mcpaintball.winner").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::RoundWinner)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.kit").getString()).executes(MCPaintballCommands::GiveKit))).createBuilder().build();
+    }
+
+    public static void ClientEndTick(Minecraft minecraft) {
+        while(MCPaintballKeybinding.CYCLE_GRENADE_LAUNCHER_TYPE.consumeClick()){
+            Player player =  minecraft.player;
+            if(Objects.requireNonNull(player).getItemInHand(InteractionHand.MAIN_HAND).getItem() == MCPaintballItems.GRENADE_LAUNCHER){
+                int T = Objects.requireNonNull(player.getItemInHand(InteractionHand.MAIN_HAND).get(MCPaintballDataComponents.SETTING)).Setting();
+                ClientPlayNetworking.send(new CycleGLTypeC2SPacket(T));
+            }
+        }
     }
 }

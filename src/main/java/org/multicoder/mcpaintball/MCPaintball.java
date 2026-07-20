@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -15,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.event.CreativeTabEvents;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
 import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 
@@ -48,6 +50,8 @@ public class MCPaintball implements ModInitializer {
         LOGGER.info("Initializing Networking");
         PayloadTypeRegistry.clientboundPlay().register(PointSyncS2CPacket.TYPE,PointSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.clientboundPlay().register(DataSyncS2CPacket.TYPE,DataSyncS2CPacket.STREAM_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket.STREAM_CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket::HandlePacket);
         LOGGER.info("Initialized MCPaintball");
     }
 }

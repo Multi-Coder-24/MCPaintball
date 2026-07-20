@@ -51,6 +51,8 @@
   "text.mcpaintball.type_assault": "Assault",
   "text.mcpaintball.type_heavy": "Heavy",
   "text.mcpaintball.type_none": "None",
+  "text.mcpaintball.gl_default": "Grenade Launcher Type: Paint Grenade",
+  "text.mcpaintball.gl_smoke": "Grenade Launcher Type: Smoke Grenade",
 
   "Comment_4": "Mob Effects",
   "effect.mcpaintball.spawning_grace": "Spawning Grace",
@@ -105,5 +107,9 @@
   "subtitle.mcpaintball.c4_removed": "C4 Removed From Remote",
   "subtitle.mcpaintball.c4_detonate": "C4 Detonated",
   "subtitle.mcpaintball.splat": "Paintball Hit Ground",
-  "subtitle.mcpaintball.grenade": "Grenade Thrown"
+  "subtitle.mcpaintball.grenade": "Grenade Thrown",
+
+  "Comment_9": "Keybindings",
+  "key.category.mcpaintball.weapon": "Weapon Features",
+  "key.mcpaintball.cycle_gl": "Cycle Grenade Launcher Type"
 }

@@ -1,13 +1,13 @@
 package org.multicoder.mcpaintball.client;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +16,7 @@ import org.multicoder.mcpaintball.client.renderer.PaintballDataOverlay;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballParticles;
 import org.multicoder.mcpaintball.entity.renderer.*;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 
@@ -33,10 +34,10 @@ public class MCPaintballClient implements ClientModInitializer {
         EntityRenderers.register(MCPaintballEntities.RED_PAINTBALL,RedPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL, GreenPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL, BluePaintballEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, ThrownItemRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE, ThrownItemRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE, ThrownItemRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE, ThrownItemRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, RedPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE, GreenPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE, BluePaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE, SmokeGrenadeEntityRenderer::new);
         CLIENT_LOGGER.info("Initializing Client Particles");
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.RED_PAINT, GlowParticle.ElectricSparkProvider::new);
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.GREEN_PAINT, GlowParticle.ElectricSparkProvider::new);
@@ -46,6 +47,8 @@ public class MCPaintballClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(DataSyncS2CPacket.TYPE,DataSyncS2CPacket::HandlePacket);
         CLIENT_LOGGER.info("Registering Overlay");
         HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"overlay"), new PaintballDataOverlay());
+
+        ClientTickEvents.END_CLIENT_TICK.register(MCPaintballGameEvents::ClientEndTick);
         CLIENT_LOGGER.info("Initialized MCPaintball Client");
     }
 }

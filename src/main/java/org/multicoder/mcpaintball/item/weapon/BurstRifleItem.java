@@ -1,6 +1,9 @@
 package org.multicoder.mcpaintball.item.weapon;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,7 +24,9 @@ import java.util.Objects;
 
 public class BurstRifleItem extends Item {
 
-    public BurstRifleItem(Properties properties) {super(properties);}
+    public BurstRifleItem() {
+        super(new Properties().setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapon/burst_rifle"))).stacksTo(1));
+    }
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
