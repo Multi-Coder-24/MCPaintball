@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.item.weapon.grenades;
+package org.multicoder.mcpaintball.item.weapon;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -50,6 +50,11 @@ public class GrenadeLauncherItem extends Item {
                             Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                             level.addFreshEntity(smokeGrenade);
                             Fired = true;
+                        }else if (Setting == 3){
+                            EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
+                            Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                            level.addFreshEntity(empGrenade);
+                            Fired = true;
                         }
                         break;
                     case 2:
@@ -62,6 +67,11 @@ public class GrenadeLauncherItem extends Item {
                             SmokeGrenadeEntity smokeGrenade = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE,player,level,player.getItemInHand(hand));
                             Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                             level.addFreshEntity(smokeGrenade);
+                            Fired = true;
+                        }else if (Setting == 3){
+                            EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
+                            Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                            level.addFreshEntity(empGrenade);
                             Fired = true;
                         }
                         break;
@@ -76,12 +86,17 @@ public class GrenadeLauncherItem extends Item {
                             Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                             level.addFreshEntity(smokeGrenade);
                             Fired = true;
+                        }else if (Setting == 3){
+                            EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
+                            Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                            level.addFreshEntity(empGrenade);
+                            Fired = true;
                         }
                         break;
                 }
                 if(Fired){
                     player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
                     return InteractionResult.CONSUME;
                 }
             }

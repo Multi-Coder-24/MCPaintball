@@ -12,6 +12,7 @@ public class MCPaintballSounds {
     public static final SoundEvent HIT = register("hit");
     public static final SoundEvent SPLAT = register("splat");
     public static final SoundEvent GRENADE = register("grenade");
+    public static final SoundEvent SPARK = register("spark");
 
     public static void Initialize() {}
     public static SoundEvent register(String name){

@@ -1,12 +1,25 @@
 package org.multicoder.mcpaintball.event;
 
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
-import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 
 public class CreativeTabEvents {
 
-    public static void CombatModify(FabricCreativeModeTabOutput output) {
+    public static void WeaponsInit(FabricCreativeModeTabOutput output) {
+        output.accept(MCPaintballItems.PISTOL);
+        output.accept(MCPaintballItems.SHOTGUN);
+        output.accept(MCPaintballItems.SNIPER_RIFLE);
+        output.accept(MCPaintballItems.ASSAULT_RIFLE);
+        output.accept(MCPaintballItems.GRENADE_LAUNCHER);
+        output.accept(MCPaintballItems.BURST_RIFLE);
+        output.accept(MCPaintballItems.RED_PAINT_GRENADE);
+        output.accept(MCPaintballItems.GREEN_PAINT_GRENADE);
+        output.accept(MCPaintballItems.BLUE_PAINT_GRENADE);
+        output.accept(MCPaintballItems.SMOKE_GRENADE);
+        output.accept(MCPaintballItems.EMP_GRENADE);
+    }
+
+    public static void UtilityInit(FabricCreativeModeTabOutput output) {
         output.accept(MCPaintballItems.RED_BOOTS);
         output.accept(MCPaintballItems.RED_LEGGINGS);
         output.accept(MCPaintballItems.RED_CHESTPLATE);
@@ -19,24 +32,5 @@ public class CreativeTabEvents {
         output.accept(MCPaintballItems.BLUE_LEGGINGS);
         output.accept(MCPaintballItems.BLUE_CHESTPLATE);
         output.accept(MCPaintballItems.BLUE_HELMET);
-    }
-
-    public static void ToolModify(FabricCreativeModeTabOutput output) {
-        output.accept(MCPaintballItems.PISTOL);
-        output.accept(MCPaintballItems.SHOTGUN);
-        output.accept(MCPaintballItems.SNIPER_RIFLE);
-        output.accept(MCPaintballItems.ASSAULT_RIFLE);
-        output.accept(MCPaintballItems.GRENADE_LAUNCHER);
-        output.accept(MCPaintballItems.BURST_RIFLE);
-        output.accept(MCPaintballItems.RED_PAINT_GRENADE);
-        output.accept(MCPaintballItems.GREEN_PAINT_GRENADE);
-        output.accept(MCPaintballItems.BLUE_PAINT_GRENADE);
-        output.accept(MCPaintballItems.SMOKE_GRENADE);
-        output.accept(MCPaintballBlocks.RED_C4_BLOCK);
-        output.accept(MCPaintballBlocks.GREEN_C4_BLOCK);
-        output.accept(MCPaintballBlocks.BLUE_C4_BLOCK);
-        output.accept(MCPaintballItems.RED_C4_REMOTE);
-        output.accept(MCPaintballItems.GREEN_C4_REMOTE);
-        output.accept(MCPaintballItems.BLUE_C4_REMOTE);
     }
 }

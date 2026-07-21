@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorType;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.item.utility.*;
 import org.multicoder.mcpaintball.item.weapon.*;
 import org.multicoder.mcpaintball.item.weapon.grenades.*;
 
@@ -27,6 +26,7 @@ public class MCPaintballItems {
     public static final Item BLUE_PAINT_GRENADE = register("explosives/blue_grenade", BluePaintGrenadeItem::new,new Item.Properties().stacksTo(8));
 
     public static final Item SMOKE_GRENADE = register("explosives/smoke_grenade", SmokeGrenadeItem::new,new Item.Properties().stacksTo(16));
+    public static final Item EMP_GRENADE = register("explosives/emp_grenade", EMPGrenadeItem::new,new Item.Properties().stacksTo(16));
 
     public static final Item RED_BOOTS = register("armor/red_boots",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.RED_ARMOR_MATERIAL, ArmorType.BOOTS));
     public static final Item RED_LEGGINGS = register("armor/red_leggings",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.RED_ARMOR_MATERIAL, ArmorType.LEGGINGS));
@@ -42,10 +42,6 @@ public class MCPaintballItems {
     public static final Item BLUE_LEGGINGS = register("armor/blue_leggings",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.BLUE_ARMOR_MATERIAL, ArmorType.LEGGINGS));
     public static final Item BLUE_CHESTPLATE = register("armor/blue_chestplate",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.BLUE_ARMOR_MATERIAL, ArmorType.CHESTPLATE));
     public static final Item BLUE_HELMET = register("armor/blue_helmet",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.BLUE_ARMOR_MATERIAL, ArmorType.HELMET));
-
-    public static final Item RED_C4_REMOTE = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"util/red_c4_remote"), new RedC4RemoteItem());
-    public static final Item GREEN_C4_REMOTE = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"util/green_c4_remote"), new GreenC4RemoteItem());
-    public static final Item BLUE_C4_REMOTE = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"util/blue_c4_remote"), new BlueC4RemoteItem());
 
     public static void Initialize(){
         MCPaintball.LOGGER.debug("Initializing Items");
