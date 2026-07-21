@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.item;
+package org.multicoder.mcpaintball.item.weapon.grenades;
 
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;

@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.item;
+package org.multicoder.mcpaintball.item.weapon.grenades;
 
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -11,14 +11,14 @@ import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
-import org.multicoder.mcpaintball.entity.BluePaintGrenadeEntity;
+import org.multicoder.mcpaintball.entity.RedPaintGrenadeEntity;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.Objects;
 
-public class BluePaintGrenadeItem extends Item {
+public class RedPaintGrenadeItem extends Item {
 
-    public BluePaintGrenadeItem(Properties properties) {
+    public RedPaintGrenadeItem(Properties properties) {
         super(properties);
     }
 
@@ -27,14 +27,14 @@ public class BluePaintGrenadeItem extends Item {
         if(!level.isClientSide()){
             if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
                 MCPaintballPlayerData data = player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get());
-                if(Objects.requireNonNull(data).Team == 3){
-                    BluePaintGrenadeEntity entity = new BluePaintGrenadeEntity(MCPaintballEntities.BLUE_PAINT_GRENADE.get(),player,level,player.getItemInHand(hand));
+                if(Objects.requireNonNull(data).Team == 1){
+                    RedPaintGrenadeEntity entity = new RedPaintGrenadeEntity(MCPaintballEntities.RED_PAINT_GRENADE.get(),player,level,player.getItemInHand(hand));
                     entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
                     level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1f,1f);
                     level.addFreshEntity(entity);
                 }
             }
         }
-        return super.use(level, player, hand);
+        return InteractionResult.CONSUME;
     }
 }

@@ -1,0 +1,12 @@
+package org.multicoder.mcpaintball.core;
+
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
+import org.lwjgl.glfw.GLFW;
+import org.multicoder.mcpaintball.MCPaintball;
+
+public class MCPaintballKeybindings {
+    public static final KeyMapping.Category CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath(MCPaintball.MODID,"weapons"));
+    public static final KeyMapping CYCLE_GRENADE_LAUNCHER_TYPE = new KeyMapping("key.mcpaintball.cycle_gl", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C,CATEGORY);
+}

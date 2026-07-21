@@ -15,6 +15,8 @@ public class MCPaintball {
     public MCPaintball(IEventBus eventBus, ModContainer ignored) {
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
+        MCPaintballDataComponents.COMPONENTS.register(eventBus);
+        MCPaintballBlocks.BLOCKS.register(eventBus);
         MCPaintballItems.ITEMS.register(eventBus);
         MCPaintballEntities.ENTITIES.register(eventBus);
         MCPaintballSounds.SOUNDS.register(eventBus);

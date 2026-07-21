@@ -5,7 +5,12 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.item.*;
+import org.multicoder.mcpaintball.item.utility.C4RemoteItem;
+import org.multicoder.mcpaintball.item.weapon.*;
+import org.multicoder.mcpaintball.item.weapon.grenades.BluePaintGrenadeItem;
+import org.multicoder.mcpaintball.item.weapon.grenades.GreenPaintGrenadeItem;
+import org.multicoder.mcpaintball.item.weapon.grenades.RedPaintGrenadeItem;
+import org.multicoder.mcpaintball.item.weapon.grenades.SmokeGrenadeItem;
 
 public class MCPaintballItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MCPaintball.MODID);
@@ -17,11 +22,15 @@ public class MCPaintballItems {
     public static final DeferredItem<?> GRENADE_LAUNCHER = ITEMS.registerItem("weapon/grenade_launcher", GrenadeLauncherItem::new);
     public static final DeferredItem<?> BURST_RIFLE = ITEMS.registerItem("weapon/burst_rifle", BurstRifleItem::new);
 
-    public static final DeferredItem<?> RED_PAINT_GRENADE = ITEMS.registerItem("explosives/red_grenade",RedPaintGrenadeItem::new);
-    public static final DeferredItem<?> GREEN_PAINT_GRENADE = ITEMS.registerItem("explosives/green_grenade",GreenPaintGrenadeItem::new);
-    public static final DeferredItem<?> BLUE_PAINT_GRENADE = ITEMS.registerItem("explosives/blue_grenade",BluePaintGrenadeItem::new);
+    public static final DeferredItem<?> RED_C4_REMOTE = ITEMS.registerItem("util/red_c4_remote", C4RemoteItem::new);
+    public static final DeferredItem<?> GREEN_C4_REMOTE = ITEMS.registerItem("util/green_c4_remote", C4RemoteItem::new);
+    public static final DeferredItem<?> BLUE_C4_REMOTE = ITEMS.registerItem("util/blue_c4_remote", C4RemoteItem::new);
 
-    public static final DeferredItem<?> SMOKE_GRENADE = ITEMS.registerItem("explosives/smoke_grenade",SmokeGrenadeItem::new);
+    public static final DeferredItem<?> RED_PAINT_GRENADE = ITEMS.registerItem("explosives/red_grenade", RedPaintGrenadeItem::new);
+    public static final DeferredItem<?> GREEN_PAINT_GRENADE = ITEMS.registerItem("explosives/green_grenade", GreenPaintGrenadeItem::new);
+    public static final DeferredItem<?> BLUE_PAINT_GRENADE = ITEMS.registerItem("explosives/blue_grenade", BluePaintGrenadeItem::new);
+
+    public static final DeferredItem<?> SMOKE_GRENADE = ITEMS.registerItem("explosives/smoke_grenade", SmokeGrenadeItem::new);
 
     public static final DeferredItem<?> RED_BOOTS = ITEMS.registerItem("armor/red_boots", Item::new,() -> new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.RED_ARMOR_MATERIAL, ArmorType.BOOTS));
     public static final DeferredItem<?> RED_LEGGINGS = ITEMS.registerItem("armor/red_leggings", Item::new,() -> new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.RED_ARMOR_MATERIAL, ArmorType.LEGGINGS));
