@@ -15,12 +15,7 @@ public class MCPaintball {
 
     public MCPaintball(IEventBus eventBus, ModContainer ignored) {
         LOGGER.info("Debug Mode Check");
-        if(System.getenv().containsKey("MultiCoderDebug")){
-            DEBUG = Boolean.parseBoolean(System.getenv("MultiCoderDebug"));
-            if(DEBUG){
-                LOGGER.info("Debug Mode Enabled");
-            }
-        }
+        if(System.getenv().containsKey("MultiCoderDebug")){DEBUG = Boolean.parseBoolean(System.getenv("MultiCoderDebug"));if(DEBUG){LOGGER.info("Debug Mode Enabled");}}
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
         MCPaintballDataComponents.COMPONENTS.register(eventBus);
@@ -30,6 +25,7 @@ public class MCPaintball {
         MCPaintballSounds.SOUNDS.register(eventBus);
         MCPaintballParticles.PARTICLES.register(eventBus);
         MCPaintballDataAttachments.ATTACHMENTS.register(eventBus);
+        MCPaintballCreativeTabs.TABS.register(eventBus);
         LOGGER.info("Initialized MCPaintball");
     }
 }

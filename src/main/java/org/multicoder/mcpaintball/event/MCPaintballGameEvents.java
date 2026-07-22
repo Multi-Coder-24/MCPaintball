@@ -9,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -53,7 +52,7 @@ public class MCPaintballGameEvents {
     public static MCPaintballSaveData INSTANCE;
     @SubscribeEvent
     public static void CreativeTabRegister(BuildCreativeModeTabContentsEvent event){
-        if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES){
+        if(event.getTabKey() == MCPaintballCreativeTabs.WEAPONS_TAB.getKey()){
             event.accept(MCPaintballItems.PISTOL.value());
             event.accept(MCPaintballItems.SHOTGUN.value());
             event.accept(MCPaintballItems.ASSAULT_RIFLE.value());
@@ -65,7 +64,7 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.BLUE_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.SMOKE_GRENADE.value());
             event.accept(MCPaintballItems.EMP_GRENADE.value());
-        }else if(event.getTabKey() == CreativeModeTabs.COMBAT){
+        }else if(event.getTabKey() == MCPaintballCreativeTabs.UTILITY_TAB.getKey()){
             event.accept(MCPaintballItems.RED_BOOTS.value());
             event.accept(MCPaintballItems.RED_LEGGINGS.value());
             event.accept(MCPaintballItems.RED_CHESTPLATE.value());
@@ -78,6 +77,9 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.BLUE_LEGGINGS.value());
             event.accept(MCPaintballItems.BLUE_CHESTPLATE.value());
             event.accept(MCPaintballItems.BLUE_HELMET.value());
+            event.accept(MCPaintballBlocks.RED_GRENADE_STATION.value());
+            event.accept(MCPaintballBlocks.GREEN_GRENADE_STATION.value());
+            event.accept(MCPaintballBlocks.BLUE_GRENADE_STATION.value());
         }
     }
 

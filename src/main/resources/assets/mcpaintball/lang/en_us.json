@@ -93,6 +93,9 @@
   "item.mcpaintball.explosives.emp_grenade": "EMP Grenade",
 
   "Comment_7": "Blocks",
+  "block.mcpaintball.utility.red_grenade_station": "Red Grenade Station",
+  "block.mcpaintball.utility.green_grenade_station": "Green Grenade Station",
+  "block.mcpaintball.utility.blue_grenade_station": "Blue Grenade Station",
 
   "Comment_8": "Miscellaneous Text",
   "text.mcpaintball.weapons_tab": "MCPaintball Weapons",
