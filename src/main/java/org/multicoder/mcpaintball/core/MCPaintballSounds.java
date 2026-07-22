@@ -15,5 +15,6 @@ public class MCPaintballSounds {
     public static final Supplier<SoundEvent> HIT = SOUNDS.register("hit",() -> SoundEvent.createFixedRangeEvent(Identifier.fromNamespaceAndPath(MCPaintball.MODID,"hit"),16f));
     public static final Supplier<SoundEvent> SPLAT = SOUNDS.register("splat",() -> SoundEvent.createFixedRangeEvent(Identifier.fromNamespaceAndPath(MCPaintball.MODID,"splat"),16f));
     public static final Supplier<SoundEvent> GRENADE = SOUNDS.register("grenade",() -> SoundEvent.createFixedRangeEvent(Identifier.fromNamespaceAndPath(MCPaintball.MODID,"grenade"),16f));
+    public static final Supplier<SoundEvent> SPARK = SOUNDS.register("spark",() -> SoundEvent.createFixedRangeEvent(Identifier.fromNamespaceAndPath(MCPaintball.MODID,"grenade"),16f));
 
 }

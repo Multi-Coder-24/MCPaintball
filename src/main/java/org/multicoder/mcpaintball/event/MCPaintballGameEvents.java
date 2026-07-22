@@ -64,12 +64,7 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.GREEN_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.BLUE_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.SMOKE_GRENADE.value());
-            event.accept(MCPaintballItems.RED_C4_REMOTE.value());
-            event.accept(MCPaintballItems.GREEN_C4_REMOTE.value());
-            event.accept(MCPaintballItems.BLUE_C4_REMOTE.value());
-            event.accept(MCPaintballBlocks.RED_C4_BI.value());
-            event.accept(MCPaintballBlocks.GREEN_C4_BI.value());
-            event.accept(MCPaintballBlocks.BLUE_C4_BI.value());
+            event.accept(MCPaintballItems.EMP_GRENADE.value());
         }else if(event.getTabKey() == CreativeModeTabs.COMBAT){
             event.accept(MCPaintballItems.RED_BOOTS.value());
             event.accept(MCPaintballItems.RED_LEGGINGS.value());
@@ -152,6 +147,7 @@ public class MCPaintballGameEvents {
             EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE.get(), GreenPaintGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE.get(), BluePaintGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE.get(), SmokeGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.EMP_GRENADE.get(), EMPGrenadeEntityRenderer::new);
         }
 
         @SubscribeEvent

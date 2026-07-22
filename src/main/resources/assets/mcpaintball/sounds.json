@@ -14,5 +14,9 @@
   "grenade": {
     "subtitle": "subtitle.mcpaintball.grenade",
     "sounds": ["mcpaintball:grenade"]
+  },
+  "spark": {
+    "subtitle": "subtitle.mcpaintball.spark",
+    "sounds": ["mcpaintball:spark"]
   }
 }

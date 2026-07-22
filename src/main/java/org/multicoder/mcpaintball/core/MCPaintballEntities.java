@@ -22,4 +22,5 @@ public class MCPaintballEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<BluePaintGrenadeEntity>> BLUE_PAINT_GRENADE = ENTITIES.register("blue_grenade",() -> EntityType.Builder.<BluePaintGrenadeEntity>of(BluePaintGrenadeEntity::new,MobCategory.MISC).build(ResourceKey.create(Registries.ENTITY_TYPE,Identifier.fromNamespaceAndPath(MCPaintball.MODID,"blue_grenade"))));
 
     public static final DeferredHolder<EntityType<?>, EntityType<SmokeGrenadeEntity>> SMOKE_GRENADE = ENTITIES.register("smoke_grenade",() -> EntityType.Builder.<SmokeGrenadeEntity>of(SmokeGrenadeEntity::new,MobCategory.MISC).build(ResourceKey.create(Registries.ENTITY_TYPE,Identifier.fromNamespaceAndPath(MCPaintball.MODID,"smoke_grenade"))));
+    public static final DeferredHolder<EntityType<?>, EntityType<EMPGrenadeEntity>> EMP_GRENADE = ENTITIES.register("emp_grenade",() -> EntityType.Builder.<EMPGrenadeEntity>of(EMPGrenadeEntity::new,MobCategory.MISC).build(ResourceKey.create(Registries.ENTITY_TYPE,Identifier.fromNamespaceAndPath(MCPaintball.MODID,"emp_grenade"))));
 }
