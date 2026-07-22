@@ -26,16 +26,12 @@ public class MCPaintball implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Debug Mode Check");
-        if(System.getenv().containsKey("MultiCoderDebug")){
-            DEBUG = Boolean.parseBoolean(System.getenv("MultiCoderDebug"));
-            if(DEBUG){
-                LOGGER.info("Debug Mode Enabled");
-            }
-        }
+        if(System.getenv().containsKey("MultiCoderDebug")){DEBUG = Boolean.parseBoolean(System.getenv("MultiCoderDebug"));if(DEBUG){LOGGER.info("Debug Mode Enabled");}}
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
         MCPaintballDataComponents.Initialize();
         MCPaintballDataAttachments.Initialize();
+        MCPaintballBlocks.Initialize();
         MCPaintballItems.Initialize();
         MCPaintballEntities.Initialize();
         MCPaintballArmorMaterials.Initialize();

@@ -44,7 +44,7 @@ public class MCPaintballItems {
     public static final Item BLUE_HELMET = register("armor/blue_helmet",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.BLUE_ARMOR_MATERIAL, ArmorType.HELMET));
 
     public static void Initialize(){
-        MCPaintball.LOGGER.debug("Initializing Items");
+        MCPaintball.LOGGER.info("Initializing Items");
     }
 
 

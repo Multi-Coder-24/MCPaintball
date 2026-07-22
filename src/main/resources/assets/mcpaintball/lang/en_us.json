@@ -96,18 +96,23 @@
   "item.mcpaintball.explosives.green_c4_block": "Green Paint C4",
   "item.mcpaintball.explosives.blue_c4_block": "Blue Paint C4",
 
-  "Comment_7": "Miscellaneous Text",
+  "Comment_7": "Blocks",
+  "block.mcpaintball.utility.red_grenade_station": "Red Grenade Station",
+  "block.mcpaintball.utility.green_grenade_station": "Green Grenade Station",
+  "block.mcpaintball.utility.blue_grenade_station": "Blue Grenade Station",
+
+  "Comment_8": "Miscellaneous Text",
   "text.mcpaintball.weapons_tab": "MCPaintball Weapons",
   "text.mcpaintball.utility_tab": "MCPaintball Utilities",
 
-  "Comment_8": "Subtitles",
+  "Comment_9": "Subtitles",
   "subtitle.mcpaintball.shot": "Weapon Fired",
   "subtitle.mcpaintball.hit": "Paintball Hit",
   "subtitle.mcpaintball.splat": "Paintball Hit Ground",
   "subtitle.mcpaintball.grenade": "Grenade Thrown",
   "subtitle.mcpaintball.spark": "EMP Hit",
 
-  "Comment_9": "Keybindings",
+  "Comment_10": "Keybindings",
   "key.category.mcpaintball.weapon": "Weapon Features",
   "key.mcpaintball.cycle_gl": "Cycle Grenade Launcher Type"
 }

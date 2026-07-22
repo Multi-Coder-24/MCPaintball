@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.event;
 
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTabOutput;
+import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 
 public class CreativeTabEvents {
@@ -32,5 +33,8 @@ public class CreativeTabEvents {
         output.accept(MCPaintballItems.BLUE_LEGGINGS);
         output.accept(MCPaintballItems.BLUE_CHESTPLATE);
         output.accept(MCPaintballItems.BLUE_HELMET);
+        output.accept(MCPaintballBlocks.RED_GRENADE_STATION);
+        output.accept(MCPaintballBlocks.GREEN_GRENADE_STATION);
+        output.accept(MCPaintballBlocks.BLUE_GRENADE_STATION);
     }
 }
