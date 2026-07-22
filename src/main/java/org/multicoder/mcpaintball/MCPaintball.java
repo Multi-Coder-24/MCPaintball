@@ -11,8 +11,16 @@ import org.slf4j.Logger;
 public class MCPaintball {
     public static final String MODID = "mcpaintball";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static boolean DEBUG = false;
 
     public MCPaintball(IEventBus eventBus, ModContainer ignored) {
+        LOGGER.info("Debug Mode Check");
+        if(System.getenv().containsKey("MultiCoderDebug")){
+            DEBUG = Boolean.parseBoolean(System.getenv("MultiCoderDebug"));
+            if(DEBUG){
+                LOGGER.info("Debug Mode Enabled");
+            }
+        }
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
         MCPaintballDataComponents.COMPONENTS.register(eventBus);

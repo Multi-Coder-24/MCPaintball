@@ -11,11 +11,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.util.DebugHelper;
 
 import java.util.Objects;
 
@@ -61,6 +63,8 @@ public class BluePaintballEntity extends AbstractArrow {
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
                 }
             }
+        }else if(MCPaintball.DEBUG){
+            DebugHelper.HandleDebug(result,level(),3,(Player) this.getOwner());
         }
         super.discard();
     }

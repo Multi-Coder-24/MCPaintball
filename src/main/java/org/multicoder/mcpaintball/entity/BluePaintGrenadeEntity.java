@@ -14,12 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import org.jspecify.annotations.NonNull;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.core.MCPaintballParticles;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.util.DebugHelper;
 
 import java.util.Objects;
 
@@ -53,6 +55,8 @@ public class BluePaintGrenadeEntity extends ThrowableItemProjectile {
                             MCPaintballGameEvents.INSTANCE.BluePoints++;
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
                         }
+                    }else if(MCPaintball.DEBUG){
+                        DebugHelper.HandleGrenadeDebug(entity,level(),3,(Player) this.getOwner());
                     }
                 });
             }
