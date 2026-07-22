@@ -22,11 +22,20 @@ import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 public class MCPaintball implements ModInitializer {
     public static final String MOD_ID = "mcpaintball";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+    public static boolean DEBUG = false;
     @Override
     public void onInitialize() {
+        LOGGER.info("Debug Mode Check");
+        if(System.getenv().containsKey("MultiCoderDebug")){
+            DEBUG = Boolean.parseBoolean(System.getenv("MultiCoderDebug"));
+            if(DEBUG){
+                LOGGER.info("Debug Mode Enabled");
+            }
+        }
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
         MCPaintballDataComponents.Initialize();
+        MCPaintballDataAttachments.Initialize();
         MCPaintballItems.Initialize();
         MCPaintballEntities.Initialize();
         MCPaintballArmorMaterials.Initialize();
