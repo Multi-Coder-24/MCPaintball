@@ -1,5 +1,7 @@
 package org.multicoder.mcpaintball.entity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
@@ -59,6 +61,9 @@ public class GreenPaintballEntity extends AbstractArrow {
                     level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
                     MCPaintballGameEvents.INSTANCE.GreenPoints++;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    ServerPlayer serverPlayer = (ServerPlayer) Target;
+                    BlockPos pos = Objects.requireNonNull(serverPlayer.getRespawnConfig()).respawnData().pos();
+                    serverPlayer.teleportTo(pos.getX(),pos.getY(),pos.getZ());
                 }
             }
         }else if(MCPaintball.DEBUG){

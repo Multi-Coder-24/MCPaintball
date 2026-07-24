@@ -12,6 +12,7 @@
   "command.mcpaintball.set": "set",
   "command.mcpaintball.check": "check",
   "command.mcpaintball.kit": "kit",
+  "command.mcpaintball.setup": "setup",
 
   "Comment_1": "Command Responses",
   "text.mcpaintball.game_start": "The game has started, Choose team and type now!",
@@ -27,6 +28,7 @@
   "text.mcpaintball.type_not_set": "You do not have a type",
   "text.mcpaintball.invalid_team": "Please Choose From The Following; Red, Green, Blue",
   "text.mcpaintball.invalid_type": "Please Choose From The Following; Standard, Sniper, Assault, Heavy",
+  "text.mcpaintball.lives_set": "You Have Set The Lives To: %s",
 
   "Comment_2": "Command Error Responses",
   "text.mcpaintball.error_round_started": "Cannot change teams or type when there is a round running",
@@ -40,6 +42,7 @@
   "text.mcpaintball.red_points": "Red Points: %s",
   "text.mcpaintball.green_points": "Green Points: %s",
   "text.mcpaintball.blue_points": "Blue Points: %s",
+  "text.mcpaintball.lives": "Lives: %s",
   "text.mcpaintball.team": "Team: %s",
   "text.mcpaintball.type": "Type: %s",
   "text.mcpaintball.team_red": "Red",
@@ -100,6 +103,9 @@
   "block.mcpaintball.utility.red_grenade_station": "Red Grenade Station",
   "block.mcpaintball.utility.green_grenade_station": "Green Grenade Station",
   "block.mcpaintball.utility.blue_grenade_station": "Blue Grenade Station",
+  "block.mcpaintball.utility.red_respawn_station": "Red Respawn Station",
+  "block.mcpaintball.utility.green_respawn_station": "Green Respawn Station",
+  "block.mcpaintball.utility.blue_respawn_station": "Blue Respawn Station",
 
   "Comment_8": "Miscellaneous Text",
   "text.mcpaintball.weapons_tab": "MCPaintball Weapons",
@@ -114,5 +120,7 @@
 
   "Comment_10": "Keybindings",
   "key.category.mcpaintball.weapon": "Weapon Features",
-  "key.mcpaintball.cycle_gl": "Cycle Grenade Launcher Type"
+  "key.mcpaintball.cycle_gl": "Cycle Grenade Launcher Type",
+  "text.mcpaintball.simulate": "simulate"
+
 }

@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,6 +54,9 @@ public class GreenPaintGrenadeEntity extends ThrowableItemProjectile {
                         level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(), MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
                         MCPaintballGameEvents.INSTANCE.GreenPoints++;
                         MCPaintballGameEvents.INSTANCE.setDirty(true);
+                        ServerPlayer serverPlayer = (ServerPlayer) player;
+                        BlockPos pos = Objects.requireNonNull(serverPlayer.getRespawnConfig()).respawnData().pos();
+                        serverPlayer.teleportTo(pos.getX(),pos.getY(),pos.getZ());
                     }
                 }else if(MCPaintball.DEBUG){
                     DebugHelper.HandleGrenadeDebug(entity,level(),2,(Player) this.getOwner());

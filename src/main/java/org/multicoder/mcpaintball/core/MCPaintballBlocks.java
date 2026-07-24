@@ -20,6 +20,10 @@ public class MCPaintballBlocks {
     public static final Block GREEN_GRENADE_STATION = register("utility/green_grenade_station",GreenGrenadeStation::new, BlockBehaviour.Properties.of().dynamicShape().noOcclusion().pushReaction(PushReaction.BLOCK).destroyTime(5f));
     public static final Block BLUE_GRENADE_STATION = register("utility/blue_grenade_station",BlueGrenadeStation::new, BlockBehaviour.Properties.of().dynamicShape().noOcclusion().pushReaction(PushReaction.BLOCK).destroyTime(5f));
 
+    public static final Block RED_RESPAWN_STATION = register("utility/red_respawn_station",RedRespawnStation::new, BlockBehaviour.Properties.of().dynamicShape().noOcclusion().pushReaction(PushReaction.BLOCK).destroyTime(5f));
+    public static final Block GREEN_RESPAWN_STATION = register("utility/green_respawn_station",GreenRespawnStation::new, BlockBehaviour.Properties.of().dynamicShape().noOcclusion().pushReaction(PushReaction.BLOCK).destroyTime(5f));
+    public static final Block BLUE_RESPAWN_STATION = register("utility/blue_respawn_station",BlueRespawnStation::new, BlockBehaviour.Properties.of().dynamicShape().noOcclusion().pushReaction(PushReaction.BLOCK).destroyTime(5f));
+
     public static void Initialize() {
         MCPaintball.LOGGER.info("Initializing Blocks");
     }

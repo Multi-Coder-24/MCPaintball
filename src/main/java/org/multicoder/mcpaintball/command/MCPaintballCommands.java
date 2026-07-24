@@ -29,7 +29,6 @@ public class MCPaintballCommands {
         switch (selectedTeam) {
             case "red" -> {
                 data.Team = 1;
-                player.removeAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -39,7 +38,6 @@ public class MCPaintballCommands {
             }
             case "green" -> {
                 data.Team = 2;
-                player.removeAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -49,7 +47,6 @@ public class MCPaintballCommands {
             }
             case "blue" -> {
                 data.Team = 3;
-                player.removeAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));

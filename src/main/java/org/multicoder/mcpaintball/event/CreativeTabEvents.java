@@ -36,5 +36,8 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.RED_GRENADE_STATION);
         output.accept(MCPaintballBlocks.GREEN_GRENADE_STATION);
         output.accept(MCPaintballBlocks.BLUE_GRENADE_STATION);
+        output.accept(MCPaintballBlocks.RED_RESPAWN_STATION);
+        output.accept(MCPaintballBlocks.GREEN_RESPAWN_STATION);
+        output.accept(MCPaintballBlocks.BLUE_RESPAWN_STATION);
     }
 }
