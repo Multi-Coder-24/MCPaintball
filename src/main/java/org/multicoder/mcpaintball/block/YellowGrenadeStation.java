@@ -53,15 +53,15 @@ public class YellowGrenadeStation extends Block {
                 if(Objects.requireNonNull(data).Team == 4){
                     switch (data.Type){
                         case 1 ->{
-                            player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
+                            player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
                             player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
                         }case 2 ->{
-                            player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
+                            player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
                             player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
                         }case 3 ->{
-                            player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
+                            player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
                             player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
                         }
