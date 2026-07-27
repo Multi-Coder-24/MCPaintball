@@ -26,6 +26,10 @@ public class DebugHelper {
                      MCPaintballGameEvents.INSTANCE.BluePoints++;
                      MCPaintballGameEvents.INSTANCE.setDirty(true);
                  }
+                 case 4->{
+                    MCPaintballGameEvents.INSTANCE.YellowPoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                }
             }
         }
     }
@@ -43,6 +47,10 @@ public class DebugHelper {
                 }
                 case 3->{
                     MCPaintballGameEvents.INSTANCE.BluePoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                }
+                case 4->{
+                    MCPaintballGameEvents.INSTANCE.YellowPoints++;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
                 }
             }

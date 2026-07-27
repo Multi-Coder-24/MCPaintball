@@ -18,6 +18,7 @@ import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.entity.BluePaintballEntity;
 import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
 import org.multicoder.mcpaintball.entity.RedPaintballEntity;
+import org.multicoder.mcpaintball.entity.YellowPaintballEntity;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.Objects;
@@ -84,6 +85,23 @@ public class BurstRifleItem extends Item {
                             }
                         });
                         T3.start();
+                        Fired = true;
+                        break;
+                    case 4:
+                        Thread T4 = new Thread(() -> {
+                            try {
+                                for(int i = 0; i < 3; i++){
+                                    YellowPaintballEntity yellowPaintball = new YellowPaintballEntity(player,level,player.getItemInHand(hand));
+                                    Objects.requireNonNull(yellowPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                                    level.addFreshEntity(yellowPaintball);
+                                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
+                                    Thread.sleep(100);
+                                }
+                            } catch (Exception e) {
+                                MCPaintball.LOGGER.error("Exception Using Burst Rifle",e);
+                            }
+                        });
+                        T4.start();
                         Fired = true;
                         break;
                 }

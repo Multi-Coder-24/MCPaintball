@@ -1,6 +1,4 @@
 {
-	"format_version": "1.21.11",
-	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "mcpaintball:block/util/light_gray",
 		"1": "mcpaintball:block/util/gray",

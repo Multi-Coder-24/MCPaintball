@@ -14,7 +14,7 @@ public class BluePaintGrenadeEntityRenderer extends ThrownItemRenderer<BluePaint
     private final ItemModelResolver itemModelResolver;
 
     public BluePaintGrenadeEntityRenderer(EntityRendererProvider.Context context) {
-        super(context, 1f, false);
+        super(context, 0.5f, false);
         itemModelResolver = context.getItemModelResolver();
     }
 

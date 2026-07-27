@@ -21,8 +21,10 @@ public class MCPaintballArmorMaterials {
     private static final ResourceKey<EquipmentAsset> RED_ARMOR_MATERIALS = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"red"));
     private static final ResourceKey<EquipmentAsset> GREEN_ARMOR_MATERIALS = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"green"));
     private static final ResourceKey<EquipmentAsset> BLUE_ARMOR_MATERIALS = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"blue"));
+    private static final ResourceKey<EquipmentAsset> YELLOW_ARMOR_MATERIALS = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"yellow"));
 
     public static final ArmorMaterial RED_ARMOR_MATERIAL = new ArmorMaterial(1000, Map.of(ArmorType.HELMET,0,ArmorType.CHESTPLATE,0,ArmorType.LEGGINGS,0,ArmorType.BOOTS,0),1, SoundEvents.ARMOR_EQUIP_GENERIC,0f,0f, TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.fromNamespaceAndPath("minecraft","air")),RED_ARMOR_MATERIALS);
     public static final ArmorMaterial GREEN_ARMOR_MATERIAL = new ArmorMaterial(1000, Map.of(ArmorType.HELMET,0,ArmorType.CHESTPLATE,0,ArmorType.LEGGINGS,0,ArmorType.BOOTS,0),1, SoundEvents.ARMOR_EQUIP_GENERIC,0f,0f, TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.fromNamespaceAndPath("minecraft","air")),GREEN_ARMOR_MATERIALS);
     public static final ArmorMaterial BLUE_ARMOR_MATERIAL = new ArmorMaterial(1000, Map.of(ArmorType.HELMET,0,ArmorType.CHESTPLATE,0,ArmorType.LEGGINGS,0,ArmorType.BOOTS,0),1, SoundEvents.ARMOR_EQUIP_GENERIC,0f,0f, TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.fromNamespaceAndPath("minecraft","air")),BLUE_ARMOR_MATERIALS);
+    public static final ArmorMaterial YELLOW_ARMOR_MATERIAL = new ArmorMaterial(1000, Map.of(ArmorType.HELMET,0,ArmorType.CHESTPLATE,0,ArmorType.LEGGINGS,0,ArmorType.BOOTS,0),1, SoundEvents.ARMOR_EQUIP_GENERIC,0f,0f, TagKey.create(BuiltInRegistries.ITEM.key(), Identifier.fromNamespaceAndPath("minecraft","air")),YELLOW_ARMOR_MATERIALS);
 }

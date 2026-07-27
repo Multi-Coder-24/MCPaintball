@@ -33,6 +33,9 @@ public record CycleGLTypeC2SPacket(int Setting) implements CustomPacketPayload {
             T = 3;
             player.sendSystemMessage(Component.translatable("text.mcpaintball.gl_emp"));
         }else if(T == 3) {
+            T = 4;
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.gl_sight"));
+        }else if(T == 4) {
             T = 1;
             player.sendSystemMessage(Component.translatable("text.mcpaintball.gl_default"));
         }

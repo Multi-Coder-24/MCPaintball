@@ -14,6 +14,7 @@ import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.entity.BluePaintballEntity;
 import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
 import org.multicoder.mcpaintball.entity.RedPaintballEntity;
+import org.multicoder.mcpaintball.entity.YellowPaintballEntity;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.Objects;
@@ -45,6 +46,12 @@ public class PistolItem extends Item {
                         BluePaintballEntity bluePaintball = new BluePaintballEntity(player,level,player.getItemInHand(hand));
                         Objects.requireNonNull(bluePaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                         level.addFreshEntity(bluePaintball);
+                        Fired = true;
+                        break;
+                    case 4:
+                        YellowPaintballEntity yellowPaintball = new YellowPaintballEntity(player,level,player.getItemInHand(hand));
+                        Objects.requireNonNull(yellowPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                        level.addFreshEntity(yellowPaintball);
                         Fired = true;
                         break;
                 }

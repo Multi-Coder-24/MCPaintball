@@ -55,6 +55,11 @@ public class GrenadeLauncherItem extends Item {
                             Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                             level.addFreshEntity(empGrenade);
                             Fired = true;
+                        }else  if(Setting == 4){
+                            SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
+                            Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                            level.addFreshEntity(sightGrenade);
+                            Fired = true;
                         }
                         break;
                     case 2:
@@ -73,6 +78,11 @@ public class GrenadeLauncherItem extends Item {
                             Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                             level.addFreshEntity(empGrenade);
                             Fired = true;
+                        }else  if(Setting == 4){
+                            SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
+                            Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                            level.addFreshEntity(sightGrenade);
+                            Fired = true;
                         }
                         break;
                     case 3:
@@ -90,6 +100,11 @@ public class GrenadeLauncherItem extends Item {
                             EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
                             Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                             level.addFreshEntity(empGrenade);
+                            Fired = true;
+                        }else  if(Setting == 4){
+                            SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
+                            Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                            level.addFreshEntity(sightGrenade);
                             Fired = true;
                         }
                         break;

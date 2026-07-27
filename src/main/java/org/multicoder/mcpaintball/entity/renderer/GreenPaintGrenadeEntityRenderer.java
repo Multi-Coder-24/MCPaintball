@@ -14,7 +14,7 @@ public class GreenPaintGrenadeEntityRenderer extends ThrownItemRenderer<GreenPai
     private final ItemModelResolver itemModelResolver;
 
     public GreenPaintGrenadeEntityRenderer(EntityRendererProvider.Context context) {
-        super(context, 1f, false);
+        super(context, 0.5f, false);
         itemModelResolver = context.getItemModelResolver();
     }
 

@@ -14,6 +14,7 @@ import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.entity.BluePaintballEntity;
 import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
 import org.multicoder.mcpaintball.entity.RedPaintballEntity;
+import org.multicoder.mcpaintball.entity.YellowPaintballEntity;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.Objects;
@@ -65,6 +66,18 @@ public class ShotgunItem extends Item {
                         level.addFreshEntity(bluePaintball1);
                         level.addFreshEntity(bluePaintball2);
                         level.addFreshEntity(bluePaintball3);
+                        Fired = true;
+                        break;
+                    case 4:
+                        YellowPaintballEntity yellowPaintball1 = new YellowPaintballEntity(player,level,player.getItemInHand(hand));
+                        YellowPaintballEntity yellowPaintball2 = new YellowPaintballEntity(player,level,player.getItemInHand(hand));
+                        YellowPaintballEntity yellowPaintball3 = new YellowPaintballEntity(player,level,player.getItemInHand(hand));
+                        Objects.requireNonNull(yellowPaintball1).shootFromRotation(player,player.getXRot(),player.getYRot() - 3f,0.0F,4.0F,0.4F);
+                        Objects.requireNonNull(yellowPaintball2).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,4.0F,0.4F);
+                        Objects.requireNonNull(yellowPaintball3).shootFromRotation(player,player.getXRot(),player.getYRot() + 3f,0.0F,4.0F,0.4F);
+                        level.addFreshEntity(yellowPaintball1);
+                        level.addFreshEntity(yellowPaintball2);
+                        level.addFreshEntity(yellowPaintball3);
                         Fired = true;
                         break;
                 }

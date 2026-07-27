@@ -8,6 +8,7 @@ public class MCPaintballParticles {
     public static final SimpleParticleType RED_PAINT = FabricParticleTypes.simple(true);
     public static final SimpleParticleType GREEN_PAINT = FabricParticleTypes.simple(true);
     public static final SimpleParticleType BLUE_PAINT = FabricParticleTypes.simple(true);
+    public static final SimpleParticleType YELLOW_PAINT = FabricParticleTypes.simple(true);
     public static void Initialize() {
         MCPaintball.LOGGER.debug("Initializing Particles");
     }

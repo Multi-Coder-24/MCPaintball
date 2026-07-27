@@ -16,8 +16,10 @@ public class CreativeTabEvents {
         output.accept(MCPaintballItems.RED_PAINT_GRENADE);
         output.accept(MCPaintballItems.GREEN_PAINT_GRENADE);
         output.accept(MCPaintballItems.BLUE_PAINT_GRENADE);
+        output.accept(MCPaintballItems.YELLOW_PAINT_GRENADE);
         output.accept(MCPaintballItems.SMOKE_GRENADE);
         output.accept(MCPaintballItems.EMP_GRENADE);
+        output.accept(MCPaintballItems.SIGHT_GRENADE);
     }
 
     public static void UtilityInit(FabricCreativeModeTabOutput output) {
@@ -33,11 +35,17 @@ public class CreativeTabEvents {
         output.accept(MCPaintballItems.BLUE_LEGGINGS);
         output.accept(MCPaintballItems.BLUE_CHESTPLATE);
         output.accept(MCPaintballItems.BLUE_HELMET);
+        output.accept(MCPaintballItems.YELLOW_BOOTS);
+        output.accept(MCPaintballItems.YELLOW_LEGGINGS);
+        output.accept(MCPaintballItems.YELLOW_CHESTPLATE);
+        output.accept(MCPaintballItems.YELLOW_HELMET);
         output.accept(MCPaintballBlocks.RED_GRENADE_STATION);
         output.accept(MCPaintballBlocks.GREEN_GRENADE_STATION);
         output.accept(MCPaintballBlocks.BLUE_GRENADE_STATION);
+        output.accept(MCPaintballBlocks.YELLOW_GRENADE_STATION);
         output.accept(MCPaintballBlocks.RED_RESPAWN_STATION);
         output.accept(MCPaintballBlocks.GREEN_RESPAWN_STATION);
         output.accept(MCPaintballBlocks.BLUE_RESPAWN_STATION);
+        output.accept(MCPaintballBlocks.YELLOW_RESPAWN_STATION);
     }
 }
