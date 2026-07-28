@@ -56,4 +56,15 @@ public class MCPaintballSaveData extends SavedData {
     public boolean RoundStarted(){
         return RoundStarted;
     }
+
+    public void incrementByChecker(int Checker){
+        switch (Checker){
+            case 1 -> RedPoints++;
+            case 2 -> GreenPoints++;
+            case 3 -> BluePoints++;
+            case 4 -> YellowPoints++;
+        }
+        setDirty(true);
+    }
+
 }

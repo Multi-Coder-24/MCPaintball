@@ -7,7 +7,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -37,79 +39,40 @@ public class GrenadeLauncherItem extends Item {
             int Setting = Objects.requireNonNull(itemStack.get(MCPaintballDataComponents.SETTING)).Setting();
             if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
                 MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                boolean Fired = false;
-                switch (data.Team){
-                    case 1:
-                        if(Setting == 1){
-                            RedPaintGrenadeEntity redPaintGrenade = new RedPaintGrenadeEntity(MCPaintballEntities.RED_PAINT_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(redPaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(redPaintGrenade);
-                            Fired = true;
-                        }else if(Setting == 2){
-                            SmokeGrenadeEntity smokeGrenade = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(smokeGrenade);
-                            Fired = true;
-                        }else if (Setting == 3){
-                            EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(empGrenade);
-                            Fired = true;
-                        }else  if(Setting == 4){
-                            SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(sightGrenade);
-                            Fired = true;
-                        }
-                        break;
-                    case 2:
-                        if(Setting == 1){
-                            GreenPaintGrenadeEntity greenPaintGrenade = new GreenPaintGrenadeEntity(MCPaintballEntities.GREEN_PAINT_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(greenPaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(greenPaintGrenade);
-                            Fired = true;
-                        }else if(Setting == 2){
-                            SmokeGrenadeEntity smokeGrenade = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(smokeGrenade);
-                            Fired = true;
-                        }else if (Setting == 3){
-                            EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(empGrenade);
-                            Fired = true;
-                        }else  if(Setting == 4){
-                            SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(sightGrenade);
-                            Fired = true;
-                        }
-                        break;
-                    case 3:
-                        if(Setting == 1){
-                            BluePaintGrenadeEntity bluePaintGrenade = new BluePaintGrenadeEntity(MCPaintballEntities.BLUE_PAINT_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(bluePaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(bluePaintGrenade);
-                            Fired = true;
-                        }else if(Setting == 2){
-                            SmokeGrenadeEntity smokeGrenade = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(smokeGrenade);
-                            Fired = true;
-                        }else if (Setting == 3){
-                            EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(empGrenade);
-                            Fired = true;
-                        }else  if(Setting == 4){
-                            SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
-                            Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                            level.addFreshEntity(sightGrenade);
-                            Fired = true;
-                        }
-                        break;
-                }
-                if(Fired){
+                if(Setting == 1){
+                    EntityType<? extends ThrowableItemProjectile> type = switch (data.Team){
+                        case 1 -> MCPaintballEntities.RED_PAINT_GRENADE;
+                        case 2 -> MCPaintballEntities.BLUE_PAINT_GRENADE;
+                        case 3 -> MCPaintballEntities.GREEN_PAINT_GRENADE;
+                        case 4 -> MCPaintballEntities.YELLOW_PAINT_GRENADE;
+                        default -> throw new IllegalStateException("Unexpected value: " + data.Team);
+                    };
+                    PaintGrenadeEntity redPaintGrenade = new PaintGrenadeEntity(type,player,level,player.getItemInHand(hand));
+                    Objects.requireNonNull(redPaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                    level.addFreshEntity(redPaintGrenade);
+                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
+                    return InteractionResult.CONSUME;
+                }else if(Setting == 2){
+                    SmokeGrenadeEntity smokeGrenade = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE,player,level,player.getItemInHand(hand));
+                    Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                    level.addFreshEntity(smokeGrenade);
+                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
+                    return InteractionResult.CONSUME;
+
+                }else if(Setting == 3){
+                    EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
+                    Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                    level.addFreshEntity(empGrenade);
+                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
+                    return InteractionResult.CONSUME;
+
+                }else if(Setting == 4){
+                    SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
+                    Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                    level.addFreshEntity(sightGrenade);
                     player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
                     level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
                     return InteractionResult.CONSUME;

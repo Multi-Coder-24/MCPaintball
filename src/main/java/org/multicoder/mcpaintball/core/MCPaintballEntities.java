@@ -12,15 +12,15 @@ import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.entity.*;
 
 public class MCPaintballEntities {
-    public static final EntityType<RedPaintballEntity> RED_PAINTBALL = register("red_paintball", EntityType.Builder.<RedPaintballEntity>of(RedPaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
-    public static final EntityType<GreenPaintballEntity> GREEN_PAINTBALL = register("green_paintball", EntityType.Builder.<GreenPaintballEntity>of(GreenPaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
-    public static final EntityType<BluePaintballEntity> BLUE_PAINTBALL = register("blue_paintball", EntityType.Builder.<BluePaintballEntity>of(BluePaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
-    public static final EntityType<YellowPaintballEntity> YELLOW_PAINTBALL = register("yellow_paintball", EntityType.Builder.<YellowPaintballEntity>of(YellowPaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
+    public static final EntityType<PaintballEntity> RED_PAINTBALL = register("red_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
+    public static final EntityType<PaintballEntity> GREEN_PAINTBALL = register("green_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
+    public static final EntityType<PaintballEntity> BLUE_PAINTBALL = register("blue_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
+    public static final EntityType<PaintballEntity> YELLOW_PAINTBALL = register("yellow_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
 
-    public static final EntityType<RedPaintGrenadeEntity> RED_PAINT_GRENADE = register("red_paint_grenade",EntityType.Builder.of(RedPaintGrenadeEntity::new,MobCategory.MISC));
-    public static final EntityType<GreenPaintGrenadeEntity> GREEN_PAINT_GRENADE = register("green_paint_grenade",EntityType.Builder.of(GreenPaintGrenadeEntity::new,MobCategory.MISC));
-    public static final EntityType<BluePaintGrenadeEntity> BLUE_PAINT_GRENADE = register("blue_paint_grenade",EntityType.Builder.of(BluePaintGrenadeEntity::new,MobCategory.MISC));
-    public static final EntityType<YellowPaintGrenadeEntity> YELLOW_PAINT_GRENADE = register("yellow_paint_grenade",EntityType.Builder.of(YellowPaintGrenadeEntity::new,MobCategory.MISC));
+    public static final EntityType<PaintGrenadeEntity> RED_PAINT_GRENADE = register("red_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
+    public static final EntityType<PaintGrenadeEntity> GREEN_PAINT_GRENADE = register("green_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
+    public static final EntityType<PaintGrenadeEntity> BLUE_PAINT_GRENADE = register("blue_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
+    public static final EntityType<PaintGrenadeEntity> YELLOW_PAINT_GRENADE = register("yellow_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
 
     public static final EntityType<SmokeGrenadeEntity> SMOKE_GRENADE = register("smoke_grenade",EntityType.Builder.of(SmokeGrenadeEntity::new,MobCategory.MISC));
     public static final EntityType<EMPGrenadeEntity> EMP_GRENADE = register("emp_grenade",EntityType.Builder.of(EMPGrenadeEntity::new,MobCategory.MISC));

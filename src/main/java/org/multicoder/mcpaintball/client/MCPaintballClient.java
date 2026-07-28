@@ -34,14 +34,14 @@ public class MCPaintballClient implements ClientModInitializer {
     public void onInitializeClient() {
         CLIENT_LOGGER.info("Initializing MCPaintball Client");
         CLIENT_LOGGER.info("Initializing EntityRenderers");
-        EntityRenderers.register(MCPaintballEntities.RED_PAINTBALL,RedPaintballEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL, GreenPaintballEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL, BluePaintballEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.YELLOW_PAINTBALL, YellowPaintballEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, RedPaintGrenadeEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE, GreenPaintGrenadeEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE, BluePaintGrenadeEntityRenderer::new);
-        EntityRenderers.register(MCPaintballEntities.YELLOW_PAINT_GRENADE, YellowPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.RED_PAINTBALL,PaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL, PaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL, PaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.YELLOW_PAINTBALL, PaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.YELLOW_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE, SmokeGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.EMP_GRENADE, EMPGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.SIGHT_GRENADE, SightGrenadeEntityRenderer::new);

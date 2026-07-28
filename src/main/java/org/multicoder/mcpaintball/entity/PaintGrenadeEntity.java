@@ -15,28 +15,25 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
-import org.multicoder.mcpaintball.core.MCPaintballItems;
-import org.multicoder.mcpaintball.core.MCPaintballParticles;
-import org.multicoder.mcpaintball.core.MCPaintballSounds;
+import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 import org.multicoder.mcpaintball.util.DebugHelper;
 
 import java.util.Objects;
 
-public class YellowPaintGrenadeEntity extends ThrowableItemProjectile {
-    public YellowPaintGrenadeEntity(EntityType<? extends ThrowableItemProjectile> type, Level level) {
+public class PaintGrenadeEntity extends ThrowableItemProjectile {
+    public PaintGrenadeEntity(EntityType<? extends ThrowableItemProjectile> type, Level level) {
         super(type, level);
     }
 
-    public YellowPaintGrenadeEntity(EntityType<? extends ThrowableItemProjectile> type, LivingEntity owner, Level level, ItemStack itemStack) {
+    public PaintGrenadeEntity(EntityType<? extends ThrowableItemProjectile> type, LivingEntity owner, Level level, ItemStack itemStack) {
         super(type, owner, level, itemStack);
     }
 
     @Override
     protected @NonNull Item getDefaultItem() {
-        return MCPaintballItems.YELLOW_PAINT_GRENADE;
+        return MCPaintballItems.BLUE_PAINT_GRENADE;
     }
 
     @Override
@@ -46,20 +43,35 @@ public class YellowPaintGrenadeEntity extends ThrowableItemProjectile {
                 ServerLevel level = (ServerLevel) this.level();
                 BlockPos current = this.blockPosition();
                 AABB box = AABB.encapsulatingFullBlocks(current.offset(-5,-2,-5),current.offset(5,2,5));
-                BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.YELLOW_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                int Checker;
+                EntityType<?> type = getType();
+                if(type == MCPaintballEntities.RED_PAINT_GRENADE){
+                    BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.RED_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                    Checker = 1;
+                }else if(type == MCPaintballEntities.GREEN_PAINT_GRENADE){
+                    BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.GREEN_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                    Checker = 2;
+                }else if(type == MCPaintballEntities.BLUE_PAINT_GRENADE){
+                    BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.BLUE_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                    Checker = 3;
+                }else if(type == MCPaintballEntities.YELLOW_PAINT_GRENADE){
+                    BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.YELLOW_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                    Checker = 4;
+                } else {
+                    Checker = 0;
+                }
                 level.getEntities(this,box).forEach(entity -> {
                     if(entity instanceof Player player){
                         MCPaintballPlayerData targetData = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                        if((Objects.requireNonNull(targetData).Team != 0 && Objects.requireNonNull(targetData).Team != 4)){
+                        if((Objects.requireNonNull(targetData).Team != 0 && Objects.requireNonNull(targetData).Team != Checker)){
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(), MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-                            MCPaintballGameEvents.INSTANCE.YellowPoints++;
-                            MCPaintballGameEvents.INSTANCE.setDirty(true);
+                            MCPaintballGameEvents.INSTANCE.incrementByChecker(Checker);
                             ServerPlayer serverPlayer = (ServerPlayer) player;
                             BlockPos pos = Objects.requireNonNull(serverPlayer.getRespawnConfig()).respawnData().pos();
                             serverPlayer.teleportTo(pos.getX(),pos.getY(),pos.getZ());
                         }
                     }else if(MCPaintball.DEBUG){
-                        DebugHelper.HandleGrenadeDebug(entity,level(),4,(Player) this.getOwner());
+                        DebugHelper.HandleGrenadeDebug(entity,level(),Checker,(Player) this.getOwner());
                     }
                 });
             }

@@ -15,6 +15,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.RED_HELMET));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_RESPAWN_STATION));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -51,6 +52,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.GREEN_HELMET));
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_RESPAWN_STATION));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -84,6 +86,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.BLUE_HELMET));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_RESPAWN_STATION));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -110,13 +113,14 @@ public class KitHandler {
                     }
                 }
             }
-            case 4 -> { // Red Team
+            case 4 -> { // Yellow Team
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_BOOTS));
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_CHESTPLATE));
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_HELMET));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_RESPAWN_STATION));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));

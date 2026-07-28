@@ -21,10 +21,10 @@ public class MCPaintballItems {
     public static final Item GRENADE_LAUNCHER = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapon/grenade_launcher"), new GrenadeLauncherItem());
     public static final Item BURST_RIFLE = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapon/burst_rifle"), new  BurstRifleItem());
 
-    public static final Item RED_PAINT_GRENADE = register("explosives/red_grenade", RedPaintGrenadeItem::new,new Item.Properties().stacksTo(8));
-    public static final Item GREEN_PAINT_GRENADE = register("explosives/green_grenade", GreenPaintGrenadeItem::new,new Item.Properties().stacksTo(8));
-    public static final Item BLUE_PAINT_GRENADE = register("explosives/blue_grenade", BluePaintGrenadeItem::new,new Item.Properties().stacksTo(8));
-    public static final Item YELLOW_PAINT_GRENADE = register("explosives/yellow_grenade", YellowPaintGrenadeItem::new,new Item.Properties().stacksTo(8));
+    public static final Item RED_PAINT_GRENADE = register("explosives/red_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
+    public static final Item GREEN_PAINT_GRENADE = register("explosives/green_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
+    public static final Item BLUE_PAINT_GRENADE = register("explosives/blue_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
+    public static final Item YELLOW_PAINT_GRENADE = register("explosives/yellow_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
 
     public static final Item SMOKE_GRENADE = register("explosives/smoke_grenade", SmokeGrenadeItem::new,new Item.Properties().stacksTo(16));
     public static final Item EMP_GRENADE = register("explosives/emp_grenade", EMPGrenadeItem::new,new Item.Properties().stacksTo(16));

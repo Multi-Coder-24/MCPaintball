@@ -4,17 +4,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
-import org.multicoder.mcpaintball.entity.BluePaintballEntity;
-import org.multicoder.mcpaintball.entity.GreenPaintballEntity;
-import org.multicoder.mcpaintball.entity.RedPaintballEntity;
-import org.multicoder.mcpaintball.entity.YellowPaintballEntity;
+import org.multicoder.mcpaintball.entity.PaintballEntity;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.Objects;
@@ -28,38 +28,19 @@ public class PistolItem extends Item {
         if(!level.isClientSide()){
             if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
                 MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                boolean Fired = false;
-                switch (data.Team){
-                    case 1:
-                        RedPaintballEntity redPaintball = new RedPaintballEntity(player,level,player.getItemInHand(hand));
-                        Objects.requireNonNull(redPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                        level.addFreshEntity(redPaintball);
-                        Fired = true;
-                        break;
-                    case 2:
-                        GreenPaintballEntity greenPaintball = new GreenPaintballEntity(player,level,player.getItemInHand(hand));
-                        Objects.requireNonNull(greenPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                        level.addFreshEntity(greenPaintball);
-                        Fired = true;
-                        break;
-                    case 3:
-                        BluePaintballEntity bluePaintball = new BluePaintballEntity(player,level,player.getItemInHand(hand));
-                        Objects.requireNonNull(bluePaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                        level.addFreshEntity(bluePaintball);
-                        Fired = true;
-                        break;
-                    case 4:
-                        YellowPaintballEntity yellowPaintball = new YellowPaintballEntity(player,level,player.getItemInHand(hand));
-                        Objects.requireNonNull(yellowPaintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                        level.addFreshEntity(yellowPaintball);
-                        Fired = true;
-                        break;
-                }
-                if(Fired){
-                    player.getCooldowns().addCooldown(player.getItemInHand(hand),30);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
-                    return InteractionResult.CONSUME;
-                }
+                EntityType<? extends AbstractArrow> type = switch (data.Team){
+                    case 1 -> MCPaintballEntities.RED_PAINTBALL;
+                    case 2 -> MCPaintballEntities.BLUE_PAINTBALL;
+                    case 3 -> MCPaintballEntities.GREEN_PAINTBALL;
+                    case 4 -> MCPaintballEntities.YELLOW_PAINTBALL;
+                    default -> throw new IllegalStateException("Unexpected value: " + data.Team);
+                };
+                PaintballEntity paintball = new PaintballEntity(type,player,level,player.getItemInHand(hand));
+                Objects.requireNonNull(paintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
+                level.addFreshEntity(paintball);
+                player.getCooldowns().addCooldown(player.getItemInHand(hand),30);
+                level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
+                return InteractionResult.CONSUME;
             }
             else {
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_use"));
