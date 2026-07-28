@@ -53,6 +53,15 @@ public class MCPaintballCommands {
                 if(ModList.get().isLoaded("voicechat")){
                     Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.BLUE);
                 }
+            }case "yellow" -> {
+                data.Team = 4;
+                player.setData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get(), data);
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                PacketDistributor.sendToPlayer(player,new DataSyncS2CPacket(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())));
+                if(ModList.get().isLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.YELLOW);
+                }
+
             }
             default -> player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_team"));
         }

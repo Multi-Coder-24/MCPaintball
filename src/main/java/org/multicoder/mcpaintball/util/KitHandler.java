@@ -14,6 +14,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.RED_CHESTPLATE.get()));
                 player.addItem(new ItemStack(MCPaintballItems.RED_HELMET.get()));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_GRENADE_STATION.get(),2));
+                player.addItem(new ItemStack(MCPaintballBlocks.RED_RESPAWN_STATION.get()));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL.get()));
@@ -48,7 +50,9 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.GREEN_LEGGINGS.get()));
                 player.addItem(new ItemStack(MCPaintballItems.GREEN_CHESTPLATE.get()));
                 player.addItem(new ItemStack(MCPaintballItems.GREEN_HELMET.get()));
-                    player.addItem(new ItemStack(MCPaintballBlocks.GREEN_GRENADE_STATION.get(),2));
+                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_GRENADE_STATION.get(),2));
+                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_RESPAWN_STATION.get()));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
 
                 switch (Type){
                     case 1 -> { // Standard
@@ -85,6 +89,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.BLUE_CHESTPLATE.get()));
                 player.addItem(new ItemStack(MCPaintballItems.BLUE_HELMET.get()));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_GRENADE_STATION.get(),2));
+                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_RESPAWN_STATION.get()));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
 
                 switch (Type){
                     case 1 -> { // Standard
@@ -115,6 +121,44 @@ public class KitHandler {
                     }
                 }
             }
+            case 4 -> { // Yellow
+                player.addItem(new ItemStack(MCPaintballItems.YELLOW_BOOTS.get()));
+                player.addItem(new ItemStack(MCPaintballItems.YELLOW_LEGGINGS.get()));
+                player.addItem(new ItemStack(MCPaintballItems.YELLOW_CHESTPLATE.get()));
+                player.addItem(new ItemStack(MCPaintballItems.YELLOW_HELMET.get()));
+                player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_GRENADE_STATION.get(),2));
+                player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_RESPAWN_STATION.get()));
+                player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
+                switch (Type){
+                    case 1 -> { // Standard
+                        player.addItem(new ItemStack(MCPaintballItems.PISTOL.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE.get(),8));
+                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
+                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE.get(),4));
+                    }
+                    case 2 -> { // Sniper
+                        player.addItem(new ItemStack(MCPaintballItems.SHOTGUN.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.SNIPER_RIFLE.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE.get(),8));
+                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),16));
+                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE.get(),6));
+                    }
+                    case 3 -> { // Assault
+                        player.addItem(new ItemStack(MCPaintballItems.SHOTGUN.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.BURST_RIFLE.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE.get(),8));
+                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
+                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE.get(),2));
+                    }
+                    case 4 -> { // Heavy
+                        player.addItem(new ItemStack(MCPaintballItems.PISTOL.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.GRENADE_LAUNCHER.get()));
+                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),16));
+                    }
+                }
+            }
+
         }
     }
 }

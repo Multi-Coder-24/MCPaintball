@@ -13,7 +13,7 @@ import org.multicoder.mcpaintball.entity.SmokeGrenadeEntity;
 public class SmokeGrenadeEntityRenderer extends ThrownItemRenderer<SmokeGrenadeEntity> {
     private final ItemModelResolver itemModelResolver;
     public SmokeGrenadeEntityRenderer(EntityRendererProvider.Context context) {
-        super(context,1f,false);
+        super(context,0.5f,false);
         itemModelResolver = context.getItemModelResolver();
     }
 

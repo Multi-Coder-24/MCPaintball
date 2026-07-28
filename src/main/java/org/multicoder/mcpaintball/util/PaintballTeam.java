@@ -7,7 +7,8 @@ public enum PaintballTeam implements StringRepresentable {
     None("text.mcpaintball.team_none"),
     Red("text.mcpaintball.team_red"),
     Green("text.mcpaintball.team_green"),
-    Blue("text.mcpaintball.team_blue"),;
+    Blue("text.mcpaintball.team_blue"),
+    Yellow("text.mcpaintball.team_yellow"),;
     PaintballTeam(String translation){
         Translation = translation;
     }

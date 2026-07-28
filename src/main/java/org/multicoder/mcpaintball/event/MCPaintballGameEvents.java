@@ -3,6 +3,7 @@ package org.multicoder.mcpaintball.event;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
@@ -36,9 +37,6 @@ import org.multicoder.mcpaintball.entity.renderer.*;
 import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
 import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
-import org.multicoder.mcpaintball.particle.BluePaintParticle;
-import org.multicoder.mcpaintball.particle.GreenPaintParticle;
-import org.multicoder.mcpaintball.particle.RedPaintParticle;
 
 import java.util.Objects;
 
@@ -62,8 +60,10 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.RED_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.GREEN_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.BLUE_PAINT_GRENADE.value());
+            event.accept(MCPaintballItems.YELLOW_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.SMOKE_GRENADE.value());
             event.accept(MCPaintballItems.EMP_GRENADE.value());
+            event.accept(MCPaintballItems.SIGHT_GRENADE.value());
         }else if(event.getTabKey() == MCPaintballCreativeTabs.UTILITY_TAB.getKey()){
             event.accept(MCPaintballItems.RED_BOOTS.value());
             event.accept(MCPaintballItems.RED_LEGGINGS.value());
@@ -77,9 +77,18 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.BLUE_LEGGINGS.value());
             event.accept(MCPaintballItems.BLUE_CHESTPLATE.value());
             event.accept(MCPaintballItems.BLUE_HELMET.value());
+            event.accept(MCPaintballItems.YELLOW_BOOTS.value());
+            event.accept(MCPaintballItems.YELLOW_LEGGINGS.value());
+            event.accept(MCPaintballItems.YELLOW_CHESTPLATE.value());
+            event.accept(MCPaintballItems.YELLOW_HELMET.value());
             event.accept(MCPaintballBlocks.RED_GRENADE_STATION.value());
             event.accept(MCPaintballBlocks.GREEN_GRENADE_STATION.value());
             event.accept(MCPaintballBlocks.BLUE_GRENADE_STATION.value());
+            event.accept(MCPaintballBlocks.YELLOW_GRENADE_STATION.value());
+            event.accept(MCPaintballBlocks.RED_RESPAWN_STATION.value());
+            event.accept(MCPaintballBlocks.GREEN_RESPAWN_STATION.value());
+            event.accept(MCPaintballBlocks.BLUE_RESPAWN_STATION.value());
+            event.accept(MCPaintballBlocks.YELLOW_RESPAWN_STATION.value());
         }
     }
 
@@ -101,7 +110,7 @@ public class MCPaintballGameEvents {
             if(Ticker == 20){
                 event.getServer().getPlayerList().getPlayers().forEach(player -> {
                     if(Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Team != 0 && Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Type != 0) {
-                        PacketDistributor.sendToPlayer(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.RedPoints,MCPaintballGameEvents.INSTANCE.GreenPoints,MCPaintballGameEvents.INSTANCE.BluePoints));
+                        PacketDistributor.sendToPlayer(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.RedPoints,MCPaintballGameEvents.INSTANCE.GreenPoints,MCPaintballGameEvents.INSTANCE.BluePoints,MCPaintballGameEvents.INSTANCE.YellowPoints,MCPaintballGameEvents.INSTANCE.MatchStarted, MCPaintballGameEvents.INSTANCE.RoundStarted));
                     }
                 });
                 Ticker = 0;
@@ -142,22 +151,26 @@ public class MCPaintballGameEvents {
         @SubscribeEvent
         private static void EntityRenderers(EntityRenderersEvent.RegisterRenderers event){
             CLIENT_LOGGER.info("Initializing EntityRenderers");
-            EntityRenderers.register(MCPaintballEntities.RED_PAINTBALL.get(), RedPaintballEntityRenderer::new);
-            EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL.get(), GreenPaintballEntityRenderer::new);
-            EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL.get(), BluePaintballEntityRenderer::new);
-            EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE.get(), RedPaintGrenadeEntityRenderer::new);
-            EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE.get(), GreenPaintGrenadeEntityRenderer::new);
-            EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE.get(), BluePaintGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.RED_PAINTBALL.get(), PaintballEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL.get(), PaintballEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.YELLOW_PAINTBALL.get(), PaintballEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.YELLOW_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE.get(), SmokeGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.EMP_GRENADE.get(), EMPGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.SIGHT_GRENADE.get(), SightGrenadeEntityRenderer::new);
         }
 
         @SubscribeEvent
         public static void ParticleRegistry(RegisterParticleProvidersEvent event){
             CLIENT_LOGGER.info("Initializing Particles");
-            event.registerSpriteSet(MCPaintballParticles.RED_PAINT.get(), RedPaintParticle.Provider::new);
-            event.registerSpriteSet(MCPaintballParticles.GREEN_PAINT.get(), GreenPaintParticle.Provider::new);
-            event.registerSpriteSet(MCPaintballParticles.BLUE_PAINT.get(), BluePaintParticle.Provider::new);
+            event.registerSpriteSet(MCPaintballParticles.RED_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
+            event.registerSpriteSet(MCPaintballParticles.GREEN_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
+            event.registerSpriteSet(MCPaintballParticles.BLUE_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
+            event.registerSpriteSet(MCPaintballParticles.YELLOW_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
         }
 
         @SubscribeEvent

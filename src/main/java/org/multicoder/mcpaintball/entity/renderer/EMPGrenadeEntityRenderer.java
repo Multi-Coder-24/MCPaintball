@@ -13,7 +13,7 @@ import org.multicoder.mcpaintball.entity.EMPGrenadeEntity;
 public class EMPGrenadeEntityRenderer extends ThrownItemRenderer<EMPGrenadeEntity> {
     private final ItemModelResolver itemModelResolver;
     public EMPGrenadeEntityRenderer(EntityRendererProvider.Context context) {
-        super(context,1f,false);
+        super(context,0.5f,false);
         itemModelResolver = context.getItemModelResolver();
     }
 

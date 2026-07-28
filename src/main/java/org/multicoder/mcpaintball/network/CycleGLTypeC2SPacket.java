@@ -42,7 +42,11 @@ public record CycleGLTypeC2SPacket(int Setting) implements CustomPacketPayload {
                 setting = 3;
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.gl_emp"));
             }else if(setting == 3){
+                setting = 4;
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.gl_sight"));
+            }else if(setting == 4){
                 setting = 1;
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.gl_default"));
             }
             held.set(MCPaintballDataComponents.SETTING,new MCPaintballGrenadeLauncherSetting(setting));
         }
