@@ -48,6 +48,7 @@ public class GrenadeLauncherItem extends Item {
                         PaintGrenadeEntity paintball = new PaintGrenadeEntity(type,player,level,itemStack);
                         Objects.requireNonNull(paintball).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
                         level.addFreshEntity(paintball);
+                        Fired = true;
                     }else if(Setting == 2){
                         SmokeGrenadeEntity smokeGrenade = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE.get(),player,level,itemStack);
                         Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
