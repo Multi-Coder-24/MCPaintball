@@ -25,6 +25,8 @@ public class MCPaintballItems {
     public static final Item GREEN_PAINT_GRENADE = register("explosives/green_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
     public static final Item BLUE_PAINT_GRENADE = register("explosives/blue_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
     public static final Item YELLOW_PAINT_GRENADE = register("explosives/yellow_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
+    public static final Item PINK_PAINT_GRENADE = register("explosives/pink_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
+    public static final Item ORANGE_PAINT_GRENADE = register("explosives/orange_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
 
     public static final Item SMOKE_GRENADE = register("explosives/smoke_grenade", SmokeGrenadeItem::new,new Item.Properties().stacksTo(16));
     public static final Item EMP_GRENADE = register("explosives/emp_grenade", EMPGrenadeItem::new,new Item.Properties().stacksTo(16));
@@ -50,6 +52,15 @@ public class MCPaintballItems {
     public static final Item YELLOW_CHESTPLATE = register("armor/yellow_chestplate",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.YELLOW_ARMOR_MATERIAL, ArmorType.CHESTPLATE));
     public static final Item YELLOW_HELMET = register("armor/yellow_helmet",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.YELLOW_ARMOR_MATERIAL, ArmorType.HELMET));
 
+    public static final Item PINK_BOOTS = register("armor/pink_boots",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.PINK_ARMOR_MATERIAL, ArmorType.BOOTS));
+    public static final Item PINK_LEGGINGS = register("armor/pink_leggings",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.PINK_ARMOR_MATERIAL, ArmorType.LEGGINGS));
+    public static final Item PINK_CHESTPLATE = register("armor/pink_chestplate",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.PINK_ARMOR_MATERIAL, ArmorType.CHESTPLATE));
+    public static final Item PINK_HELMET = register("armor/pink_helmet",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.PINK_ARMOR_MATERIAL, ArmorType.HELMET));
+
+    public static final Item ORANGE_BOOTS = register("armor/orange_boots",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.BOOTS));
+    public static final Item ORANGE_LEGGINGS = register("armor/orange_leggings",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.LEGGINGS));
+    public static final Item ORANGE_CHESTPLATE = register("armor/orange_chestplate",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.CHESTPLATE));
+    public static final Item ORANGE_HELMET = register("armor/orange_helmet",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.HELMET));
 
     public static void Initialize(){
         MCPaintball.LOGGER.info("Initializing Items");

@@ -86,6 +86,18 @@ public class PaintballEntity extends AbstractArrow {
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
                             BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
                             Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                        }else if(type == MCPaintballEntities.PINK_PAINTBALL && TargetData.Team != 5){
+                            level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
+                            MCPaintballGameEvents.INSTANCE.PinkPoints++;
+                            MCPaintballGameEvents.INSTANCE.setDirty(true);
+                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
+                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                        }else if(type == MCPaintballEntities.ORANGE_PAINTBALL && TargetData.Team != 6){
+                            level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
+                            MCPaintballGameEvents.INSTANCE.OrangePoints++;
+                            MCPaintballGameEvents.INSTANCE.setDirty(true);
+                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
+                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
                         }
                     }
                 }

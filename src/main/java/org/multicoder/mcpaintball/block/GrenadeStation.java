@@ -127,6 +127,44 @@ public class GrenadeStation extends Block {
                             }
                         }
                     }
+                }else if(state.getBlock() == MCPaintballBlocks.PINK_GRENADE_STATION){
+                    if(Objects.requireNonNull(data).Team == 5){
+                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        switch (data.Type){
+                            case 1 ->{
+                                player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
+                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
+                            }case 2 ->{
+                                player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
+                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
+                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                            }case 3 ->{
+                                player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
+                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
+                            }
+                        }
+                    }
+                }else if(state.getBlock() == MCPaintballBlocks.ORANGE_GRENADE_STATION){
+                    if(Objects.requireNonNull(data).Team == 6){
+                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        switch (data.Type){
+                            case 1 ->{
+                                player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
+                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
+                            }case 2 ->{
+                                player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
+                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
+                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                            }case 3 ->{
+                                player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
+                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
+                            }
+                        }
+                    }
                 }
             }
         }

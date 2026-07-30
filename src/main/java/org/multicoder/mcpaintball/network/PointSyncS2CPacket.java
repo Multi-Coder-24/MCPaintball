@@ -10,10 +10,10 @@ import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.client.MCPaintballClient;
 
-public record PointSyncS2CPacket(int Red, int Green, int Blue,int Yellow,boolean gameRunning,boolean roundRunning) implements CustomPacketPayload {
+public record PointSyncS2CPacket(int Red, int Green, int Blue,int Yellow,int Pink,int Orange,boolean gameRunning,boolean roundRunning) implements CustomPacketPayload {
     public static final Identifier ID = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"point_sync");
     public static final CustomPacketPayload.Type<PointSyncS2CPacket> TYPE = new CustomPacketPayload.Type<>(ID);
-    public static final StreamCodec<RegistryFriendlyByteBuf,PointSyncS2CPacket> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.INT,PointSyncS2CPacket::Red, ByteBufCodecs.INT,PointSyncS2CPacket::Green, ByteBufCodecs.INT,PointSyncS2CPacket::Blue,ByteBufCodecs.INT,PointSyncS2CPacket::Yellow, ByteBufCodecs.BOOL,PointSyncS2CPacket::gameRunning,ByteBufCodecs.BOOL,PointSyncS2CPacket::roundRunning, PointSyncS2CPacket::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf,PointSyncS2CPacket> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.INT,PointSyncS2CPacket::Red, ByteBufCodecs.INT,PointSyncS2CPacket::Green, ByteBufCodecs.INT,PointSyncS2CPacket::Blue,ByteBufCodecs.INT,PointSyncS2CPacket::Yellow,ByteBufCodecs.INT,PointSyncS2CPacket::Pink,ByteBufCodecs.INT,PointSyncS2CPacket::Orange, ByteBufCodecs.BOOL,PointSyncS2CPacket::gameRunning,ByteBufCodecs.BOOL,PointSyncS2CPacket::roundRunning, PointSyncS2CPacket::new);
 
     @Override
     public @NonNull Type<? extends CustomPacketPayload> type() {
@@ -25,6 +25,8 @@ public record PointSyncS2CPacket(int Red, int Green, int Blue,int Yellow,boolean
         MCPaintballClient.GreenPoints = packet.Green;
         MCPaintballClient.BluePoints = packet.Blue;
         MCPaintballClient.YellowPoints = packet.Yellow;
+        MCPaintballClient.PinkPoints = packet.Pink;
+        MCPaintballClient.OrangePoints = packet.Orange;
         MCPaintballClient.GameRunning = packet.gameRunning;
         MCPaintballClient.RoundRunning = packet.roundRunning;
     }

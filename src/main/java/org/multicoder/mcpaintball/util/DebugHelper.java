@@ -29,7 +29,15 @@ public class DebugHelper {
                  case 4->{
                     MCPaintballGameEvents.INSTANCE.YellowPoints++;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
-                }
+                 }
+                 case 5->{
+                    MCPaintballGameEvents.INSTANCE.PinkPoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                 }
+                 case 6->{
+                    MCPaintballGameEvents.INSTANCE.OrangePoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                 }
             }
         }
     }
@@ -51,6 +59,14 @@ public class DebugHelper {
                 }
                 case 4->{
                     MCPaintballGameEvents.INSTANCE.YellowPoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                }
+                case 5->{
+                    MCPaintballGameEvents.INSTANCE.PinkPoints++;
+                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                }
+                case 6->{
+                    MCPaintballGameEvents.INSTANCE.OrangePoints++;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
                 }
             }

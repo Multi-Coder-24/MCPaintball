@@ -62,6 +62,22 @@ public class MCPaintballCommands {
                 if(FabricLoader.getInstance().isModLoaded("voicechat")){
                     Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.YELLOW);
                 }
+            }case "pink" -> {
+                data.Team = 5;
+                player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+                if(FabricLoader.getInstance().isModLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.PINK);
+                }
+            }case "orange" -> {
+                data.Team = 6;
+                player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+                if(FabricLoader.getInstance().isModLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.ORANGE);
+                }
             }
             default -> player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_team"));
         }

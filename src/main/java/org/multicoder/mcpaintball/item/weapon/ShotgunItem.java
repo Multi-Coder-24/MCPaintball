@@ -35,6 +35,8 @@ public class ShotgunItem extends Item {
                     case 2 -> MCPaintballEntities.BLUE_PAINTBALL;
                     case 3 -> MCPaintballEntities.GREEN_PAINTBALL;
                     case 4 -> MCPaintballEntities.YELLOW_PAINTBALL;
+                    case 5 -> MCPaintballEntities.PINK_PAINTBALL;
+                    case 6 -> MCPaintballEntities.ORANGE_PAINTBALL;
                     default -> throw new IllegalStateException("Unexpected value: " + data.Team);
                 };
                 PaintballEntity paintball1 = new PaintballEntity(type,player,level,player.getItemInHand(hand));

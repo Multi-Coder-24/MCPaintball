@@ -28,6 +28,8 @@ public class MCPaintballClient implements ClientModInitializer {
     public static int GreenPoints = 0;
     public static int BluePoints = 0;
     public static int YellowPoints = 0;
+    public static int PinkPoints = 0;
+    public static int OrangePoints = 0;
     public static boolean GameRunning = false;
     public static boolean RoundRunning = false;
     @Override
@@ -38,10 +40,14 @@ public class MCPaintballClient implements ClientModInitializer {
         EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL, PaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL, PaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.YELLOW_PAINTBALL, PaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.PINK_PAINTBALL, PaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.ORANGE_PAINTBALL, PaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.YELLOW_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.PINK_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.ORANGE_PAINT_GRENADE, PaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE, SmokeGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.EMP_GRENADE, EMPGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.SIGHT_GRENADE, SightGrenadeEntityRenderer::new);
@@ -50,6 +56,8 @@ public class MCPaintballClient implements ClientModInitializer {
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.GREEN_PAINT, GlowParticle.ElectricSparkProvider::new);
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.BLUE_PAINT, GlowParticle.ElectricSparkProvider::new);
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.YELLOW_PAINT, GlowParticle.ElectricSparkProvider::new);
+        ParticleProviderRegistry.getInstance().register(MCPaintballParticles.PINK_PAINT, GlowParticle.ElectricSparkProvider::new);
+        ParticleProviderRegistry.getInstance().register(MCPaintballParticles.ORANGE_PAINT, GlowParticle.ElectricSparkProvider::new);
         CLIENT_LOGGER.info("Initializing Packet Handlers");
         ClientPlayNetworking.registerGlobalReceiver(PointSyncS2CPacket.TYPE,PointSyncS2CPacket::HandlePacket);
         ClientPlayNetworking.registerGlobalReceiver(DataSyncS2CPacket.TYPE,DataSyncS2CPacket::HandlePacket);

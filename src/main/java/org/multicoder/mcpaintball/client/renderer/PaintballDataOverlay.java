@@ -29,10 +29,12 @@ public class PaintballDataOverlay implements HudElement {
                 graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.green_points", MCPaintballClient.GreenPoints), 20, 30, Color.WHITE.getRGB());
                 graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.blue_points", MCPaintballClient.BluePoints), 20, 40, Color.WHITE.getRGB());
                 graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.yellow_points", MCPaintballClient.YellowPoints), 20, 50, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(team.getSerializedName())), 20, 60, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(type.getSerializedName())), 20, 70, Color.WHITE.getRGB());
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.pink_points", MCPaintballClient.PinkPoints), 20, 60, Color.WHITE.getRGB());
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.orange_points", MCPaintballClient.OrangePoints), 20, 70, Color.WHITE.getRGB());
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(team.getSerializedName())), 20, 80, Color.WHITE.getRGB());
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(type.getSerializedName())), 20, 90, Color.WHITE.getRGB());
                 if (MCPaintballClient.RoundRunning) {
-                    graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.round_running"), 20, 80, Color.WHITE.getRGB());
+                    graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.round_running"), 20, 100, Color.WHITE.getRGB());
                 }
             }
         } catch (Exception e) {

@@ -57,6 +57,12 @@ public class PaintGrenadeEntity extends ThrowableItemProjectile {
                 }else if(type == MCPaintballEntities.YELLOW_PAINT_GRENADE){
                     BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.YELLOW_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
                     Checker = 4;
+                }else if(type == MCPaintballEntities.PINK_PAINT_GRENADE){
+                    BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.PINK_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                    Checker = 5;
+                }else if(type == MCPaintballEntities.ORANGE_PAINT_GRENADE){
+                    BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.ORANGE_PAINT,true, true,pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                    Checker = 6;
                 } else {
                     Checker = 0;
                 }

@@ -16,11 +16,15 @@ public class MCPaintballEntities {
     public static final EntityType<PaintballEntity> GREEN_PAINTBALL = register("green_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
     public static final EntityType<PaintballEntity> BLUE_PAINTBALL = register("blue_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
     public static final EntityType<PaintballEntity> YELLOW_PAINTBALL = register("yellow_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
+    public static final EntityType<PaintballEntity> PINK_PAINTBALL = register("pink_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
+    public static final EntityType<PaintballEntity> ORANGE_PAINTBALL = register("orange_paintball", EntityType.Builder.<PaintballEntity>of(PaintballEntity::new, MobCategory.MISC).sized(0.5f,0.5f));
 
     public static final EntityType<PaintGrenadeEntity> RED_PAINT_GRENADE = register("red_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
     public static final EntityType<PaintGrenadeEntity> GREEN_PAINT_GRENADE = register("green_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
     public static final EntityType<PaintGrenadeEntity> BLUE_PAINT_GRENADE = register("blue_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
     public static final EntityType<PaintGrenadeEntity> YELLOW_PAINT_GRENADE = register("yellow_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
+    public static final EntityType<PaintGrenadeEntity> PINK_PAINT_GRENADE = register("pink_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
+    public static final EntityType<PaintGrenadeEntity> ORANGE_PAINT_GRENADE = register("orange_paint_grenade",EntityType.Builder.of(PaintGrenadeEntity::new,MobCategory.MISC));
 
     public static final EntityType<SmokeGrenadeEntity> SMOKE_GRENADE = register("smoke_grenade",EntityType.Builder.of(SmokeGrenadeEntity::new,MobCategory.MISC));
     public static final EntityType<EMPGrenadeEntity> EMP_GRENADE = register("emp_grenade",EntityType.Builder.of(EMPGrenadeEntity::new,MobCategory.MISC));

@@ -54,6 +54,18 @@ public class PaintGrenadeItem extends Item {
                     level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
                     level.addFreshEntity(entity);
                     held.shrink(1);
+                }else if(held.getItem() == MCPaintballItems.PINK_PAINT_GRENADE && Objects.requireNonNull(data).Team == 5){
+                    PaintGrenadeEntity entity = new PaintGrenadeEntity(MCPaintballEntities.PINK_PAINT_GRENADE,player,level,player.getItemInHand(hand));
+                    entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
+                    level.addFreshEntity(entity);
+                    held.shrink(1);
+                }else if(held.getItem() == MCPaintballItems.ORANGE_PAINT_GRENADE && Objects.requireNonNull(data).Team == 6){
+                    PaintGrenadeEntity entity = new PaintGrenadeEntity(MCPaintballEntities.ORANGE_PAINT_GRENADE,player,level,player.getItemInHand(hand));
+                    entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
+                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
+                    level.addFreshEntity(entity);
+                    held.shrink(1);
                 }
             }
         }

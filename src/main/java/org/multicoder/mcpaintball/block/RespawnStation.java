@@ -41,6 +41,12 @@ public class RespawnStation extends Block {
                 }else if(state.getBlock() == MCPaintballBlocks.YELLOW_RESPAWN_STATION && Objects.requireNonNull(data).Team == 4){
                     ServerPlayer sp = (ServerPlayer) player;
                     sp.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(GlobalPos.of(level.dimension(),pos.above()),0.0f,0f),true),true);
+                }else if(state.getBlock() == MCPaintballBlocks.PINK_RESPAWN_STATION && Objects.requireNonNull(data).Team == 5){
+                    ServerPlayer sp = (ServerPlayer) player;
+                    sp.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(GlobalPos.of(level.dimension(),pos.above()),0.0f,0f),true),true);
+                }else if(state.getBlock() == MCPaintballBlocks.ORANGE_RESPAWN_STATION && Objects.requireNonNull(data).Team == 6){
+                    ServerPlayer sp = (ServerPlayer) player;
+                    sp.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(GlobalPos.of(level.dimension(),pos.above()),0.0f,0f),true),true);
                 }
             }
         }
