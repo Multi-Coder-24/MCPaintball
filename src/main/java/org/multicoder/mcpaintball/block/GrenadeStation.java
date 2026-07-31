@@ -54,6 +54,7 @@ public class GrenadeStation extends Block {
                 if(state.getBlock() == MCPaintballBlocks.RED_GRENADE_STATION){
                     if(Objects.requireNonNull(data).Team == 1){
                         player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        player.addItem(new ItemStack(MCPaintballBlocks.RED_PAINT_MINE,2));
                         switch (data.Type){
                             case 1 ->{
                                 player.addItem(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE,8));
@@ -73,6 +74,7 @@ public class GrenadeStation extends Block {
                 }else if(state.getBlock() == MCPaintballBlocks.GREEN_GRENADE_STATION){
                     if(Objects.requireNonNull(data).Team == 2){
                         player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        player.addItem(new ItemStack(MCPaintballBlocks.GREEN_PAINT_MINE,2));
                         switch (data.Type){
                             case 1 ->{
                                 player.addItem(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
@@ -92,6 +94,7 @@ public class GrenadeStation extends Block {
                 }else if(state.getBlock() == MCPaintballBlocks.BLUE_GRENADE_STATION){
                     if(Objects.requireNonNull(data).Team == 3){
                         player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        player.addItem(new ItemStack(MCPaintballBlocks.BLUE_PAINT_MINE,2));
                         switch (data.Type){
                             case 1 ->{
                                 player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
@@ -111,6 +114,7 @@ public class GrenadeStation extends Block {
                 }else if(state.getBlock() == MCPaintballBlocks.YELLOW_GRENADE_STATION){
                     if(Objects.requireNonNull(data).Team == 4){
                         player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE,2));
                         switch (data.Type){
                             case 1 ->{
                                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
@@ -130,6 +134,7 @@ public class GrenadeStation extends Block {
                 }else if(state.getBlock() == MCPaintballBlocks.PINK_GRENADE_STATION){
                     if(Objects.requireNonNull(data).Team == 5){
                         player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        player.addItem(new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE,2));
                         switch (data.Type){
                             case 1 ->{
                                 player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
@@ -149,6 +154,7 @@ public class GrenadeStation extends Block {
                 }else if(state.getBlock() == MCPaintballBlocks.ORANGE_GRENADE_STATION){
                     if(Objects.requireNonNull(data).Team == 6){
                         player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                        player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_PAINT_MINE,2));
                         switch (data.Type){
                             case 1 ->{
                                 player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));

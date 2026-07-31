@@ -16,6 +16,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_RESPAWN_STATION));
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                player.addItem(new ItemStack(MCPaintballBlocks.RED_PAINT_MINE,8));
+                player.addItem(new ItemStack(MCPaintballBlocks.RED_FLAG,2));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -53,6 +55,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_RESPAWN_STATION));
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_PAINT_MINE,8));
+                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_FLAG,2));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -87,6 +91,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_RESPAWN_STATION));
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_PAINT_MINE,8));
+                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_FLAG,2));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -121,6 +127,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_RESPAWN_STATION));
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE,8));
+                player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_FLAG,2));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -157,6 +165,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballBlocks.PINK_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.PINK_RESPAWN_STATION));
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                player.addItem(new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE,8));
+                player.addItem(new ItemStack(MCPaintballBlocks.PINK_FLAG,2));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -193,6 +203,8 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_GRENADE_STATION,2));
                 player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_RESPAWN_STATION));
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
+                player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_PAINT_MINE,8));
+                player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_FLAG,2));
                 switch (Type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
