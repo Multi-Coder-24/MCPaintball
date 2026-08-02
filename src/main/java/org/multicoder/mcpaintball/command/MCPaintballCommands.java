@@ -62,6 +62,24 @@ public class MCPaintballCommands {
                     Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.YELLOW);
                 }
 
+            }case "pink" -> {
+                data.Team = 5;
+                player.setData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get(), data);
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                PacketDistributor.sendToPlayer(player,new DataSyncS2CPacket(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())));
+                if(ModList.get().isLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.PINK);
+                }
+
+            }case "orange" -> {
+                data.Team = 6;
+                player.setData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get(), data);
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
+                PacketDistributor.sendToPlayer(player,new DataSyncS2CPacket(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())));
+                if(ModList.get().isLoaded("voicechat")){
+                    Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.ORANGE);
+                }
+
             }
             default -> player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_team"));
         }
@@ -129,6 +147,9 @@ public class MCPaintballCommands {
         MCPaintballGameEvents.INSTANCE.RedPoints = 0;
         MCPaintballGameEvents.INSTANCE.GreenPoints = 0;
         MCPaintballGameEvents.INSTANCE.BluePoints = 0;
+        MCPaintballGameEvents.INSTANCE.YellowPoints = 0;
+        MCPaintballGameEvents.INSTANCE.PinkPoints = 0;
+        MCPaintballGameEvents.INSTANCE.OrangePoints = 0;
         MCPaintballGameEvents.INSTANCE.setDirty();
         player.sendSystemMessage(Component.translatable("text.mcpaintball.game_stopped"));
         return 0;
@@ -165,11 +186,17 @@ public class MCPaintballCommands {
         points.add(MCPaintballGameEvents.INSTANCE.RedPoints);
         points.add(MCPaintballGameEvents.INSTANCE.GreenPoints);
         points.add(MCPaintballGameEvents.INSTANCE.BluePoints);
+        points.add(MCPaintballGameEvents.INSTANCE.YellowPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.PinkPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.OrangePoints);
         int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).get());
-        String Team = switch (Winner){
-            case 0 -> "Red";
-            case 1 -> "Green";
-            case 2 -> "Blue";
+        Component Team = switch (Winner){
+            case 0 -> Component.translatable("text.mcpaintball.team_red");
+            case 1 -> Component.translatable("text.mcpaintball.team_green");
+            case 2 -> Component.translatable("text.mcpaintball.team_blue");
+            case 3 -> Component.translatable("text.mcpaintball.team_yellow");
+            case 4 -> Component.translatable("text.mcpaintball.team_pink");
+            case 5 -> Component.translatable("text.mcpaintball.team_orange");
             default -> throw new IllegalStateException("Unexpected value: " + Winner);
         };
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);

@@ -35,6 +35,8 @@ public class BurstRifleItem extends Item {
                         case 2 -> MCPaintballEntities.GREEN_PAINTBALL.get();
                         case 3 -> MCPaintballEntities.BLUE_PAINTBALL.get();
                         case 4 -> MCPaintballEntities.YELLOW_PAINTBALL.get();
+                        case 5 -> MCPaintballEntities.PINK_PAINTBALL.get();
+                        case 6 -> MCPaintballEntities.ORANGE_PAINTBALL.get();
                         default -> throw new IllegalStateException("Unexpected value: " + data.Team);
                     };
                     Thread T1 = new Thread(() -> {

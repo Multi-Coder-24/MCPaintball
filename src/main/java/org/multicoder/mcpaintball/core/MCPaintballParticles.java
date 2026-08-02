@@ -14,4 +14,6 @@ public class MCPaintballParticles {
     public static final Supplier<SimpleParticleType> GREEN_PAINT = PARTICLES.register("green_paint", () -> new SimpleParticleType(true));
     public static final Supplier<SimpleParticleType> BLUE_PAINT = PARTICLES.register("blue_paint", () -> new SimpleParticleType(true));
     public static final Supplier<SimpleParticleType> YELLOW_PAINT = PARTICLES.register("yellow_paint", () -> new SimpleParticleType(true));
+    public static final Supplier<SimpleParticleType> PINK_PAINT = PARTICLES.register("pink_paint", () -> new SimpleParticleType(true));
+    public static final Supplier<SimpleParticleType> ORANGE_PAINT = PARTICLES.register("orange_paint", () -> new SimpleParticleType(true));
 }

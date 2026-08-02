@@ -31,6 +31,10 @@ public class PaintGrenadeEntityRenderer extends ThrownItemRenderer<PaintGrenadeE
             itemModelResolver.updateForNonLiving(state.item,new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE.get()), ItemDisplayContext.GROUND,entity);
         }else if (type == MCPaintballEntities.YELLOW_PAINT_GRENADE.get()){
             itemModelResolver.updateForNonLiving(state.item,new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE.get()), ItemDisplayContext.GROUND,entity);
+        }else if (type == MCPaintballEntities.PINK_PAINT_GRENADE.get()){
+            itemModelResolver.updateForNonLiving(state.item,new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE.get()), ItemDisplayContext.GROUND,entity);
+        }else if (type == MCPaintballEntities.ORANGE_PAINT_GRENADE.get()){
+            itemModelResolver.updateForNonLiving(state.item,new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE.get()), ItemDisplayContext.GROUND,entity);
         }
     }
 }

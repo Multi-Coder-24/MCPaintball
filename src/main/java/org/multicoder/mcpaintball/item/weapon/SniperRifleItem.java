@@ -36,6 +36,8 @@ public class SniperRifleItem extends Item {
                         case 2 -> MCPaintballEntities.BLUE_PAINTBALL.get();
                         case 3 -> MCPaintballEntities.GREEN_PAINTBALL.get();
                         case 4 -> MCPaintballEntities.YELLOW_PAINTBALL.get();
+                        case 5 -> MCPaintballEntities.PINK_PAINTBALL.get();
+                        case 6 -> MCPaintballEntities.ORANGE_PAINTBALL.get();
                         default -> throw new IllegalStateException("Unexpected value: " + data.Team);
                     };
                     PaintballEntity paintball = new PaintballEntity(type, player, level, player.getItemInHand(hand));

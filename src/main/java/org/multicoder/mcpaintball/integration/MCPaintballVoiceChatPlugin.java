@@ -13,6 +13,8 @@ public class MCPaintballVoiceChatPlugin implements VoicechatPlugin {
     public static Group GREEN;
     public static Group BLUE;
     public static Group YELLOW;
+    public static Group PINK;
+    public static Group ORANGE;
     @Override
     public String getPluginId() {
         return "mcpaintball";
@@ -35,5 +37,7 @@ public class MCPaintballVoiceChatPlugin implements VoicechatPlugin {
         GREEN = event.getVoicechat().groupBuilder().setName("MCPaintball Green Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
         BLUE = event.getVoicechat().groupBuilder().setName("MCPaintball Blue Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
         YELLOW = event.getVoicechat().groupBuilder().setName("MCPaintball Yellow Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        PINK = event.getVoicechat().groupBuilder().setName("MCPaintball Pink Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        ORANGE = event.getVoicechat().groupBuilder().setName("MCPaintball Orange Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
     }
 }

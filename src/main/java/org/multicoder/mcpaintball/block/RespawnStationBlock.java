@@ -8,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.NonNull;
@@ -21,7 +22,7 @@ import java.util.Objects;
 public class RespawnStationBlock extends Block {
 
     public RespawnStationBlock(Properties properties) {
-        super(properties);
+        super(properties.dynamicShape().noOcclusion().pushReaction(PushReaction.BLOCK).destroyTime(5F));
     }
 
     @Override
@@ -39,6 +40,12 @@ public class RespawnStationBlock extends Block {
                     ServerPlayer sp = (ServerPlayer) player;
                     sp.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(GlobalPos.of(level.dimension(),pos.above()),0.0f,0f),true),true);
                 }else if(state.getBlock() == MCPaintballBlocks.YELLOW_RESPAWN_STATION.get() && Objects.requireNonNull(data).Team == 4){
+                    ServerPlayer sp = (ServerPlayer) player;
+                    sp.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(GlobalPos.of(level.dimension(),pos.above()),0.0f,0f),true),true);
+                }else if(state.getBlock() == MCPaintballBlocks.PINK_RESPAWN_STATION.get() && Objects.requireNonNull(data).Team == 5){
+                    ServerPlayer sp = (ServerPlayer) player;
+                    sp.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(GlobalPos.of(level.dimension(),pos.above()),0.0f,0f),true),true);
+                }else if(state.getBlock() == MCPaintballBlocks.ORANGE_RESPAWN_STATION.get() && Objects.requireNonNull(data).Team == 6){
                     ServerPlayer sp = (ServerPlayer) player;
                     sp.setRespawnPosition(new ServerPlayer.RespawnConfig(new LevelData.RespawnData(GlobalPos.of(level.dimension(),pos.above()),0.0f,0f),true),true);
                 }

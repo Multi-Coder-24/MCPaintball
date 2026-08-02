@@ -43,6 +43,8 @@ public class GrenadeLauncherItem extends Item {
                             case 2 -> MCPaintballEntities.GREEN_PAINT_GRENADE.get();
                             case 3 -> MCPaintballEntities.BLUE_PAINT_GRENADE.get();
                             case 4 -> MCPaintballEntities.YELLOW_PAINT_GRENADE.get();
+                            case 5 -> MCPaintballEntities.PINK_PAINT_GRENADE.get();
+                            case 6 -> MCPaintballEntities.ORANGE_PAINT_GRENADE.get();
                             default -> throw new IllegalStateException("Unexpected value: " + data.Team);
                         };
                         PaintGrenadeEntity paintball = new PaintGrenadeEntity(type,player,level,itemStack);

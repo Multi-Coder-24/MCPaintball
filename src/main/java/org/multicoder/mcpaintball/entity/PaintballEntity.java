@@ -13,13 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
-import org.multicoder.mcpaintball.util.DebugHelper;
 
 import java.util.Objects;
 
@@ -86,11 +84,21 @@ public class PaintballEntity extends AbstractArrow {
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
                             BlockPos respawn = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
                             Target.teleportTo(respawn.getX(),respawn.getY(),respawn.getZ());
+                        }else if(type == MCPaintballEntities.PINK_PAINTBALL.get() && TargetData.Team != 5) {
+                            Objects.requireNonNull(level()).playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+                            MCPaintballGameEvents.INSTANCE.PinkPoints++;
+                            MCPaintballGameEvents.INSTANCE.setDirty(true);
+                            BlockPos respawn = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
+                            Target.teleportTo(respawn.getX(),respawn.getY(),respawn.getZ());
+                        }else if(type == MCPaintballEntities.ORANGE_PAINTBALL.get() && TargetData.Team != 6) {
+                            Objects.requireNonNull(level()).playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(), MCPaintballSounds.HIT.get(), SoundSource.PLAYERS, 1f, 1f);
+                            MCPaintballGameEvents.INSTANCE.OrangePoints++;
+                            MCPaintballGameEvents.INSTANCE.setDirty(true);
+                            BlockPos respawn = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
+                            Target.teleportTo(respawn.getX(),respawn.getY(),respawn.getZ());
                         }
                     }
                 }
-            } else if (MCPaintball.DEBUG) {
-                DebugHelper.HandleDebug(result, level(), (Player) this.getOwner());
             }
         }
         super.discard();

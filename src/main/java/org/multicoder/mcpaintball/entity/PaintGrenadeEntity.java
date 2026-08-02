@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,11 +13,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import org.jspecify.annotations.NonNull;
-import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
-import org.multicoder.mcpaintball.util.DebugHelper;
 
 import java.util.Objects;
 
@@ -43,6 +40,10 @@ public class PaintGrenadeEntity extends ThrowableItemProjectile {
             return MCPaintballItems.BLUE_PAINT_GRENADE.value();
         }else if(type == MCPaintballEntities.YELLOW_PAINT_GRENADE.get()){
             return MCPaintballItems.YELLOW_PAINT_GRENADE.value();
+        }else if(type == MCPaintballEntities.PINK_PAINT_GRENADE.get()){
+            return MCPaintballItems.PINK_PAINT_GRENADE.value();
+        }else if(type == MCPaintballEntities.ORANGE_PAINT_GRENADE.get()){
+            return MCPaintballItems.ORANGE_PAINT_GRENADE.value();
         }
         return MCPaintballItems.RED_PAINT_GRENADE.value();
     }
@@ -67,6 +68,12 @@ public class PaintGrenadeEntity extends ThrowableItemProjectile {
             }else if(type == MCPaintballEntities.YELLOW_PAINT_GRENADE.get()){
                 BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.YELLOW_PAINT.get(),true,true, pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
                 Checker = 4;
+            }else if(type == MCPaintballEntities.PINK_PAINT_GRENADE.get()){
+                BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.PINK_PAINT.get(),true,true, pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                Checker = 5;
+            }else if(type == MCPaintballEntities.ORANGE_PAINT_GRENADE.get()){
+                BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(MCPaintballParticles.ORANGE_PAINT.get(),true,true, pos.getX(), pos.getY(), pos.getZ(),5,0.2,0.2,0.2,0.01));
+                Checker = 6;
             } else {
                 Checker = 0;
             }
@@ -79,8 +86,6 @@ public class PaintGrenadeEntity extends ThrowableItemProjectile {
                         BlockPos respawn = Objects.requireNonNull(player.getRespawnConfig()).respawnData().pos();
                         player.teleportTo(respawn.getX(),respawn.getY(),respawn.getZ());
                     }
-                }else if(MCPaintball.DEBUG){
-                    DebugHelper.HandleGrenadeDebug(entity,level(),Checker,(Player) this.getOwner());
                 }
             });
         }

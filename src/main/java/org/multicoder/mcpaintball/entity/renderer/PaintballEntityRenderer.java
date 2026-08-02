@@ -15,6 +15,8 @@ public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity,Arrow
     public static final Identifier GREEN = Identifier.fromNamespaceAndPath(MCPaintball.MODID,"textures/entity/projectiles/green_paintball.png");
     public static final Identifier BLUE = Identifier.fromNamespaceAndPath(MCPaintball.MODID,"textures/entity/projectiles/blue_paintball.png");
     public static final Identifier YELLOW = Identifier.fromNamespaceAndPath(MCPaintball.MODID,"textures/entity/projectiles/yellow_paintball.png");
+    public static final Identifier PINK = Identifier.fromNamespaceAndPath(MCPaintball.MODID,"textures/entity/projectiles/pink_paintball.png");
+    public static final Identifier ORANGE = Identifier.fromNamespaceAndPath(MCPaintball.MODID,"textures/entity/projectiles/orange_paintball.png");
     public PaintballEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
@@ -30,6 +32,10 @@ public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity,Arrow
             return BLUE;
         }else if(type == MCPaintballEntities.YELLOW_PAINTBALL.get()){
             return YELLOW;
+        }else if(type == MCPaintballEntities.PINK_PAINTBALL.get()){
+            return PINK;
+        }else if(type == MCPaintballEntities.ORANGE_PAINTBALL.get()){
+            return ORANGE;
         }
         return RED;
     }

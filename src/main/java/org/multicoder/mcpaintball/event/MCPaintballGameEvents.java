@@ -61,6 +61,14 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.GREEN_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.BLUE_PAINT_GRENADE.value());
             event.accept(MCPaintballItems.YELLOW_PAINT_GRENADE.value());
+            event.accept(MCPaintballItems.PINK_PAINT_GRENADE.value());
+            event.accept(MCPaintballItems.ORANGE_PAINT_GRENADE.value());
+            event.accept(MCPaintballBlocks.RED_PAINT_MINE.value());
+            event.accept(MCPaintballBlocks.GREEN_PAINT_MINE.value());
+            event.accept(MCPaintballBlocks.BLUE_PAINT_MINE.value());
+            event.accept(MCPaintballBlocks.YELLOW_PAINT_MINE.value());
+            event.accept(MCPaintballBlocks.PINK_PAINT_MINE.value());
+            event.accept(MCPaintballBlocks.ORANGE_PAINT_MINE.value());
             event.accept(MCPaintballItems.SMOKE_GRENADE.value());
             event.accept(MCPaintballItems.EMP_GRENADE.value());
             event.accept(MCPaintballItems.SIGHT_GRENADE.value());
@@ -81,14 +89,32 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.YELLOW_LEGGINGS.value());
             event.accept(MCPaintballItems.YELLOW_CHESTPLATE.value());
             event.accept(MCPaintballItems.YELLOW_HELMET.value());
+            event.accept(MCPaintballItems.PINK_BOOTS.value());
+            event.accept(MCPaintballItems.PINK_LEGGINGS.value());
+            event.accept(MCPaintballItems.PINK_CHESTPLATE.value());
+            event.accept(MCPaintballItems.PINK_HELMET.value());
+            event.accept(MCPaintballItems.ORANGE_BOOTS.value());
+            event.accept(MCPaintballItems.ORANGE_LEGGINGS.value());
+            event.accept(MCPaintballItems.ORANGE_CHESTPLATE.value());
+            event.accept(MCPaintballItems.ORANGE_HELMET.value());
             event.accept(MCPaintballBlocks.RED_GRENADE_STATION.value());
             event.accept(MCPaintballBlocks.GREEN_GRENADE_STATION.value());
             event.accept(MCPaintballBlocks.BLUE_GRENADE_STATION.value());
             event.accept(MCPaintballBlocks.YELLOW_GRENADE_STATION.value());
+            event.accept(MCPaintballBlocks.PINK_GRENADE_STATION.value());
+            event.accept(MCPaintballBlocks.ORANGE_GRENADE_STATION.value());
             event.accept(MCPaintballBlocks.RED_RESPAWN_STATION.value());
             event.accept(MCPaintballBlocks.GREEN_RESPAWN_STATION.value());
             event.accept(MCPaintballBlocks.BLUE_RESPAWN_STATION.value());
             event.accept(MCPaintballBlocks.YELLOW_RESPAWN_STATION.value());
+            event.accept(MCPaintballBlocks.PINK_RESPAWN_STATION.value());
+            event.accept(MCPaintballBlocks.ORANGE_RESPAWN_STATION.value());
+            event.accept(MCPaintballBlocks.RED_FLAG.value());
+            event.accept(MCPaintballBlocks.GREEN_FLAG.value());
+            event.accept(MCPaintballBlocks.BLUE_FLAG.value());
+            event.accept(MCPaintballBlocks.YELLOW_FLAG.value());
+            event.accept(MCPaintballBlocks.PINK_FLAG.value());
+            event.accept(MCPaintballBlocks.ORANGE_FLAG.value());
         }
     }
 
@@ -110,7 +136,7 @@ public class MCPaintballGameEvents {
             if(Ticker == 20){
                 event.getServer().getPlayerList().getPlayers().forEach(player -> {
                     if(Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Team != 0 && Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Type != 0) {
-                        PacketDistributor.sendToPlayer(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.RedPoints,MCPaintballGameEvents.INSTANCE.GreenPoints,MCPaintballGameEvents.INSTANCE.BluePoints,MCPaintballGameEvents.INSTANCE.YellowPoints,MCPaintballGameEvents.INSTANCE.MatchStarted, MCPaintballGameEvents.INSTANCE.RoundStarted));
+                        PacketDistributor.sendToPlayer(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.RedPoints,MCPaintballGameEvents.INSTANCE.GreenPoints,MCPaintballGameEvents.INSTANCE.BluePoints,MCPaintballGameEvents.INSTANCE.YellowPoints,MCPaintballGameEvents.INSTANCE.PinkPoints,MCPaintballGameEvents.INSTANCE.OrangePoints,MCPaintballGameEvents.INSTANCE.MatchStarted, MCPaintballGameEvents.INSTANCE.RoundStarted));
                     }
                 });
                 Ticker = 0;
@@ -138,8 +164,8 @@ public class MCPaintballGameEvents {
     public static void RegisterCommands(RegisterCommandsEvent event){
         MCPaintball.LOGGER.info("[MCPaintball] Commands Register");
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.team_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("team", StringArgumentType.word()).executes(MCPaintballCommands::SetTeam))))).createBuilder().build();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.type_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.set").getString()).then(argument("type",StringArgumentType.word()).executes(MCPaintballCommands::SetType))))).createBuilder().build();
+        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.team_prefix").getString()).then(argument("team", StringArgumentType.word()).executes(MCPaintballCommands::SetTeam)))).createBuilder().build();
+        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.type_prefix").getString()).then(argument("type",StringArgumentType.word()).executes(MCPaintballCommands::SetType)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartGame)).then(literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopGame)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartRound)).then(literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopRound)).then(literal(Component.translatable("command.mcpaintball.winner").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::RoundWinner)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.kit").getString()).executes(MCPaintballCommands::GiveKit))).createBuilder().build();
@@ -155,10 +181,14 @@ public class MCPaintballGameEvents {
             EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL.get(), PaintballEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL.get(), PaintballEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.YELLOW_PAINTBALL.get(), PaintballEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.PINK_PAINTBALL.get(), PaintballEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.ORANGE_PAINTBALL.get(), PaintballEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.YELLOW_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.PINK_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
+            EntityRenderers.register(MCPaintballEntities.ORANGE_PAINT_GRENADE.get(), PaintGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE.get(), SmokeGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.EMP_GRENADE.get(), EMPGrenadeEntityRenderer::new);
             EntityRenderers.register(MCPaintballEntities.SIGHT_GRENADE.get(), SightGrenadeEntityRenderer::new);
@@ -171,6 +201,8 @@ public class MCPaintballGameEvents {
             event.registerSpriteSet(MCPaintballParticles.GREEN_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
             event.registerSpriteSet(MCPaintballParticles.BLUE_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
             event.registerSpriteSet(MCPaintballParticles.YELLOW_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
+            event.registerSpriteSet(MCPaintballParticles.PINK_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
+            event.registerSpriteSet(MCPaintballParticles.ORANGE_PAINT.get(), GlowParticle.ElectricSparkProvider::new);
         }
 
         @SubscribeEvent
