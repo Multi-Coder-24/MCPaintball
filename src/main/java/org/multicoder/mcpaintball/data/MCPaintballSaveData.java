@@ -7,25 +7,26 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import org.multicoder.mcpaintball.MCPaintball;
 
+
 @SuppressWarnings("all")
 public class MCPaintballSaveData extends SavedData {
-    public int RedPoints = 0;
-    public int GreenPoints = 0;
-    public int BluePoints = 0;
-    public int YellowPoints = 0;
-    public int PinkPoints = 0;
-    public int OrangePoints = 0;
-    public boolean MatchStarted = false;
-    public boolean RoundStarted = false;
+    public int redPoints = 0;
+    public int greenPoints = 0;
+    public int bluePoints = 0;
+    public int yellowPoints = 0;
+    public int pinkPoints = 0;
+    public int orangePoints = 0;
+    public boolean matchStarted = false;
+    public boolean roundStarted = false;
     public static final Codec<MCPaintballSaveData> CODEC = RecordCodecBuilder.create( instance  -> instance.group(
-            Codec.INT.fieldOf("red_points").forGetter(MCPaintballSaveData::RedPoints),
-            Codec.INT.fieldOf("blue_points").forGetter(MCPaintballSaveData::BluePoints),
-            Codec.INT.fieldOf("green_points").forGetter(MCPaintballSaveData::GreenPoints),
-            Codec.INT.fieldOf("yellow_points").forGetter(MCPaintballSaveData::YellowPoints),
-            Codec.INT.fieldOf("pink_points").forGetter(MCPaintballSaveData::PinkPoints),
-            Codec.INT.fieldOf("orange_points").forGetter(MCPaintballSaveData::OrangePoints),
-            Codec.BOOL.fieldOf("match_started").forGetter(MCPaintballSaveData::MatchStarted),
-            Codec.BOOL.fieldOf("round_started").forGetter(MCPaintballSaveData::RoundStarted)
+            Codec.INT.fieldOf("red_points").forGetter(MCPaintballSaveData::redPoints),
+            Codec.INT.fieldOf("blue_points").forGetter(MCPaintballSaveData::bluePoints),
+            Codec.INT.fieldOf("green_points").forGetter(MCPaintballSaveData::greenPoints),
+            Codec.INT.fieldOf("yellow_points").forGetter(MCPaintballSaveData::yellowPoints),
+            Codec.INT.fieldOf("pink_points").forGetter(MCPaintballSaveData::pinkPoints),
+            Codec.INT.fieldOf("orange_points").forGetter(MCPaintballSaveData::orangePoints),
+            Codec.BOOL.fieldOf("match_started").forGetter(MCPaintballSaveData::matchStarted),
+            Codec.BOOL.fieldOf("round_started").forGetter(MCPaintballSaveData::roundStarted)
     ).apply(instance,MCPaintballSaveData::new));
 
     public static final SavedDataType<MCPaintballSaveData> TYPE = new SavedDataType<>(Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"paintball_data"),MCPaintballSaveData::new,CODEC,null);
@@ -36,45 +37,44 @@ public class MCPaintballSaveData extends SavedData {
 
 
     public MCPaintballSaveData(int redPoints, int bluePoints, int greenPoints,int yellowPoints,int pinkPoints,int orangePoints, boolean matchStarted, boolean roundStarted){
-        RedPoints = redPoints;
-        BluePoints = bluePoints;
-        GreenPoints = greenPoints;
-        YellowPoints = yellowPoints;
-        PinkPoints = pinkPoints;
-        OrangePoints = orangePoints;
-        MatchStarted = matchStarted;
-        RoundStarted = roundStarted;
+        this.redPoints = redPoints;
+        this.bluePoints = bluePoints;
+        this.greenPoints = greenPoints;
+        this.yellowPoints = yellowPoints;
+        this.pinkPoints = pinkPoints;
+        this.orangePoints = orangePoints;
+        this.matchStarted = matchStarted;
+        this.roundStarted = roundStarted;
     }
 
-    public int RedPoints(){
-        return RedPoints;
+    public int redPoints(){
+        return redPoints;
     }
-    public int GreenPoints(){
-        return GreenPoints;
+    public int greenPoints(){
+        return greenPoints;
     }
-    public int BluePoints(){
-        return BluePoints;
+    public int bluePoints(){
+        return bluePoints;
     }
-    public int YellowPoints(){return YellowPoints;}
-    public int PinkPoints(){return PinkPoints;}
-    public int OrangePoints(){return OrangePoints;}
-    public boolean MatchStarted(){
-        return MatchStarted;
+    public int yellowPoints(){return yellowPoints;}
+    public int pinkPoints(){return pinkPoints;}
+    public int orangePoints(){return orangePoints;}
+    public boolean matchStarted(){
+        return matchStarted;
     }
-    public boolean RoundStarted(){
-        return RoundStarted;
+    public boolean roundStarted(){
+        return roundStarted;
     }
 
-    public void incrementByChecker(int Checker){
-        switch (Checker){
-            case 1 -> RedPoints++;
-            case 2 -> GreenPoints++;
-            case 3 -> BluePoints++;
-            case 4 -> YellowPoints++;
-            case 5 -> PinkPoints++;
-            case 6 -> OrangePoints++;
+    public void incrementByChecker(int checker){
+        switch (checker){
+            case 1 -> redPoints++;
+            case 2 -> greenPoints++;
+            case 3 -> bluePoints++;
+            case 4 -> yellowPoints++;
+            case 5 -> pinkPoints++;
+            case 6 -> orangePoints++;
         }
         setDirty(true);
     }
-
 }

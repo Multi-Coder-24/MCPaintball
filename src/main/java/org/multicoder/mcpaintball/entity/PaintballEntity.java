@@ -13,13 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
-import org.multicoder.mcpaintball.util.DebugHelper;
 
 import java.util.Objects;
 
@@ -56,55 +54,51 @@ public class PaintballEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(@NonNull EntityHitResult result) {
         if(!level().isClientSide()){
-            if(result.getEntity() instanceof ServerPlayer Target){
-                if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
-                    MCPaintballPlayerData TargetData = Target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                    if(Objects.requireNonNull(TargetData).Team != 0){
+            if(result.getEntity() instanceof ServerPlayer target){
+                if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+                    MCPaintballPlayerData targetData = target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+                    if(Objects.requireNonNull(targetData).team != 0){
                         EntityType<?> type = getType();
-                        if(type == MCPaintballEntities.RED_PAINTBALL && TargetData.Team != 1){
+                        if(type == MCPaintballEntities.RED_PAINTBALL && targetData.team != 1){
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-                            MCPaintballGameEvents.INSTANCE.RedPoints++;
+                            MCPaintballGameEvents.INSTANCE.redPoints++;
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
-                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
-                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
-                        }else if(type == MCPaintballEntities.GREEN_PAINTBALL && TargetData.Team != 2){
+                            BlockPos pos = Objects.requireNonNull(target.getRespawnConfig()).respawnData().pos();
+                            target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                        }else if(type == MCPaintballEntities.GREEN_PAINTBALL && targetData.team != 2){
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-                            MCPaintballGameEvents.INSTANCE.GreenPoints++;
+                            MCPaintballGameEvents.INSTANCE.greenPoints++;
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
-                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
-                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
-                        }else if(type == MCPaintballEntities.BLUE_PAINTBALL && TargetData.Team != 3){
+                            BlockPos pos = Objects.requireNonNull(target.getRespawnConfig()).respawnData().pos();
+                            target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                        }else if(type == MCPaintballEntities.BLUE_PAINTBALL && targetData.team != 3){
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-                            MCPaintballGameEvents.INSTANCE.BluePoints++;
+                            MCPaintballGameEvents.INSTANCE.bluePoints++;
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
-                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
-                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
-
-                        }else if(type == MCPaintballEntities.YELLOW_PAINTBALL && TargetData.Team != 4){
+                            BlockPos pos = Objects.requireNonNull(target.getRespawnConfig()).respawnData().pos();
+                            target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                        }else if(type == MCPaintballEntities.YELLOW_PAINTBALL && targetData.team != 4){
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-                            MCPaintballGameEvents.INSTANCE.YellowPoints++;
+                            MCPaintballGameEvents.INSTANCE.yellowPoints++;
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
-                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
-                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
-                        }else if(type == MCPaintballEntities.PINK_PAINTBALL && TargetData.Team != 5){
+                            BlockPos pos = Objects.requireNonNull(target.getRespawnConfig()).respawnData().pos();
+                            target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                        }else if(type == MCPaintballEntities.PINK_PAINTBALL && targetData.team != 5){
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-                            MCPaintballGameEvents.INSTANCE.PinkPoints++;
+                            MCPaintballGameEvents.INSTANCE.pinkPoints++;
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
-                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
-                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
-                        }else if(type == MCPaintballEntities.ORANGE_PAINTBALL && TargetData.Team != 6){
+                            BlockPos pos = Objects.requireNonNull(target.getRespawnConfig()).respawnData().pos();
+                            target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                        }else if(type == MCPaintballEntities.ORANGE_PAINTBALL && targetData.team != 6){
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(),MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
-                            MCPaintballGameEvents.INSTANCE.OrangePoints++;
+                            MCPaintballGameEvents.INSTANCE.orangePoints++;
                             MCPaintballGameEvents.INSTANCE.setDirty(true);
-                            BlockPos pos = Objects.requireNonNull(Target.getRespawnConfig()).respawnData().pos();
-                            Target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                            BlockPos pos = Objects.requireNonNull(target.getRespawnConfig()).respawnData().pos();
+                            target.teleportTo(pos.getX(),pos.getY(),pos.getZ());
                         }
                     }
                 }
-            }else if(MCPaintball.DEBUG){
-                DebugHelper.HandleDebug(result,level(),3,(Player) this.getOwner());
             }
-
         }
         super.discard();
     }

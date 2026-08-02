@@ -6,7 +6,7 @@ import org.multicoder.mcpaintball.core.MCPaintballItems;
 
 public class CreativeTabEvents {
 
-    public static void WeaponsInit(FabricCreativeModeTabOutput output) {
+    public static void weaponsInit(FabricCreativeModeTabOutput output) {
         output.accept(MCPaintballItems.PISTOL);
         output.accept(MCPaintballItems.SHOTGUN);
         output.accept(MCPaintballItems.SNIPER_RIFLE);
@@ -30,7 +30,7 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.ORANGE_PAINT_MINE);
     }
 
-    public static void UtilityInit(FabricCreativeModeTabOutput output) {
+    public static void utilityInit(FabricCreativeModeTabOutput output) {
         output.accept(MCPaintballItems.RED_BOOTS);
         output.accept(MCPaintballItems.RED_LEGGINGS);
         output.accept(MCPaintballItems.RED_CHESTPLATE);

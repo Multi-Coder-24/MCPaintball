@@ -72,7 +72,7 @@ public class MCPaintballItems {
     public static final Item PINK_FLAG_ITEM = register("objectives/pink_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
     public static final Item ORANGE_FLAG_ITEM = register("objectives/orange_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
 
-    public static void Initialize(){
+    public static void initialize(){
         MCPaintball.LOGGER.info("Initializing Items");
     }
 

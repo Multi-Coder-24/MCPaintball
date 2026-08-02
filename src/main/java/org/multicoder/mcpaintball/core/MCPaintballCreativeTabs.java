@@ -18,7 +18,7 @@ public class MCPaintballCreativeTabs {
     public static final CreativeModeTab WEAPONS_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapons_tab"),FabricCreativeModeTab.builder().title(Component.translatable("text.mcpaintball.weapons_tab")).icon(() -> new ItemStack(MCPaintballItems.RED_PAINT_GRENADE.asItem())).build());
     public static final CreativeModeTab UTILITY_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"utility_tab"),FabricCreativeModeTab.builder().title(Component.translatable("text.mcpaintball.utility_tab")).icon(() -> new ItemStack(MCPaintballItems.RED_HELMET.asItem())).build());
 
-    public static void Initialize(){
+    public static void initialize(){
         MCPaintball.LOGGER.info("Initializing CreativeModeTabs");
     }
 }

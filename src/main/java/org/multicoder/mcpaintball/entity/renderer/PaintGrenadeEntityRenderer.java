@@ -26,12 +26,16 @@ public class PaintGrenadeEntityRenderer extends ThrownItemRenderer<PaintGrenadeE
         EntityType<?> type = entity.getType();
         if(type == MCPaintballEntities.RED_PAINT_GRENADE){
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.RED_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
-        }else  if(type == MCPaintballEntities.GREEN_PAINT_GRENADE){
+        }else if(type == MCPaintballEntities.GREEN_PAINT_GRENADE){
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
-        }else  if(type == MCPaintballEntities.BLUE_PAINT_GRENADE){
+        }else if(type == MCPaintballEntities.BLUE_PAINT_GRENADE){
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
-        }else  if(type == MCPaintballEntities.YELLOW_PAINT_GRENADE){
+        }else if(type == MCPaintballEntities.YELLOW_PAINT_GRENADE){
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
+        }else if(type == MCPaintballEntities.PINK_PAINT_GRENADE){
+            this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
+        }else if(type == MCPaintballEntities.YELLOW_PAINTBALL){
+            this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
         }
     }
 }

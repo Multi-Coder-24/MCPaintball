@@ -24,14 +24,14 @@ import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
 
 public class MCPaintballClient implements ClientModInitializer {
     public static final Logger CLIENT_LOGGER = LogManager.getLogger(MOD_ID + "_client");
-    public static int RedPoints = 0;
-    public static int GreenPoints = 0;
-    public static int BluePoints = 0;
-    public static int YellowPoints = 0;
-    public static int PinkPoints = 0;
-    public static int OrangePoints = 0;
-    public static boolean GameRunning = false;
-    public static boolean RoundRunning = false;
+    public static int redPoints = 0;
+    public static int greenPoints = 0;
+    public static int bluePoints = 0;
+    public static int yellowPoints = 0;
+    public static int pinkPoints = 0;
+    public static int orangePoints = 0;
+    public static boolean gameRunning = false;
+    public static boolean roundRunning = false;
     @Override
     public void onInitializeClient() {
         CLIENT_LOGGER.info("Initializing MCPaintball Client");
@@ -59,12 +59,12 @@ public class MCPaintballClient implements ClientModInitializer {
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.PINK_PAINT, GlowParticle.ElectricSparkProvider::new);
         ParticleProviderRegistry.getInstance().register(MCPaintballParticles.ORANGE_PAINT, GlowParticle.ElectricSparkProvider::new);
         CLIENT_LOGGER.info("Initializing Packet Handlers");
-        ClientPlayNetworking.registerGlobalReceiver(PointSyncS2CPacket.TYPE,PointSyncS2CPacket::HandlePacket);
-        ClientPlayNetworking.registerGlobalReceiver(DataSyncS2CPacket.TYPE,DataSyncS2CPacket::HandlePacket);
+        ClientPlayNetworking.registerGlobalReceiver(PointSyncS2CPacket.TYPE,PointSyncS2CPacket::handlePacket);
+        ClientPlayNetworking.registerGlobalReceiver(DataSyncS2CPacket.TYPE,DataSyncS2CPacket::handlePacket);
         CLIENT_LOGGER.info("Registering Overlay");
         HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"overlay"), new PaintballDataOverlay());
 
-        ClientTickEvents.END_CLIENT_TICK.register(MCPaintballGameEvents::ClientEndTick);
+        ClientTickEvents.END_CLIENT_TICK.register(MCPaintballGameEvents::clientEndTick);
         CLIENT_LOGGER.info("Initialized MCPaintball Client");
     }
 }

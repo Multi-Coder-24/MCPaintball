@@ -40,7 +40,7 @@ public class SightGrenadeEntity extends ThrowableItemProjectile {
                 AABB box = AABB.encapsulatingFullBlocks(current.offset(-5,-2,-5),current.offset(5,2,5));
                 level.getEntities(null,box).forEach(entity -> {
                     if(entity instanceof ServerPlayer player){
-                        if(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).Team != 0){
+                        if(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).team != 0){
                             MobEffectInstance blind = new MobEffectInstance(MobEffects.BLINDNESS,40);
                             MobEffectInstance dark = new MobEffectInstance(MobEffects.DARKNESS,40);
                             player.addEffect(dark);

@@ -22,22 +22,19 @@ import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 public class MCPaintball implements ModInitializer {
     public static final String MOD_ID = "mcpaintball";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
-    public static boolean DEBUG = false;
     @Override
     public void onInitialize() {
-        LOGGER.info("Debug Mode Check");
-        if(System.getenv().containsKey("MultiCoderDebug")){DEBUG = Boolean.parseBoolean(System.getenv("MultiCoderDebug"));if(DEBUG){LOGGER.info("Debug Mode Enabled");}}
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
-        MCPaintballDataComponents.Initialize();
-        MCPaintballDataAttachments.Initialize();
-        MCPaintballBlocks.Initialize();
-        MCPaintballItems.Initialize();
-        MCPaintballEntities.Initialize();
-        MCPaintballArmorMaterials.Initialize();
-        MCPaintballParticles.Initialize();
-        MCPaintballSounds.Initialize();
-        MCPaintballCreativeTabs.Initialize();
+        MCPaintballDataComponents.initialize();
+        MCPaintballDataAttachments.initialize();
+        MCPaintballBlocks.initialize();
+        MCPaintballItems.initialize();
+        MCPaintballEntities.initialize();
+        MCPaintballArmorMaterials.initialize();
+        MCPaintballParticles.initialize();
+        MCPaintballSounds.initialize();
+        MCPaintballCreativeTabs.initialize();
         LOGGER.info("Initializing Particles");
         Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"red_paint"), MCPaintballParticles.RED_PAINT);
         Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"green_paint"),MCPaintballParticles.GREEN_PAINT);
@@ -46,18 +43,18 @@ public class MCPaintball implements ModInitializer {
         Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"pink_paint"),MCPaintballParticles.PINK_PAINT);
         Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"orange_paint"),MCPaintballParticles.ORANGE_PAINT);
         LOGGER.info("Initializing Creative Tab Events");
-        CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.WEAPONS_TAB_KEY).register(CreativeTabEvents::WeaponsInit);
-        CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.UTILITY_TAB_KEY).register(CreativeTabEvents::UtilityInit);
+        CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.WEAPONS_TAB_KEY).register(CreativeTabEvents::weaponsInit);
+        CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.UTILITY_TAB_KEY).register(CreativeTabEvents::utilityInit);
         LOGGER.info("Initializing Server Events");
-        ServerLifecycleEvents.SERVER_STARTED.register(MCPaintballGameEvents::ServerStart);
-        ServerPlayerEvents.JOIN.register(MCPaintballGameEvents::Join);
+        ServerLifecycleEvents.SERVER_STARTED.register(MCPaintballGameEvents::serverStart);
+        ServerPlayerEvents.JOIN.register(MCPaintballGameEvents::join);
         LOGGER.info("Initializing Command Events");
-        CommandRegistrationCallback.EVENT.register(MCPaintballGameEvents::CommandRegister);
+        CommandRegistrationCallback.EVENT.register(MCPaintballGameEvents::commandRegister);
         LOGGER.info("Initializing Networking");
         PayloadTypeRegistry.clientboundPlay().register(PointSyncS2CPacket.TYPE,PointSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.clientboundPlay().register(DataSyncS2CPacket.TYPE,DataSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket.STREAM_CODEC);
-        ServerPlayNetworking.registerGlobalReceiver(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket::HandlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket::handlePacket);
         LOGGER.info("Initialized MCPaintball");
     }
 }

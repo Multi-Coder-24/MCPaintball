@@ -14,7 +14,7 @@ public class MCPaintballSounds {
     public static final SoundEvent GRENADE = register("grenade");
     public static final SoundEvent SPARK = register("spark");
 
-    public static void Initialize() {}
+    public static void initialize() {}
     public static SoundEvent register(String name){
         return Registry.register(BuiltInRegistries.SOUND_EVENT, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,name),SoundEvent.createFixedRangeEvent(Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,name),16));
     }

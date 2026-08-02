@@ -21,14 +21,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class MCPaintballCommands {
-    public static int SetTeam(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int setTeam(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String selectedTeam = StringArgumentType.getString(context, "team");
         ServerPlayer player = context.getSource().getPlayerOrException();
         MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
         selectedTeam = selectedTeam.toLowerCase();
         switch (selectedTeam) {
             case "red" -> {
-                data.Team = 1;
+                data.team = 1;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -37,7 +37,7 @@ public class MCPaintballCommands {
                 }
             }
             case "green" -> {
-                data.Team = 2;
+                data.team = 2;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -46,7 +46,7 @@ public class MCPaintballCommands {
                 }
             }
             case "blue" -> {
-                data.Team = 3;
+                data.team = 3;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -55,7 +55,7 @@ public class MCPaintballCommands {
                 }
             }
             case "yellow" -> {
-                data.Team = 4;
+                data.team = 4;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -63,7 +63,7 @@ public class MCPaintballCommands {
                     Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.YELLOW);
                 }
             }case "pink" -> {
-                data.Team = 5;
+                data.team = 5;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -71,7 +71,7 @@ public class MCPaintballCommands {
                     Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(context.getSource().getPlayerOrException().getUUID())).setGroup(MCPaintballVoiceChatPlugin.PINK);
                 }
             }case "orange" -> {
-                data.Team = 6;
+                data.team = 6;
                 player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                 player.sendSystemMessage(Component.translatable("text.mcpaintball.team_set"));
                 ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
@@ -84,37 +84,37 @@ public class MCPaintballCommands {
         return 0;
     }
 
-    public static int SetType(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int setType(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String selectedType = StringArgumentType.getString(context, "type");
         ServerPlayer player = context.getSource().getPlayerOrException();
-        if(MCPaintballGameEvents.INSTANCE.MatchStarted){
-            if(!MCPaintballGameEvents.INSTANCE.RoundStarted){
+        if(MCPaintballGameEvents.INSTANCE.matchStarted){
+            if(!MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 selectedType = selectedType.toLowerCase();
                 switch (selectedType) {
                     case "standard" -> {
-                        data.Type = 1;
+                        data.type = 1;
                         player.removeAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
                         ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
                     }
                     case "sniper" -> {
-                        data.Type = 2;
+                        data.type = 2;
                         player.removeAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
                         ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
                     }
                     case "assault" -> {
-                        data.Type = 3;
+                        data.type = 3;
                         player.removeAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
                         ServerPlayNetworking.send(context.getSource().getPlayerOrException(),new DataSyncS2CPacket(context.getSource().getPlayerOrException().getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
                     }
                     case "heavy" -> {
-                        data.Type = 4;
+                        data.type = 4;
                         player.removeAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                         player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER, data);
                         player.sendSystemMessage(Component.translatable("text.mcpaintball.type_set"));
@@ -133,22 +133,22 @@ public class MCPaintballCommands {
         return 0;
     }
 
-    public static int StartGame(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int startGame(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
-        MCPaintballGameEvents.INSTANCE.MatchStarted = true;
+        MCPaintballGameEvents.INSTANCE.matchStarted = true;
         MCPaintballGameEvents.INSTANCE.setDirty(true);
         player.sendSystemMessage(Component.translatable("text.mcpaintball.game_start"));
         return 0;
     }
 
-    public static int StopGame(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int stopGame(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
-        MCPaintballGameEvents.INSTANCE.MatchStarted = false;
-        MCPaintballGameEvents.INSTANCE.RoundStarted = false;
-        MCPaintballGameEvents.INSTANCE.RedPoints = 0;
-        MCPaintballGameEvents.INSTANCE.GreenPoints = 0;
-        MCPaintballGameEvents.INSTANCE.BluePoints = 0;
-        MCPaintballGameEvents.INSTANCE.YellowPoints = 0;
+        MCPaintballGameEvents.INSTANCE.matchStarted = false;
+        MCPaintballGameEvents.INSTANCE.roundStarted = false;
+        MCPaintballGameEvents.INSTANCE.redPoints = 0;
+        MCPaintballGameEvents.INSTANCE.greenPoints = 0;
+        MCPaintballGameEvents.INSTANCE.bluePoints = 0;
+        MCPaintballGameEvents.INSTANCE.yellowPoints = 0;
         MCPaintballGameEvents.INSTANCE.setDirty(true);
         context.getSource().getServer().getPlayerList().getPlayers().forEach(serverPlayer ->{
             MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
@@ -158,10 +158,10 @@ public class MCPaintballCommands {
         return 0;
     }
 
-    public static int StopRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int stopRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
-        if(MCPaintballGameEvents.INSTANCE.MatchStarted){
-            MCPaintballGameEvents.INSTANCE.RoundStarted = false;
+        if(MCPaintballGameEvents.INSTANCE.matchStarted){
+            MCPaintballGameEvents.INSTANCE.roundStarted = false;
             MCPaintballGameEvents.INSTANCE.setDirty();
             player.sendSystemMessage(Component.translatable("text.mcpaintball.round_ended"));
         }
@@ -171,10 +171,10 @@ public class MCPaintballCommands {
         return 0;
     }
 
-    public static int StartRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    public static int startRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
-        if(MCPaintballGameEvents.INSTANCE.MatchStarted){
-            MCPaintballGameEvents.INSTANCE.RoundStarted = true;
+        if(MCPaintballGameEvents.INSTANCE.matchStarted){
+            MCPaintballGameEvents.INSTANCE.roundStarted = true;
             MCPaintballGameEvents.INSTANCE.setDirty();
             player.sendSystemMessage(Component.translatable("text.mcpaintball.round_started"));
         }
@@ -184,30 +184,34 @@ public class MCPaintballCommands {
         return 0;
     }
 
-    public static int RoundWinner(CommandContext<CommandSourceStack> context) {
+    public static int roundWinner(CommandContext<CommandSourceStack> context) {
         List<Integer> points = new ArrayList<>();
-        points.add(MCPaintballGameEvents.INSTANCE.RedPoints);
-        points.add(MCPaintballGameEvents.INSTANCE.GreenPoints);
-        points.add(MCPaintballGameEvents.INSTANCE.BluePoints);
-        points.add(MCPaintballGameEvents.INSTANCE.YellowPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.redPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.greenPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.bluePoints);
+        points.add(MCPaintballGameEvents.INSTANCE.yellowPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.pinkPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.orangePoints);
         int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).get());
-        String Team = switch (Winner){
-            case 0 -> "Red";
-            case 1 -> "Green";
-            case 2 -> "Blue";
-            case 3 -> "Yellow";
+        Component Team = switch (Winner){
+            case 0 -> Component.translatable("text.mcpaintball.team_red");
+            case 1 -> Component.translatable("text.mcpaintball.team_green");
+            case 2 -> Component.translatable("text.mcpaintball.team_blue");
+            case 3 -> Component.translatable("text.mcpaintball.team_yellow");
+            case 4 -> Component.translatable("text.mcpaintball.team_pink");
+            case 5 -> Component.translatable("text.mcpaintball.team_orange");
             default -> throw new IllegalStateException("Unexpected value: " + Winner);
         };
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
         return 0;
     }
 
-    public static int GiveKit(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        if(MCPaintballGameEvents.INSTANCE.MatchStarted && !MCPaintballGameEvents.INSTANCE.RoundStarted){
+    public static int giveKit(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
             ServerPlayer player = context.getSource().getPlayerOrException();
             MCPaintballPlayerData data = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-            if(data != null && data.Team != 0 && data.Type != 0){
-                KitHandler.GrantKit(player, data.Team, data.Type);
+            if(data != null && data.team != 0 && data.type != 0){
+                KitHandler.grantKit(player, data.team, data.type);
             }
         }
         return 0;

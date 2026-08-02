@@ -6,9 +6,9 @@ import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 
 public class KitHandler {
-    public static void GrantKit(Player player,int Team,int Type){
-        switch (Team) {
-            case 1 -> { // Red Team
+    public static void grantKit(Player player, int team, int type){
+        switch (team) {
+            case 1 -> { // red team
                 player.addItem(new ItemStack(MCPaintballItems.RED_BOOTS));
                 player.addItem(new ItemStack(MCPaintballItems.RED_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.RED_CHESTPLATE));
@@ -18,7 +18,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_FLAG,2));
-                switch (Type){
+                switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));
@@ -47,7 +47,7 @@ public class KitHandler {
                     }
                 }
             }
-            case 2 -> { // Green
+            case 2 -> { // green
                 player.addItem(new ItemStack(MCPaintballItems.GREEN_BOOTS));
                 player.addItem(new ItemStack(MCPaintballItems.GREEN_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.GREEN_CHESTPLATE));
@@ -57,7 +57,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_FLAG,2));
-                switch (Type){
+                switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));
@@ -83,7 +83,7 @@ public class KitHandler {
                     }
                 }
             }
-            case 3 -> { // Blue
+            case 3 -> { // blue
                 player.addItem(new ItemStack(MCPaintballItems.BLUE_BOOTS));
                 player.addItem(new ItemStack(MCPaintballItems.BLUE_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.BLUE_CHESTPLATE));
@@ -93,7 +93,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_FLAG,2));
-                switch (Type){
+                switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));
@@ -119,7 +119,7 @@ public class KitHandler {
                     }
                 }
             }
-            case 4 -> { // Yellow Team
+            case 4 -> { // yellow team
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_BOOTS));
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_CHESTPLATE));
@@ -129,7 +129,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_FLAG,2));
-                switch (Type){
+                switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));
@@ -157,7 +157,7 @@ public class KitHandler {
                         player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
                     }
                 }
-            }case 5 -> { // Pink Team
+            }case 5 -> { // pink team
                 player.addItem(new ItemStack(MCPaintballItems.PINK_BOOTS));
                 player.addItem(new ItemStack(MCPaintballItems.PINK_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.PINK_CHESTPLATE));
@@ -167,7 +167,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.PINK_FLAG,2));
-                switch (Type){
+                switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));
@@ -195,7 +195,7 @@ public class KitHandler {
                         player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
                     }
                 }
-            }case 6 -> { // Orange Team
+            }case 6 -> { // orange team
                 player.addItem(new ItemStack(MCPaintballItems.ORANGE_BOOTS));
                 player.addItem(new ItemStack(MCPaintballItems.ORANGE_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.ORANGE_CHESTPLATE));
@@ -205,7 +205,7 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_FLAG,2));
-                switch (Type){
+                switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));

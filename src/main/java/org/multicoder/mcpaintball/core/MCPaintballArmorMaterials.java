@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class MCPaintballArmorMaterials {
 
-    public static void Initialize(){
+    public static void initialize(){
         MCPaintball.LOGGER.debug("Initializing Armor Materials");
     }
     private static final ResourceKey<EquipmentAsset> RED_ARMOR_MATERIALS = ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"red"));

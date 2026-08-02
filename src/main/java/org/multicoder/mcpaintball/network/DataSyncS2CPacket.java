@@ -21,7 +21,7 @@ public record DataSyncS2CPacket(MCPaintballPlayerData data) implements CustomPac
     public @NonNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static void HandlePacket(DataSyncS2CPacket packet, ClientPlayNetworking.Context ignored) {
+    public static void handlePacket(DataSyncS2CPacket packet, ClientPlayNetworking.Context ignored) {
         MCPaintballPlayerData data = packet.data();
         Objects.requireNonNull(Minecraft.getInstance().player).setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
     }

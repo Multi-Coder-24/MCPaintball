@@ -20,6 +20,8 @@ import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class GrenadeStation extends Block {
@@ -49,129 +51,116 @@ public class GrenadeStation extends Block {
     @Override
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
         if(!level.isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballPlayerData data = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                if(state.getBlock() == MCPaintballBlocks.RED_GRENADE_STATION){
-                    if(Objects.requireNonNull(data).Team == 1){
-                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.RED_PAINT_MINE,2));
-                        switch (data.Type){
-                            case 1 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
-                            }case 2 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
-                            }case 3 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                            }
+                List<ItemStack> toAdd = new ArrayList<>();
+                if(state.getBlock() == MCPaintballBlocks.RED_GRENADE_STATION && Objects.requireNonNull(data).team == 1){
+                    toAdd.addAll(List.of(data.fetchDefaultExplosives()));
+                    switch (data.type) {
+                        case 1 -> {
+                            toAdd.add(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE, 8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE, 4));
+                        }
+                        case 2 -> {
+                            toAdd.add(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE, 8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 16));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE, 6));
+                        }
+                        case 3 -> {
+                            toAdd.add(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE, 8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE, 2));
                         }
                     }
-                }else if(state.getBlock() == MCPaintballBlocks.GREEN_GRENADE_STATION){
-                    if(Objects.requireNonNull(data).Team == 2){
-                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.GREEN_PAINT_MINE,2));
-                        switch (data.Type){
-                            case 1 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
-                            }case 2 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
-                            }case 3 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                            }
+                }else if(state.getBlock() == MCPaintballBlocks.GREEN_GRENADE_STATION && Objects.requireNonNull(data).team == 2){
+                    toAdd.addAll(List.of(data.fetchDefaultExplosives()));
+                    switch (data.type){
+                        case 1 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
+                        }case 2 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                        }case 3 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
                         }
                     }
-                }else if(state.getBlock() == MCPaintballBlocks.BLUE_GRENADE_STATION){
-                    if(Objects.requireNonNull(data).Team == 3){
-                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.BLUE_PAINT_MINE,2));
-                        switch (data.Type){
-                            case 1 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
-                            }case 2 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
-                            }case 3 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                            }
+                }else if(state.getBlock() == MCPaintballBlocks.BLUE_GRENADE_STATION && Objects.requireNonNull(data).team == 3){
+                    toAdd.addAll(List.of(data.fetchDefaultExplosives()));
+                    switch (data.type){
+                        case 1 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
+                        }case 2 ->{
+                            player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
+                            player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
+                            player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                        }case 3 ->{
+                            player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
+                            player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
                         }
                     }
-                }else if(state.getBlock() == MCPaintballBlocks.YELLOW_GRENADE_STATION){
-                    if(Objects.requireNonNull(data).Team == 4){
-                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE,2));
-                        switch (data.Type){
-                            case 1 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
-                            }case 2 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
-                            }case 3 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                            }
+                }else if(state.getBlock() == MCPaintballBlocks.YELLOW_GRENADE_STATION && Objects.requireNonNull(data).team == 4){
+                    toAdd.addAll(List.of(data.fetchDefaultExplosives()));
+                    switch (data.type){
+                        case 1 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
+                        }case 2 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                        }case 3 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
                         }
                     }
-                }else if(state.getBlock() == MCPaintballBlocks.PINK_GRENADE_STATION){
-                    if(Objects.requireNonNull(data).Team == 5){
-                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE,2));
-                        switch (data.Type){
-                            case 1 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
-                            }case 2 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
-                            }case 3 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                            }
+                }else if(state.getBlock() == MCPaintballBlocks.PINK_GRENADE_STATION && Objects.requireNonNull(data).team == 5){
+                    toAdd.addAll(List.of(data.fetchDefaultExplosives()));
+                    switch (data.type){
+                        case 1 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
+                        }case 2 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                        }case 3 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
                         }
                     }
-                }else if(state.getBlock() == MCPaintballBlocks.ORANGE_GRENADE_STATION){
-                    if(Objects.requireNonNull(data).Team == 6){
-                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_PAINT_MINE,2));
-                        switch (data.Type){
-                            case 1 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
-                            }case 2 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
-                            }case 3 ->{
-                                player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
-                                player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                                player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                            }
+                }else if(state.getBlock() == MCPaintballBlocks.ORANGE_GRENADE_STATION && Objects.requireNonNull(data).team == 6){
+                    toAdd.addAll(List.of(data.fetchDefaultExplosives()));
+                    switch (data.type){
+                        case 1 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,4));
+                        }case 2 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,16));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                        }case 3 ->{
+                            toAdd.add(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
+                            toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
+                            toAdd.add(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
                         }
                     }
                 }
+                toAdd.forEach(player::addItem);
+                return InteractionResult.SUCCESS;
             }
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);

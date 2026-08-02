@@ -10,12 +10,12 @@ public enum PaintballType implements StringRepresentable {
     Assault("text.mcpaintball.type_assault"),
     Heavy("text.mcpaintball.type_heavy");
     PaintballType(String translation){
-        Translation = translation;
+        this.translation = translation;
     }
-    public final String Translation;
+    public final String translation;
 
     @Override
     public @NonNull String getSerializedName() {
-        return this.Translation;
+        return this.translation;
     }
 }

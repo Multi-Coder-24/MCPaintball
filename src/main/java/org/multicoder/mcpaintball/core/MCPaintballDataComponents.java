@@ -16,7 +16,7 @@ public class MCPaintballDataComponents {
     public static final DataComponentType<FlagItemSettings> FLAGITEMSETTINGS = Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"flag_item_settings"),
             new DataComponentType.Builder<FlagItemSettings>().persistent(FlagItemSettings.CODEC).ignoreSwapAnimation().build());
 
-    public static void Initialize() {
+    public static void initialize() {
         MCPaintball.LOGGER.info("Initializing Data Components");
     }
 }

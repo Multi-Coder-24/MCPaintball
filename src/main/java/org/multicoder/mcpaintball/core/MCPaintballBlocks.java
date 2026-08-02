@@ -45,7 +45,7 @@ public class MCPaintballBlocks {
     public static final Block ORANGE_FLAG = register("objectives/orange_flag",FlagBlock::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
 
 
-    public static void Initialize() {
+    public static void initialize() {
         MCPaintball.LOGGER.info("Initializing Blocks");
     }
 

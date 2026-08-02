@@ -24,34 +24,31 @@ public class FlagBlock extends Block{
     @Override
     public void playerDestroy(Level level, @NonNull Player player, @NonNull BlockPos pos, @NonNull BlockState state, @Nullable BlockEntity blockEntity, @NonNull ItemStack destroyedWith) {
         if(!level.isClientSide()) {
-            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 Block block = state.getBlock();
+                int team;
+                ItemStack stack;
                 if(block == MCPaintballBlocks.RED_FLAG){
-                    ItemStack stack = new ItemStack(MCPaintballItems.RED_FLAG_ITEM);
-                    stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,1));
-                    player.addItem(stack);
+                    stack = new ItemStack(MCPaintballItems.RED_FLAG_ITEM);
+                    team = 1;
                 } else if (block == MCPaintballBlocks.GREEN_FLAG) {
-                    ItemStack stack = new ItemStack(MCPaintballItems.GREEN_FLAG_ITEM);
-                    stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,2));
-                    player.addItem(stack);
+                    stack = new ItemStack(MCPaintballItems.GREEN_FLAG_ITEM);
+                    team = 2;
                 } else if (block == MCPaintballBlocks.BLUE_FLAG) {
-                    ItemStack stack = new ItemStack(MCPaintballItems.BLUE_FLAG_ITEM);
-                    stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,3));
-                    player.addItem(stack);
+                    stack = new ItemStack(MCPaintballItems.BLUE_FLAG_ITEM);
+                    team = 3;
                 } else if (block == MCPaintballBlocks.YELLOW_FLAG) {
-                    ItemStack stack = new ItemStack(MCPaintballItems.YELLOW_FLAG_ITEM);
-                    stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,4));
-                    player.addItem(stack);
+                    stack = new ItemStack(MCPaintballItems.YELLOW_FLAG_ITEM);
+                    team = 4;
                 } else if (block == MCPaintballBlocks.PINK_FLAG) {
-                    ItemStack stack = new ItemStack(MCPaintballItems.PINK_FLAG_ITEM);
-                    stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,5));
-                    player.addItem(stack);
+                    stack = new ItemStack(MCPaintballItems.PINK_FLAG_ITEM);
+                    team = 5;
                 } else if (block == MCPaintballBlocks.ORANGE_FLAG) {
-                    ItemStack stack = new ItemStack(MCPaintballItems.ORANGE_FLAG_ITEM);
-                    stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,6));
-                    player.addItem(stack);
-                }
-
+                    stack = new ItemStack(MCPaintballItems.ORANGE_FLAG_ITEM);
+                    team = 6;
+                }else{return;}
+                stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,team));
+                player.addItem(stack);
             }
         }
         super.playerDestroy(level, player, pos, state, blockEntity, destroyedWith);

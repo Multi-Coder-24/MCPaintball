@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -48,37 +49,39 @@ public class PaintMine extends Block {
     @Override
     protected void entityInside(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
         if(!level.isClientSide()) {
-            if (MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted) {
+            if (MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted) {
                 if (entity instanceof ServerPlayer player) {
                     ServerLevel serverLevel = (ServerLevel) level;
-                    if (Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).Team != 0) {
+                    if (Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != 0) {
                         AABB box = AABB.encapsulatingFullBlocks(pos.offset(-3, 0, -3), pos.offset(3, 1, 3));
-                        int Checker;
+                        int checker;
+                        SimpleParticleType type;
                         if (state.getBlock() == MCPaintballBlocks.RED_PAINT_MINE) {
-                            Checker = 1;
-                            BlockPos.betweenClosed(box).forEach(blockPos -> serverLevel.sendParticles(MCPaintballParticles.RED_PAINT, true, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5, 0.1, 0.1, 0.1, 0.01));
+                            checker = 1;
+                            type = MCPaintballParticles.RED_PAINT;
                         } else if (state.getBlock() == MCPaintballBlocks.GREEN_PAINT_MINE) {
-                            Checker = 2;
-                            BlockPos.betweenClosed(box).forEach(blockPos -> serverLevel.sendParticles(MCPaintballParticles.GREEN_PAINT, true, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5, 0.1, 0.1, 0.1, 0.01));
+                            checker = 2;
+                            type = MCPaintballParticles.GREEN_PAINT;
                         } else if (state.getBlock() == MCPaintballBlocks.BLUE_PAINT_MINE) {
-                            Checker = 3;
-                            BlockPos.betweenClosed(box).forEach(blockPos -> serverLevel.sendParticles(MCPaintballParticles.BLUE_PAINT, true, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5, 0.1, 0.1, 0.1, 0.01));
+                            checker = 3;
+                            type = MCPaintballParticles.BLUE_PAINT;
                         } else if (state.getBlock() == MCPaintballBlocks.YELLOW_PAINT_MINE) {
-                            Checker = 4;
-                            BlockPos.betweenClosed(box).forEach(blockPos -> serverLevel.sendParticles(MCPaintballParticles.YELLOW_PAINT, true, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5, 0.1, 0.1, 0.1, 0.01));
+                            checker = 4;
+                            type = MCPaintballParticles.YELLOW_PAINT;
                         } else if (state.getBlock() == MCPaintballBlocks.PINK_PAINT_MINE) {
-                            Checker = 5;
-                            BlockPos.betweenClosed(box).forEach(blockPos -> serverLevel.sendParticles(MCPaintballParticles.PINK_PAINT, true, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5, 0.1, 0.1, 0.1, 0.01));
+                            checker = 5;
+                            type = MCPaintballParticles.PINK_PAINT;
                         } else if (state.getBlock() == MCPaintballBlocks.ORANGE_PAINT_MINE) {
-                            Checker = 6;
-                            BlockPos.betweenClosed(box).forEach(blockPos -> serverLevel.sendParticles(MCPaintballParticles.ORANGE_PAINT, true, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5, 0.1, 0.1, 0.1, 0.01));
+                            checker = 6;
+                            type = MCPaintballParticles.ORANGE_PAINT;
                         } else {
-                            Checker = 0;
+                            return;
                         }
+                        BlockPos.betweenClosed(box).forEach(blockPos -> serverLevel.sendParticles(type, true, true, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 5, 0.1, 0.1, 0.1, 0.01));
                         serverLevel.getEntities(null, box).forEach(found -> {
                             if (found instanceof ServerPlayer serverPlayer) {
-                                if (Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).Team != Checker && Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).Team != 0) {
-                                    MCPaintballGameEvents.INSTANCE.incrementByChecker(Checker);
+                                if (Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != checker && Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != 0) {
+                                    MCPaintballGameEvents.INSTANCE.incrementByChecker(checker);
                                 }
                             }
                         });
@@ -93,20 +96,20 @@ public class PaintMine extends Block {
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         if(!context.getLevel().isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 Item toPlace = context.getItemInHand().getItem();
-                int Team = Objects.requireNonNull(Objects.requireNonNull(context.getPlayer()).getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).Team;
-                if(toPlace == MCPaintballBlocks.RED_PAINT_MINE.asItem() && Team == 1){
+                int team = Objects.requireNonNull(Objects.requireNonNull(context.getPlayer()).getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team;
+                if(toPlace == MCPaintballBlocks.RED_PAINT_MINE.asItem() && team == 1){
                     return super.getStateForPlacement(context);
-                } else if (toPlace == MCPaintballBlocks.GREEN_PAINT_MINE.asItem() && Team == 2) {
+                } else if (toPlace == MCPaintballBlocks.GREEN_PAINT_MINE.asItem() && team == 2) {
                     return super.getStateForPlacement(context);
-                }else if (toPlace == MCPaintballBlocks.BLUE_PAINT_MINE.asItem() && Team == 3) {
+                }else if (toPlace == MCPaintballBlocks.BLUE_PAINT_MINE.asItem() && team == 3) {
                     return super.getStateForPlacement(context);
-                }else if (toPlace == MCPaintballBlocks.YELLOW_PAINT_MINE.asItem() && Team == 4) {
+                }else if (toPlace == MCPaintballBlocks.YELLOW_PAINT_MINE.asItem() && team == 4) {
                     return super.getStateForPlacement(context);
-                }else if (toPlace == MCPaintballBlocks.PINK_PAINT_MINE.asItem() && Team == 5) {
+                }else if (toPlace == MCPaintballBlocks.PINK_PAINT_MINE.asItem() && team == 5) {
                     return super.getStateForPlacement(context);
-                }else if (toPlace == MCPaintballBlocks.ORANGE_PAINT_MINE.asItem() && Team == 6) {
+                }else if (toPlace == MCPaintballBlocks.ORANGE_PAINT_MINE.asItem() && team == 6) {
                     return super.getStateForPlacement(context);
                 }
             }

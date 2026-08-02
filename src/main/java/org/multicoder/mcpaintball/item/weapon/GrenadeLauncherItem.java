@@ -36,18 +36,18 @@ public class GrenadeLauncherItem extends Item {
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         if(!level.isClientSide()){
             ItemStack itemStack = player.getItemInHand(hand);
-            int Setting = Objects.requireNonNull(itemStack.get(MCPaintballDataComponents.SETTING)).Setting();
-            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+            int Setting = Objects.requireNonNull(itemStack.get(MCPaintballDataComponents.SETTING)).setting();
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 if(Setting == 1){
-                    EntityType<? extends ThrowableItemProjectile> type = switch (data.Team){
+                    EntityType<? extends ThrowableItemProjectile> type = switch (data.team){
                         case 1 -> MCPaintballEntities.RED_PAINT_GRENADE;
                         case 2 -> MCPaintballEntities.BLUE_PAINT_GRENADE;
                         case 3 -> MCPaintballEntities.GREEN_PAINT_GRENADE;
                         case 4 -> MCPaintballEntities.YELLOW_PAINT_GRENADE;
                         case 5 -> MCPaintballEntities.PINK_PAINT_GRENADE;
                         case 6 -> MCPaintballEntities.ORANGE_PAINT_GRENADE;
-                        default -> throw new IllegalStateException("Unexpected value: " + data.Team);
+                        default -> throw new IllegalStateException("Unexpected value: " + data.team);
                     };
                     PaintGrenadeEntity redPaintGrenade = new PaintGrenadeEntity(type,player,level,player.getItemInHand(hand));
                     Objects.requireNonNull(redPaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);

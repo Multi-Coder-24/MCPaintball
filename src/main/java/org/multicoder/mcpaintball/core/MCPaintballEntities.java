@@ -30,7 +30,7 @@ public class MCPaintballEntities {
     public static final EntityType<EMPGrenadeEntity> EMP_GRENADE = register("emp_grenade",EntityType.Builder.of(EMPGrenadeEntity::new,MobCategory.MISC));
     public static final EntityType<SightGrenadeEntity> SIGHT_GRENADE = register("sight_grenade",EntityType.Builder.of(SightGrenadeEntity::new,MobCategory.MISC));
 
-    public static void Initialize() {
+    public static void initialize() {
         MCPaintball.LOGGER.debug("Initializing Entities");
     }
     private static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {

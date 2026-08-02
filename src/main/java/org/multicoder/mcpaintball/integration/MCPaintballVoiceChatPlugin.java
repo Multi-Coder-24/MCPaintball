@@ -35,11 +35,11 @@ public class MCPaintballVoiceChatPlugin implements VoicechatPlugin {
 
     private static void ServerStarted(VoicechatServerStartedEvent event) {
         SERVER = event.getVoicechat();
-        RED = event.getVoicechat().groupBuilder().setName("MCPaintball Red Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
-        GREEN = event.getVoicechat().groupBuilder().setName("MCPaintball Green Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
-        BLUE = event.getVoicechat().groupBuilder().setName("MCPaintball Blue Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
-        YELLOW = event.getVoicechat().groupBuilder().setName("MCPaintball Yellow Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
-        PINK = event.getVoicechat().groupBuilder().setName("MCPaintball Pink Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
-        ORANGE = event.getVoicechat().groupBuilder().setName("MCPaintball Orange Team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        RED = event.getVoicechat().groupBuilder().setName("MCPaintball red team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        GREEN = event.getVoicechat().groupBuilder().setName("MCPaintball green team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        BLUE = event.getVoicechat().groupBuilder().setName("MCPaintball blue team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        YELLOW = event.getVoicechat().groupBuilder().setName("MCPaintball yellow team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        PINK = event.getVoicechat().groupBuilder().setName("MCPaintball pink team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
+        ORANGE = event.getVoicechat().groupBuilder().setName("MCPaintball orange team").setPassword(UUID.randomUUID().toString()).setPersistent(true).setHidden(true).setType(Group.Type.ISOLATED).build();
     }
 }

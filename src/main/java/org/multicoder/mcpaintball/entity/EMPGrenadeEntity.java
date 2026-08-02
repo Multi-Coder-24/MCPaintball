@@ -42,7 +42,7 @@ public class EMPGrenadeEntity extends ThrowableItemProjectile {
                 BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(ParticleTypes.ELECTRIC_SPARK,true, true,pos.getX(), pos.getY(), pos.getZ(),10,1.0,1.0,1.0,0.001));
                 level.getEntities(null,box).forEach(entity -> {
                     if(entity instanceof ServerPlayer player){
-                        if(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).Team != 0){
+                        if(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).team != 0){
                             level.playSound(null,player.blockPosition(), MCPaintballSounds.SPARK, SoundSource.PLAYERS,1f,1f);
                             player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.GRENADE_LAUNCHER),120);
                             player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.PISTOL),120);
