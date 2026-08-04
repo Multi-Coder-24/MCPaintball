@@ -6,8 +6,12 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.state.BlockState;
+import org.multicoder.mcpaintball.block.CapturePointBlock;
+import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
@@ -149,6 +153,8 @@ public class MCPaintballCommands {
         MCPaintballGameEvents.INSTANCE.greenPoints = 0;
         MCPaintballGameEvents.INSTANCE.bluePoints = 0;
         MCPaintballGameEvents.INSTANCE.yellowPoints = 0;
+        MCPaintballGameEvents.INSTANCE.pinkPoints = 0;
+        MCPaintballGameEvents.INSTANCE.orangePoints = 0;
         MCPaintballGameEvents.INSTANCE.setDirty(true);
         context.getSource().getServer().getPlayerList().getPlayers().forEach(serverPlayer ->{
             MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
@@ -161,12 +167,21 @@ public class MCPaintballCommands {
     public static int stopRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
         if(MCPaintballGameEvents.INSTANCE.matchStarted){
+            List<BlockPos> positions = new ArrayList<>(MCPaintballGameEvents.INSTANCE.capturePoints);
+            positions.forEach(position -> {
+                BlockState state = Objects.requireNonNull(context.getSource().getServer()).overworld().getBlockState(position);
+                if(state.getBlock() == MCPaintballBlocks.CAPTURE_POINT){
+                    int Team = state.getValue(CapturePointBlock.TEAM);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(Team);
+                    Objects.requireNonNull(context.getSource().getServer()).overworld().setBlockAndUpdate(position,state.setValue(CapturePointBlock.TEAM,0));
+                }
+            });
             MCPaintballGameEvents.INSTANCE.roundStarted = false;
             MCPaintballGameEvents.INSTANCE.setDirty();
             player.sendSystemMessage(Component.translatable("text.mcpaintball.round_ended"));
         }
         else{
-            player.sendSystemMessage(Component.translatable("text.mcpaintball.error_no_game"));
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.error_game_not_started"));
         }
         return 0;
     }

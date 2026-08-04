@@ -73,5 +73,6 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.YELLOW_FLAG);
         output.accept(MCPaintballBlocks.PINK_FLAG);
         output.accept(MCPaintballBlocks.ORANGE_FLAG);
+        output.accept(MCPaintballBlocks.CAPTURE_POINT);
     }
 }

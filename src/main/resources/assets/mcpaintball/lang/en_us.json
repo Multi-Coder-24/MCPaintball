@@ -153,6 +153,7 @@
   "block.mcpaintball.objectives.yellow_flag": "Yellow Flag",
   "block.mcpaintball.objectives.pink_flag": "Pink Flag",
   "block.mcpaintball.objectives.orange_flag": "Orange Flag",
+  "block.mcpaintball.objectives.capture_point": "Capture Point",
 
   "Comment_8": "Miscellaneous Text",
   "text.mcpaintball.weapons_tab": "MCPaintball Weapons",
