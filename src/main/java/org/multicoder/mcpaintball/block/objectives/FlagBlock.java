@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.block;
+package org.multicoder.mcpaintball.block.objectives;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;

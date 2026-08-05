@@ -74,5 +74,17 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.PINK_FLAG);
         output.accept(MCPaintballBlocks.ORANGE_FLAG);
         output.accept(MCPaintballBlocks.CAPTURE_POINT);
+        output.accept(MCPaintballBlocks.RED_DOOR);
+        output.accept(MCPaintballBlocks.GREEN_DOOR);
+        output.accept(MCPaintballBlocks.BLUE_DOOR);
+        output.accept(MCPaintballBlocks.YELLOW_DOOR);
+        output.accept(MCPaintballBlocks.PINK_DOOR);
+        output.accept(MCPaintballBlocks.ORANGE_DOOR);
+        output.accept(MCPaintballBlocks.RED_TOWER);
+        output.accept(MCPaintballBlocks.GREEN_TOWER);
+        output.accept(MCPaintballBlocks.BLUE_TOWER);
+        output.accept(MCPaintballBlocks.YELLOW_TOWER);
+        output.accept(MCPaintballBlocks.PINK_TOWER);
+        output.accept(MCPaintballBlocks.ORANGE_TOWER);
     }
 }

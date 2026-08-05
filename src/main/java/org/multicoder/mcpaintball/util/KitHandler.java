@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.util;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 
@@ -18,6 +19,10 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.RED_FLAG,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.CAPTURE_POINT,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.RED_TOWER));
+                player.addItem(new ItemStack(Blocks.RED_WOOL,64));
+                player.addItem(new ItemStack(MCPaintballBlocks.RED_DOOR,4));
                 switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -57,6 +62,11 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_FLAG,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.CAPTURE_POINT,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_TOWER));
+                player.addItem(new ItemStack(Blocks.GREEN_WOOL,64));
+                player.addItem(new ItemStack(MCPaintballBlocks.GREEN_DOOR,4));
+
                 switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -93,6 +103,11 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_FLAG,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.CAPTURE_POINT,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_TOWER));
+                player.addItem(new ItemStack(Blocks.BLUE_WOOL,64));
+                player.addItem(new ItemStack(MCPaintballBlocks.BLUE_DOOR,4));
+
                 switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -129,6 +144,11 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_FLAG,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.CAPTURE_POINT,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_TOWER));
+                player.addItem(new ItemStack(Blocks.YELLOW_WOOL,64));
+                player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_DOOR,4));
+
                 switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -167,6 +187,11 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.PINK_FLAG,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.CAPTURE_POINT,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.PINK_TOWER));
+                player.addItem(new ItemStack(Blocks.PINK_WOOL,64));
+                player.addItem(new ItemStack(MCPaintballBlocks.PINK_DOOR,4));
+
                 switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
@@ -205,6 +230,10 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_PAINT_MINE,8));
                 player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_FLAG,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.CAPTURE_POINT,2));
+                player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_TOWER));
+                player.addItem(new ItemStack(Blocks.ORANGE_WOOL,64));
+                player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_DOOR,4));
                 switch (type){
                     case 1 -> { // Standard
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
