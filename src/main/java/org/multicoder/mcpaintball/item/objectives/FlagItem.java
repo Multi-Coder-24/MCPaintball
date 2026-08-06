@@ -35,17 +35,19 @@ public class FlagItem extends Item {
                     default -> throw new IllegalStateException("Unexpected value: " + settings.team());
                 };
                 if(itemStack.getItem() != MCPaintballItems.RED_FLAG_ITEM && block == MCPaintballBlocks.RED_FLAG){
-                    MCPaintballGameEvents.INSTANCE.incrementByChecker(settings.team());
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(1);
                 }else if(itemStack.getItem() != MCPaintballItems.GREEN_FLAG_ITEM && block == MCPaintballBlocks.GREEN_FLAG){
-                    MCPaintballGameEvents.INSTANCE.incrementByChecker(settings.team());
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(2);
                 }else if(itemStack.getItem() != MCPaintballItems.BLUE_FLAG_ITEM && block == MCPaintballBlocks.BLUE_FLAG){
-                    MCPaintballGameEvents.INSTANCE.incrementByChecker(settings.team());
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(3);
                 }else if(itemStack.getItem() != MCPaintballItems.YELLOW_FLAG_ITEM && block == MCPaintballBlocks.YELLOW_FLAG){
-                    MCPaintballGameEvents.INSTANCE.incrementByChecker(settings.team());
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(4);
                 }else if(itemStack.getItem() != MCPaintballItems.PINK_FLAG_ITEM && block == MCPaintballBlocks.PINK_FLAG){
-                    MCPaintballGameEvents.INSTANCE.incrementByChecker(settings.team());
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(5);
                 }else if(itemStack.getItem() != MCPaintballItems.ORANGE_FLAG_ITEM && block == MCPaintballBlocks.ORANGE_FLAG){
-                    MCPaintballGameEvents.INSTANCE.incrementByChecker(settings.team());
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(6);
+                }else {
+                    throw new IllegalStateException("Unexpected value: " + settings.team());
                 }
                 itemStack.shrink(1);
                 context.getLevel().setBlock(settings.position(),state, Block.UPDATE_ALL_IMMEDIATE);

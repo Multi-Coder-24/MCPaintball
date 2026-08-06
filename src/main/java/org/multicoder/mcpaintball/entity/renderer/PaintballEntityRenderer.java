@@ -34,7 +34,7 @@ public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity,Arrow
             return YELLOW;
         }else if(type == MCPaintballEntities.PINK_PAINTBALL){
             return PINK;
-        }else if(type == MCPaintballEntities.ORANGE_PAINT_GRENADE){
+        }else if(type == MCPaintballEntities.ORANGE_PAINTBALL){
             return ORANGE;
         }
         return RED;
