@@ -20,9 +20,9 @@ public class MCPaintballItems {
     public static final Item PISTOL = register("weapon/pistol", PistolItem::new,new Item.Properties());
     public static final Item SHOTGUN = register("weapon/shotgun", ShotgunItem::new,new Item.Properties());
     public static final Item SNIPER_RIFLE = register("weapon/sniper_rifle", SniperRifleItem::new,new Item.Properties());
-    public static final Item ASSAULT_RIFLE = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapon/assault_rifle"), new RifleItem());
-    public static final Item GRENADE_LAUNCHER = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapon/grenade_launcher"), new GrenadeLauncherItem());
-    public static final Item BURST_RIFLE = Registry.register(BuiltInRegistries.ITEM,Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapon/burst_rifle"), new  BurstRifleItem());
+    public static final Item ASSAULT_RIFLE = register("weapon/assault_rifle", RifleItem::new,new Item.Properties());
+    public static final Item GRENADE_LAUNCHER = register("weapon/grenade_launcher", GrenadeLauncherItem::new,new Item.Properties());
+    public static final Item BURST_RIFLE = register("weapon/burst_rifle", BurstRifleItem::new,new Item.Properties());
 
     public static final Item RED_PAINT_GRENADE = register("explosives/red_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));
     public static final Item GREEN_PAINT_GRENADE = register("explosives/green_grenade", PaintGrenadeItem::new,new Item.Properties().stacksTo(8));

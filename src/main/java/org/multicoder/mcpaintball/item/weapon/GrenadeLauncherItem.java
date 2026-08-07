@@ -1,9 +1,6 @@
 package org.multicoder.mcpaintball.item.weapon;
 
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,22 +11,24 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
-import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
 import org.multicoder.mcpaintball.data.MCPaintballGrenadeLauncherSetting;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
-import org.multicoder.mcpaintball.entity.*;
+import org.multicoder.mcpaintball.entity.EMPGrenadeEntity;
+import org.multicoder.mcpaintball.entity.PaintGrenadeEntity;
+import org.multicoder.mcpaintball.entity.SightGrenadeEntity;
+import org.multicoder.mcpaintball.entity.SmokeGrenadeEntity;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.Objects;
 
-public class GrenadeLauncherItem extends Item {
+public class  GrenadeLauncherItem extends Item {
 
-    public GrenadeLauncherItem() {
-        super(new Properties().component(MCPaintballDataComponents.SETTING,new MCPaintballGrenadeLauncherSetting(1)).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"weapon/grenade_launcher"))).stacksTo(1));
+    public GrenadeLauncherItem(Properties properties) {
+        super(properties.component(MCPaintballDataComponents.SETTING,new MCPaintballGrenadeLauncherSetting(1)).stacksTo(1));
     }
 
     @Override
@@ -42,8 +41,8 @@ public class GrenadeLauncherItem extends Item {
                 if(Setting == 1){
                     EntityType<? extends ThrowableItemProjectile> type = switch (data.team){
                         case 1 -> MCPaintballEntities.RED_PAINT_GRENADE;
-                        case 2 -> MCPaintballEntities.BLUE_PAINT_GRENADE;
-                        case 3 -> MCPaintballEntities.GREEN_PAINT_GRENADE;
+                        case 2 -> MCPaintballEntities.GREEN_PAINT_GRENADE;
+                        case 3 -> MCPaintballEntities.BLUE_PAINT_GRENADE;
                         case 4 -> MCPaintballEntities.YELLOW_PAINT_GRENADE;
                         case 5 -> MCPaintballEntities.PINK_PAINT_GRENADE;
                         case 6 -> MCPaintballEntities.ORANGE_PAINT_GRENADE;

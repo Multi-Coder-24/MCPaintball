@@ -20,7 +20,7 @@ import java.util.Objects;
 public class ShotgunItem extends Item {
 
     public ShotgunItem(Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1));
     }
 
     @Override

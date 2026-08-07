@@ -20,7 +20,7 @@ import java.util.Objects;
 public class SniperRifleItem extends Item {
 
     public SniperRifleItem(Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1));
     }
 
     @Override

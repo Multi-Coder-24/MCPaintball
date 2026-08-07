@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class PistolItem extends Item {
 
-    public PistolItem(Properties properties) {super(properties);}
+    public PistolItem(Properties properties) {super(properties.stacksTo(1));}
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
