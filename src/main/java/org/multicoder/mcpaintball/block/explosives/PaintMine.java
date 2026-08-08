@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.block;
+package org.multicoder.mcpaintball.block.explosives;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;

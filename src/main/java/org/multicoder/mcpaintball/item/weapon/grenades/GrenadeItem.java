@@ -39,13 +39,13 @@ public class GrenadeItem extends Item {
                         held.shrink(1);
                     }
                 } else if(held.getItem() == MCPaintballItems.GREEN_PAINT_GRENADE.asItem()){
-                    if(Objects.requireNonNull(data).Team == 2){
+                   if(Objects.requireNonNull(data).Team == 2){
                         PaintGrenadeEntity entity = new PaintGrenadeEntity(MCPaintballEntities.GREEN_PAINT_GRENADE.get(),player,level,player.getItemInHand(hand));
                         entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
                         level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1f,1f);
                         level.addFreshEntity(entity);
                         held.shrink(1);
-                    }
+                   }
                 } else if(held.getItem() == MCPaintballItems.BLUE_PAINT_GRENADE.asItem()){
                     if(Objects.requireNonNull(data).Team == 3){
                         PaintGrenadeEntity entity = new PaintGrenadeEntity(MCPaintballEntities.BLUE_PAINT_GRENADE.get(),player,level,player.getItemInHand(hand));
@@ -55,7 +55,7 @@ public class GrenadeItem extends Item {
                         held.shrink(1);
                     }
                 } else if(held.getItem() == MCPaintballItems.YELLOW_PAINT_GRENADE.asItem()){
-                    if(Objects.requireNonNull(data).Team == 4){
+                   if(Objects.requireNonNull(data).Team == 4){
                         PaintGrenadeEntity entity = new PaintGrenadeEntity(MCPaintballEntities.YELLOW_PAINT_GRENADE.get(),player,level,player.getItemInHand(hand));
                         entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);
                         level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1f,1f);
@@ -69,7 +69,7 @@ public class GrenadeItem extends Item {
                         level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1f,1f);
                         level.addFreshEntity(entity);
                         held.shrink(1);
-                    }
+                   }
                 } else if(held.getItem() == MCPaintballItems.ORANGE_PAINT_GRENADE.asItem()){
                     if(Objects.requireNonNull(data).Team == 6){
                         PaintGrenadeEntity entity = new PaintGrenadeEntity(MCPaintballEntities.ORANGE_PAINT_GRENADE.get(),player,level,player.getItemInHand(hand));
@@ -77,7 +77,7 @@ public class GrenadeItem extends Item {
                         level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE.get(), SoundSource.PLAYERS,1f,1f);
                         level.addFreshEntity(entity);
                         held.shrink(1);
-                    }
+                   }
                 } else if(held.getItem() == MCPaintballItems.SMOKE_GRENADE.asItem()){
                     SmokeGrenadeEntity entity = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE.get(),player,level,player.getItemInHand(hand));
                     entity.shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,5.0F,1.0F);

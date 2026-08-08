@@ -4,10 +4,14 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
+import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
@@ -158,6 +162,15 @@ public class MCPaintballCommands {
     public static int StopRound(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = context.getSource().getPlayerOrException();
         if(MCPaintballGameEvents.INSTANCE.MatchStarted){
+            List<BlockPos> positions = new ArrayList<>(MCPaintballGameEvents.INSTANCE.CapturePoints);
+            positions.forEach(position -> {
+                BlockState state = Objects.requireNonNull(context.getSource().getServer()).overworld().getBlockState(position);
+                if(state.getBlock() == MCPaintballBlocks.CAPTURE_POINT.get()){
+                    int Team = state.getValue(CapturePointBlock.TEAM);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(Team);
+                    Objects.requireNonNull(context.getSource().getServer()).overworld().setBlockAndUpdate(position,state.setValue(CapturePointBlock.TEAM,0));
+                }
+            });
             MCPaintballGameEvents.INSTANCE.RoundStarted = false;
             MCPaintballGameEvents.INSTANCE.setDirty();
             player.sendSystemMessage(Component.translatable("text.mcpaintball.round_ended"));

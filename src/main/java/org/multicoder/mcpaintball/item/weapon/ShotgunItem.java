@@ -22,7 +22,7 @@ import java.util.Objects;
 public class ShotgunItem extends Item {
 
     public ShotgunItem(Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1));
     }
 
     @Override
@@ -33,8 +33,8 @@ public class ShotgunItem extends Item {
                 if (data.Team != 0) {
                     EntityType<? extends AbstractArrow> type = switch (data.Team) {
                         case 1 -> MCPaintballEntities.RED_PAINTBALL.get();
-                        case 2 -> MCPaintballEntities.BLUE_PAINTBALL.get();
-                        case 3 -> MCPaintballEntities.GREEN_PAINTBALL.get();
+                        case 2 -> MCPaintballEntities.GREEN_PAINTBALL.get();
+                        case 3 -> MCPaintballEntities.BLUE_PAINTBALL.get();
                         case 4 -> MCPaintballEntities.YELLOW_PAINTBALL.get();
                         case 5 -> MCPaintballEntities.PINK_PAINTBALL.get();
                         case 6 -> MCPaintballEntities.ORANGE_PAINTBALL.get();

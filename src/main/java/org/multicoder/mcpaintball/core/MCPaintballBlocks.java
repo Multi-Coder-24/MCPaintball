@@ -5,7 +5,13 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.block.*;
+import org.multicoder.mcpaintball.block.doors.TeamedDoor;
+import org.multicoder.mcpaintball.block.explosives.PaintMine;
+import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
+import org.multicoder.mcpaintball.block.objectives.FlagBlock;
+import org.multicoder.mcpaintball.block.utility.BasicTowerBlock;
+import org.multicoder.mcpaintball.block.utility.GrenadeStationBlock;
+import org.multicoder.mcpaintball.block.utility.RespawnStationBlock;
 
 @SuppressWarnings("unused")
 public class MCPaintballBlocks {
@@ -39,6 +45,22 @@ public class MCPaintballBlocks {
     public static final DeferredBlock<FlagBlock> PINK_FLAG = BLOCKS.registerBlock("objectives/pink_flag",FlagBlock::new);
     public static final DeferredBlock<FlagBlock> ORANGE_FLAG = BLOCKS.registerBlock("objectives/orange_flag",FlagBlock::new);
 
+    public static final DeferredBlock<TeamedDoor> RED_DOOR = BLOCKS.registerBlock("doors/red_door",TeamedDoor::new);
+    public static final DeferredBlock<TeamedDoor> GREEN_DOOR = BLOCKS.registerBlock("doors/green_door",TeamedDoor::new);
+    public static final DeferredBlock<TeamedDoor> BLUE_DOOR = BLOCKS.registerBlock("doors/blue_door",TeamedDoor::new);
+    public static final DeferredBlock<TeamedDoor> YELLOW_DOOR = BLOCKS.registerBlock("doors/yellow_door",TeamedDoor::new);
+    public static final DeferredBlock<TeamedDoor> PINK_DOOR = BLOCKS.registerBlock("doors/pink_door",TeamedDoor::new);
+    public static final DeferredBlock<TeamedDoor> ORANGE_DOOR = BLOCKS.registerBlock("doors/orange_door",TeamedDoor::new);
+
+    public static final DeferredBlock<BasicTowerBlock> RED_TOWER = BLOCKS.registerBlock("utility/red_tower",BasicTowerBlock::new);
+    public static final DeferredBlock<BasicTowerBlock> GREEN_TOWER = BLOCKS.registerBlock("utility/green_tower",BasicTowerBlock::new);
+    public static final DeferredBlock<BasicTowerBlock> BLUE_TOWER = BLOCKS.registerBlock("utility/blue_tower",BasicTowerBlock::new);
+    public static final DeferredBlock<BasicTowerBlock> YELLOW_TOWER = BLOCKS.registerBlock("utility/yellow_tower",BasicTowerBlock::new);
+    public static final DeferredBlock<BasicTowerBlock> PINK_TOWER = BLOCKS.registerBlock("utility/pink_tower",BasicTowerBlock::new);
+    public static final DeferredBlock<BasicTowerBlock> ORANGE_TOWER = BLOCKS.registerBlock("utility/orange_tower",BasicTowerBlock::new);
+
+    public static final DeferredBlock<CapturePointBlock> CAPTURE_POINT = BLOCKS.registerBlock("objectives/capture_point",CapturePointBlock::new);
+
 
     public static final DeferredItem<BlockItem> RED_GRENADE_STATION_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(RED_GRENADE_STATION);
     public static final DeferredItem<BlockItem> GREEN_GRENADE_STATION_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(GREEN_GRENADE_STATION);
@@ -67,5 +89,21 @@ public class MCPaintballBlocks {
     public static final DeferredItem<BlockItem> YELLOW_FLAG_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(YELLOW_FLAG);
     public static final DeferredItem<BlockItem> PINK_FLAG_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(PINK_FLAG);
     public static final DeferredItem<BlockItem> ORANGE_FLAG_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(ORANGE_FLAG);
+
+    public static final DeferredItem<BlockItem> RED_DOOR_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(RED_DOOR);
+    public static final DeferredItem<BlockItem> GREEN_DOOR_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(GREEN_DOOR);
+    public static final DeferredItem<BlockItem> BLUE_DOOR_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(BLUE_DOOR);
+    public static final DeferredItem<BlockItem> YELLOW_DOOR_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(YELLOW_DOOR);
+    public static final DeferredItem<BlockItem> PINK_DOOR_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(PINK_DOOR);
+    public static final DeferredItem<BlockItem> ORANGE_DOOR_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(ORANGE_DOOR);
+
+    public static final DeferredItem<BlockItem> RED_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(RED_TOWER);
+    public static final DeferredItem<BlockItem> GREEN_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(GREEN_TOWER);
+    public static final DeferredItem<BlockItem> BLUE_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(BLUE_TOWER);
+    public static final DeferredItem<BlockItem> YELLOW_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(YELLOW_TOWER);
+    public static final DeferredItem<BlockItem> PINK_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(PINK_TOWER);
+    public static final DeferredItem<BlockItem> ORANGE_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(ORANGE_TOWER);
+
+    public static final DeferredItem<BlockItem> CAPTURE_POINT_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(CAPTURE_POINT);
 
 }

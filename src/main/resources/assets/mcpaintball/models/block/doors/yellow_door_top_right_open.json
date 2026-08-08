@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "textures": {
+    "bottom": "mcpaintball:block/doors/yellow_door_lower",
+    "top": "mcpaintball:block/doors/yellow_door_upper"
+  }
+}

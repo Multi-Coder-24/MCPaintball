@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public class BurstRifleItem extends Item {
 
-    public BurstRifleItem(Properties properties) {super(properties);}
+    public BurstRifleItem(Properties properties) {super(properties.stacksTo(1));}
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {

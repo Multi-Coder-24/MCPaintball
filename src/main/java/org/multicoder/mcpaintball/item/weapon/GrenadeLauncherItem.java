@@ -25,7 +25,7 @@ import java.util.Objects;
 public class GrenadeLauncherItem extends Item {
 
     public GrenadeLauncherItem(Properties properties) {
-        super(properties.component(MCPaintballDataComponents.SETTING.get(),new MCPaintballGrenadeLauncherSetting(1)));
+        super(properties.component(MCPaintballDataComponents.SETTING.get(),new MCPaintballGrenadeLauncherSetting(1)).stacksTo(1));
     }
 
     @Override

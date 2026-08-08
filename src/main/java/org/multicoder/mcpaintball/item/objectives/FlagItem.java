@@ -39,26 +39,20 @@ public class FlagItem extends Item {
                     default -> throw new IllegalStateException("Unexpected value: " + settings.Team());
                 };
                 if(itemStack.getItem() != MCPaintballItems.RED_FLAG_ITEM.get() && block == MCPaintballBlocks.RED_FLAG.get()){
-                    MCPaintballGameEvents.INSTANCE.RedPoints += 10;
-                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(1);
                 }else if(itemStack.getItem() != MCPaintballItems.GREEN_FLAG_ITEM.get() && block == MCPaintballBlocks.GREEN_FLAG.get()){
-                    MCPaintballGameEvents.INSTANCE.GreenPoints += 10;
-                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(2);
                 }else if(itemStack.getItem() != MCPaintballItems.BLUE_FLAG_ITEM.get() && block == MCPaintballBlocks.BLUE_FLAG.get()){
-                    MCPaintballGameEvents.INSTANCE.BluePoints += 10;
-                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(3);
                 }else if(itemStack.getItem() != MCPaintballItems.YELLOW_FLAG_ITEM.get() && block == MCPaintballBlocks.YELLOW_FLAG.get()){
-                    MCPaintballGameEvents.INSTANCE.YellowPoints += 10;
-                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(4);
                 }else if(itemStack.getItem() != MCPaintballItems.PINK_FLAG_ITEM.get() && block == MCPaintballBlocks.PINK_FLAG.get()){
-                    MCPaintballGameEvents.INSTANCE.PinkPoints += 10;
-                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(5);
                 }else if(itemStack.getItem() != MCPaintballItems.ORANGE_FLAG_ITEM.get() && block == MCPaintballBlocks.ORANGE_FLAG.get()){
-                    MCPaintballGameEvents.INSTANCE.OrangePoints += 10;
-                    MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(6);
                 }
                 itemStack.shrink(1);
-                context.getLevel().setBlock(settings.position(), state, Block.UPDATE_ALL);
+                context.getLevel().setBlock(settings.position(), state, Block.UPDATE_ALL_IMMEDIATE);
             }
         }
         return InteractionResult.SUCCESS;

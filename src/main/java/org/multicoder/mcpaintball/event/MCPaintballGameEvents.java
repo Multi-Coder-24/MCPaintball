@@ -115,6 +115,19 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballBlocks.YELLOW_FLAG.value());
             event.accept(MCPaintballBlocks.PINK_FLAG.value());
             event.accept(MCPaintballBlocks.ORANGE_FLAG.value());
+            event.accept(MCPaintballBlocks.RED_DOOR.value());
+            event.accept(MCPaintballBlocks.GREEN_DOOR.value());
+            event.accept(MCPaintballBlocks.BLUE_DOOR.value());
+            event.accept(MCPaintballBlocks.YELLOW_DOOR.value());
+            event.accept(MCPaintballBlocks.PINK_DOOR.value());
+            event.accept(MCPaintballBlocks.ORANGE_DOOR.value());
+            event.accept(MCPaintballBlocks.CAPTURE_POINT.value());
+            event.accept(MCPaintballBlocks.RED_TOWER.value());
+            event.accept(MCPaintballBlocks.GREEN_TOWER.value());
+            event.accept(MCPaintballBlocks.BLUE_TOWER.value());
+            event.accept(MCPaintballBlocks.YELLOW_TOWER.value());
+            event.accept(MCPaintballBlocks.PINK_TOWER.value());
+            event.accept(MCPaintballBlocks.ORANGE_TOWER.value());
         }
     }
 

@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class PistolItem extends Item {
 
-    public PistolItem(Properties properties) {super(properties);}
+    public PistolItem(Properties properties) {super(properties.stacksTo(1));}
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
@@ -31,8 +31,8 @@ public class PistolItem extends Item {
                 if (data.Team != 0) {
                     EntityType<? extends AbstractArrow> type = switch (data.Team) {
                         case 1 -> MCPaintballEntities.RED_PAINTBALL.get();
-                        case 2 -> MCPaintballEntities.BLUE_PAINTBALL.get();
-                        case 3 -> MCPaintballEntities.GREEN_PAINTBALL.get();
+                        case 2 -> MCPaintballEntities.GREEN_PAINTBALL.get();
+                        case 3 -> MCPaintballEntities.BLUE_PAINTBALL.get();
                         case 4 -> MCPaintballEntities.YELLOW_PAINTBALL.get();
                         case 5 -> MCPaintballEntities.PINK_PAINTBALL.get();
                         case 6 -> MCPaintballEntities.ORANGE_PAINTBALL.get();
