@@ -1,10 +1,10 @@
 package org.multicoder.mcpaintball.event;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -14,6 +14,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import org.multicoder.mcpaintball.client.gui.RoleTeamScreen;
+import org.multicoder.mcpaintball.client.gui.SelectTeamScreen;
 import org.multicoder.mcpaintball.command.MCPaintballCommands;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballDataComponents;
@@ -45,8 +47,6 @@ public class MCPaintballGameEvents {
     }
 
     public static void commandRegister(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext ignored, Commands.CommandSelection ignored2) {
-        dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.team_prefix").getString()).then(Commands.argument("team",StringArgumentType.word()).executes(MCPaintballCommands::setTeam)))).createBuilder().build();
-        dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.type_prefix").getString()).then(Commands.argument("type",StringArgumentType.word()).executes(MCPaintballCommands::setType)))).createBuilder().build();
         dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::startGame)).then(Commands.literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::stopGame)))).createBuilder().build();
         dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::startRound)).then(Commands.literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::stopRound)).then(Commands.literal(Component.translatable("command.mcpaintball.winner").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::roundWinner)))).createBuilder().build();
         dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.kit").getString()).executes(MCPaintballCommands::giveKit))).createBuilder().build();
@@ -59,6 +59,14 @@ public class MCPaintballGameEvents {
                 int i = Objects.requireNonNull(player.getItemInHand(InteractionHand.MAIN_HAND).get(MCPaintballDataComponents.SETTING)).setting();
                 ClientPlayNetworking.send(new CycleGLTypeC2SPacket(i));
             }
+        }
+        while (MCPaintballKeybinding.OPEN_TEAM_SELECT.consumeClick()){
+            Screen Parent = minecraft.screen;
+            minecraft.setScreen(new SelectTeamScreen(Parent));
+        }
+        while (MCPaintballKeybinding.OPEN_ROLE_SELECT.consumeClick()){
+            Screen Parent = minecraft.screen;
+            minecraft.setScreen(new RoleTeamScreen(Parent));
         }
     }
 }

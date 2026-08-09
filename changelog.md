@@ -42,7 +42,7 @@ Version number. Where possible we will use the format.
 - **Addition: Paint Mines**
 - **Addition: Flags**
 
-## Planned Changelog: Version 1.4.0
+## Version 1.4.0
 
 - **Addition: Team Locked Doors**
 - **Addition: Basic Fort Structure**

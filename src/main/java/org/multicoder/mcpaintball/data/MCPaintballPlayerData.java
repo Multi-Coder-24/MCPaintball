@@ -14,22 +14,22 @@ import org.multicoder.mcpaintball.entity.PaintballEntity;
 
 public class MCPaintballPlayerData {
     public int team = 0;
-    public int type = 0;
+    public int role = 0;
 
     public int team(){
         return team;
     }
     public int type(){
-        return type;
+        return role;
     }
-    public MCPaintballPlayerData(int team, int type){
+    public MCPaintballPlayerData(int team, int role){
         this.team = team;
-        this.type = type;
+        this.role = role;
     }
     public MCPaintballPlayerData(){}
     public static final Codec<MCPaintballPlayerData> CODEC = RecordCodecBuilder.create(builder -> builder.group(
             Codec.INT.fieldOf("team").forGetter(MCPaintballPlayerData::team),
-            Codec.INT.fieldOf("type").forGetter(MCPaintballPlayerData::type)
+            Codec.INT.fieldOf("role").forGetter(MCPaintballPlayerData::type)
     ).apply(builder, MCPaintballPlayerData::new));
 
     public static final StreamCodec<ByteBuf,MCPaintballPlayerData> STREAM_CODEC = StreamCodec.composite(ByteBufCodecs.INT,MCPaintballPlayerData::team, ByteBufCodecs.INT,MCPaintballPlayerData::type, MCPaintballPlayerData::new);

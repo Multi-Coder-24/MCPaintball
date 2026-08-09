@@ -56,7 +56,7 @@ public class GrenadeStation extends Block {
                 List<ItemStack> toAdd = new ArrayList<>();
                 if(state.getBlock() == MCPaintballBlocks.RED_GRENADE_STATION && Objects.requireNonNull(data).team == 1){
                     toAdd.addAll(List.of(data.fetchDefaultExplosives()));
-                    switch (data.type) {
+                    switch (data.role) {
                         case 1 -> {
                             toAdd.add(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE, 8));
                             toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 4));
@@ -75,7 +75,7 @@ public class GrenadeStation extends Block {
                     }
                 }else if(state.getBlock() == MCPaintballBlocks.GREEN_GRENADE_STATION && Objects.requireNonNull(data).team == 2){
                     toAdd.addAll(List.of(data.fetchDefaultExplosives()));
-                    switch (data.type){
+                    switch (data.role){
                         case 1 ->{
                             toAdd.add(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE,8));
                             toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
@@ -92,7 +92,7 @@ public class GrenadeStation extends Block {
                     }
                 }else if(state.getBlock() == MCPaintballBlocks.BLUE_GRENADE_STATION && Objects.requireNonNull(data).team == 3){
                     toAdd.addAll(List.of(data.fetchDefaultExplosives()));
-                    switch (data.type){
+                    switch (data.role){
                         case 1 ->{
                             toAdd.add(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE,8));
                             toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
@@ -109,7 +109,7 @@ public class GrenadeStation extends Block {
                     }
                 }else if(state.getBlock() == MCPaintballBlocks.YELLOW_GRENADE_STATION && Objects.requireNonNull(data).team == 4){
                     toAdd.addAll(List.of(data.fetchDefaultExplosives()));
-                    switch (data.type){
+                    switch (data.role){
                         case 1 ->{
                             toAdd.add(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
                             toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
@@ -126,7 +126,7 @@ public class GrenadeStation extends Block {
                     }
                 }else if(state.getBlock() == MCPaintballBlocks.PINK_GRENADE_STATION && Objects.requireNonNull(data).team == 5){
                     toAdd.addAll(List.of(data.fetchDefaultExplosives()));
-                    switch (data.type){
+                    switch (data.role){
                         case 1 ->{
                             toAdd.add(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
                             toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
@@ -143,7 +143,7 @@ public class GrenadeStation extends Block {
                     }
                 }else if(state.getBlock() == MCPaintballBlocks.ORANGE_GRENADE_STATION && Objects.requireNonNull(data).team == 6){
                     toAdd.addAll(List.of(data.fetchDefaultExplosives()));
-                    switch (data.type){
+                    switch (data.role){
                         case 1 ->{
                             toAdd.add(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE,8));
                             toAdd.add(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));

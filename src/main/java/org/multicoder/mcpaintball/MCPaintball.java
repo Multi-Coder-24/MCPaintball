@@ -15,9 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.event.CreativeTabEvents;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
-import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
-import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
-import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
+import org.multicoder.mcpaintball.network.*;
 
 public class MCPaintball implements ModInitializer {
     public static final String MOD_ID = "mcpaintball";
@@ -26,6 +24,7 @@ public class MCPaintball implements ModInitializer {
     public void onInitialize() {
         LOGGER.info("Initializing MCPaintball");
         LOGGER.info("Initializing Registries");
+        MCPaintballKeybinding.initialize();
         MCPaintballDataComponents.initialize();
         MCPaintballDataAttachments.initialize();
         MCPaintballBlocks.initialize();
@@ -54,7 +53,11 @@ public class MCPaintball implements ModInitializer {
         PayloadTypeRegistry.clientboundPlay().register(PointSyncS2CPacket.TYPE,PointSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.clientboundPlay().register(DataSyncS2CPacket.TYPE,DataSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket.STREAM_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(TeamSelectC2SPacket.TYPE,TeamSelectC2SPacket.STREAM_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(RoleSelectC2SPacket.TYPE,RoleSelectC2SPacket.STREAM_CODEC);
         ServerPlayNetworking.registerGlobalReceiver(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket::handlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(TeamSelectC2SPacket.TYPE,TeamSelectC2SPacket::handlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(RoleSelectC2SPacket.TYPE,RoleSelectC2SPacket::handlePacket);
         LOGGER.info("Initialized MCPaintball");
     }
 }
