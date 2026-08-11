@@ -8,11 +8,16 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.block.entity.RedClaymoreBlockEntity;
+import org.multicoder.mcpaintball.block.entity.*;
 
 @SuppressWarnings("all")
 public class MCPaintballBlockEntities {
     public static final BlockEntityType<RedClaymoreBlockEntity> RED_CLAYMORE_BLOCK_ENTITY = register("red_claymore",RedClaymoreBlockEntity::new, MCPaintballBlocks.RED_CLAYMORE_BLOCK);
+    public static final BlockEntityType<GreenClaymoreBlockEntity> GREEN_CLAYMORE_BLOCK_ENTITY = register("green_claymore",GreenClaymoreBlockEntity::new, MCPaintballBlocks.GREEN_CLAYMORE_BLOCK);
+    public static final BlockEntityType<BlueClaymoreBlockEntity> BLUE_CLAYMORE_BLOCK_ENTITY = register("blue_claymore",BlueClaymoreBlockEntity::new, MCPaintballBlocks.BLUE_CLAYMORE_BLOCK);
+    public static final BlockEntityType<YellowClaymoreBlockEntity> YELLOW_CLAYMORE_BLOCK_ENTITY = register("yellow_claymore",YellowClaymoreBlockEntity::new, MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK);
+    public static final BlockEntityType<PinkClaymoreBlockEntity> PINK_CLAYMORE_BLOCK_ENTITY = register("pink_claymore",PinkClaymoreBlockEntity::new, MCPaintballBlocks.PINK_CLAYMORE_BLOCK);
+    public static final BlockEntityType<OrangeClaymoreBlockEntity> ORANGE_CLAYMORE_BLOCK_ENTITY = register("orange_claymore",OrangeClaymoreBlockEntity::new, MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK);
 
 
     public static void initialize() {

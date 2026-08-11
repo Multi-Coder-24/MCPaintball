@@ -1,7 +1,7 @@
 {
 	"textures": {
 		"0": "mcpaintball:block/util/gray",
-		"1": "mcpaintball:block/util/red",
+		"1": "mcpaintball:block/util/blue",
 		"particle": "mcpaintball:block/util/gray"
 	},
 	"elements": [

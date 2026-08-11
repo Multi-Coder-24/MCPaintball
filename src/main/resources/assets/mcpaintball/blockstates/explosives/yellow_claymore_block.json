@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mcpaintball:block/explosives/yellow_claymore"
+    },
+    "facing=south": {
+      "model": "mcpaintball:block/explosives/yellow_claymore",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "mcpaintball:block/explosives/yellow_claymore",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "mcpaintball:block/explosives/yellow_claymore",
+      "y": 270
+    }
+  }
+}

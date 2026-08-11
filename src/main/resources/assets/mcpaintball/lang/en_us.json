@@ -152,6 +152,12 @@
   "block.mcpaintball.utility.yellow_tower": "Yellow Team Tower",
   "block.mcpaintball.utility.pink_tower": "Pink Team Tower",
   "block.mcpaintball.utility.orange_tower": "Orange Team Tower",
+  "block.mcpaintball.explosives.red_claymore_block": "Red Claymore",
+  "block.mcpaintball.explosives.green_claymore_block": "Green Claymore",
+  "block.mcpaintball.explosives.blue_claymore_block": "Blue Claymore",
+  "block.mcpaintball.explosives.yellow_claymore_block": "Yellow Claymore",
+  "block.mcpaintball.explosives.pink_claymore_block": "Pink Claymore",
+  "block.mcpaintball.explosives.orange_claymore_block": "Orange Claymore",
 
   "Comment_8": "Miscellaneous Text",
   "text.mcpaintball.weapons_tab": "MCPaintball Weapons",
