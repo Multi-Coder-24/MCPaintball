@@ -7,7 +7,7 @@ public enum PaintballRole implements StringRepresentable {
     None("text.mcpaintball.role_none"),
     Captain("text.mcpaintball.role_captain"),
     Gunner("text.mcpaintball.role_gunner"),
-    Heavy("text.mcpaintball.role_heavy"),
+    Sniper("text.mcpaintball.role_sniper"),
     Specialist("text.mcpaintball.role_specialist"),
     Grenadier("text.mcpaintball.role_grenadier");
     

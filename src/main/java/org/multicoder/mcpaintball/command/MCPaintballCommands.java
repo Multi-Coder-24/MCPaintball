@@ -13,6 +13,8 @@ import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 import org.multicoder.mcpaintball.util.KitHandler;
+import org.multicoder.mcpaintball.util.PaintballRole;
+import org.multicoder.mcpaintball.util.PaintballTeam;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -111,7 +113,9 @@ public class MCPaintballCommands {
             ServerPlayer player = context.getSource().getPlayerOrException();
             MCPaintballPlayerData data = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
             if(data != null && data.team != 0 && data.role != 0){
-                KitHandler.grantKit(player, data.team, data.role);
+                PaintballTeam team = PaintballTeam.values()[data.team];
+                PaintballRole role = PaintballRole.values()[data.role];
+                KitHandler.grantKit(player, team, role);
             }
         }
         return 0;

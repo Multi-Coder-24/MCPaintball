@@ -86,5 +86,6 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.YELLOW_TOWER);
         output.accept(MCPaintballBlocks.PINK_TOWER);
         output.accept(MCPaintballBlocks.ORANGE_TOWER);
+        output.accept(MCPaintballBlocks.RED_CLAYMORE_BLOCK);
     }
 }

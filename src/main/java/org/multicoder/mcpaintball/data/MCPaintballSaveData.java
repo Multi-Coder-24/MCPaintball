@@ -8,8 +8,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import org.multicoder.mcpaintball.MCPaintball;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @SuppressWarnings("all")
@@ -77,7 +76,6 @@ public class MCPaintballSaveData extends SavedData {
     public boolean roundStarted(){
         return roundStarted;
     }
-
     public void incrementByChecker(int checker){
         switch (checker){
             case 1 -> redPoints++;

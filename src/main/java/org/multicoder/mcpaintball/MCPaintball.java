@@ -28,6 +28,7 @@ public class MCPaintball implements ModInitializer {
         MCPaintballDataComponents.initialize();
         MCPaintballDataAttachments.initialize();
         MCPaintballBlocks.initialize();
+        MCPaintballBlockEntities.initialize();
         MCPaintballItems.initialize();
         MCPaintballEntities.initialize();
         MCPaintballArmorMaterials.initialize();

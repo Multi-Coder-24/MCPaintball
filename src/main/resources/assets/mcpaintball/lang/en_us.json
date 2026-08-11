@@ -15,8 +15,6 @@
   "text.mcpaintball.round_started": "The round has started, Weapons Free",
   "text.mcpaintball.round_ended": "The round has ended, Weapons Stopped",
   "text.mcpaintball.round_winner": "The winning team is %s, Congratulations",
-  "text.mcpaintball.team_set": "Paintball Team Set",
-  "text.mcpaintball.role_set": "Paintball Role Set",
 
   "Comment_2": "Command Error Responses",
   "text.mcpaintball.error_game_not_started": "Cannot start a round before starting a game",
@@ -41,7 +39,7 @@
   "text.mcpaintball.team_none": "None",
   "text.mcpaintball.role_captain": "Team Captain",
   "text.mcpaintball.role_gunner": "Gunner",
-  "text.mcpaintball.role_heavy": "Heavy",
+  "text.mcpaintball.role_sniper": "Sniper",
   "text.mcpaintball.role_specialist": "Specialist",
   "text.mcpaintball.role_grenadier": "Grenadier",
   "text.mcpaintball.role_none": "None",
@@ -49,6 +47,8 @@
   "text.mcpaintball.gl_smoke": "Grenade Launcher Type: Smoke Grenade",
   "text.mcpaintball.gl_emp": "Grenade Launcher Type: EMP Grenade",
   "text.mcpaintball.gl_sight": "Grenade Launcher Type: Sight Grenade",
+  "text.mcpaintball.set_team": "Please Set Team Before Choosing Role",
+  "text.mcpaintball.one_captain": "There Can Only Be 1 Captain Per Team",
 
   "Comment_5": "Entities",
   "entity.mcpaintball.red_paintball": "Red Paintball",
@@ -156,6 +156,7 @@
   "Comment_8": "Miscellaneous Text",
   "text.mcpaintball.weapons_tab": "MCPaintball Weapons",
   "text.mcpaintball.utility_tab": "MCPaintball Utilities",
+  "team.mcpaintball.pre": "[MCPaintball] ",
 
   "Comment_9": "Subtitles",
   "subtitle.mcpaintball.shot": "Weapon Fired",
@@ -182,7 +183,7 @@
   "screen.mcpaintball.text.orange_team": "Orange Team",
   "screen.mcpaintball.text.captain_role": "Team Captain",
   "screen.mcpaintball.text.gunner_role": "Gunner",
-  "screen.mcpaintball.text.heavy_role": "Heavy",
+  "screen.mcpaintball.text.sniper_role": "Sniper",
   "screen.mcpaintball.text.specialist_role": "Specialist",
   "screen.mcpaintball.text.grenadier_role": "Grenadier"
 }

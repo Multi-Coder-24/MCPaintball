@@ -63,7 +63,6 @@ public class MCPaintballClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(DataSyncS2CPacket.TYPE,DataSyncS2CPacket::handlePacket);
         CLIENT_LOGGER.info("Registering Overlay");
         HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"overlay"), new PaintballDataOverlay());
-
         ClientTickEvents.END_CLIENT_TICK.register(MCPaintballGameEvents::clientEndTick);
         CLIENT_LOGGER.info("Initialized MCPaintball Client");
     }

@@ -13,6 +13,7 @@ import net.minecraft.world.level.material.PushReaction;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.block.doors.TeamedDoor;
 import org.multicoder.mcpaintball.block.explosives.PaintMine;
+import org.multicoder.mcpaintball.block.explosives.RedClaymoreBlock;
 import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
 import org.multicoder.mcpaintball.block.objectives.FlagBlock;
 import org.multicoder.mcpaintball.block.utility.BasicTowerBlock;
@@ -66,6 +67,7 @@ public class MCPaintballBlocks {
     public static final Block PINK_TOWER = register("utility/pink_tower", BasicTowerBlock::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
     public static final Block ORANGE_TOWER = register("utility/orange_tower", BasicTowerBlock::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
 
+    public static final Block RED_CLAYMORE_BLOCK = register("explosives/red_claymore_block", RedClaymoreBlock::new,BlockBehaviour.Properties.of());
 
     public static void initialize() {
         MCPaintball.LOGGER.info("Initializing Blocks");

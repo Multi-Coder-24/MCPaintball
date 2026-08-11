@@ -18,7 +18,7 @@ public class RoleTeamScreen extends Screen {
         ClientPlayNetworking.send(new RoleSelectC2SPacket(2));
         Minecraft.getInstance().setScreen(parentScreen);
     }).build();
-    public Button Heavy = Button.builder(Component.translatable("screen.mcpaintball.text.heavy_role"), _ -> {
+    public Button Heavy = Button.builder(Component.translatable("screen.mcpaintball.text.sniper_role"), _ -> {
         ClientPlayNetworking.send(new RoleSelectC2SPacket(3));
         Minecraft.getInstance().setScreen(parentScreen);
     }).build();

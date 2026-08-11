@@ -12,6 +12,8 @@ import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.util.RoleCheck;
 
 
 public record RoleSelectC2SPacket(int Role) implements CustomPacketPayload {
@@ -26,11 +28,22 @@ public record RoleSelectC2SPacket(int Role) implements CustomPacketPayload {
     }
 
     public static void handlePacket(RoleSelectC2SPacket packet, ServerPlayNetworking.Context context) {
-        ServerPlayer player = context.player();
-        MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-        data.role = packet.Role;
-        player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
-        player.sendSystemMessage(Component.translatable("text.mcpaintball.role_set"));
-        ServerPlayNetworking.send(player,new DataSyncS2CPacket(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
+            ServerPlayer player = context.player();
+            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+            if(data.team == 0) {
+                player.sendSystemMessage(Component.translatable("text.mcpaintball.set_team"));
+            }
+            else {
+                if(packet.Role == 1 && RoleCheck.checkCaptainRole(context.server())){
+                    player.sendSystemMessage(Component.translatable("text.mcpaintball.one_captain"));
+                }else {
+                    data.role = packet.Role;
+                    player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
+                    ServerPlayNetworking.send(player,new DataSyncS2CPacket(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+                }
+
+            }
+        }
     }
 }
