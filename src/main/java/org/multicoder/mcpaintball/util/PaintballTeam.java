@@ -10,14 +10,15 @@ public enum PaintballTeam implements StringRepresentable {
     Blue("text.mcpaintball.team_blue"),
     Yellow("text.mcpaintball.team_yellow"),
     Pink("text.mcpaintball.team_pink"),
-    Orange("text.mcpaintball.team_orange"),;
+    Orange("text.mcpaintball.team_orange"),
+    Admin("text.mcpaintball.team_admin");
     PaintballTeam(String translation){
-        Translation = translation;
+        this.translation = translation;
     }
-    public final String Translation;
+    public final String translation;
 
     @Override
     public @NonNull String getSerializedName() {
-        return this.Translation;
+        return this.translation;
     }
 }

@@ -1,7 +1,6 @@
 package org.multicoder.mcpaintball.event;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -39,8 +38,6 @@ import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 
 import java.util.Objects;
-
-import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 import static net.neoforged.neoforge.common.NeoForgeMod.MOD_ID;
 
@@ -148,7 +145,7 @@ public class MCPaintballGameEvents {
         event.getServer().addTickable(() -> {
             if(Ticker == 20){
                 event.getServer().getPlayerList().getPlayers().forEach(player -> {
-                    if(Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Team != 0 && Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Type != 0) {
+                    if(Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Team != 0 && Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Role != 0) {
                         PacketDistributor.sendToPlayer(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.RedPoints,MCPaintballGameEvents.INSTANCE.GreenPoints,MCPaintballGameEvents.INSTANCE.BluePoints,MCPaintballGameEvents.INSTANCE.YellowPoints,MCPaintballGameEvents.INSTANCE.PinkPoints,MCPaintballGameEvents.INSTANCE.OrangePoints,MCPaintballGameEvents.INSTANCE.MatchStarted, MCPaintballGameEvents.INSTANCE.RoundStarted));
                     }
                 });
@@ -177,8 +174,6 @@ public class MCPaintballGameEvents {
     public static void RegisterCommands(RegisterCommandsEvent event){
         MCPaintball.LOGGER.info("[MCPaintball] Commands Register");
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.team_prefix").getString()).then(argument("team", StringArgumentType.word()).executes(MCPaintballCommands::SetTeam)))).createBuilder().build();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.type_prefix").getString()).then(argument("type",StringArgumentType.word()).executes(MCPaintballCommands::SetType)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartGame)).then(literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopGame)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartRound)).then(literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopRound)).then(literal(Component.translatable("command.mcpaintball.winner").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::RoundWinner)))).createBuilder().build();
         dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.kit").getString()).executes(MCPaintballCommands::GiveKit))).createBuilder().build();

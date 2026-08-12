@@ -8,28 +8,28 @@ import net.minecraft.network.codec.StreamCodec;
 
 public class MCPaintballPlayerData {
         public int Team = 0;
-        public int Type = 0;
+        public int Role = 0;
 
         public static final Codec<org.multicoder.mcpaintball.data.MCPaintballPlayerData> CODEC = RecordCodecBuilder.create(inst ->inst.group(
                 Codec.INT.fieldOf("team").forGetter(org.multicoder.mcpaintball.data.MCPaintballPlayerData::Team),
-                Codec.INT.fieldOf("type").forGetter(org.multicoder.mcpaintball.data.MCPaintballPlayerData::Type)
+                Codec.INT.fieldOf("role").forGetter(org.multicoder.mcpaintball.data.MCPaintballPlayerData::Role)
         ).apply(inst, org.multicoder.mcpaintball.data.MCPaintballPlayerData::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, org.multicoder.mcpaintball.data.MCPaintballPlayerData> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.INT, org.multicoder.mcpaintball.data.MCPaintballPlayerData::Team,
-                ByteBufCodecs.INT, org.multicoder.mcpaintball.data.MCPaintballPlayerData::Type,
+                ByteBufCodecs.INT, org.multicoder.mcpaintball.data.MCPaintballPlayerData::Role,
                 org.multicoder.mcpaintball.data.MCPaintballPlayerData::new);
 
         public MCPaintballPlayerData(int Team, int Type){
             this.Team = Team;
-            this.Type = Type;
+            this.Role = Type;
         }
         public MCPaintballPlayerData(){
         }
         public int Team(){
             return Team;
         }
-        public int Type(){
-            return Type;
+        public int Role(){
+            return Role;
         }
 }
 

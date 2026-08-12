@@ -6,7 +6,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.block.doors.TeamedDoor;
-import org.multicoder.mcpaintball.block.explosives.PaintMine;
+import org.multicoder.mcpaintball.block.explosives.*;
 import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
 import org.multicoder.mcpaintball.block.objectives.FlagBlock;
 import org.multicoder.mcpaintball.block.utility.BasicTowerBlock;
@@ -60,6 +60,13 @@ public class MCPaintballBlocks {
     public static final DeferredBlock<BasicTowerBlock> ORANGE_TOWER = BLOCKS.registerBlock("utility/orange_tower",BasicTowerBlock::new);
 
     public static final DeferredBlock<CapturePointBlock> CAPTURE_POINT = BLOCKS.registerBlock("objectives/capture_point",CapturePointBlock::new);
+
+    public static final DeferredBlock<RedClaymoreBlock> RED_CLAYMORE_BLOCK = BLOCKS.registerBlock("explosives/red_claymore_block",RedClaymoreBlock::new);
+    public static final DeferredBlock<GreenClaymoreBlock> GREEN_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/green_claymore_block",GreenClaymoreBlock::new);
+    public static final DeferredBlock<BlueClaymoreBlock> BLUE_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/blue_claymore_block",BlueClaymoreBlock::new);
+    public static final DeferredBlock<YellowClaymoreBlock> YELLOW_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/yellow_claymore_block",YellowClaymoreBlock::new);
+    public static final DeferredBlock<PinkClaymoreBlock> PINK_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/pink_claymore_block",PinkClaymoreBlock::new);
+    public static final DeferredBlock<OrangeClaymoreBlock> ORANGE_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/orange_claymore_block",OrangeClaymoreBlock::new);
 
 
     public static final DeferredItem<BlockItem> RED_GRENADE_STATION_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(RED_GRENADE_STATION);

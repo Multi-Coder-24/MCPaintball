@@ -55,7 +55,7 @@ public class GrenadeStationBlock extends Block {
                 if(block == MCPaintballBlocks.RED_GRENADE_STATION.get() && Objects.requireNonNull(data).Team == 1){
                     player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
                     player.addItem(new ItemStack(MCPaintballBlocks.RED_PAINT_MINE.get(),2));
-                    switch (data.Type){
+                    switch (data.Role){
                         case 1 ->{
                             player.addItem(new ItemStack(MCPaintballItems.RED_PAINT_GRENADE.get(),8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
@@ -73,7 +73,7 @@ public class GrenadeStationBlock extends Block {
                 }else if(block == MCPaintballBlocks.GREEN_GRENADE_STATION.get() && Objects.requireNonNull(data).Team == 2){
                     player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
                     player.addItem(new ItemStack(MCPaintballBlocks.GREEN_PAINT_MINE.get(),2));
-                    switch (data.Type){
+                    switch (data.Role){
                         case 1 ->{
                             player.addItem(new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE.get(),8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
@@ -91,7 +91,7 @@ public class GrenadeStationBlock extends Block {
                 }else if(block == MCPaintballBlocks.BLUE_GRENADE_STATION.get() && Objects.requireNonNull(data).Team == 3){
                     player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
                     player.addItem(new ItemStack(MCPaintballBlocks.BLUE_PAINT_MINE.get(),2));
-                    switch (data.Type){
+                    switch (data.Role){
                         case 1 ->{
                             player.addItem(new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE.get(),8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
@@ -109,7 +109,7 @@ public class GrenadeStationBlock extends Block {
                 }else if(block == MCPaintballBlocks.YELLOW_GRENADE_STATION.get() && Objects.requireNonNull(data).Team == 4){
                     player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
                     player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE.get(),2));
-                    switch (data.Type){
+                    switch (data.Role){
                         case 1 ->{
                             player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE.get(),8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
@@ -127,7 +127,7 @@ public class GrenadeStationBlock extends Block {
                 }else if(block == MCPaintballBlocks.PINK_GRENADE_STATION.get() && Objects.requireNonNull(data).Team == 5){
                     player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
                     player.addItem(new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE.get(),2));
-                    switch (data.Type){
+                    switch (data.Role){
                         case 1 ->{
                             player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE.get(),8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
@@ -145,7 +145,7 @@ public class GrenadeStationBlock extends Block {
                 }else if(block == MCPaintballBlocks.ORANGE_GRENADE_STATION.get() && Objects.requireNonNull(data).Team == 6){
                     player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE.get(),4));
                     player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_PAINT_MINE.get(),2));
-                    switch (data.Type){
+                    switch (data.Role){
                         case 1 ->{
                             player.addItem(new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE.get(),8));
                             player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE.get(),4));
