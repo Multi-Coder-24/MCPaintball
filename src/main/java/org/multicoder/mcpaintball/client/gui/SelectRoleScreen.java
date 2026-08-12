@@ -7,7 +7,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.multicoder.mcpaintball.network.RoleSelectC2SPacket;
 
-public class RoleTeamScreen extends Screen {
+public class SelectRoleScreen extends Screen {
     public Screen parentScreen;
 
     public Button Captain = Button.builder(Component.translatable("screen.mcpaintball.text.captain_role"), _ -> {
@@ -30,7 +30,7 @@ public class RoleTeamScreen extends Screen {
         ClientPlayNetworking.send(new RoleSelectC2SPacket(5));
         Minecraft.getInstance().setScreen(parentScreen);
     }).build();
-    public RoleTeamScreen(Screen parent) {
+    public SelectRoleScreen(Screen parent) {
         super(Component.translatable("screen.mcpaintball.select_role"));
         this.parentScreen = parent;
     }

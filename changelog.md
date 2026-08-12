@@ -49,3 +49,13 @@ Version number. Where possible we will use the format.
 - **Addition: Capture Point**
 - **Fix: Orange Paintball Rendering**
 - **Fix: Flag Points Awarded Wrong Team**
+
+## Version 2.0.0
+
+- **Addition: Paint Claymore**
+- **Integration: Minecraft Built In Team**
+- **Change: Type Is Now Role**
+- **Change: Roles Have Been Revamped**
+- **Change: Kit Has Been Changed**
+- **Change: Team & Role Selection Now Done By Keybinding And GUI**
+- **Change: Created Temporary Team "Admin" Who Places Team Flags And Capture Points Before Round Starts**

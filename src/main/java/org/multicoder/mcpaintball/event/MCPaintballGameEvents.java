@@ -14,7 +14,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import org.multicoder.mcpaintball.client.gui.RoleTeamScreen;
+import org.multicoder.mcpaintball.client.gui.SelectRoleScreen;
 import org.multicoder.mcpaintball.client.gui.SelectTeamScreen;
 import org.multicoder.mcpaintball.command.MCPaintballCommands;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
@@ -69,7 +69,7 @@ public class MCPaintballGameEvents {
         }
         while (MCPaintballKeybinding.OPEN_ROLE_SELECT.consumeClick()){
             Screen Parent = minecraft.screen;
-            minecraft.setScreen(new RoleTeamScreen(Parent));
+            minecraft.setScreen(new SelectRoleScreen(Parent));
         }
     }
 }

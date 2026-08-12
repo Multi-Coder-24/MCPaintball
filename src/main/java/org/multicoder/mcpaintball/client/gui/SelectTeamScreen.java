@@ -34,6 +34,10 @@ public class SelectTeamScreen extends Screen {
         ClientPlayNetworking.send(new TeamSelectC2SPacket(6));
         Minecraft.getInstance().setScreen(parentScreen);
     }).build();
+    public Button Admin = Button.builder(Component.translatable("screen.mcpaintball.text.admin_team"), _ -> {
+        ClientPlayNetworking.send(new TeamSelectC2SPacket(7));
+        Minecraft.getInstance().setScreen(parentScreen);
+    }).build();
     public SelectTeamScreen(Screen parent) {
         super(Component.translatable("screen.mcpaintball.select_team"));
         this.parentScreen = parent;
@@ -48,12 +52,14 @@ public class SelectTeamScreen extends Screen {
         Yellow.setRectangle(75,30,50,100);
         Pink.setRectangle(75,30,150,100);
         Orange.setRectangle(75,30,250,100);
+        Admin.setRectangle(75,30,50,150);
         addRenderableWidget(Red);
         addRenderableWidget(Green);
         addRenderableWidget(Blue);
         addRenderableWidget(Yellow);
         addRenderableWidget(Pink);
         addRenderableWidget(Orange);
+        addRenderableWidget(Admin);
     }
 
 
