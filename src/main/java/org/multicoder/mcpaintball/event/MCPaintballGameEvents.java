@@ -24,7 +24,7 @@ import org.multicoder.mcpaintball.core.MCPaintballKeybinding;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
 import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
 import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
-import org.multicoder.mcpaintball.util.MinecraftTeamSystem;
+import org.multicoder.mcpaintball.integration.MinecraftTeamSystem;
 
 import java.util.Objects;
 

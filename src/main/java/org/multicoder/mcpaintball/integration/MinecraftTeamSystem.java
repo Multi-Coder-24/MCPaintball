@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.util;
+package org.multicoder.mcpaintball.integration;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
