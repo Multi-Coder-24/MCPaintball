@@ -28,6 +28,12 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.YELLOW_PAINT_MINE);
         output.accept(MCPaintballBlocks.PINK_PAINT_MINE);
         output.accept(MCPaintballBlocks.ORANGE_PAINT_MINE);
+        output.accept(MCPaintballBlocks.RED_CLAYMORE_BLOCK);
+        output.accept(MCPaintballBlocks.GREEN_CLAYMORE_BLOCK);
+        output.accept(MCPaintballBlocks.BLUE_CLAYMORE_BLOCK);
+        output.accept(MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK);
+        output.accept(MCPaintballBlocks.PINK_CLAYMORE_BLOCK);
+        output.accept(MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK);
     }
 
     public static void utilityInit(FabricCreativeModeTabOutput output) {
@@ -86,11 +92,6 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.YELLOW_TOWER);
         output.accept(MCPaintballBlocks.PINK_TOWER);
         output.accept(MCPaintballBlocks.ORANGE_TOWER);
-        output.accept(MCPaintballBlocks.RED_CLAYMORE_BLOCK);
-        output.accept(MCPaintballBlocks.GREEN_CLAYMORE_BLOCK);
-        output.accept(MCPaintballBlocks.BLUE_CLAYMORE_BLOCK);
-        output.accept(MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK);
-        output.accept(MCPaintballBlocks.PINK_CLAYMORE_BLOCK);
-        output.accept(MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK);
+
     }
 }
