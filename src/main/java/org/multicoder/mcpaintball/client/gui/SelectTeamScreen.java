@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import org.multicoder.mcpaintball.network.TeamSelectC2SPacket;
 
-@SuppressWarnings("unused")
+
 public class SelectTeamScreen extends Screen {
     public Screen parentScreen;
 

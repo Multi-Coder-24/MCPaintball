@@ -62,11 +62,11 @@ public class MCPaintballBlocks {
     public static final DeferredBlock<CapturePointBlock> CAPTURE_POINT = BLOCKS.registerBlock("objectives/capture_point",CapturePointBlock::new);
 
     public static final DeferredBlock<RedClaymoreBlock> RED_CLAYMORE_BLOCK = BLOCKS.registerBlock("explosives/red_claymore_block",RedClaymoreBlock::new);
-    public static final DeferredBlock<GreenClaymoreBlock> GREEN_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/green_claymore_block",GreenClaymoreBlock::new);
-    public static final DeferredBlock<BlueClaymoreBlock> BLUE_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/blue_claymore_block",BlueClaymoreBlock::new);
-    public static final DeferredBlock<YellowClaymoreBlock> YELLOW_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/yellow_claymore_block",YellowClaymoreBlock::new);
-    public static final DeferredBlock<PinkClaymoreBlock> PINK_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/pink_claymore_block",PinkClaymoreBlock::new);
-    public static final DeferredBlock<OrangeClaymoreBlock> ORANGE_CLAYMORE_BLOCK = BLOCKS.registerBlock("utility/orange_claymore_block",OrangeClaymoreBlock::new);
+    public static final DeferredBlock<GreenClaymoreBlock> GREEN_CLAYMORE_BLOCK = BLOCKS.registerBlock("explosives/green_claymore_block",GreenClaymoreBlock::new);
+    public static final DeferredBlock<BlueClaymoreBlock> BLUE_CLAYMORE_BLOCK = BLOCKS.registerBlock("explosives/blue_claymore_block",BlueClaymoreBlock::new);
+    public static final DeferredBlock<YellowClaymoreBlock> YELLOW_CLAYMORE_BLOCK = BLOCKS.registerBlock("explosives/yellow_claymore_block",YellowClaymoreBlock::new);
+    public static final DeferredBlock<PinkClaymoreBlock> PINK_CLAYMORE_BLOCK = BLOCKS.registerBlock("explosives/pink_claymore_block",PinkClaymoreBlock::new);
+    public static final DeferredBlock<OrangeClaymoreBlock> ORANGE_CLAYMORE_BLOCK = BLOCKS.registerBlock("explosives/orange_claymore_block",OrangeClaymoreBlock::new);
 
 
     public static final DeferredItem<BlockItem> RED_GRENADE_STATION_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(RED_GRENADE_STATION);
@@ -110,6 +110,13 @@ public class MCPaintballBlocks {
     public static final DeferredItem<BlockItem> YELLOW_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(YELLOW_TOWER);
     public static final DeferredItem<BlockItem> PINK_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(PINK_TOWER);
     public static final DeferredItem<BlockItem> ORANGE_TOWER_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(ORANGE_TOWER);
+
+    public static final DeferredItem<BlockItem> RED_CLAYMORE_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(RED_CLAYMORE_BLOCK);
+    public static final DeferredItem<BlockItem> GREEN_CLAYMORE_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(GREEN_CLAYMORE_BLOCK);
+    public static final DeferredItem<BlockItem> BLUE_CLAYMORE_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(BLUE_CLAYMORE_BLOCK);
+    public static final DeferredItem<BlockItem> YELLOW_CLAYMORE_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(YELLOW_CLAYMORE_BLOCK);
+    public static final DeferredItem<BlockItem> PINK_CLAYMORE_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(PINK_CLAYMORE_BLOCK);
+    public static final DeferredItem<BlockItem> ORANGE_CLAYMORE_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(ORANGE_CLAYMORE_BLOCK);
 
     public static final DeferredItem<BlockItem> CAPTURE_POINT_BI = MCPaintballItems.ITEMS.registerSimpleBlockItem(CAPTURE_POINT);
 

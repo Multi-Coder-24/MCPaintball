@@ -7,7 +7,6 @@ import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import org.multicoder.mcpaintball.network.RoleSelectC2SPacket;
 
-@SuppressWarnings("unused")
 public class SelectRoleScreen extends Screen {
     public Screen parentScreen;
 

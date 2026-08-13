@@ -13,7 +13,6 @@ public class MinecraftTeamSystem {
     public static PlayerTeam YELLOW;
     public static PlayerTeam PINK;
     public static PlayerTeam ORANGE;
-    @SuppressWarnings("unused")
     public static void init(MinecraftServer server) {
         if(!server.getScoreboard().getTeamNames().contains("Red")){
             RED = server.getScoreboard().addPlayerTeam("Red");

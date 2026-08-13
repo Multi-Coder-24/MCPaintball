@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.event;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.commands.CommandSourceStack;
@@ -27,15 +28,16 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.client.gui.SelectRoleScreen;
+import org.multicoder.mcpaintball.client.gui.SelectTeamScreen;
 import org.multicoder.mcpaintball.client.renderer.PaintballDataOverlay;
 import org.multicoder.mcpaintball.command.MCPaintballCommands;
 import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
 import org.multicoder.mcpaintball.entity.renderer.*;
-import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
-import org.multicoder.mcpaintball.network.DataSyncS2CPacket;
-import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
+import org.multicoder.mcpaintball.integration.MinecraftTeamSystem;
+import org.multicoder.mcpaintball.network.*;
 
 import java.util.Objects;
 import static net.minecraft.commands.Commands.literal;
@@ -69,6 +71,12 @@ public class MCPaintballGameEvents {
             event.accept(MCPaintballItems.SMOKE_GRENADE.value());
             event.accept(MCPaintballItems.EMP_GRENADE.value());
             event.accept(MCPaintballItems.SIGHT_GRENADE.value());
+            event.accept(MCPaintballBlocks.RED_CLAYMORE_BLOCK.value());
+            event.accept(MCPaintballBlocks.GREEN_CLAYMORE_BLOCK.value());
+            event.accept(MCPaintballBlocks.BLUE_CLAYMORE_BLOCK.value());
+            event.accept(MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK.value());
+            event.accept(MCPaintballBlocks.PINK_CLAYMORE_BLOCK.value());
+            event.accept(MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK.value());
         }else if(event.getTabKey() == MCPaintballCreativeTabs.UTILITY_TAB.getKey()){
             event.accept(MCPaintballItems.RED_BOOTS.value());
             event.accept(MCPaintballItems.RED_LEGGINGS.value());
@@ -135,20 +143,19 @@ public class MCPaintballGameEvents {
         registrar.playToClient(PointSyncS2CPacket.TYPE,PointSyncS2CPacket.STREAM_CODEC);
         registrar.playToClient(DataSyncS2CPacket.TYPE,DataSyncS2CPacket.STREAM_CODEC);
         registrar.playToServer(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket.STREAM_CODEC,CycleGLTypeC2SPacket::HandlePacket);
+        registrar.playToServer(TeamSelectC2SPacket.TYPE,TeamSelectC2SPacket.STREAM_CODEC,TeamSelectC2SPacket::handlePacket);
+        registrar.playToServer(RoleSelectC2SPacket.TYPE,RoleSelectC2SPacket.STREAM_CODEC,RoleSelectC2SPacket::handlePacket);
     }
 
     @SubscribeEvent
     public static void ServerStarted(ServerStartedEvent event){
+        MinecraftTeamSystem.init(event.getServer());
         MCPaintball.LOGGER.info("[MCPaintball] Attaching Server Data");
         INSTANCE = event.getServer().overworld().getDataStorage().computeIfAbsent(MCPaintballSaveData.TYPE);
         INSTANCE.setDirty(true);
         event.getServer().addTickable(() -> {
             if(Ticker == 20){
-                event.getServer().getPlayerList().getPlayers().forEach(player -> {
-                    if(Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Team != 0 && Objects.requireNonNull(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get())).Role != 0) {
-                        PacketDistributor.sendToPlayer(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.RedPoints,MCPaintballGameEvents.INSTANCE.GreenPoints,MCPaintballGameEvents.INSTANCE.BluePoints,MCPaintballGameEvents.INSTANCE.YellowPoints,MCPaintballGameEvents.INSTANCE.PinkPoints,MCPaintballGameEvents.INSTANCE.OrangePoints,MCPaintballGameEvents.INSTANCE.MatchStarted, MCPaintballGameEvents.INSTANCE.RoundStarted));
-                    }
-                });
+                event.getServer().getPlayerList().getPlayers().forEach(player -> PacketDistributor.sendToPlayer(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.RedPoints,MCPaintballGameEvents.INSTANCE.GreenPoints,MCPaintballGameEvents.INSTANCE.BluePoints,MCPaintballGameEvents.INSTANCE.YellowPoints,MCPaintballGameEvents.INSTANCE.PinkPoints,MCPaintballGameEvents.INSTANCE.OrangePoints,MCPaintballGameEvents.INSTANCE.MatchStarted, MCPaintballGameEvents.INSTANCE.RoundStarted)));
                 Ticker = 0;
             }else{
                 Ticker++;
@@ -228,7 +235,16 @@ public class MCPaintballGameEvents {
                     int Setting = Objects.requireNonNull(held.get(MCPaintballDataComponents.SETTING.get())).Setting();
                     ClientPacketDistributor.sendToServer(new CycleGLTypeC2SPacket(Setting));
                 }
-
+            }
+            while (MCPaintballKeybindings.SELECT_ROLE.consumeClick()){
+                Minecraft mc = Minecraft.getInstance();
+                Screen screen = mc.screen;
+                mc.setScreen(new SelectRoleScreen(screen));
+            }
+            while (MCPaintballKeybindings.SELECT_TEAM.consumeClick()){
+                Minecraft mc = Minecraft.getInstance();
+                Screen screen = mc.screen;
+                mc.setScreen(new SelectTeamScreen(screen));
             }
         }
 
@@ -236,7 +252,10 @@ public class MCPaintballGameEvents {
         public static void RegisterKeyMappings(RegisterKeyMappingsEvent event){
             CLIENT_LOGGER.info("Initializing Keybindings");
             event.registerCategory(MCPaintballKeybindings.CATEGORY);
+            event.registerCategory(MCPaintballKeybindings.CATEGORY_CONFIG);
             event.register(MCPaintballKeybindings.CYCLE_GRENADE_LAUNCHER_TYPE);
+            event.register(MCPaintballKeybindings.SELECT_ROLE);
+            event.register(MCPaintballKeybindings.SELECT_TEAM);
         }
 
         @SubscribeEvent
