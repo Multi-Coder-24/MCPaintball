@@ -35,6 +35,7 @@ public class MCPaintball implements ModInitializer {
         MCPaintballParticles.initialize();
         MCPaintballSounds.initialize();
         MCPaintballCreativeTabs.initialize();
+        MCPaintballStats.Initialize();
         LOGGER.info("Initializing Particles");
         Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"red_paint"), MCPaintballParticles.RED_PAINT);
         Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"green_paint"),MCPaintballParticles.GREEN_PAINT);

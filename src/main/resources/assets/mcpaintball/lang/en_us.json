@@ -178,6 +178,7 @@
   "key.mcpaintball.cycle_gl": "Cycle Grenade Launcher Type",
   "key.mcpaintball.team_select_open": "Open Team Select Screen",
   "key.mcpaintball.role_select_open": "Open Role Select Screen",
+  "key.mcpaintball.open_admin_screen": "Open Admin Screen",
 
   "Comment_11": "GUI",
   "screen.mcpaintball.select_team": "Team Select Screen",
@@ -193,5 +194,14 @@
   "screen.mcpaintball.text.gunner_role": "Gunner",
   "screen.mcpaintball.text.sniper_role": "Sniper",
   "screen.mcpaintball.text.specialist_role": "Specialist",
-  "screen.mcpaintball.text.grenadier_role": "Grenadier"
+  "screen.mcpaintball.text.grenadier_role": "Grenadier",
+  "screen.mcpaintball.text.game_start": "Start Game",
+  "screen.mcpaintball.text.game_stop": "Stop Game",
+  "screen.mcpaintball.text.round_start": "Start Round",
+  "screen.mcpaintball.text.round_stop": "Stop Round",
+  "screen.mcpaintball.text.round_winner": "Announce Round Winner",
+
+  "Comment_12": "Statistics",
+  "stat.mcpaintball.players_hit": "[MCPaintball] Successful Hits",
+  "stat.mcpaintball.hits": "[MCPaintball] Hit By Players"
 }

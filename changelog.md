@@ -59,3 +59,13 @@ Version number. Where possible we will use the format.
 - **Change: Kit Has Been Changed**
 - **Change: Team & Role Selection Now Done By Keybinding And GUI**
 - **Change: Created Temporary Team "Admin" Who Places Team Flags And Capture Points Before Round Starts**
+
+## Version 2.1.0 (Proposed)
+
+- **Addition: Player Statistics**
+- **Change: Admin Screen Replaces Commands**
+- **Change: Save Team Wins For A Longer Tornament**
+- **Change: Game Type (Standard, Capture The Flag, Capture Points, Capture Flag & Points)**
+- **Change: Admin Kit Will Reflect Game Type**
+- **Change: Tower Blocks Can Be Used Before Round Starts**
+- **Change: Apply Rotation To; Grenade Stations, Flags & Tower Blocks**

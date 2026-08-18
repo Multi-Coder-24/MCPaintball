@@ -71,11 +71,14 @@ public class PaintGrenadeEntity extends ThrowableItemProjectile {
                     if(entity instanceof Player player){
                         MCPaintballPlayerData targetData = player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                         if((Objects.requireNonNull(targetData).team != 0 && Objects.requireNonNull(targetData).team != checker)){
+                            ServerPlayer owner = (ServerPlayer) getOwner();
+                            Objects.requireNonNull(owner).awardStat(MCPaintballStats.PLAYERS_HIT,1);
                             level().playSound(null, Objects.requireNonNull(this.getOwner()).blockPosition(), MCPaintballSounds.HIT, SoundSource.PLAYERS,1f,1f);
                             MCPaintballGameEvents.INSTANCE.incrementByChecker(checker);
                             ServerPlayer serverPlayer = (ServerPlayer) player;
                             BlockPos pos = Objects.requireNonNull(serverPlayer.getRespawnConfig()).respawnData().pos();
                             serverPlayer.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                            serverPlayer.awardStat(MCPaintballStats.HITS,1);
                         }
                     }
                 });
