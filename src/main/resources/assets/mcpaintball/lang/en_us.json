@@ -1,12 +1,6 @@
 {
   "Comment_0": "Command Translations",
   "command.mcpaintball.prefix": "mcpaintball",
-  "command.mcpaintball.round_prefix": "round",
-  "command.mcpaintball.game_prefix": "game",
-  "command.mcpaintball.start": "start",
-  "command.mcpaintball.stop": "stop",
-  "command.mcpaintball.end": "end",
-  "command.mcpaintball.winner": "winner",
   "command.mcpaintball.kit": "kit",
 
   "Comment_1": "Command Responses",
@@ -17,7 +11,7 @@
   "text.mcpaintball.round_winner": "The winning team is %s, Congratulations",
 
   "Comment_2": "Command Error Responses",
-  "text.mcpaintball.error_game_not_started": "Cannot start a round before starting a game",
+  "text.mcpaintball.error_game_not_started": "Cannot start/stop a round before starting a game",
 
   "Comment_3": "Player Information Messages",
   "text.mcpaintball.invalid_use": "Weapons Are Not Enabled",

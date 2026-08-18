@@ -1,18 +1,35 @@
 package org.multicoder.mcpaintball.client.gui;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import org.multicoder.mcpaintball.network.AdminCommandC2SPacket;
 
 public class AdminScreen extends Screen {
     public Screen parentScreen;
 
 
-    public Button StartGameButton = Button.builder(Component.translatable("screen.mcpaintball.text.game_start"),_ ->{}).build();
-    public Button StopGameButton = Button.builder(Component.translatable("screen.mcpaintball.text.game_stop"),_ ->{}).build();
-    public Button StartRoundButton = Button.builder(Component.translatable("screen.mcpaintball.text.round_start"),_ ->{}).build();
-    public Button StopRoundButton = Button.builder(Component.translatable("screen.mcpaintball.text.round_stop"),_ ->{}).build();
-    public Button RoundWinnerButton = Button.builder(Component.translatable("screen.mcpaintball.text.round_winner"),_ ->{}).build();
+    public Button StartGameButton = Button.builder(Component.translatable("screen.mcpaintball.text.game_start"),_ ->{
+        ClientPlayNetworking.send(new AdminCommandC2SPacket(0));
+        this.minecraft.setScreen(parentScreen);
+    }).build();
+    public Button StopGameButton = Button.builder(Component.translatable("screen.mcpaintball.text.game_stop"),_ ->{
+        ClientPlayNetworking.send(new AdminCommandC2SPacket(1));
+        this.minecraft.setScreen(parentScreen);
+    }).build();
+    public Button StartRoundButton = Button.builder(Component.translatable("screen.mcpaintball.text.round_start"),_ ->{
+        ClientPlayNetworking.send(new AdminCommandC2SPacket(2));
+        this.minecraft.setScreen(parentScreen);
+    }).build();
+    public Button StopRoundButton = Button.builder(Component.translatable("screen.mcpaintball.text.round_stop"),_ ->{
+        ClientPlayNetworking.send(new AdminCommandC2SPacket(3));
+        this.minecraft.setScreen(parentScreen);
+    }).build();
+    public Button RoundWinnerButton = Button.builder(Component.translatable("screen.mcpaintball.text.round_winner"),_ ->{
+        ClientPlayNetworking.send(new AdminCommandC2SPacket(4));
+        this.minecraft.setScreen(parentScreen);
+    }).build();
 
     public AdminScreen(Screen parent) {
         super(Component.translatable("screen.mcpaintball.select_role"));
