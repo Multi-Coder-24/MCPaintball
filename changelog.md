@@ -69,3 +69,4 @@ Version number. Where possible we will use the format.
 - **Change: Admin Kit Will Reflect Game Type**
 - **Change: Tower Blocks Can Be Used Before Round Starts**
 - **Change: Apply Rotation To; Grenade Stations, Flags & Tower Blocks**
+- **Change: Kit Will Run Via Keybinding**

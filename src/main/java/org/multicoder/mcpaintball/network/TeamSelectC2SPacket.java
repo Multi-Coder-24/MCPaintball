@@ -32,7 +32,7 @@ public record TeamSelectC2SPacket(int Team) implements CustomPacketPayload {
     }
 
     public static void handlePacket(TeamSelectC2SPacket packet, ServerPlayNetworking.Context context) {
-        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted) {
+        if(MCPaintballGameEvents.INSTANCE.tournamentStarted && !MCPaintballGameEvents.INSTANCE.roundStarted) {
             ServerPlayer player = context.player();
             MinecraftServer server = Objects.requireNonNull(context.server());
             int Team = packet.Team;

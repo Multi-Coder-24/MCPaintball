@@ -34,48 +34,38 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
     public static void handlePacket(AdminCommandC2SPacket packet, ServerPlayNetworking.Context context) {
         int Option = packet.Option;
         switch (Option) {
-            case 0 ->{
-                MCPaintballGameEvents.INSTANCE.matchStarted = true;
+            case 0 ->{ //Tournament Start
+                MCPaintballGameEvents.INSTANCE.tournamentStarted = true;
                 MCPaintballGameEvents.INSTANCE.setDirty(true);
-                Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.game_start"),false);
+                Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.tournament_start"),false);
             }
-            case 1 ->{
-                MCPaintballGameEvents.INSTANCE.matchStarted = false;
+            case 1 ->{ //Tournament End
+                MCPaintballGameEvents.INSTANCE.tournamentStarted = false;
                 MCPaintballGameEvents.INSTANCE.roundStarted = false;
-                MCPaintballGameEvents.INSTANCE.redPoints = 0;
-                MCPaintballGameEvents.INSTANCE.greenPoints = 0;
-                MCPaintballGameEvents.INSTANCE.bluePoints = 0;
-                MCPaintballGameEvents.INSTANCE.yellowPoints = 0;
-                MCPaintballGameEvents.INSTANCE.pinkPoints = 0;
-                MCPaintballGameEvents.INSTANCE.orangePoints = 0;
                 MCPaintballGameEvents.INSTANCE.setDirty(true);
-                Objects.requireNonNull(context.server()).getPlayerList().getPlayers().forEach(player -> {
-                    MCPaintballPlayerData playerData = new MCPaintballPlayerData(0,0);
-                    player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,playerData);
-                });
-                Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.game_stopped"),false);
+                Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.tournament_stopped"),false);
             }
-            case 2 ->{
-                if(MCPaintballGameEvents.INSTANCE.matchStarted){
+            case 2 ->{ //Round Started
+                if(MCPaintballGameEvents.INSTANCE.tournamentStarted){
                     MCPaintballGameEvents.INSTANCE.roundStarted = true;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
                     Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_started"),false);
                 }
                 else{
-                    Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.error_game_not_started"),false);
+                    Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.error_tournament_not_started"),false);
                 }
             }
-            case 3 ->{
-                if(MCPaintballGameEvents.INSTANCE.matchStarted){
+            case 3 ->{ //Round End
+                if(MCPaintballGameEvents.INSTANCE.tournamentStarted){
                     MCPaintballGameEvents.INSTANCE.roundStarted = false;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
                     Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_ended"),false);
                 }
                 else{
-                    Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.error_game_not_started"),false);
+                    Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.error_tournament_not_started"),false);
                 }
             }
-            case 4 ->{
+            case 4 ->{ //Round Winner
                 List<Integer> points = new ArrayList<>();
                 points.add(MCPaintballGameEvents.INSTANCE.redPoints);
                 points.add(MCPaintballGameEvents.INSTANCE.greenPoints);
@@ -94,6 +84,32 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
                     default -> throw new IllegalStateException("Unexpected value: " + Winner);
                 };
                 Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
+                MCPaintballGameEvents.INSTANCE.resetPoints();
+            }
+            case 5 ->{ //Tournament Winner
+                List<Integer> points = new ArrayList<>();
+                points.add(MCPaintballGameEvents.INSTANCE.RedWins);
+                points.add(MCPaintballGameEvents.INSTANCE.GreenWins);
+                points.add(MCPaintballGameEvents.INSTANCE.BlueWins);
+                points.add(MCPaintballGameEvents.INSTANCE.YellowWins);
+                points.add(MCPaintballGameEvents.INSTANCE.PinkWins);
+                points.add(MCPaintballGameEvents.INSTANCE.OrangeWins);
+                int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).get());
+                Component Team = switch (Winner){
+                    case 0 -> Component.translatable("text.mcpaintball.team_red");
+                    case 1 -> Component.translatable("text.mcpaintball.team_green");
+                    case 2 -> Component.translatable("text.mcpaintball.team_blue");
+                    case 3 -> Component.translatable("text.mcpaintball.team_yellow");
+                    case 4 -> Component.translatable("text.mcpaintball.team_pink");
+                    case 5 -> Component.translatable("text.mcpaintball.team_orange");
+                    default -> throw new IllegalStateException("Unexpected value: " + Winner);
+                };
+                Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.tournament_winner",Team),false);
+                Objects.requireNonNull(context.server()).getPlayerList().getPlayers().forEach(player -> {
+                    MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
+                    player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
+                });
+                MCPaintballGameEvents.INSTANCE.resetAll();
             }
         }
     }

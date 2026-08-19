@@ -24,7 +24,7 @@ public class FlagBlock extends Block{
     @Override
     public void playerDestroy(Level level, @NonNull Player player, @NonNull BlockPos pos, @NonNull BlockState state, @Nullable BlockEntity blockEntity, @NonNull ItemStack destroyedWith) {
         if(!level.isClientSide()) {
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 Block block = state.getBlock();
                 int team;
                 ItemStack stack;

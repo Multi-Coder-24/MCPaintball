@@ -36,7 +36,7 @@ public class  GrenadeLauncherItem extends Item {
         if(!level.isClientSide()){
             ItemStack itemStack = player.getItemInHand(hand);
             int Setting = Objects.requireNonNull(itemStack.get(MCPaintballDataComponents.SETTING)).setting();
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 if(Setting == 1){
                     EntityType<? extends ThrowableItemProjectile> type = switch (data.team){

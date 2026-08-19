@@ -56,7 +56,7 @@ public class PaintballEntity extends AbstractArrow {
     protected void onHitEntity(@NonNull EntityHitResult result) {
         if(!level().isClientSide()){
             if(result.getEntity() instanceof ServerPlayer target){
-                if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+                if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                     MCPaintballPlayerData targetData = target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                     if(Objects.requireNonNull(targetData).team != 0){
                         EntityType<?> type = getType();

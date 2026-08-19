@@ -21,7 +21,7 @@ public class FlagItem extends Item {
     @Override
     public @NonNull InteractionResult useOn(@NonNull UseOnContext context) {
         if(!context.getLevel().isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 ItemStack itemStack = context.getItemInHand();
                 Block block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
                 FlagItemSettings settings = Objects.requireNonNull(itemStack.get(MCPaintballDataComponents.FLAGITEMSETTINGS));

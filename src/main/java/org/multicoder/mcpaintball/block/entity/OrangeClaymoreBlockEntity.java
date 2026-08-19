@@ -29,7 +29,7 @@ public class OrangeClaymoreBlockEntity extends BlockEntity{
     public static void tick(@NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull OrangeClaymoreBlockEntity entity) {
         if(!Objects.requireNonNull(level).isClientSide()){
             if(entity.Ticker == 20){
-                if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+                if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                     ServerLevel serverLevel = (ServerLevel) level;
                     Direction direction = state.getValue(RedClaymoreBlock.FACING);
                     AABB box = switch (direction){
@@ -54,7 +54,7 @@ public class OrangeClaymoreBlockEntity extends BlockEntity{
                 }
             }
             else{
-                if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+                if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                     entity.Ticker++;
                 }
             }

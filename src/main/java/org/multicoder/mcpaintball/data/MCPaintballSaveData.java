@@ -19,7 +19,13 @@ public class MCPaintballSaveData extends SavedData {
     public int yellowPoints = 0;
     public int pinkPoints = 0;
     public int orangePoints = 0;
-    public boolean matchStarted = false;
+    public int RedWins = 0;
+    public int GreenWins = 0;
+    public int BlueWins = 0;
+    public int YellowWins = 0;
+    public int PinkWins = 0;
+    public int OrangeWins = 0;
+    public boolean tournamentStarted = false;
     public boolean roundStarted = false;
     public List<BlockPos> capturePoints = new ArrayList<BlockPos>();
 
@@ -30,7 +36,13 @@ public class MCPaintballSaveData extends SavedData {
             Codec.INT.fieldOf("yellow_points").forGetter(MCPaintballSaveData::yellowPoints),
             Codec.INT.fieldOf("pink_points").forGetter(MCPaintballSaveData::pinkPoints),
             Codec.INT.fieldOf("orange_points").forGetter(MCPaintballSaveData::orangePoints),
-            Codec.BOOL.fieldOf("match_started").forGetter(MCPaintballSaveData::matchStarted),
+            Codec.INT.fieldOf("red_winds").forGetter(MCPaintballSaveData::RedWins),
+            Codec.INT.fieldOf("green_winds").forGetter(MCPaintballSaveData::GreenWins),
+            Codec.INT.fieldOf("blue_winds").forGetter(MCPaintballSaveData::BlueWins),
+            Codec.INT.fieldOf("yellow_winds").forGetter(MCPaintballSaveData::YellowWins),
+            Codec.INT.fieldOf("pink_winds").forGetter(MCPaintballSaveData::PinkWins),
+            Codec.INT.fieldOf("orange_winds").forGetter(MCPaintballSaveData::OrangeWins),
+            Codec.BOOL.fieldOf("tournament_started").forGetter(MCPaintballSaveData::tournamentStarted),
             Codec.BOOL.fieldOf("round_started").forGetter(MCPaintballSaveData::roundStarted),
             Codec.list(BlockPos.CODEC).fieldOf("capture_points").forGetter(MCPaintballSaveData::capturePoints)
     ).apply(instance,MCPaintballSaveData::new));
@@ -46,14 +58,14 @@ public class MCPaintballSaveData extends SavedData {
     }
 
 
-    public MCPaintballSaveData(int redPoints, int bluePoints, int greenPoints,int yellowPoints,int pinkPoints,int orangePoints, boolean matchStarted, boolean roundStarted,List<BlockPos> capturePoints){
+    public MCPaintballSaveData(int redPoints, int bluePoints, int greenPoints,int yellowPoints,int pinkPoints,int orangePoints,int red_wins,int green_wins,int blue_wins,int yellow_wins,int pink_wins,int orange_wins, boolean tournamentStarted, boolean roundStarted,List<BlockPos> capturePoints){
         this.redPoints = redPoints;
         this.bluePoints = bluePoints;
         this.greenPoints = greenPoints;
         this.yellowPoints = yellowPoints;
         this.pinkPoints = pinkPoints;
         this.orangePoints = orangePoints;
-        this.matchStarted = matchStarted;
+        this.tournamentStarted = tournamentStarted;
         this.roundStarted = roundStarted;
         this.capturePoints = capturePoints;
     }
@@ -70,8 +82,14 @@ public class MCPaintballSaveData extends SavedData {
     public int yellowPoints(){return yellowPoints;}
     public int pinkPoints(){return pinkPoints;}
     public int orangePoints(){return orangePoints;}
-    public boolean matchStarted(){
-        return matchStarted;
+    public int RedWins(){return RedWins;}
+    public int GreenWins(){return GreenWins;}
+    public int BlueWins(){return BlueWins;}
+    public int YellowWins(){return YellowWins;}
+    public int PinkWins(){return PinkWins;}
+    public int OrangeWins(){return OrangeWins;}
+    public boolean tournamentStarted(){
+        return tournamentStarted;
     }
     public boolean roundStarted(){
         return roundStarted;
@@ -84,6 +102,18 @@ public class MCPaintballSaveData extends SavedData {
             case 4 -> yellowPoints++;
             case 5 -> pinkPoints++;
             case 6 -> orangePoints++;
+        }
+        setDirty(true);
+    }
+
+    public void IncrementWinCount(int Team){
+        switch (Team){
+            case 1 -> RedWins++;
+            case 2 -> GreenWins++;
+            case 3 -> BlueWins++;
+            case 4 -> YellowWins++;
+            case 5 -> PinkWins++;
+            case 6 -> OrangeWins++;
         }
         setDirty(true);
     }
@@ -112,6 +142,32 @@ public class MCPaintballSaveData extends SavedData {
             case 5 -> pinkPoints += 10;
             case 6 -> orangePoints += 10;
         }
+        setDirty(true);
+    }
+
+    public void resetPoints() {
+        redPoints = 0;
+        greenPoints = 0;
+        bluePoints = 0;
+        yellowPoints = 0;
+        pinkPoints = 0;
+        orangePoints = 0;
+        setDirty(true);
+    }
+
+    public void resetAll() {
+        redPoints = 0;
+        greenPoints = 0;
+        bluePoints = 0;
+        yellowPoints = 0;
+        pinkPoints = 0;
+        orangePoints = 0;
+        RedWins = 0;
+        GreenWins = 0;
+        BlueWins = 0;
+        YellowWins = 0;
+        PinkWins = 0;
+        OrangeWins = 0;
         setDirty(true);
     }
 }

@@ -49,7 +49,7 @@ public class PaintMine extends Block {
     @Override
     protected void entityInside(@NonNull BlockState state, Level level, @NonNull BlockPos pos, @NonNull Entity entity, @NonNull InsideBlockEffectApplier effectApplier, boolean isPrecise) {
         if(!level.isClientSide()) {
-            if (MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted) {
+            if (MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted) {
                 if (entity instanceof ServerPlayer player) {
                     ServerLevel serverLevel = (ServerLevel) level;
                     if (Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != 0) {
@@ -96,7 +96,7 @@ public class PaintMine extends Block {
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         if(!context.getLevel().isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 Item toPlace = context.getItemInHand().getItem();
                 int team = Objects.requireNonNull(Objects.requireNonNull(context.getPlayer()).getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team;
                 if(toPlace == MCPaintballBlocks.RED_PAINT_MINE.asItem() && team == 1){

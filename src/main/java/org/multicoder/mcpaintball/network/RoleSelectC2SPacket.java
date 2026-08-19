@@ -28,7 +28,7 @@ public record RoleSelectC2SPacket(int Role) implements CustomPacketPayload {
     }
 
     public static void handlePacket(RoleSelectC2SPacket packet, ServerPlayNetworking.Context context) {
-        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
+        if(MCPaintballGameEvents.INSTANCE.tournamentStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
             ServerPlayer player = context.player();
             MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
             if(data.team == 0) {

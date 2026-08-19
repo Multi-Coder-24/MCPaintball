@@ -33,7 +33,7 @@ public class CapturePointBlock extends Block {
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         if(!context.getLevel().isClientSide()) {
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballGameEvents.INSTANCE.addCapturePoint(context.getClickedPos());
                 return super.getStateForPlacement(context);
             }
@@ -44,7 +44,7 @@ public class CapturePointBlock extends Block {
     @Override
     public @NonNull BlockState playerWillDestroy(@NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull Player player) {
         if(!level.isClientSide()){
-            if (MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted) {
+            if (MCPaintballGameEvents.INSTANCE.tournamentStarted && !MCPaintballGameEvents.INSTANCE.roundStarted) {
                 MCPaintballGameEvents.INSTANCE.removeCapturePoint(pos);
             }
         }
@@ -55,7 +55,7 @@ public class CapturePointBlock extends Block {
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
         if(!level.isClientSide()){
             MCPaintball.LOGGER.info("Capture Point::Server Side");
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintball.LOGGER.info("Capture Point::Game Running");
                 if(Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != 0){
                     MCPaintball.LOGGER.info("Capture Point::Player Is Active");

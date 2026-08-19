@@ -10,11 +10,11 @@ public class AdminScreen extends Screen {
     public Screen parentScreen;
 
 
-    public Button StartGameButton = Button.builder(Component.translatable("screen.mcpaintball.text.game_start"),_ ->{
+    public Button StartTournamentButton = Button.builder(Component.translatable("screen.mcpaintball.text.tournament_start"), _ ->{
         ClientPlayNetworking.send(new AdminCommandC2SPacket(0));
         this.minecraft.setScreen(parentScreen);
     }).build();
-    public Button StopGameButton = Button.builder(Component.translatable("screen.mcpaintball.text.game_stop"),_ ->{
+    public Button StopTournamentButton = Button.builder(Component.translatable("screen.mcpaintball.text.tournament_stop"), _ ->{
         ClientPlayNetworking.send(new AdminCommandC2SPacket(1));
         this.minecraft.setScreen(parentScreen);
     }).build();
@@ -31,6 +31,11 @@ public class AdminScreen extends Screen {
         this.minecraft.setScreen(parentScreen);
     }).build();
 
+    public Button TournamentWinnerButton = Button.builder(Component.translatable("screen.mcpaintball.text.tournament_winner"),_ ->{
+        ClientPlayNetworking.send(new AdminCommandC2SPacket(5));
+        this.minecraft.setScreen(parentScreen);
+    }).build();
+
     public AdminScreen(Screen parent) {
         super(Component.translatable("screen.mcpaintball.select_role"));
         this.parentScreen = parent;
@@ -39,15 +44,17 @@ public class AdminScreen extends Screen {
     @Override
     protected void init() {
         super.init();
-        StartGameButton.setRectangle(100,30,50,50);
-        StopGameButton.setRectangle(100,30,50,100);
-        StartRoundButton.setRectangle(100,30,175,50);
-        StopRoundButton.setRectangle(100,30,175,100);
-        RoundWinnerButton.setRectangle(150,30,75,150);
-        addRenderableWidget(StartGameButton);
-        addRenderableWidget(StopGameButton);
+        StartTournamentButton.setRectangle(100,30,50,50);
+        StopTournamentButton.setRectangle(100,30,50,100);
+        StartRoundButton.setRectangle(100,30,250,50);
+        StopRoundButton.setRectangle(100,30,250,100);
+        RoundWinnerButton.setRectangle(150,30,50,150);
+        TournamentWinnerButton.setRectangle(150,30,250,150);
+        addRenderableWidget(StartTournamentButton);
+        addRenderableWidget(StopTournamentButton);
         addRenderableWidget(StartRoundButton);
         addRenderableWidget(StopRoundButton);
         addRenderableWidget(RoundWinnerButton);
+        addRenderableWidget(TournamentWinnerButton);
     }
 }
