@@ -3,6 +3,9 @@ package org.multicoder.mcpaintball.data;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
@@ -47,14 +50,41 @@ public class MCPaintballSaveData extends SavedData {
             Codec.list(BlockPos.CODEC).fieldOf("capture_points").forGetter(MCPaintballSaveData::capturePoints)
     ).apply(instance,MCPaintballSaveData::new));
 
+    public static final StreamCodec<RegistryFriendlyByteBuf,MCPaintballSaveData> CODEC_PACKET = StreamCodec.composite(
+            ByteBufCodecs.fromCodec(CODEC),MCPaintballSaveData::instance,
+            MCPaintballSaveData::new
+    );
+
+    public MCPaintballSaveData(MCPaintballSaveData saveData) {
+        this.redPoints = saveData.redPoints;
+        this.greenPoints = saveData.greenPoints;
+        this.bluePoints = saveData.bluePoints;
+        this.yellowPoints = saveData.yellowPoints;
+        this.pinkPoints = saveData.pinkPoints;
+        this.orangePoints = saveData.orangePoints;
+        this.RedWins = saveData.RedWins;
+        this.GreenWins = saveData.GreenWins;
+        this.BlueWins = saveData.BlueWins;
+        this.YellowWins = saveData.YellowWins;
+        this.PinkWins = saveData.PinkWins;
+        this.OrangeWins = saveData.OrangeWins;
+        this.tournamentStarted = saveData.tournamentStarted;
+        this.roundStarted = saveData.roundStarted;
+        this.capturePoints = saveData.capturePoints;
+    }
+
+    public MCPaintballSaveData() {
+
+    }
+
     private List<BlockPos> capturePoints() {
         return capturePoints;
     }
 
     public static final SavedDataType<MCPaintballSaveData> TYPE = new SavedDataType<>(Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"paintball_data"),MCPaintballSaveData::new,CODEC,null);
 
-    public MCPaintballSaveData(){
-
+    public MCPaintballSaveData instance(){
+        return this;
     }
 
 
@@ -69,7 +99,9 @@ public class MCPaintballSaveData extends SavedData {
         this.roundStarted = roundStarted;
         this.capturePoints = capturePoints;
     }
+    public MCPaintballSaveData(int redPoints, int bluePoints, int greenPoints,int yellowPoints,int pinkPoints,int orangePoints,int red_wins,int green_wins,int blue_wins,int yellow_wins,int pink_wins,int orange_wins, boolean tournamentStarted, boolean roundStarted,BlockPos[] capturePoints) {
 
+    }
     public int redPoints(){
         return redPoints;
     }

@@ -22,6 +22,7 @@ import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 
 import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
 
+@SuppressWarnings("unused")
 public class MCPaintballClient implements ClientModInitializer {
     public static final Logger CLIENT_LOGGER = LogManager.getLogger(MOD_ID + "_client");
     public static int redPoints = 0;
@@ -30,7 +31,13 @@ public class MCPaintballClient implements ClientModInitializer {
     public static int yellowPoints = 0;
     public static int pinkPoints = 0;
     public static int orangePoints = 0;
-    public static boolean gameRunning = false;
+    public static int RedWins = 0;
+    public static int GreenWins = 0;
+    public static int BlueWins = 0;
+    public static int YellowWins = 0;
+    public static int PinkWins = 0;
+    public static int OrangeWins = 0;
+    public static boolean tournamentRunning = false;
     public static boolean roundRunning = false;
     @Override
     public void onInitializeClient() {

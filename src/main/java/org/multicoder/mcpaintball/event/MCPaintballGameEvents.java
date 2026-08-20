@@ -32,7 +32,7 @@ public class MCPaintballGameEvents {
         Objects.requireNonNull(server.overworld().getDataStorage().get(MCPaintballSaveData.TYPE)).setDirty();
         server.addTickable((() -> {
             if(ticker == 20){
-                server.getPlayerList().getPlayers().forEach(player -> ServerPlayNetworking.send(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.redPoints,MCPaintballGameEvents.INSTANCE.greenPoints,MCPaintballGameEvents.INSTANCE.bluePoints,MCPaintballGameEvents.INSTANCE.yellowPoints,MCPaintballGameEvents.INSTANCE.pinkPoints,MCPaintballGameEvents.INSTANCE.orangePoints, MCPaintballGameEvents.INSTANCE.tournamentStarted,MCPaintballGameEvents.INSTANCE.roundStarted)));
+                server.getPlayerList().getPlayers().forEach(player -> ServerPlayNetworking.send(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE)));
                 ticker = 0;
             }else{
                 ticker++;
