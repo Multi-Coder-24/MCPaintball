@@ -48,8 +48,8 @@ public class AdminScreen extends Screen {
         StopTournamentButton.setRectangle(100,30,50,100);
         StartRoundButton.setRectangle(100,30,250,50);
         StopRoundButton.setRectangle(100,30,250,100);
-        RoundWinnerButton.setRectangle(150,30,50,150);
-        TournamentWinnerButton.setRectangle(150,30,250,150);
+        RoundWinnerButton.setRectangle(150,30,250,150);
+        TournamentWinnerButton.setRectangle(150,30,50,150);
         addRenderableWidget(StartTournamentButton);
         addRenderableWidget(StopTournamentButton);
         addRenderableWidget(StartRoundButton);

@@ -1,5 +1,4 @@
 package org.multicoder.mcpaintball;
-
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -49,7 +48,7 @@ public class MCPaintball implements ModInitializer {
         ServerLifecycleEvents.SERVER_STARTED.register(MCPaintballGameEvents::serverStart);
         ServerPlayerEvents.JOIN.register(MCPaintballGameEvents::join);
         LOGGER.info("Initializing Networking");
-        PayloadTypeRegistry.clientboundPlay().register(PointSyncS2CPacket.TYPE,PointSyncS2CPacket.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(SaveDataSyncS2CPacket.TYPE, SaveDataSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.clientboundPlay().register(DataSyncS2CPacket.TYPE,DataSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(TeamSelectC2SPacket.TYPE,TeamSelectC2SPacket.STREAM_CODEC);

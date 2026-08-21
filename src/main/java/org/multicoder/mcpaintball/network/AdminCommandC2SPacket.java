@@ -8,8 +8,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
+import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
@@ -59,6 +63,15 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
                 if(MCPaintballGameEvents.INSTANCE.tournamentStarted){
                     MCPaintballGameEvents.INSTANCE.roundStarted = false;
                     MCPaintballGameEvents.INSTANCE.setDirty(true);
+                    MCPaintballGameEvents.INSTANCE.capturePoints.forEach(point -> {
+                        BlockState state = Objects.requireNonNull(context.server()).overworld().getBlockState(point);
+                        if(state.getBlock() == MCPaintballBlocks.CAPTURE_POINT){
+                            int Value = state.getValue(CapturePointBlock.TEAM);
+                            MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(Value);
+                            state = state.setValue(CapturePointBlock.TEAM,0);
+                            Objects.requireNonNull(context.server()).overworld().setBlock(point,state, Block.UPDATE_ALL_IMMEDIATE);
+                        }
+                    });
                     Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_ended"),false);
                 }
                 else{
@@ -66,6 +79,7 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
                 }
             }
             case 4 ->{ //Round Winner
+                MCPaintball.LOGGER.info("Round Winner");
                 List<Integer> points = new ArrayList<>();
                 points.add(MCPaintballGameEvents.INSTANCE.redPoints);
                 points.add(MCPaintballGameEvents.INSTANCE.greenPoints);
@@ -73,7 +87,8 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
                 points.add(MCPaintballGameEvents.INSTANCE.yellowPoints);
                 points.add(MCPaintballGameEvents.INSTANCE.pinkPoints);
                 points.add(MCPaintballGameEvents.INSTANCE.orangePoints);
-                int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).get());
+                int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).orElseThrow());
+                MCPaintball.LOGGER.info("Winner: " + Winner);
                 Component Team = switch (Winner){
                     case 0 -> Component.translatable("text.mcpaintball.team_red");
                     case 1 -> Component.translatable("text.mcpaintball.team_green");
@@ -83,10 +98,12 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
                     case 5 -> Component.translatable("text.mcpaintball.team_orange");
                     default -> throw new IllegalStateException("Unexpected value: " + Winner);
                 };
+                MCPaintballGameEvents.INSTANCE.IncrementWinCount(Winner);
                 Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
                 MCPaintballGameEvents.INSTANCE.resetPoints();
             }
             case 5 ->{ //Tournament Winner
+                MCPaintball.LOGGER.info("Tournament Winner");
                 List<Integer> points = new ArrayList<>();
                 points.add(MCPaintballGameEvents.INSTANCE.RedWins);
                 points.add(MCPaintballGameEvents.INSTANCE.GreenWins);

@@ -39,26 +39,30 @@ public class MCPaintballSaveData extends SavedData {
             Codec.INT.fieldOf("yellow_points").forGetter(MCPaintballSaveData::yellowPoints),
             Codec.INT.fieldOf("pink_points").forGetter(MCPaintballSaveData::pinkPoints),
             Codec.INT.fieldOf("orange_points").forGetter(MCPaintballSaveData::orangePoints),
-            Codec.INT.fieldOf("red_winds").forGetter(MCPaintballSaveData::RedWins),
-            Codec.INT.fieldOf("green_winds").forGetter(MCPaintballSaveData::GreenWins),
-            Codec.INT.fieldOf("blue_winds").forGetter(MCPaintballSaveData::BlueWins),
-            Codec.INT.fieldOf("yellow_winds").forGetter(MCPaintballSaveData::YellowWins),
-            Codec.INT.fieldOf("pink_winds").forGetter(MCPaintballSaveData::PinkWins),
-            Codec.INT.fieldOf("orange_winds").forGetter(MCPaintballSaveData::OrangeWins),
+            Codec.INT.fieldOf("red_wins").forGetter(MCPaintballSaveData::RedWins),
+            Codec.INT.fieldOf("green_wins").forGetter(MCPaintballSaveData::GreenWins),
+            Codec.INT.fieldOf("blue_wins").forGetter(MCPaintballSaveData::BlueWins),
+            Codec.INT.fieldOf("yellow_wins").forGetter(MCPaintballSaveData::YellowWins),
+            Codec.INT.fieldOf("pink_wins").forGetter(MCPaintballSaveData::PinkWins),
+            Codec.INT.fieldOf("orange_wins").forGetter(MCPaintballSaveData::OrangeWins),
             Codec.BOOL.fieldOf("tournament_started").forGetter(MCPaintballSaveData::tournamentStarted),
             Codec.BOOL.fieldOf("round_started").forGetter(MCPaintballSaveData::roundStarted),
             Codec.list(BlockPos.CODEC).fieldOf("capture_points").forGetter(MCPaintballSaveData::capturePoints)
     ).apply(instance,MCPaintballSaveData::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf,MCPaintballSaveData> CODEC_PACKET = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf,MCPaintballSaveData> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.fromCodec(CODEC),MCPaintballSaveData::instance,
             MCPaintballSaveData::new
     );
 
+    public MCPaintballSaveData() {
+
+    }
+
     public MCPaintballSaveData(MCPaintballSaveData saveData) {
         this.redPoints = saveData.redPoints;
-        this.greenPoints = saveData.greenPoints;
         this.bluePoints = saveData.bluePoints;
+        this.greenPoints = saveData.greenPoints;
         this.yellowPoints = saveData.yellowPoints;
         this.pinkPoints = saveData.pinkPoints;
         this.orangePoints = saveData.orangePoints;
@@ -73,9 +77,6 @@ public class MCPaintballSaveData extends SavedData {
         this.capturePoints = saveData.capturePoints;
     }
 
-    public MCPaintballSaveData() {
-
-    }
 
     private List<BlockPos> capturePoints() {
         return capturePoints;
@@ -95,12 +96,15 @@ public class MCPaintballSaveData extends SavedData {
         this.yellowPoints = yellowPoints;
         this.pinkPoints = pinkPoints;
         this.orangePoints = orangePoints;
+        this.RedWins = red_wins;
+        this.GreenWins = green_wins;
+        this.BlueWins = blue_wins;
+        this.YellowWins = yellow_wins;
+        this.PinkWins = pink_wins;
+        this.OrangeWins = orange_wins;
         this.tournamentStarted = tournamentStarted;
         this.roundStarted = roundStarted;
         this.capturePoints = capturePoints;
-    }
-    public MCPaintballSaveData(int redPoints, int bluePoints, int greenPoints,int yellowPoints,int pinkPoints,int orangePoints,int red_wins,int green_wins,int blue_wins,int yellow_wins,int pink_wins,int orange_wins, boolean tournamentStarted, boolean roundStarted,BlockPos[] capturePoints) {
-
     }
     public int redPoints(){
         return redPoints;
@@ -140,14 +144,14 @@ public class MCPaintballSaveData extends SavedData {
 
     public void IncrementWinCount(int Team){
         switch (Team){
-            case 1 -> RedWins++;
-            case 2 -> GreenWins++;
-            case 3 -> BlueWins++;
-            case 4 -> YellowWins++;
-            case 5 -> PinkWins++;
-            case 6 -> OrangeWins++;
+            case 0 -> this.RedWins++;
+            case 1 -> this.GreenWins++;
+            case 2 -> this.BlueWins++;
+            case 3 -> this.YellowWins++;
+            case 4 -> this.PinkWins++;
+            case 5 -> this.OrangeWins++;
         }
-        setDirty(true);
+        this.setDirty(true);
     }
 
     public void addCapturePoint(BlockPos pos){

@@ -10,17 +10,17 @@ import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.client.MCPaintballClient;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
 
-public record PointSyncS2CPacket(MCPaintballSaveData data) implements CustomPacketPayload {
+public record SaveDataSyncS2CPacket(MCPaintballSaveData data) implements CustomPacketPayload {
     public static final Identifier ID = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"point_sync");
-    public static final CustomPacketPayload.Type<PointSyncS2CPacket> TYPE = new CustomPacketPayload.Type<>(ID);
-    public static final StreamCodec<RegistryFriendlyByteBuf,PointSyncS2CPacket> STREAM_CODEC = StreamCodec.composite(MCPaintballSaveData.CODEC_PACKET,PointSyncS2CPacket::data, PointSyncS2CPacket::new);
+    public static final CustomPacketPayload.Type<SaveDataSyncS2CPacket> TYPE = new CustomPacketPayload.Type<>(ID);
+    public static final StreamCodec<RegistryFriendlyByteBuf, SaveDataSyncS2CPacket> STREAM_CODEC = StreamCodec.composite(MCPaintballSaveData.STREAM_CODEC, SaveDataSyncS2CPacket::data, SaveDataSyncS2CPacket::new);
 
     @Override
     public @NonNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 
-    public static void handlePacket(PointSyncS2CPacket packet, ClientPlayNetworking.Context ignored) {
+    public static void handlePacket(SaveDataSyncS2CPacket packet, ClientPlayNetworking.Context ignored) {
         MCPaintballSaveData saveData = packet.data;
         MCPaintballClient.redPoints = saveData.redPoints;
         MCPaintballClient.greenPoints = saveData.greenPoints;
@@ -28,7 +28,14 @@ public record PointSyncS2CPacket(MCPaintballSaveData data) implements CustomPack
         MCPaintballClient.yellowPoints = saveData.yellowPoints;
         MCPaintballClient.pinkPoints = saveData.pinkPoints;
         MCPaintballClient.orangePoints = saveData.orangePoints;
+        MCPaintballClient.RedWins = saveData.RedWins;
+        MCPaintballClient.GreenWins = saveData.GreenWins;
+        MCPaintballClient.BlueWins = saveData.BlueWins;
+        MCPaintballClient.YellowWins = saveData.YellowWins;
+        MCPaintballClient.PinkWins = saveData.PinkWins;
+        MCPaintballClient.OrangeWins = saveData.OrangeWins;
         MCPaintballClient.tournamentRunning = saveData.tournamentStarted;
         MCPaintballClient.roundRunning = saveData.roundStarted;
+        MCPaintballClient.capture_points = saveData.capturePoints;
     }
 }

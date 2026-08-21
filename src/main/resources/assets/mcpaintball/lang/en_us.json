@@ -4,7 +4,7 @@
   "text.mcpaintball.tournament_stopped": "The tournament has stopped",
   "text.mcpaintball.round_started": "The round has started, Weapons Free",
   "text.mcpaintball.round_ended": "The round has ended, Weapons Stopped",
-  "text.mcpaintball.round_winner": "The winning team of the round is %s, Congratulations",
+  "text.mcpaintball.round_winner": "The winning team of the round is %s",
   "text.mcpaintball.tournament_winner": "The winning team of the tournament is %s, Congratulations",
 
   "Comment_2": "Command Error Responses",

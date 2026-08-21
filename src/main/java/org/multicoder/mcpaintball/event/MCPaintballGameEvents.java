@@ -19,7 +19,7 @@ import org.multicoder.mcpaintball.core.MCPaintballKeybinding;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
 import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
 import org.multicoder.mcpaintball.network.GiveKitC2SPacket;
-import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
+import org.multicoder.mcpaintball.network.SaveDataSyncS2CPacket;
 import org.multicoder.mcpaintball.integration.MinecraftTeamSystem;
 
 import java.util.Objects;
@@ -32,7 +32,7 @@ public class MCPaintballGameEvents {
         Objects.requireNonNull(server.overworld().getDataStorage().get(MCPaintballSaveData.TYPE)).setDirty();
         server.addTickable((() -> {
             if(ticker == 20){
-                server.getPlayerList().getPlayers().forEach(player -> ServerPlayNetworking.send(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE)));
+                server.getPlayerList().getPlayers().forEach(player -> ServerPlayNetworking.send(player,new SaveDataSyncS2CPacket(MCPaintballGameEvents.INSTANCE)));
                 ticker = 0;
             }else{
                 ticker++;
