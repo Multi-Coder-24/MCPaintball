@@ -94,4 +94,8 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.ORANGE_TOWER);
 
     }
+
+    public static void moderator(FabricCreativeModeTabOutput output) {
+        output.accept(MCPaintballBlocks.TROPHY);
+    }
 }

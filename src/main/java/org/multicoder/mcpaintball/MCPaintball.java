@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.CreativeModeTabs;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.core.*;
@@ -44,6 +45,7 @@ public class MCPaintball implements ModInitializer {
         LOGGER.info("Initializing Creative Tab Events");
         CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.WEAPONS_TAB_KEY).register(CreativeTabEvents::weaponsInit);
         CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.UTILITY_TAB_KEY).register(CreativeTabEvents::utilityInit);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.OP_BLOCKS).register(CreativeTabEvents::moderator);
         LOGGER.info("Initializing Server Events");
         ServerLifecycleEvents.SERVER_STARTED.register(MCPaintballGameEvents::serverStart);
         ServerPlayerEvents.JOIN.register(MCPaintballGameEvents::join);

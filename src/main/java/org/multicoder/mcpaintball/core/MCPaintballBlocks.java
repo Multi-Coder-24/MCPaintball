@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.block.TrophyBlock;
 import org.multicoder.mcpaintball.block.doors.TeamedDoor;
 import org.multicoder.mcpaintball.block.explosives.*;
 import org.multicoder.mcpaintball.block.objectives.*;
@@ -48,6 +49,8 @@ public class MCPaintballBlocks {
     public static final Block ORANGE_FLAG = register("objectives/orange_flag",FlagBlock::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
 
     public static final Block CAPTURE_POINT = register("objectives/capture_point", CapturePointBlock::new,BlockBehaviour.Properties.of());
+
+    public static final Block TROPHY = register("trophy", TrophyBlock::new,BlockBehaviour.Properties.of());
 
     public static final Block RED_DOOR = register("doors/red_door", TeamedDoor::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
     public static final Block GREEN_DOOR = register("doors/green_door", TeamedDoor::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
