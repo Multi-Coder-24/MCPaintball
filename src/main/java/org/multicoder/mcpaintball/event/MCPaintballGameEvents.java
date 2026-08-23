@@ -17,9 +17,9 @@ import org.multicoder.mcpaintball.core.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.core.MCPaintballKeybinding;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
-import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
-import org.multicoder.mcpaintball.network.GiveKitC2SPacket;
-import org.multicoder.mcpaintball.network.SaveDataSyncS2CPacket;
+import org.multicoder.mcpaintball.network.ClientToServer.CycleGLTypeC2SPacket;
+import org.multicoder.mcpaintball.network.ClientToServer.GiveKitC2SPacket;
+import org.multicoder.mcpaintball.network.ServerToClient.SaveDataSyncS2CPacket;
 import org.multicoder.mcpaintball.integration.MinecraftTeamSystem;
 
 import java.util.Objects;

@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.multicoder.mcpaintball.network.AdminCommandC2SPacket;
+import org.multicoder.mcpaintball.network.ClientToServer.AdminCommandC2SPacket;
 
 public class AdminScreen extends Screen {
     public Screen parentScreen;

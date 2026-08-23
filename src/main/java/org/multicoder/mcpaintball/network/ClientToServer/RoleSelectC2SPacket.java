@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.network;
+package org.multicoder.mcpaintball.network.ClientToServer;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -13,6 +13,7 @@ import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.network.ServerToClient.DataSyncS2CPacket;
 import org.multicoder.mcpaintball.util.RoleCheck;
 
 

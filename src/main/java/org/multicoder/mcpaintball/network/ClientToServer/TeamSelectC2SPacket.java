@@ -1,4 +1,4 @@
-package org.multicoder.mcpaintball.network;
+package org.multicoder.mcpaintball.network.ClientToServer;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
@@ -16,6 +16,7 @@ import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 import org.multicoder.mcpaintball.integration.MCPaintballVoiceChatPlugin;
 import org.multicoder.mcpaintball.integration.MinecraftTeamSystem;
+import org.multicoder.mcpaintball.network.ServerToClient.DataSyncS2CPacket;
 
 import java.util.Objects;
 

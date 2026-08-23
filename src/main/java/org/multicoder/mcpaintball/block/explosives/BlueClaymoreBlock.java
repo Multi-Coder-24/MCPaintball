@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.PushReaction;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import org.multicoder.mcpaintball.block.entity.BlueClaymoreBlockEntity;
+import org.multicoder.mcpaintball.block.entity.ClaymoreBlockEntity;
 import org.multicoder.mcpaintball.core.MCPaintballBlockEntities;
 
 public class BlueClaymoreBlock extends BaseEntityBlock {
@@ -42,7 +42,7 @@ public class BlueClaymoreBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(@NonNull BlockPos worldPosition, @NonNull BlockState blockState) {
-        return new BlueClaymoreBlockEntity(worldPosition,blockState);
+        return new ClaymoreBlockEntity(MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class BlueClaymoreBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NonNull Level level, @NonNull BlockState state, @NonNull BlockEntityType<T> type) {
         if(!level.isClientSide()){
-            return createTickerHelper(type, MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY, BlueClaymoreBlockEntity::tick);
+            return createTickerHelper(type, MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
         }else {
             return null;
         }

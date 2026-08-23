@@ -8,6 +8,7 @@ Version number. Where possible we will use the format.
 - **New Additions, Addition:** E.g. Addition: New Team
 - **Integrations, Displayed As| Integration:** E.g. Integration: FTB Teams
 - **Changes, Change:** E.g. Change: Overlay Displays Points
+- **Removal, Remove:** E.g. Remove: Red Team
 - **Fixes, Fix:** E.g. Fix: Bug With Assault Rifle Rendering
 - **Fixes (Issue), Issue Number#Fix:** E.g. 01#Fix: Bug With Paintball Hit Logic
 
@@ -65,8 +66,9 @@ Version number. Where possible we will use the format.
 - **Addition: Player Statistics**
 - **Change: Admin Screen Replaces Commands**
 - **Change: Save Team Wins For A Longer Tornament**
-- **Change: Game Type (Standard, Capture The Flag, Capture Points, Capture Flag & Points)**
-- **Change: Admin Kit Will Reflect Game Type**
 - **Change: Tower Blocks Can Be Used Before Round Starts**
 - **Change: Apply Rotation To; Grenade Stations, Flags & Tower Blocks**
 - **Change: Kit Will Run Via Keybinding**
+- **Change: Capture Points Display On Overlay**
+- **Change: Overlay Will Only Display Team Wins & Points (Unless Admin)**
+- **Remove: All Slash Commands**

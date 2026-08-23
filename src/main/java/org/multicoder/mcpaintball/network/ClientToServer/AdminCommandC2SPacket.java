@@ -1,5 +1,5 @@
 
-package org.multicoder.mcpaintball.network;
+package org.multicoder.mcpaintball.network.ClientToServer;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.RegistryFriendlyByteBuf;

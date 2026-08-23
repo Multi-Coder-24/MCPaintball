@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.multicoder.mcpaintball.network.RoleSelectC2SPacket;
+import org.multicoder.mcpaintball.network.ClientToServer.RoleSelectC2SPacket;
 
 public class SelectRoleScreen extends Screen {
     public Screen parentScreen;

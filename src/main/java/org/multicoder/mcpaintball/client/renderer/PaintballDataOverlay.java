@@ -23,7 +23,6 @@ import java.awt.*;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@SuppressWarnings("unused")
 public class PaintballDataOverlay implements HudElement {
 
     @Override
@@ -34,7 +33,6 @@ public class PaintballDataOverlay implements HudElement {
                 PaintballTeam team = PaintballTeam.values()[data.team];
                 PaintballRole role = PaintballRole.values()[data.role];
                 int W = graphics.guiWidth();
-                int H = graphics.guiHeight();
                 switch (team){
                     case Admin -> {
                         graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.red_points", MCPaintballClient.redPoints), 20, 10, Color.WHITE.getRGB());
@@ -75,8 +73,8 @@ public class PaintballDataOverlay implements HudElement {
                         graphics.text(Minecraft.getInstance().font,Component.translatable("text.mcpaintball.orange_wins",MCPaintballClient.OrangeWins),20,20,Color.WHITE.getRGB());
                     }
                 }
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(team.getSerializedName())), W - 75, 10, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.role", Component.translatable(role.getSerializedName())), W - 75, 20, Color.WHITE.getRGB());
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(team.getSerializedName())), W - 100, 10, Color.WHITE.getRGB());
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.role", Component.translatable(role.getSerializedName())), W - 100, 20, Color.WHITE.getRGB());
                 Level level = Minecraft.getInstance().level;
                 AtomicInteger i = new AtomicInteger(1);
                 MCPaintballClient.capture_points.forEach(point -> {
