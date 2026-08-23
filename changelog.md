@@ -64,6 +64,8 @@ Version number. Where possible we will use the format.
 ## Version 2.1.0 (Proposed)
 
 - **Addition: Player Statistics**
+- **Addition: Tournament Winning Trophy**
+- **Addition: Round Winner Medals**
 - **Change: Admin Screen Replaces Commands**
 - **Change: Save Team Wins For A Longer Tornament**
 - **Change: Tower Blocks Can Be Used Before Round Starts**
