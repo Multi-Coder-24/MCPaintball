@@ -66,12 +66,12 @@ public class MCPaintballBlocks {
     public static final Block PINK_TOWER = register("utility/pink_tower", BasicTowerBlock::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
     public static final Block ORANGE_TOWER = register("utility/orange_tower", BasicTowerBlock::new,BlockBehaviour.Properties.of().noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(2f));
 
-    public static final Block RED_CLAYMORE_BLOCK = register("explosives/red_claymore_block", RedClaymoreBlock::new,BlockBehaviour.Properties.of());
-    public static final Block GREEN_CLAYMORE_BLOCK = register("explosives/green_claymore_block", GreenClaymoreBlock::new,BlockBehaviour.Properties.of());
-    public static final Block BLUE_CLAYMORE_BLOCK = register("explosives/blue_claymore_block", BlueClaymoreBlock::new,BlockBehaviour.Properties.of());
-    public static final Block YELLOW_CLAYMORE_BLOCK = register("explosives/yellow_claymore_block", YellowClaymoreBlock::new,BlockBehaviour.Properties.of());
-    public static final Block PINK_CLAYMORE_BLOCK = register("explosives/pink_claymore_block", PinkClaymoreBlock::new,BlockBehaviour.Properties.of());
-    public static final Block ORANGE_CLAYMORE_BLOCK = register("explosives/orange_claymore_block", OrangeClaymoreBlock::new,BlockBehaviour.Properties.of());
+    public static final Block RED_CLAYMORE_BLOCK = register("explosives/red_claymore_block", ClaymoreBlock::new,BlockBehaviour.Properties.of());
+    public static final Block GREEN_CLAYMORE_BLOCK = register("explosives/green_claymore_block", ClaymoreBlock::new,BlockBehaviour.Properties.of());
+    public static final Block BLUE_CLAYMORE_BLOCK = register("explosives/blue_claymore_block", ClaymoreBlock::new,BlockBehaviour.Properties.of());
+    public static final Block YELLOW_CLAYMORE_BLOCK = register("explosives/yellow_claymore_block", ClaymoreBlock::new,BlockBehaviour.Properties.of());
+    public static final Block PINK_CLAYMORE_BLOCK = register("explosives/pink_claymore_block", ClaymoreBlock::new,BlockBehaviour.Properties.of());
+    public static final Block ORANGE_CLAYMORE_BLOCK = register("explosives/orange_claymore_block", ClaymoreBlock::new,BlockBehaviour.Properties.of());
 
     public static void initialize() {
         MCPaintball.LOGGER.info("Initializing Blocks");

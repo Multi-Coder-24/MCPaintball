@@ -40,37 +40,31 @@ public class ClaymoreBlockEntity extends BlockEntity{
                 if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                     ServerLevel serverLevel = (ServerLevel) level;
                     Block claymore = state.getBlock();
-                    Direction direction;
+                    Direction direction = state.getValue(ClaymoreBlock.FACING);
                     int Team;
                     SimpleParticleType type;
                     if(claymore == MCPaintballBlocks.RED_CLAYMORE_BLOCK){
                         Team = 1;
-                        direction = state.getValue(RedClaymoreBlock.FACING);
                         type = MCPaintballParticles.RED_PAINT;
                     }
                     else if(claymore == MCPaintballBlocks.GREEN_CLAYMORE_BLOCK){
                         Team = 2;
-                        direction = state.getValue(GreenClaymoreBlock.FACING);
                         type = MCPaintballParticles.GREEN_PAINT;
                     }
                     else if(claymore == MCPaintballBlocks.BLUE_CLAYMORE_BLOCK){
                         Team = 3;
-                        direction = state.getValue(BlueClaymoreBlock.FACING);
                         type = MCPaintballParticles.BLUE_PAINT;
                     }
                     else if(claymore == MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK){
                         Team = 4;
-                        direction = state.getValue(YellowClaymoreBlock.FACING);
                         type = MCPaintballParticles.YELLOW_PAINT;
                     }
                     else if(claymore == MCPaintballBlocks.PINK_CLAYMORE_BLOCK){
                         Team = 5;
-                        direction = state.getValue(PinkClaymoreBlock.FACING);
                         type = MCPaintballParticles.PINK_PAINT;
                     }
                     else if(claymore == MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK){
                         Team = 6;
-                        direction = state.getValue(OrangeClaymoreBlock.FACING);
                         type = MCPaintballParticles.ORANGE_PAINT;
                     } else {return;}
                     AABB box = switch (direction){

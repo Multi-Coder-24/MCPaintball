@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "mcpaintball:block/utility/orange_grenade_station"
+    },
+    "facing=south": {
+      "model": "mcpaintball:block/utility/orange_grenade_station"
+    },
+    "facing=west": {
+      "model": "mcpaintball:block/utility/orange_grenade_station",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "mcpaintball:block/utility/orange_grenade_station",
+      "y": 90
     }
   }
 }
