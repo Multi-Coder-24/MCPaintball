@@ -61,7 +61,7 @@ Version number. Where possible we will use the format.
 - **Change: Team & Role Selection Now Done By Keybinding And GUI**
 - **Change: Created Temporary Team "Admin" Who Places Team Flags And Capture Points Before Round Starts**
 
-## Version 2.1.0 (Proposed)
+## Version 2.1.0
 
 - **Addition: Player Statistics**
 - **Addition: Tournament Winning Trophy**

@@ -32,7 +32,7 @@ public class MCPaintball implements ModInitializer {
         MCPaintballParticles.initialize();
         MCPaintballSounds.initialize();
         MCPaintballCreativeTabs.initialize();
-        MCPaintballStats.Initialize();
+        MCPaintballStats.initialize();
         LOGGER.info("Initializing Creative Tab Events");
         CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.WEAPONS_TAB_KEY).register(CreativeTabEvents::weaponsInit);
         CreativeModeTabEvents.modifyOutputEvent(MCPaintballCreativeTabs.UTILITY_TAB_KEY).register(CreativeTabEvents::utilityInit);

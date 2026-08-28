@@ -14,13 +14,13 @@ public class MCPaintballStats {
     public static final Stat<?> HITS = register("hits");
 
 
-    public static Stat<?> register(String name){
+    private static Stat<?> register(String name){
         Identifier id = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,name);
         Registry.register(BuiltInRegistries.CUSTOM_STAT,name,id);
         return Stats.CUSTOM.get(id, StatFormatter.DEFAULT);
     }
 
-    public static void Initialize(){
+    public static void initialize(){
         MCPaintball.LOGGER.info("Initializing Stats");
     }
 

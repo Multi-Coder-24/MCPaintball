@@ -97,5 +97,6 @@ public class CreativeTabEvents {
 
     public static void moderator(FabricCreativeModeTabOutput output) {
         output.accept(MCPaintballBlocks.TROPHY);
+        output.accept(MCPaintballItems.MEDAL_ITEM);
     }
 }

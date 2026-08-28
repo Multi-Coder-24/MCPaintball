@@ -15,7 +15,7 @@ public class MCPaintballParticles {
     public static final SimpleParticleType PINK_PAINT = register(FabricParticleTypes.simple(true),"pink_paint");
     public static final SimpleParticleType ORANGE_PAINT = register(FabricParticleTypes.simple(true),"orange_paint");
 
-    public static SimpleParticleType register(SimpleParticleType type,String name){
+    private static SimpleParticleType register(SimpleParticleType type,String name){
         Registry.register(BuiltInRegistries.PARTICLE_TYPE, Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,name),type);
         return type;
     }

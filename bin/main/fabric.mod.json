@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "mcpaintball",
+  "version": "2.1.0",
+  "name": "Minecraft Paintball",
+  "description": "Minecraft paintball mod adds a vanilla way to paintball and have fun with friends.\\nThe weapon models are Licenced under L-GPL by MrCrayFish We do not own the rights to the model",
+  "authors": ["Multicoder"],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/mc-paintball",
+    "issues": "https://github.com/Multi-Coder-24/MCPaintball/issues",
+    "sources": "https://github.com/Multi-Coder-24/MCPaintball"
+  },
+  "license": "MIT",
+  "icon": "assets/mcpaintball/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.multicoder.mcpaintball.client.MCPaintballClient"
+    ],
+    "main": [
+      "org.multicoder.mcpaintball.MCPaintball"
+    ],
+    "voicechat": [
+      "org.multicoder.mcpaintball.integration.MCPaintballVoiceChatPlugin"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "fabric-api": ">=0.152.1+26.1.2",
+    "minecraft": ">=26.1.1"
+  }
+}

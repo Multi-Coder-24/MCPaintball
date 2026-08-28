@@ -13,7 +13,6 @@ import org.multicoder.mcpaintball.MCPaintball;
 
 import java.util.*;
 
-
 @SuppressWarnings("all")
 public class MCPaintballSaveData extends SavedData {
     public int redPoints = 0;
@@ -155,15 +154,13 @@ public class MCPaintballSaveData extends SavedData {
     }
 
     public void addCapturePoint(BlockPos pos){
-        ArrayList<BlockPos> capturePointsTemp = new ArrayList<BlockPos>();
-        capturePointsTemp.addAll(capturePoints);
+        ArrayList<BlockPos> capturePointsTemp = new ArrayList<>(capturePoints);
         capturePointsTemp.add(pos);
         capturePoints = capturePointsTemp;
         setDirty(true);
     }
     public void removeCapturePoint(BlockPos pos){
-        ArrayList<BlockPos> capturePointsTemp = new ArrayList<BlockPos>();
-        capturePointsTemp.addAll(capturePoints);
+        ArrayList<BlockPos> capturePointsTemp = new ArrayList<>(capturePoints);
         capturePointsTemp.remove(pos);
         capturePoints = capturePointsTemp;
         setDirty(true);

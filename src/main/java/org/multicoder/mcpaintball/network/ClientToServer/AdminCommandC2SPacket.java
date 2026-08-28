@@ -8,6 +8,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
@@ -15,6 +16,7 @@ import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
 import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
@@ -100,6 +102,13 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
                 };
                 MCPaintballGameEvents.INSTANCE.IncrementWinCount(Winner);
                 Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
+                Winner++;
+                int finalWinner = Winner;
+                Objects.requireNonNull(context.server()).getPlayerList().getPlayers().forEach(player -> {
+                    if(Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == finalWinner) {
+                        player.addItem(new ItemStack(MCPaintballItems.MEDAL_ITEM));
+                    }
+                });
                 MCPaintballGameEvents.INSTANCE.resetPoints();
             }
             case 5 ->{ //Tournament Winner
@@ -122,7 +131,12 @@ public record AdminCommandC2SPacket(int Option) implements CustomPacketPayload {
                     default -> throw new IllegalStateException("Unexpected value: " + Winner);
                 };
                 Objects.requireNonNull(context.server()).getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.tournament_winner",Team),false);
+                Winner++;
+                int finalWinner = Winner;
                 Objects.requireNonNull(context.server()).getPlayerList().getPlayers().forEach(player -> {
+                    if(Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == finalWinner) {
+                        player.addItem(new ItemStack(MCPaintballBlocks.TROPHY));
+                    }
                     MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
                     player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
                 });

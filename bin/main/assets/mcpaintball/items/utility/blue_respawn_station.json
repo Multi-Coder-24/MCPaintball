@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "mcpaintball:block/utility/blue_respawn_station"
+  }
+}

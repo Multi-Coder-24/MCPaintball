@@ -6,10 +6,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.ItemStack;
-import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
-import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.entity.PaintballEntity;
 
 public class MCPaintballPlayerData {
@@ -45,17 +42,4 @@ public class MCPaintballPlayerData {
             default -> null;
         };
     }
-
-    public ItemStack[] fetchDefaultExplosives(){
-        return switch (team){
-            case 1 -> new ItemStack[]{new ItemStack(MCPaintballItems.SIGHT_GRENADE,4),new ItemStack(MCPaintballBlocks.RED_PAINT_MINE,2)};
-            case 2 -> new ItemStack[]{new ItemStack(MCPaintballItems.SIGHT_GRENADE,4),new ItemStack(MCPaintballBlocks.GREEN_PAINT_MINE,2)};
-            case 3 -> new ItemStack[]{new ItemStack(MCPaintballItems.SIGHT_GRENADE,4),new ItemStack(MCPaintballBlocks.BLUE_PAINT_MINE,2)};
-            case 4 -> new ItemStack[]{new ItemStack(MCPaintballItems.SIGHT_GRENADE,4),new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE,2)};
-            case 5 -> new ItemStack[]{new ItemStack(MCPaintballItems.SIGHT_GRENADE,4),new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE,2)};
-            case 6 -> new ItemStack[]{new ItemStack(MCPaintballItems.SIGHT_GRENADE,4),new ItemStack(MCPaintballBlocks.ORANGE_PAINT_MINE,2)};
-            default -> null;
-        };
-    }
-
 }
