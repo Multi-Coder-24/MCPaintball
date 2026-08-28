@@ -76,6 +76,8 @@ public class PaintGrenadeEntity extends ThrowableItemProjectile {
                             ServerPlayer serverPlayer = (ServerPlayer) player;
                             BlockPos pos = Objects.requireNonNull(serverPlayer.getRespawnConfig()).respawnData().pos();
                             serverPlayer.teleportTo(pos.getX(),pos.getY(),pos.getZ());
+                            serverPlayer.awardStat(MCPaintballStats.HITS,1);
+                            ((ServerPlayer) getOwner()).awardStat(MCPaintballStats.PLAYERS_HIT,1);
                         }
                     }
                 });
