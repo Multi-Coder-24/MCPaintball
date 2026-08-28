@@ -64,5 +64,4 @@ Version number. Where possible we will use the format.
 ## Version 2.1.0
 
 - **Addition: Player Statistics**
-- **Addition: Tournament Winning Trophy**
-- **Addition: Round Winner Medals**
+- **Addition: Winner Medals**
