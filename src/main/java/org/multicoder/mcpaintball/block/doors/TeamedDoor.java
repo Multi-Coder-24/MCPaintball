@@ -31,7 +31,7 @@ public class TeamedDoor extends DoorBlock {
     @Override
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, final @NonNull Level level, final @NonNull BlockPos pos, final @NonNull Player player, final @NonNull BlockHitResult hitResult) {
         if(!level.isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.tournamentStarted){
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballPlayerData data = Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER));
                 if(data.team != 0){
                     if(state.getBlock() == MCPaintballBlocks.RED_DOOR && data.team == 1){

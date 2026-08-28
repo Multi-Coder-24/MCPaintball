@@ -27,7 +27,7 @@ public class BurstRifleItem extends Item {
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         if(!level.isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 EntityType<PaintballEntity> paintballType = data.getFromTeam();
                 Thread thread = new Thread(() -> {

@@ -1,6 +1,5 @@
 package org.multicoder.mcpaintball.item.objectives;
 
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -8,7 +7,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
-import org.multicoder.mcpaintball.block.objectives.FlagBlock;
 import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.data.FlagItemSettings;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
@@ -23,7 +21,7 @@ public class FlagItem extends Item {
     @Override
     public @NonNull InteractionResult useOn(@NonNull UseOnContext context) {
         if(!context.getLevel().isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 ItemStack itemStack = context.getItemInHand();
                 Block block = context.getLevel().getBlockState(context.getClickedPos()).getBlock();
                 FlagItemSettings settings = Objects.requireNonNull(itemStack.get(MCPaintballDataComponents.FLAGITEMSETTINGS));
@@ -52,7 +50,7 @@ public class FlagItem extends Item {
                     throw new IllegalStateException("Unexpected value: " + settings.team());
                 }
                 itemStack.shrink(1);
-                context.getLevel().setBlock(settings.position(),state.setValue(FlagBlock.FACING, Direction.values()[settings.facing()]), Block.UPDATE_ALL_IMMEDIATE);
+                context.getLevel().setBlock(settings.position(),state, Block.UPDATE_ALL_IMMEDIATE);
                 return InteractionResult.SUCCESS;
             }
         }

@@ -22,7 +22,7 @@ public class EMPGrenadeItem extends Item {
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         if(!level.isClientSide()) {
-            if (MCPaintballGameEvents.INSTANCE.tournamentStarted && MCPaintballGameEvents.INSTANCE.roundStarted) {
+            if (MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted) {
                 ItemStack held = player.getItemInHand(hand);
                 EMPGrenadeEntity entity = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE, player, level, player.getItemInHand(hand));
                 entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5.0F, 1.0F);

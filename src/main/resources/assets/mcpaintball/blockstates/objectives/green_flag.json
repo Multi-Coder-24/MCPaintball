@@ -1,19 +1,7 @@
 {
   "variants": {
-    "facing=north": {
+    "": {
       "model": "mcpaintball:block/objectives/green_flag"
-    },
-    "facing=south": {
-      "model": "mcpaintball:block/objectives/green_flag",
-      "y": 180
-    },
-    "facing=east": {
-      "model": "mcpaintball:block/objectives/green_flag",
-      "y": 90
-    },
-    "facing=west": {
-      "model": "mcpaintball:block/objectives/green_flag",
-      "y": 270
     }
   }
 }

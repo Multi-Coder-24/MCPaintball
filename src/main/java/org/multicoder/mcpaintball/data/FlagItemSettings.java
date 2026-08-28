@@ -4,10 +4,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 
-public record FlagItemSettings(BlockPos position,int team,int facing) {
+public record FlagItemSettings(BlockPos position,int team) {
     public static final Codec<FlagItemSettings> CODEC = RecordCodecBuilder.create(builder -> builder.group(
             BlockPos.CODEC.fieldOf("position").forGetter(FlagItemSettings::position),
-                    Codec.INT.fieldOf("team").forGetter(FlagItemSettings::team),
-            Codec.INT.fieldOf("facing").forGetter(FlagItemSettings::facing))
+                    Codec.INT.fieldOf("team").forGetter(FlagItemSettings::team))
             .apply(builder, FlagItemSettings::new));
 }

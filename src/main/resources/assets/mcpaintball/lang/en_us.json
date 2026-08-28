@@ -1,14 +1,23 @@
 {
+  "Comment_0": "Command Translations",
+  "command.mcpaintball.prefix": "mcpaintball",
+  "command.mcpaintball.round_prefix": "round",
+  "command.mcpaintball.game_prefix": "game",
+  "command.mcpaintball.start": "start",
+  "command.mcpaintball.stop": "stop",
+  "command.mcpaintball.end": "end",
+  "command.mcpaintball.winner": "winner",
+  "command.mcpaintball.kit": "kit",
+
   "Comment_1": "Command Responses",
-  "text.mcpaintball.tournament_start": "The tournament has started, Choose team and type now!",
-  "text.mcpaintball.tournament_stopped": "The tournament has stopped",
+  "text.mcpaintball.game_start": "The game has started, Choose team and type now!",
+  "text.mcpaintball.game_stopped": "The game has stopped",
   "text.mcpaintball.round_started": "The round has started, Weapons Free",
   "text.mcpaintball.round_ended": "The round has ended, Weapons Stopped",
-  "text.mcpaintball.round_winner": "The winning team of the round is %s",
-  "text.mcpaintball.tournament_winner": "The winning team of the tournament is %s, Congratulations",
+  "text.mcpaintball.round_winner": "The winning team is %s, Congratulations",
 
   "Comment_2": "Command Error Responses",
-  "text.mcpaintball.error_tournament_not_started": "Cannot start/stop a round before starting a tournament",
+  "text.mcpaintball.error_game_not_started": "Cannot start a round before starting a game",
 
   "Comment_3": "Player Information Messages",
   "text.mcpaintball.invalid_use": "Weapons Are Not Enabled",
@@ -18,13 +27,7 @@
   "text.mcpaintball.yellow_points": "Yellow Points: %s",
   "text.mcpaintball.pink_points": "Pink Points: %s",
   "text.mcpaintball.orange_points": "Orange Points: %s",
-  "text.mcpaintball.red_wins": "Red Wins: %s",
-  "text.mcpaintball.green_wins": "Green Wins: %s",
-  "text.mcpaintball.blue_wins": "Blue Wins: %s",
-  "text.mcpaintball.yellow_wins": "Yellow Wins: %s",
-  "text.mcpaintball.pink_wins": "Pink Wins: %s",
-  "text.mcpaintball.orange_wins": "Orange Wins: %s",
-  "text.mcpaintball.round_running": "Active Round Ongoing",
+  "text.mcpaintball.round_running": "Active Match Ongoing",
   "text.mcpaintball.team": "Team: %s",
   "text.mcpaintball.role": "Role: %s",
   "text.mcpaintball.team_red": "Red",
@@ -111,7 +114,6 @@
   "item.mcpaintball.objectives.yellow_flag_item": "Yellow Flag Item",
   "item.mcpaintball.objectives.pink_flag_item": "Pink Flag Item",
   "item.mcpaintball.objectives.orange_flag_item": "Orange Flag Item",
-  "item.mcpaintball.medal": "Round Winners Medal",
 
   "Comment_7": "Blocks",
   "block.mcpaintball.utility.red_grenade_station": "Red Grenade Station",
@@ -157,7 +159,6 @@
   "block.mcpaintball.explosives.yellow_claymore_block": "Yellow Claymore",
   "block.mcpaintball.explosives.pink_claymore_block": "Pink Claymore",
   "block.mcpaintball.explosives.orange_claymore_block": "Orange Claymore",
-  "block.mcpaintball.trophy": "Tournament Trophy",
 
   "Comment_8": "Miscellaneous Text",
   "text.mcpaintball.weapons_tab": "MCPaintball Weapons",
@@ -177,7 +178,6 @@
   "key.mcpaintball.cycle_gl": "Cycle Grenade Launcher Type",
   "key.mcpaintball.team_select_open": "Open Team Select Screen",
   "key.mcpaintball.role_select_open": "Open Role Select Screen",
-  "key.mcpaintball.open_admin_screen": "Open Admin Screen",
 
   "Comment_11": "GUI",
   "screen.mcpaintball.select_team": "Team Select Screen",
@@ -193,15 +193,5 @@
   "screen.mcpaintball.text.gunner_role": "Gunner",
   "screen.mcpaintball.text.sniper_role": "Sniper",
   "screen.mcpaintball.text.specialist_role": "Specialist",
-  "screen.mcpaintball.text.grenadier_role": "Grenadier",
-  "screen.mcpaintball.text.tournament_start": "Start Tournament",
-  "screen.mcpaintball.text.tournament_stop": "Stop Tournament",
-  "screen.mcpaintball.text.round_start": "Start Round",
-  "screen.mcpaintball.text.round_stop": "Stop Round",
-  "screen.mcpaintball.text.round_winner": "Announce Round Winner",
-  "screen.mcpaintball.text.tournament_winner": "Announce Tournament Winner",
-
-  "Comment_12": "Statistics",
-  "stat.mcpaintball.players_hit": "[MCPaintball] Successful Hits",
-  "stat.mcpaintball.hits": "[MCPaintball] Hit By Players"
+  "screen.mcpaintball.text.grenadier_role": "Grenadier"
 }

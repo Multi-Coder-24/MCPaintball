@@ -1,19 +1,7 @@
 {
   "variants": {
-    "facing=north": {
+    "": {
       "model": "mcpaintball:block/utility/red_tower"
-    },
-    "facing=east": {
-      "model": "mcpaintball:block/utility/red_tower",
-      "y": 90
-    },
-    "facing=south": {
-      "model": "mcpaintball:block/utility/red_tower",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "mcpaintball:block/utility/red_tower",
-      "y": 270
     }
   }
 }

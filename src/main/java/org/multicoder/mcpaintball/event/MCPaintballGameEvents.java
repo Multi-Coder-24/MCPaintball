@@ -1,25 +1,29 @@
 package org.multicoder.mcpaintball.event;
 
+import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import org.multicoder.mcpaintball.client.gui.AdminScreen;
 import org.multicoder.mcpaintball.client.gui.SelectRoleScreen;
 import org.multicoder.mcpaintball.client.gui.SelectTeamScreen;
+import org.multicoder.mcpaintball.command.MCPaintballCommands;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.core.MCPaintballKeybinding;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
-import org.multicoder.mcpaintball.network.ClientToServer.CycleGLTypeC2SPacket;
-import org.multicoder.mcpaintball.network.ClientToServer.GiveKitC2SPacket;
-import org.multicoder.mcpaintball.network.ServerToClient.SaveDataSyncS2CPacket;
+import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
+import org.multicoder.mcpaintball.network.PointSyncS2CPacket;
 import org.multicoder.mcpaintball.integration.MinecraftTeamSystem;
 
 import java.util.Objects;
@@ -32,7 +36,7 @@ public class MCPaintballGameEvents {
         Objects.requireNonNull(server.overworld().getDataStorage().get(MCPaintballSaveData.TYPE)).setDirty();
         server.addTickable((() -> {
             if(ticker == 20){
-                server.getPlayerList().getPlayers().forEach(player -> ServerPlayNetworking.send(player,new SaveDataSyncS2CPacket(MCPaintballGameEvents.INSTANCE)));
+                server.getPlayerList().getPlayers().forEach(player -> ServerPlayNetworking.send(player,new PointSyncS2CPacket(MCPaintballGameEvents.INSTANCE.redPoints,MCPaintballGameEvents.INSTANCE.greenPoints,MCPaintballGameEvents.INSTANCE.bluePoints,MCPaintballGameEvents.INSTANCE.yellowPoints,MCPaintballGameEvents.INSTANCE.pinkPoints,MCPaintballGameEvents.INSTANCE.orangePoints, MCPaintballGameEvents.INSTANCE.matchStarted,MCPaintballGameEvents.INSTANCE.roundStarted)));
                 ticker = 0;
             }else{
                 ticker++;
@@ -43,6 +47,12 @@ public class MCPaintballGameEvents {
 
     public static void join(ServerPlayer player) {
         player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+    }
+
+    public static void commandRegister(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext ignored, Commands.CommandSelection ignored2) {
+        dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::startGame)).then(Commands.literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::stopGame)))).createBuilder().build();
+        dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::startRound)).then(Commands.literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN)).executes(MCPaintballCommands::stopRound)).then(Commands.literal(Component.translatable("command.mcpaintball.winner").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::roundWinner)))).createBuilder().build();
+        dispatcher.register(Commands.literal(Component.translatable("command.mcpaintball.prefix").getString()).then(Commands.literal(Component.translatable("command.mcpaintball.kit").getString()).executes(MCPaintballCommands::giveKit))).createBuilder().build();
     }
 
     public static void clientEndTick(Minecraft minecraft) {
@@ -60,16 +70,6 @@ public class MCPaintballGameEvents {
         while (MCPaintballKeybinding.OPEN_ROLE_SELECT.consumeClick()){
             Screen Parent = minecraft.screen;
             minecraft.setScreen(new SelectRoleScreen(Parent));
-        }
-        while (MCPaintballKeybinding.OPEN_ADMIN_SCREEN.consumeClick()){
-            Minecraft instance = Minecraft.getInstance();
-            if(Objects.requireNonNull(instance.player).permissions().hasPermission(Permissions.COMMANDS_MODERATOR)){
-                Screen Parent = minecraft.screen;
-                minecraft.setScreen(new AdminScreen(Parent));
-            }
-        }
-        while(MCPaintballKeybinding.GIVE_KIT.consumeClick()){
-            ClientPlayNetworking.send(new GiveKitC2SPacket());
         }
     }
 }
