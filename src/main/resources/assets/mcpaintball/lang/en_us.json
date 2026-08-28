@@ -193,5 +193,9 @@
   "screen.mcpaintball.text.gunner_role": "Gunner",
   "screen.mcpaintball.text.sniper_role": "Sniper",
   "screen.mcpaintball.text.specialist_role": "Specialist",
-  "screen.mcpaintball.text.grenadier_role": "Grenadier"
+  "screen.mcpaintball.text.grenadier_role": "Grenadier",
+
+  "Comment_12": "Stats",
+  "stat.mcpaintball.players_hit": "[MCPaintball] Successful Hits",
+  "stat.mcpaintball.hits": "[MCPaintball] Hit By Players"
 }

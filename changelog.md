@@ -8,6 +8,7 @@ Version number. Where possible we will use the format.
 - **New Additions, Addition:** E.g. Addition: New Team
 - **Integrations, Displayed As| Integration:** E.g. Integration: FTB Teams
 - **Changes, Change:** E.g. Change: Overlay Displays Points
+- **Removal, Remove:** E.g. Remove: Red Team
 - **Fixes, Fix:** E.g. Fix: Bug With Assault Rifle Rendering
 - **Fixes (Issue), Issue Number#Fix:** E.g. 01#Fix: Bug With Paintball Hit Logic
 
@@ -42,10 +43,25 @@ Version number. Where possible we will use the format.
 - **Addition: Paint Mines**
 - **Addition: Flags**
 
-## Planned Changelog: Version 1.4.0
+## Version 1.4.0
 
 - **Addition: Team Locked Doors**
 - **Addition: Basic Fort Structure**
 - **Addition: Capture Point**
 - **Fix: Orange Paintball Rendering**
 - **Fix: Flag Points Awarded Wrong Team**
+
+## Version 2.0.0
+
+- **Addition: Paint Claymore**
+- **Integration: Minecraft Built In Team**
+- **Change: Type Is Now Role**
+- **Change: Roles Have Been Revamped**
+- **Change: Kit Has Been Changed**
+- **Change: Team & Role Selection Now Done By Keybinding And GUI**
+- **Change: Created Temporary Team "Admin" Who Places Team Flags And Capture Points Before Round Starts**
+
+## Version 2.1.0
+
+- **Addition: Player Statistics**
+- **Addition: Round Winner Medals**

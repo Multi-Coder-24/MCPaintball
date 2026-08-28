@@ -24,6 +24,7 @@ public class MCPaintball {
         MCPaintballParticles.PARTICLES.register(eventBus);
         MCPaintballDataAttachments.ATTACHMENTS.register(eventBus);
         MCPaintballCreativeTabs.TABS.register(eventBus);
+        MCPaintballStats.STATS.register(eventBus);
         LOGGER.info("Initialized MCPaintball");
     }
 }

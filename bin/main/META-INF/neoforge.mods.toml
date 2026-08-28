@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+issueTrackerURL="https://github.com/Multi-Coder-24/MCPaintball/issues"
+[[mods]]
+modId = "mcpaintball"
+version = "2.0.0"
+displayName = "MCPaintball"
+updateJSONURL="https://api.modrinth.com/updates/mc-paintball/forge_updates.json?neoforge=only"
+displayURL="https://modrinth.com/project/mc-paintball"
+logoFile="assets/mcpaintball/icon.png"
+authors = "Multicoder"
+description = '''Minecraft paintball mod adds a vanilla way to paintball and have fun with friends.
+The weapon models are Licenced under L-GPL by MrCrayFish We do not own the rights to the model'''
+[[dependencies."mcpaintball"]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26,)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies."mcpaintball"]]
+modId = "minecraft"
+type = "required"
+versionRange = "[26.1.2,27.1)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies."mcpaintball"]]
+modId="voicechat_api"
+type="optional"
+versionRange="[2.6.20,)"
+ordering="AFTER"
+side="BOTH"
