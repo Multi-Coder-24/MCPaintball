@@ -6,10 +6,12 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
 import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 import org.multicoder.mcpaintball.util.KitHandler;
@@ -100,7 +102,13 @@ public class MCPaintballCommands {
             case 5 -> Component.translatable("text.mcpaintball.team_orange");
             default -> throw new IllegalStateException("Unexpected value: " + Winner);
         };
+        int FWinner = Winner + 1;
         context.getSource().getServer().getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
+        context.getSource().getServer().getPlayerList().getPlayers().forEach(player -> {
+            if(player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get()).Team == FWinner){
+                player.addItem(new ItemStack(MCPaintballItems.MEDAL.get())); 
+            }
+        });
         return 0;
     }
 

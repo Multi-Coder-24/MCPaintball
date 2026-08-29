@@ -5,6 +5,7 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.item.MedalItem;
 import org.multicoder.mcpaintball.item.objectives.FlagItem;
 import org.multicoder.mcpaintball.item.weapon.*;
 import org.multicoder.mcpaintball.item.weapon.grenades.*;
@@ -67,5 +68,7 @@ public class MCPaintballItems {
     public static final DeferredItem<?> ORANGE_LEGGINGS = ITEMS.registerItem("armor/orange_leggings", Item::new,() -> new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.LEGGINGS));
     public static final DeferredItem<?> ORANGE_CHESTPLATE = ITEMS.registerItem("armor/orange_chestplate", Item::new,() -> new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.CHESTPLATE));
     public static final DeferredItem<?> ORANGE_HELMET = ITEMS.registerItem("armor/orange_helmet", Item::new,() -> new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.HELMET));
+
+    public static final DeferredItem<?> MEDAL = ITEMS.registerItem("medal", MedalItem::new, Item.Properties::new);
 
 }
