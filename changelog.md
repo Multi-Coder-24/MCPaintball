@@ -65,3 +65,8 @@ Version number. Where possible we will use the format.
 
 - **Addition: Player Statistics**
 - **Addition: Winner Medals**
+
+## Version 2.2.0 (Proposed)
+
+- **Change: Reformatted Overlay**
+- **Change: Refined Claymore Blocks**

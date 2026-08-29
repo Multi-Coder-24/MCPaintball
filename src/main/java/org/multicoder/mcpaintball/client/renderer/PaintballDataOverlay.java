@@ -25,16 +25,19 @@ public class PaintballDataOverlay implements HudElement {
                 MCPaintballPlayerData data = Objects.requireNonNull(Minecraft.getInstance().player).getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
                 PaintballTeam team = PaintballTeam.values()[data.team];
                 PaintballRole role = PaintballRole.values()[data.role];
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.red_points", MCPaintballClient.redPoints), 20, 20, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.green_points", MCPaintballClient.greenPoints), 20, 30, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.blue_points", MCPaintballClient.bluePoints), 20, 40, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.yellow_points", MCPaintballClient.yellowPoints), 20, 50, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.pink_points", MCPaintballClient.pinkPoints), 20, 60, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.orange_points", MCPaintballClient.orangePoints), 20, 70, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(team.getSerializedName())), 20, 80, Color.WHITE.getRGB());
-                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.role", Component.translatable(role.getSerializedName())), 20, 90, Color.WHITE.getRGB());
+                int XPos = graphics.guiWidth() - 100;
+                switch(team){
+                    case Red -> graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.red_points", MCPaintballClient.redPoints), 20, 20, Color.WHITE.getRGB());
+                    case Green -> graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.green_points", MCPaintballClient.greenPoints), 20, 20, Color.WHITE.getRGB());
+                    case Blue -> graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.blue_points", MCPaintballClient.bluePoints), 20, 20, Color.WHITE.getRGB());
+                    case Yellow -> graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.yellow_points", MCPaintballClient.yellowPoints), 20, 20, Color.WHITE.getRGB());
+                    case Pink -> graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.pink_points", MCPaintballClient.pinkPoints), 20, 20, Color.WHITE.getRGB());
+                    case Orange -> graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.orange_points", MCPaintballClient.orangePoints), 20, 20, Color.WHITE.getRGB());
+                }
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.team", Component.translatable(team.getSerializedName())), XPos, 20, Color.WHITE.getRGB());
+                graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.role", Component.translatable(role.getSerializedName())), XPos, 30, Color.WHITE.getRGB());
                 if (MCPaintballClient.roundRunning) {
-                    graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.round_running"), 20, 100, Color.WHITE.getRGB());
+                    graphics.text(Minecraft.getInstance().font, Component.translatable("text.mcpaintball.round_running"), 20, 30, Color.WHITE.getRGB());
                 }
             }
         } catch (Exception e) {

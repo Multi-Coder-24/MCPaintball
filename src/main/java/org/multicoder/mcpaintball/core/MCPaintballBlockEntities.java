@@ -12,12 +12,12 @@ import org.multicoder.mcpaintball.block.entity.*;
 
 @SuppressWarnings("all")
 public class MCPaintballBlockEntities {
-    public static final BlockEntityType<RedClaymoreBlockEntity> RED_CLAYMORE_BLOCK_ENTITY = register("red_claymore",RedClaymoreBlockEntity::new, MCPaintballBlocks.RED_CLAYMORE_BLOCK);
-    public static final BlockEntityType<GreenClaymoreBlockEntity> GREEN_CLAYMORE_BLOCK_ENTITY = register("green_claymore",GreenClaymoreBlockEntity::new, MCPaintballBlocks.GREEN_CLAYMORE_BLOCK);
-    public static final BlockEntityType<BlueClaymoreBlockEntity> BLUE_CLAYMORE_BLOCK_ENTITY = register("blue_claymore",BlueClaymoreBlockEntity::new, MCPaintballBlocks.BLUE_CLAYMORE_BLOCK);
-    public static final BlockEntityType<YellowClaymoreBlockEntity> YELLOW_CLAYMORE_BLOCK_ENTITY = register("yellow_claymore",YellowClaymoreBlockEntity::new, MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK);
-    public static final BlockEntityType<PinkClaymoreBlockEntity> PINK_CLAYMORE_BLOCK_ENTITY = register("pink_claymore",PinkClaymoreBlockEntity::new, MCPaintballBlocks.PINK_CLAYMORE_BLOCK);
-    public static final BlockEntityType<OrangeClaymoreBlockEntity> ORANGE_CLAYMORE_BLOCK_ENTITY = register("orange_claymore",OrangeClaymoreBlockEntity::new, MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK);
+    public static final BlockEntityType<ClaymoreBlockEntity> RED_CLAYMORE_BLOCK_ENTITY = register("red_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.RED_CLAYMORE_BLOCK);
+    public static final BlockEntityType<ClaymoreBlockEntity> GREEN_CLAYMORE_BLOCK_ENTITY = register("green_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.GREEN_CLAYMORE_BLOCK);
+    public static final BlockEntityType<ClaymoreBlockEntity> BLUE_CLAYMORE_BLOCK_ENTITY = register("blue_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.BLUE_CLAYMORE_BLOCK);
+    public static final BlockEntityType<ClaymoreBlockEntity> YELLOW_CLAYMORE_BLOCK_ENTITY = register("yellow_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK);
+    public static final BlockEntityType<ClaymoreBlockEntity> PINK_CLAYMORE_BLOCK_ENTITY = register("pink_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.PINK_CLAYMORE_BLOCK);
+    public static final BlockEntityType<ClaymoreBlockEntity> ORANGE_CLAYMORE_BLOCK_ENTITY = register("orange_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK);
 
 
     public static void initialize() {
