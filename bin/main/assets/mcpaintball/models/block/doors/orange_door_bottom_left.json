@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_left",
-  "textures": {
-    "bottom": "mcpaintball:block/doors/orange_door_lower",
-    "top": "mcpaintball:block/doors/orange_door_upper"
-  }
-}
