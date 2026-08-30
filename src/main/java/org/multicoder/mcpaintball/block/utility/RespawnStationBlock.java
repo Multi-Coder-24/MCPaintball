@@ -28,7 +28,7 @@ public class RespawnStationBlock extends Block {
     @Override
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
         if(!level.isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.MatchStarted && MCPaintballGameEvents.INSTANCE.RoundStarted){
+            if(MCPaintballGameEvents.INSTANCE.MatchStarted && !MCPaintballGameEvents.INSTANCE.RoundStarted){
                 MCPaintballPlayerData data = player.getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.get());
                 if(state.getBlock() == MCPaintballBlocks.RED_RESPAWN_STATION.get() && Objects.requireNonNull(data).Team == 1){
                     ServerPlayer sp = (ServerPlayer) player;

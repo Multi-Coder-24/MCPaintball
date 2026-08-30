@@ -4,9 +4,9 @@ sources can keep up to date. Issue numbers will be used (when appropriate)
 The changelog will provide a list for all changes date stamped and their given
 Version number. Where possible we will use the format.
 
-### The Format is | Category | Displays As | E.g.
+### The Format is | Category, Example
 - **New Additions, Addition:** E.g. Addition: New Team
-- **Integrations, Displayed As| Integration:** E.g. Integration: FTB Teams
+- **Integrations, Integration:** E.g. Integration: FTB Teams
 - **Changes, Change:** E.g. Change: Overlay Displays Points
 - **Removal, Remove:** E.g. Remove: Red Team
 - **Fixes, Fix:** E.g. Fix: Bug With Assault Rifle Rendering
@@ -72,4 +72,7 @@ Version number. Where possible we will use the format.
 - **Change: Refined Claymore Blocks**
 - **Change: Admin Screen To Replace Commands**
 - **Change: Give Kit On Keybinding**
+- **Change: Tower Block Can Be Used Before Round Starts**
+- **Change: Respawn Station Can Be Used Before Round Starts**
+- **Change: Flag Blocks Support Rotation**
 - **Remove: Commands**

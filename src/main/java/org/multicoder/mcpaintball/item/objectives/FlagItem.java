@@ -1,6 +1,7 @@
 package org.multicoder.mcpaintball.item.objectives;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
+import org.multicoder.mcpaintball.block.objectives.FlagBlock;
 import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
@@ -19,7 +21,7 @@ import java.util.Objects;
 public class FlagItem extends Item {
 
     public FlagItem(Properties properties) {
-        super(properties.component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO,0)));
+        super(properties.component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO,0,0)));
     }
 
     @Override
@@ -51,8 +53,9 @@ public class FlagItem extends Item {
                 }else if(itemStack.getItem() != MCPaintballItems.ORANGE_FLAG_ITEM.get() && block == MCPaintballBlocks.ORANGE_FLAG.get()){
                     MCPaintballGameEvents.INSTANCE.incrementCapturePointByChecker(6);
                 }
+                Direction facing = Direction.values()[settings.Facing()];
                 itemStack.shrink(1);
-                context.getLevel().setBlock(settings.position(), state, Block.UPDATE_ALL_IMMEDIATE);
+                context.getLevel().setBlock(settings.position(), state.setValue(FlagBlock.FACING,facing), Block.UPDATE_ALL_IMMEDIATE);
             }
         }
         return InteractionResult.SUCCESS;
