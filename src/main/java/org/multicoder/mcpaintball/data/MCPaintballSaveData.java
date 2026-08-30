@@ -3,10 +3,19 @@ package org.multicoder.mcpaintball.data;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
+import org.multicoder.mcpaintball.core.MCPaintballBlocks;
+import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballItems;
+import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
 import java.util.*;
 
@@ -113,5 +122,80 @@ public class MCPaintballSaveData extends SavedData {
             case 6 -> orangePoints += 10;
         }
         setDirty(true);
+    }
+    public void StartGame(MinecraftServer server){
+        this.matchStarted = true;
+        this.setDirty(true);
+        server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.game_start"),false);
+    }
+    public void StopGame(MinecraftServer server){
+        this.matchStarted = false;
+        this.roundStarted = false;
+        this.redPoints = 0;
+        this.greenPoints = 0;
+        this.bluePoints = 0;
+        this.yellowPoints = 0;
+        this.pinkPoints = 0;
+        this.orangePoints = 0;
+        this.capturePoints = new ArrayList<>();
+        this.setDirty(true);
+        server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.game_stopped"),false);
+        server.getPlayerList().getPlayers().forEach(player -> {
+            MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
+            player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
+        });
+    }
+    public void StartRound(MinecraftServer server, ServerPlayer player){
+        if(this.matchStarted){
+            this.roundStarted = true;
+            this.setDirty(true);
+            server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_started"),false);
+        }
+        else {
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.error_game_not_started"),false);
+        }
+    }
+    public void StopRound(MinecraftServer server, ServerPlayer player){
+        if(this.matchStarted){
+            this.roundStarted = false;
+            this.capturePoints.forEach(pos ->{
+                if(server.overworld().getBlockState(pos).getBlock() == MCPaintballBlocks.CAPTURE_POINT){
+                    int Team = server.overworld().getBlockState(pos).getValue(CapturePointBlock.TEAM);
+                    incrementCapturePointByChecker(Team);
+                    server.overworld().setBlockAndUpdate(pos,server.overworld().getBlockState(pos).setValue(CapturePointBlock.TEAM, 0));
+                }
+            });
+            this.setDirty(true);
+            server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_ended"),false);
+        }
+        else {
+            player.sendSystemMessage(Component.translatable("text.mcpaintball.error_game_not_started"),false);
+        }
+    }
+    public void RoundWinner(MinecraftServer server){
+        List<Integer> points = new ArrayList<>();
+        points.add(MCPaintballGameEvents.INSTANCE.redPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.greenPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.bluePoints);
+        points.add(MCPaintballGameEvents.INSTANCE.yellowPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.pinkPoints);
+        points.add(MCPaintballGameEvents.INSTANCE.orangePoints);
+        int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).get());
+        Component Team = switch (Winner){
+            case 0 -> Component.translatable("text.mcpaintball.team_red");
+            case 1 -> Component.translatable("text.mcpaintball.team_green");
+            case 2 -> Component.translatable("text.mcpaintball.team_blue");
+            case 3 -> Component.translatable("text.mcpaintball.team_yellow");
+            case 4 -> Component.translatable("text.mcpaintball.team_pink");
+            case 5 -> Component.translatable("text.mcpaintball.team_orange");
+            default -> throw new IllegalStateException("Unexpected value: " + Winner);
+        };
+        int FWinner = Winner + 1;
+        server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
+        server.getPlayerList().getPlayers().forEach(serverPlayer ->{
+            if(Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == FWinner){
+                serverPlayer.addItem(new ItemStack(MCPaintballItems.MEDAL));
+            }
+        });
     }
 }

@@ -13,6 +13,8 @@ public class MCPaintballKeybinding {
     public static final KeyMapping CYCLE_GRENADE_LAUNCHER_TYPE = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mcpaintball.cycle_gl",InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C, MCPAINTBALL_CATEGORY));
     public static final KeyMapping OPEN_TEAM_SELECT = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mcpaintball.team_select_open", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z,MCPAINTBALL_SETUP_CATEGORY));
     public static final KeyMapping OPEN_ROLE_SELECT = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mcpaintball.role_select_open", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_X,MCPAINTBALL_SETUP_CATEGORY));
+    public static final KeyMapping OPEN_ADMIN_SCREEN = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mcpaintball.admin_open", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_M,MCPAINTBALL_SETUP_CATEGORY));
+    public static final KeyMapping KIT_GIVE = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mcpaintball.kit", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K,MCPAINTBALL_SETUP_CATEGORY));
 
     public static void initialize() {
         MCPaintball.LOGGER.info("Initializing Keybindings");

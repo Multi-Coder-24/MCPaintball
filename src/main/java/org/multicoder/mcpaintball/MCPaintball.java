@@ -1,7 +1,6 @@
 package org.multicoder.mcpaintball;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -49,17 +48,19 @@ public class MCPaintball implements ModInitializer {
         LOGGER.info("Initializing Server Events");
         ServerLifecycleEvents.SERVER_STARTED.register(MCPaintballGameEvents::serverStart);
         ServerPlayerEvents.JOIN.register(MCPaintballGameEvents::join);
-        LOGGER.info("Initializing Command Events");
-        CommandRegistrationCallback.EVENT.register(MCPaintballGameEvents::commandRegister);
         LOGGER.info("Initializing Networking");
         PayloadTypeRegistry.clientboundPlay().register(PointSyncS2CPacket.TYPE,PointSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.clientboundPlay().register(DataSyncS2CPacket.TYPE,DataSyncS2CPacket.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(TeamSelectC2SPacket.TYPE,TeamSelectC2SPacket.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(RoleSelectC2SPacket.TYPE,RoleSelectC2SPacket.STREAM_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(AdminSelectionC2SPacket.TYPE,AdminSelectionC2SPacket.STREAM_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(KitSenderC2SPacket.TYPE,KitSenderC2SPacket.STREAM_CODEC);
         ServerPlayNetworking.registerGlobalReceiver(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket::handlePacket);
         ServerPlayNetworking.registerGlobalReceiver(TeamSelectC2SPacket.TYPE,TeamSelectC2SPacket::handlePacket);
         ServerPlayNetworking.registerGlobalReceiver(RoleSelectC2SPacket.TYPE,RoleSelectC2SPacket::handlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(AdminSelectionC2SPacket.TYPE,AdminSelectionC2SPacket::handlePacket);
+        ServerPlayNetworking.registerGlobalReceiver(KitSenderC2SPacket.TYPE,KitSenderC2SPacket::handlePacket);
         LOGGER.info("Initialized MCPaintball");
     }
 }

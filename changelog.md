@@ -70,3 +70,6 @@ Version number. Where possible we will use the format.
 
 - **Change: Reformatted Overlay**
 - **Change: Refined Claymore Blocks**
+- **Change: Admin Screen To Replace Commands**
+- **Change: Give Kit On Keybinding**
+- **Remove: Commands**
