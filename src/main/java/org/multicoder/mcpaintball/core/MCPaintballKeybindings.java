@@ -12,4 +12,6 @@ public class MCPaintballKeybindings {
     public static final KeyMapping CYCLE_GRENADE_LAUNCHER_TYPE = new KeyMapping("key.mcpaintball.cycle_gl", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C,CATEGORY);
     public static final KeyMapping SELECT_TEAM = new KeyMapping("key.mcpaintball.team_select_open", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z,CATEGORY_CONFIG);
     public static final KeyMapping SELECT_ROLE = new KeyMapping("key.mcpaintball.role_select_open", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_X,CATEGORY_CONFIG);
+    public static final KeyMapping ADMIN_OPEN = new KeyMapping("key.mcpaintball.admin_open", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_M,CATEGORY_CONFIG);
+    public static final KeyMapping GIVE_KIT = new KeyMapping("key.mcpaintball.kit", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K,CATEGORY_CONFIG);
 }

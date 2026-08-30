@@ -1,12 +1,10 @@
 package org.multicoder.mcpaintball.event;
 
-import com.mojang.brigadier.CommandDispatcher;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.particle.GlowParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.entity.player.Player;
@@ -19,7 +17,6 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -28,10 +25,10 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.multicoder.mcpaintball.MCPaintball;
+import org.multicoder.mcpaintball.client.gui.AdminScreen;
 import org.multicoder.mcpaintball.client.gui.SelectRoleScreen;
 import org.multicoder.mcpaintball.client.gui.SelectTeamScreen;
 import org.multicoder.mcpaintball.client.renderer.PaintballDataOverlay;
-import org.multicoder.mcpaintball.command.MCPaintballCommands;
 import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
@@ -40,7 +37,6 @@ import org.multicoder.mcpaintball.integration.MinecraftTeamSystem;
 import org.multicoder.mcpaintball.network.*;
 
 import java.util.Objects;
-import static net.minecraft.commands.Commands.literal;
 import static net.neoforged.neoforge.common.NeoForgeMod.MOD_ID;
 
 @EventBusSubscriber(modid = MCPaintball.MODID)
@@ -145,6 +141,8 @@ public class MCPaintballGameEvents {
         registrar.playToServer(CycleGLTypeC2SPacket.TYPE,CycleGLTypeC2SPacket.STREAM_CODEC,CycleGLTypeC2SPacket::HandlePacket);
         registrar.playToServer(TeamSelectC2SPacket.TYPE,TeamSelectC2SPacket.STREAM_CODEC,TeamSelectC2SPacket::handlePacket);
         registrar.playToServer(RoleSelectC2SPacket.TYPE,RoleSelectC2SPacket.STREAM_CODEC,RoleSelectC2SPacket::handlePacket);
+        registrar.playToServer(AdminSelectionC2SPacket.TYPE,AdminSelectionC2SPacket.STREAM_CODEC,AdminSelectionC2SPacket::handlePacket);
+        registrar.playToServer(KitSenderC2SPacket.TYPE,KitSenderC2SPacket.STREAM_CODEC,KitSenderC2SPacket::handlePacket);
     }
 
     @SubscribeEvent
@@ -175,15 +173,6 @@ public class MCPaintballGameEvents {
         if(event.isWasDeath() && event.getOriginal().hasData(MCPaintballDataAttachments.PAINTBALL_PLAYER.value())){
             event.getEntity().setData(MCPaintballDataAttachments.PAINTBALL_PLAYER.value(), event.getOriginal().getData(MCPaintballDataAttachments.PAINTBALL_PLAYER.value()));
         }
-    }
-
-    @SubscribeEvent
-    public static void RegisterCommands(RegisterCommandsEvent event){
-        MCPaintball.LOGGER.info("[MCPaintball] Commands Register");
-        CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.game_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartGame)).then(literal(Component.translatable("command.mcpaintball.stop").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopGame)))).createBuilder().build();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.round_prefix").getString()).then(literal(Component.translatable("command.mcpaintball.start").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StartRound)).then(literal(Component.translatable("command.mcpaintball.end").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::StopRound)).then(literal(Component.translatable("command.mcpaintball.winner").getString()).requires(commandSourceStack -> commandSourceStack.permissions().hasPermission(Permissions.COMMANDS_MODERATOR)).executes(MCPaintballCommands::RoundWinner)))).createBuilder().build();
-        dispatcher.register(literal(Component.translatable("command.mcpaintball.prefix").getString()).then(literal(Component.translatable("command.mcpaintball.kit").getString()).executes(MCPaintballCommands::GiveKit))).createBuilder().build();
     }
 
     @EventBusSubscriber(modid = MCPaintball.MODID,value = Dist.CLIENT)
@@ -246,6 +235,16 @@ public class MCPaintballGameEvents {
                 Screen screen = mc.screen;
                 mc.setScreen(new SelectTeamScreen(screen));
             }
+            while (MCPaintballKeybindings.ADMIN_OPEN.consumeClick()){
+                Minecraft mc = Minecraft.getInstance();
+                if(Objects.requireNonNull(mc.player).permissions().hasPermission(Permissions.COMMANDS_MODERATOR)){
+                    Screen screen = mc.screen;
+                    mc.setScreen(new AdminScreen(screen));
+                }
+            }
+            while (MCPaintballKeybindings.GIVE_KIT.consumeClick()){
+                ClientPacketDistributor.sendToServer(new KitSenderC2SPacket());
+            }
         }
 
         @SubscribeEvent
@@ -256,6 +255,8 @@ public class MCPaintballGameEvents {
             event.register(MCPaintballKeybindings.CYCLE_GRENADE_LAUNCHER_TYPE);
             event.register(MCPaintballKeybindings.SELECT_ROLE);
             event.register(MCPaintballKeybindings.SELECT_TEAM);
+            event.register(MCPaintballKeybindings.ADMIN_OPEN);
+            event.register(MCPaintballKeybindings.GIVE_KIT);
         }
 
         @SubscribeEvent

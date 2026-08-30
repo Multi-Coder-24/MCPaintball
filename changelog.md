@@ -64,4 +64,12 @@ Version number. Where possible we will use the format.
 ## Version 2.1.0
 
 - **Addition: Player Statistics**
-- **Addition: Round Winner Medals**
+- **Addition: Winner Medals**
+
+## Version 2.2.0 (Proposed)
+
+- **Change: Reformatted Overlay**
+- **Change: Refined Claymore Blocks**
+- **Change: Admin Screen To Replace Commands**
+- **Change: Give Kit On Keybinding**
+- **Remove: Commands**
