@@ -29,7 +29,7 @@ public class BasicTowerBlock extends Block {
     @Override
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
         if(!level.isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+            if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
                 StructureTemplateManager manager = Objects.requireNonNull(level.getServer()).getStructureManager();
                 StructureTemplate template;
                 if(state.getBlock() == MCPaintballBlocks.RED_TOWER && Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == 1){

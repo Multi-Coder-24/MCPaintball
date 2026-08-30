@@ -1,6 +1,5 @@
 package org.multicoder.mcpaintball.core;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -9,7 +8,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.ArmorType;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.data.FlagItemSettings;
 import org.multicoder.mcpaintball.item.MedalItem;
 import org.multicoder.mcpaintball.item.objectives.FlagItem;
 import org.multicoder.mcpaintball.item.weapon.*;
@@ -66,12 +64,12 @@ public class MCPaintballItems {
     public static final Item ORANGE_CHESTPLATE = register("armor/orange_chestplate",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.CHESTPLATE));
     public static final Item ORANGE_HELMET = register("armor/orange_helmet",Item::new,new Item.Properties().humanoidArmor(MCPaintballArmorMaterials.ORANGE_ARMOR_MATERIAL, ArmorType.HELMET));
 
-    public static final Item RED_FLAG_ITEM = register("objectives/red_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
-    public static final Item GREEN_FLAG_ITEM = register("objectives/green_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
-    public static final Item BLUE_FLAG_ITEM = register("objectives/blue_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
-    public static final Item YELLOW_FLAG_ITEM = register("objectives/yellow_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
-    public static final Item PINK_FLAG_ITEM = register("objectives/pink_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
-    public static final Item ORANGE_FLAG_ITEM = register("objectives/orange_flag_item", FlagItem::new,new Item.Properties().component(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(BlockPos.ZERO, 0)).stacksTo(8));
+    public static final Item RED_FLAG_ITEM = register("objectives/red_flag_item", FlagItem::new,new Item.Properties());
+    public static final Item GREEN_FLAG_ITEM = register("objectives/green_flag_item", FlagItem::new,new Item.Properties());
+    public static final Item BLUE_FLAG_ITEM = register("objectives/blue_flag_item", FlagItem::new,new Item.Properties());
+    public static final Item YELLOW_FLAG_ITEM = register("objectives/yellow_flag_item", FlagItem::new,new Item.Properties());
+    public static final Item PINK_FLAG_ITEM = register("objectives/pink_flag_item", FlagItem::new,new Item.Properties());
+    public static final Item ORANGE_FLAG_ITEM = register("objectives/orange_flag_item", FlagItem::new,new Item.Properties());
 
     public static final Item MEDAL = register("medal", MedalItem::new,new Item.Properties());
 
