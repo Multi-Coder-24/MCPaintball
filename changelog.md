@@ -66,7 +66,7 @@ Version number. Where possible we will use the format.
 - **Addition: Player Statistics**
 - **Addition: Winner Medals**
 
-## Version 2.2.0 (Proposed)
+## Version 2.2.0
 
 - **Change: Reformatted Overlay**
 - **Change: Refined Claymore Blocks**
@@ -75,4 +75,5 @@ Version number. Where possible we will use the format.
 - **Change: Tower Block Can Be Used Before Round Starts**
 - **Change: Respawn Station Can Be Used Before Round Starts**
 - **Change: Flag Blocks Support Rotation**
+- **Change: Grenade Stations Support Rotation**
 - **Remove: Commands**
