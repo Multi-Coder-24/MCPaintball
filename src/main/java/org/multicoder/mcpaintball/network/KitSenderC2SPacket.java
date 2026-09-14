@@ -13,7 +13,7 @@ import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 import org.multicoder.mcpaintball.util.KitHandler;
 import org.multicoder.mcpaintball.util.PaintballRole;
-import org.multicoder.mcpaintball.util.PaintballTeam;
+import org.multicoder.mcpaintball.util.PaintballColors;
 
 
 public record KitSenderC2SPacket() implements CustomPacketPayload {
@@ -29,7 +29,7 @@ public record KitSenderC2SPacket() implements CustomPacketPayload {
         if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
             ServerPlayer player = context.player();
             MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-            KitHandler.grantKit(player, PaintballTeam.values()[data.team], PaintballRole.values()[data.role]);
+            KitHandler.grantKit(player, PaintballColors.values()[data.team], PaintballRole.values()[data.role]);
         }
     }
 }

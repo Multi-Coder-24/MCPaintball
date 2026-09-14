@@ -51,6 +51,8 @@ Version number. Where possible we will use the format.
 - **Fix: Orange Paintball Rendering**
 - **Fix: Flag Points Awarded Wrong Team**
 
+----
+
 ## Version 2.0.0
 
 - **Addition: Paint Claymore**
@@ -77,3 +79,12 @@ Version number. Where possible we will use the format.
 - **Change: Flag Blocks Support Rotation**
 - **Change: Grenade Stations Support Rotation**
 - **Remove: Commands**
+
+----
+
+## Version 3.0.0
+
+- **Addition: Game Controller**
+- **Change: ReWorked The Team System**
+- **Change: Changed Paintball Items, Weapons, Hit/Score Logic To Reflect Team Changes**
+- **Remove: World Save Data**

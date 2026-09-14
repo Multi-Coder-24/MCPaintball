@@ -6,7 +6,7 @@ import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 
 public class KitHandler {
-    public static void grantKit(Player player, PaintballTeam team, PaintballRole type){
+    public static void grantKit(Player player, PaintballColors team, PaintballRole type){
         switch (team) {
             case Red -> {
                 player.addItem(new ItemStack(MCPaintballItems.RED_BOOTS));

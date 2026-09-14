@@ -19,6 +19,8 @@ public class MCPaintballBlockEntities {
     public static final BlockEntityType<ClaymoreBlockEntity> PINK_CLAYMORE_BLOCK_ENTITY = register("pink_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.PINK_CLAYMORE_BLOCK);
     public static final BlockEntityType<ClaymoreBlockEntity> ORANGE_CLAYMORE_BLOCK_ENTITY = register("orange_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK);
 
+    public static final BlockEntityType<GameControllerBlockEntity> GAME_CONTROLLER_BLOCK_ENTITY = register("game_controller",GameControllerBlockEntity::new, MCPaintballBlocks.GAME_CONTROLLER);
+
 
     public static void initialize() {
         MCPaintball.LOGGER.info("Initializing Block Entities");
