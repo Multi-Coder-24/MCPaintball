@@ -92,9 +92,6 @@ public class CreativeTabEvents {
         output.accept(MCPaintballBlocks.YELLOW_TOWER);
         output.accept(MCPaintballBlocks.PINK_TOWER);
         output.accept(MCPaintballBlocks.ORANGE_TOWER);
-    }
-    public static void adminInit(FabricCreativeModeTabOutput output){
-        output.accept(MCPaintballBlocks.GAME_CONTROLLER);
-    }
 
+    }
 }

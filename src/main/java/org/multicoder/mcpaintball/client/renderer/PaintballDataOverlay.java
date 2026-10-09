@@ -10,7 +10,7 @@ import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.client.MCPaintballClient;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
-import org.multicoder.mcpaintball.util.PaintballColors;
+import org.multicoder.mcpaintball.util.PaintballTeam;
 import org.multicoder.mcpaintball.util.PaintballRole;
 
 import java.awt.*;
@@ -23,7 +23,7 @@ public class PaintballDataOverlay implements HudElement {
         try{
             if(MCPaintballClient.gameRunning) {
                 MCPaintballPlayerData data = Objects.requireNonNull(Minecraft.getInstance().player).getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                PaintballColors team = PaintballColors.values()[data.team];
+                PaintballTeam team = PaintballTeam.values()[data.team];
                 PaintballRole role = PaintballRole.values()[data.role];
                 int XPos = graphics.guiWidth() - 100;
                 switch(team){
