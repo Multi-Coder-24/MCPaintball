@@ -14,9 +14,12 @@ public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity,Arrow
     public static final Identifier RED = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/red_paintball.png");
     public static final Identifier GREEN = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/green_paintball.png");
     public static final Identifier BLUE = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/blue_paintball.png");
+    public static final Identifier CYAN = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/cyan_paintball.png");
+    public static final Identifier MAGENTA = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/magenta_paintball.png");
     public static final Identifier YELLOW = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/yellow_paintball.png");
-    public static final Identifier PINK = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/pink_paintball.png");
     public static final Identifier ORANGE = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/orange_paintball.png");
+    public static final Identifier WHITE = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/white_paintball.png");
+    public static final Identifier BLACK = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"textures/entity/projectiles/black_paintball.png");
     public PaintballEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
@@ -30,12 +33,18 @@ public class PaintballEntityRenderer extends ArrowRenderer<PaintballEntity,Arrow
             return GREEN;
         }else if(type == MCPaintballEntities.BLUE_PAINTBALL){
             return BLUE;
+        }else if(type == MCPaintballEntities.CYAN_PAINTBALL){
+            return CYAN;
+        }else if(type == MCPaintballEntities.MAGENTA_PAINTBALL){
+            return MAGENTA;
         }else if(type == MCPaintballEntities.YELLOW_PAINTBALL){
             return YELLOW;
-        }else if(type == MCPaintballEntities.PINK_PAINTBALL){
-            return PINK;
         }else if(type == MCPaintballEntities.ORANGE_PAINTBALL){
             return ORANGE;
+        }else if(type == MCPaintballEntities.WHITE_PAINTBALL){
+            return WHITE;
+        }else if(type == MCPaintballEntities.BLACK_PAINTBALL){
+            return BLACK;
         }
         return RED;
     }

@@ -30,12 +30,18 @@ public class PaintGrenadeEntityRenderer extends ThrownItemRenderer<PaintGrenadeE
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.GREEN_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
         }else if(type == MCPaintballEntities.BLUE_PAINT_GRENADE){
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.BLUE_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
+        }else if(type == MCPaintballEntities.CYAN_PAINT_GRENADE){
+            this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.CYAN_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
+        }else if(type == MCPaintballEntities.MAGENTA_PAINT_GRENADE){
+            this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.MAGENTA_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
         }else if(type == MCPaintballEntities.YELLOW_PAINT_GRENADE){
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
-        }else if(type == MCPaintballEntities.PINK_PAINT_GRENADE){
-            this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
         }else if(type == MCPaintballEntities.ORANGE_PAINT_GRENADE){
             this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.ORANGE_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
+        }else if(type == MCPaintballEntities.WHITE_PAINT_GRENADE){
+            this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.WHITE_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
+        }else if(type == MCPaintballEntities.BLACK_PAINT_GRENADE){
+            this.itemModelResolver.updateForNonLiving(state.item, new ItemStack(MCPaintballItems.BLACK_PAINT_GRENADE.asItem()), ItemDisplayContext.GROUND, entity);
         }
     }
 }

@@ -7,17 +7,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
 import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
-import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 
 @SuppressWarnings("all")
@@ -141,7 +141,7 @@ public class MCPaintballSaveData extends SavedData {
         this.setDirty(true);
         server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.game_stopped"),false);
         server.getPlayerList().getPlayers().forEach(player -> {
-            MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
+            MCPaintballPlayerData data = new MCPaintballPlayerData();
             player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
         });
     }
@@ -192,10 +192,10 @@ public class MCPaintballSaveData extends SavedData {
         };
         int FWinner = Winner + 1;
         server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
-        server.getPlayerList().getPlayers().forEach(serverPlayer ->{
-            if(Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == FWinner){
-                serverPlayer.addItem(new ItemStack(MCPaintballItems.MEDAL));
-            }
-        });
+//        server.getPlayerList().getPlayers().forEach(serverPlayer ->{
+//            if(Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == FWinner){
+//                serverPlayer.addItem(new ItemStack(MCPaintballItems.MEDAL));
+//            }
+//        });
     }
 }

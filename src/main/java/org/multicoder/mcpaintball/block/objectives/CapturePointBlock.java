@@ -1,7 +1,6 @@
 package org.multicoder.mcpaintball.block.objectives;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -12,18 +11,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.phys.BlockHitResult;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
-
-import java.util.Objects;
 
 public class CapturePointBlock extends Block {
 
-    public static final IntegerProperty TEAM = IntegerProperty.create("team",0,6);
+    public static final IntegerProperty TEAM = IntegerProperty.create("team",0,8);
 
     public CapturePointBlock(Properties properties) {
         super(properties.noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(5f));
@@ -51,23 +45,23 @@ public class CapturePointBlock extends Block {
         return super.playerWillDestroy(level, pos, state, player);
     }
 
-    @Override
-    protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
-        if(!level.isClientSide()){
-            MCPaintball.LOGGER.info("Capture Point::Server Side");
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
-                MCPaintball.LOGGER.info("Capture Point::Game Running");
-                if(Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != 0){
-                    MCPaintball.LOGGER.info("Capture Point::Player Is Active");
-                    int team = Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team;
-                    state = state.setValue(TEAM, team);
-                    level.setBlockAndUpdate(pos, state);
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
-    }
+//    @Override
+//    protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
+//        if(!level.isClientSide()){
+//            MCPaintball.LOGGER.info("Capture Point::Server Side");
+//            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
+//                MCPaintball.LOGGER.info("Capture Point::Game Running");
+//                if(Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != 0){
+//                    MCPaintball.LOGGER.info("Capture Point::Player Is Active");
+//                    int team = Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team;
+//                    state = state.setValue(TEAM, team);
+//                    level.setBlockAndUpdate(pos, state);
+//                    return InteractionResult.SUCCESS;
+//                }
+//            }
+//        }
+//        return super.useWithoutItem(state, level, pos, player, hitResult);
+//    }
 
 
     @Override

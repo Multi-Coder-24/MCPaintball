@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 
+@SuppressWarnings("all")
 public class KitHandler {
     public static void grantKit(Player player, PaintballTeam team, PaintballRole type){
         switch (team) {
@@ -148,35 +149,35 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_LEGGINGS));
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_CHESTPLATE));
                 player.addItem(new ItemStack(MCPaintballItems.YELLOW_HELMET));
-                switch (type){
+                switch (type) {
                     case Captain -> {
                         player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_TOWER));
-                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
+                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 4));
+                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE, 4));
+                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE, 2));
                     }
                     case Gunner -> {
                         player.addItem(new ItemStack(MCPaintballItems.BURST_RIFLE));
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
-                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
+                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 4));
+                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE, 4));
+                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE, 2));
                     }
                     case Sniper -> {
                         player.addItem(new ItemStack(MCPaintballItems.SNIPER_RIFLE));
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
-                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,8));
-                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE,8));
-                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
+                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 8));
+                        player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE, 8));
+                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE, 6));
                     }
                     case Specialist -> {
                         player.addItem(new ItemStack(MCPaintballItems.SHOTGUN));
                         player.addItem(new ItemStack(MCPaintballItems.PISTOL));
                         player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_PAINT_MINE, 8));
-                        player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_GRENADE_STATION,2));
+                        player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK, 4));
+                        player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_GRENADE_STATION, 2));
                     }
                     case Grenadier -> {
                         player.addItem(new ItemStack(MCPaintballItems.GRENADE_LAUNCHER));
@@ -185,50 +186,6 @@ public class KitHandler {
                         player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 10));
                         player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE, 10));
                         player.addItem(new ItemStack(MCPaintballItems.YELLOW_PAINT_GRENADE, 16));
-                    }
-                }
-            }case Pink -> {
-                player.addItem(new ItemStack(MCPaintballItems.PINK_BOOTS));
-                player.addItem(new ItemStack(MCPaintballItems.PINK_LEGGINGS));
-                player.addItem(new ItemStack(MCPaintballItems.PINK_CHESTPLATE));
-                player.addItem(new ItemStack(MCPaintballItems.PINK_HELMET));
-                switch (type){
-                    case Captain -> {
-                        player.addItem(new ItemStack(MCPaintballItems.ASSAULT_RIFLE));
-                        player.addItem(new ItemStack(MCPaintballItems.PISTOL));
-                        player.addItem(new ItemStack(MCPaintballBlocks.PINK_TOWER));
-                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                    }
-                    case Gunner -> {
-                        player.addItem(new ItemStack(MCPaintballItems.BURST_RIFLE));
-                        player.addItem(new ItemStack(MCPaintballItems.PISTOL));
-                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,4));
-                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,2));
-                    }
-                    case Sniper -> {
-                        player.addItem(new ItemStack(MCPaintballItems.SNIPER_RIFLE));
-                        player.addItem(new ItemStack(MCPaintballItems.PISTOL));
-                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE,8));
-                        player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE,8));
-                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE,6));
-                    }
-                    case Specialist -> {
-                        player.addItem(new ItemStack(MCPaintballItems.SHOTGUN));
-                        player.addItem(new ItemStack(MCPaintballItems.PISTOL));
-                        player.addItem(new ItemStack(MCPaintballBlocks.PINK_PAINT_MINE, 8));
-                        player.addItem(new ItemStack(MCPaintballBlocks.PINK_CLAYMORE_BLOCK,4));
-                        player.addItem(new ItemStack(MCPaintballBlocks.PINK_GRENADE_STATION,2));
-                    }
-                    case Grenadier -> {
-                        player.addItem(new ItemStack(MCPaintballItems.GRENADE_LAUNCHER));
-                        player.addItem(new ItemStack(MCPaintballItems.PISTOL));
-                        player.addItem(new ItemStack(MCPaintballItems.EMP_GRENADE, 10));
-                        player.addItem(new ItemStack(MCPaintballItems.SMOKE_GRENADE, 10));
-                        player.addItem(new ItemStack(MCPaintballItems.SIGHT_GRENADE, 10));
-                        player.addItem(new ItemStack(MCPaintballItems.PINK_PAINT_GRENADE, 16));
                     }
                 }
             }case Orange -> {
@@ -281,7 +238,6 @@ public class KitHandler {
                 player.addItem(new ItemStack(MCPaintballBlocks.GREEN_FLAG,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.BLUE_FLAG,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.YELLOW_FLAG,4));
-                player.addItem(new ItemStack(MCPaintballBlocks.PINK_FLAG,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.ORANGE_FLAG,4));
                 player.addItem(new ItemStack(MCPaintballBlocks.CAPTURE_POINT,12));
             }

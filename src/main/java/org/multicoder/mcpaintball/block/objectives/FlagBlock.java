@@ -49,16 +49,28 @@ public class FlagBlock extends Block{
                     stack = new ItemStack(MCPaintballItems.BLUE_FLAG_ITEM);
                     team = 3;
                     facing = state.getValue(FlagBlock.FACING).ordinal();
+                }  else if (block == MCPaintballBlocks.CYAN_FLAG) {
+                    stack = new ItemStack(MCPaintballItems.CYAN_FLAG_ITEM);
+                    team = 3;
+                    facing = state.getValue(FlagBlock.FACING).ordinal();
+                }  else if (block == MCPaintballBlocks.MAGENTA_FLAG) {
+                    stack = new ItemStack(MCPaintballItems.MAGENTA_FLAG_ITEM);
+                    team = 3;
+                    facing = state.getValue(FlagBlock.FACING).ordinal();
                 } else if (block == MCPaintballBlocks.YELLOW_FLAG) {
                     stack = new ItemStack(MCPaintballItems.YELLOW_FLAG_ITEM);
                     team = 4;
                     facing = state.getValue(FlagBlock.FACING).ordinal();
-                } else if (block == MCPaintballBlocks.PINK_FLAG) {
-                    stack = new ItemStack(MCPaintballItems.PINK_FLAG_ITEM);
-                    team = 5;
-                    facing = state.getValue(FlagBlock.FACING).ordinal();
                 } else if (block == MCPaintballBlocks.ORANGE_FLAG) {
                     stack = new ItemStack(MCPaintballItems.ORANGE_FLAG_ITEM);
+                    team = 6;
+                    facing = state.getValue(FlagBlock.FACING).ordinal();
+                } else if (block == MCPaintballBlocks.WHITE_FLAG) {
+                    stack = new ItemStack(MCPaintballItems.WHITE_FLAG_ITEM);
+                    team = 6;
+                    facing = state.getValue(FlagBlock.FACING).ordinal();
+                } else if (block == MCPaintballBlocks.BLACK_FLAG) {
+                    stack = new ItemStack(MCPaintballItems.BLACK_FLAG_ITEM);
                     team = 6;
                     facing = state.getValue(FlagBlock.FACING).ordinal();
                 }else{return;}
