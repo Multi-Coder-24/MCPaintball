@@ -7,17 +7,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.block.objectives.CapturePointBlock;
 import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
+import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 
 @SuppressWarnings("all")
@@ -38,7 +38,7 @@ public class MCPaintballSaveData extends SavedData {
             Codec.INT.fieldOf("green_points").forGetter(MCPaintballSaveData::greenPoints),
             Codec.INT.fieldOf("yellow_points").forGetter(MCPaintballSaveData::yellowPoints),
             Codec.INT.fieldOf("pink_points").forGetter(MCPaintballSaveData::pinkPoints),
-            Codec.INT.fieldOf("orange_points").forGetter(MCPaintballSaveData::orangePoints),
+            Codec.INT.fieldOf("orang_points").forGetter(MCPaintballSaveData::orangePoints),
             Codec.BOOL.fieldOf("match_started").forGetter(MCPaintballSaveData::matchStarted),
             Codec.BOOL.fieldOf("round_started").forGetter(MCPaintballSaveData::roundStarted),
             Codec.list(BlockPos.CODEC).fieldOf("capture_points").forGetter(MCPaintballSaveData::capturePoints)
@@ -141,7 +141,7 @@ public class MCPaintballSaveData extends SavedData {
         this.setDirty(true);
         server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.game_stopped"),false);
         server.getPlayerList().getPlayers().forEach(player -> {
-            MCPaintballPlayerData data = new MCPaintballPlayerData();
+            MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
             player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
         });
     }
@@ -192,10 +192,10 @@ public class MCPaintballSaveData extends SavedData {
         };
         int FWinner = Winner + 1;
         server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
-//        server.getPlayerList().getPlayers().forEach(serverPlayer ->{
-//            if(Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == FWinner){
-//                serverPlayer.addItem(new ItemStack(MCPaintballItems.MEDAL));
-//            }
-//        });
+        server.getPlayerList().getPlayers().forEach(serverPlayer ->{
+            if(Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == FWinner){
+                serverPlayer.addItem(new ItemStack(MCPaintballItems.MEDAL));
+            }
+        });
     }
 }

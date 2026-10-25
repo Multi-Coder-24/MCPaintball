@@ -19,7 +19,6 @@ import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
-import org.multicoder.mcpaintball.util.TeamColors;
 
 import java.util.Objects;
 
@@ -34,32 +33,23 @@ public class TeamedDoor extends DoorBlock {
         if(!level.isClientSide()){
             if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
                 MCPaintballPlayerData data = Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER));
-                if(data.teamColor != TeamColors.NONE){
-                    if(state.getBlock() == MCPaintballBlocks.RED_DOOR && data.teamColor == TeamColors.RED){
+                if(data.team != 0){
+                    if(state.getBlock() == MCPaintballBlocks.RED_DOOR && data.team == 1){
                         state = state.cycle(OPEN);
                         level.setBlock(pos, state, 10);
-                    }else  if(state.getBlock() == MCPaintballBlocks.GREEN_DOOR && data.teamColor == TeamColors.GREEN){
+                    }else  if(state.getBlock() == MCPaintballBlocks.GREEN_DOOR && data.team == 2){
                         state = state.cycle(OPEN);
                         level.setBlock(pos, state, 10);
-                    }else if(state.getBlock() == MCPaintballBlocks.BLUE_DOOR && data.teamColor == TeamColors.BLUE){
+                    }else if(state.getBlock() == MCPaintballBlocks.BLUE_DOOR && data.team == 3){
                         state = state.cycle(OPEN);
                         level.setBlock(pos, state, 10);
-                    }else if(state.getBlock() == MCPaintballBlocks.CYAN_DOOR && data.teamColor == TeamColors.CYAN){
+                    }else if(state.getBlock() == MCPaintballBlocks.YELLOW_DOOR && data.team == 4){
                         state = state.cycle(OPEN);
                         level.setBlock(pos, state, 10);
-                    }else if(state.getBlock() == MCPaintballBlocks.MAGENTA_DOOR && data.teamColor == TeamColors.MAGENTA){
+                    }else if(state.getBlock() == MCPaintballBlocks.PINK_DOOR && data.team == 5){
                         state = state.cycle(OPEN);
                         level.setBlock(pos, state, 10);
-                    }else if(state.getBlock() == MCPaintballBlocks.YELLOW_DOOR && data.teamColor == TeamColors.YELLOW){
-                        state = state.cycle(OPEN);
-                        level.setBlock(pos, state, 10);
-                    }else if(state.getBlock() == MCPaintballBlocks.ORANGE_DOOR && data.teamColor == TeamColors.ORANGE){
-                        state = state.cycle(OPEN);
-                        level.setBlock(pos, state, 10);
-                    }else if(state.getBlock() == MCPaintballBlocks.WHITE_DOOR && data.teamColor == TeamColors.WHITE){
-                        state = state.cycle(OPEN);
-                        level.setBlock(pos, state, 10);
-                    }else if(state.getBlock() == MCPaintballBlocks.BLACK_DOOR && data.teamColor == TeamColors.BLACK){
+                    }else if(state.getBlock() == MCPaintballBlocks.ORANGE_DOOR && data.team == 6){
                         state = state.cycle(OPEN);
                         level.setBlock(pos, state, 10);
                     }else {
