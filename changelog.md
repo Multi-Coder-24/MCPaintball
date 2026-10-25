@@ -84,7 +84,6 @@ Version number. Where possible we will use the format.
 
 ## Version 3.0.0
 
-- **Addition: Game Controller**
-- **Change: ReWorked The Team System**
-- **Change: Changed Paintball Items, Weapons, Hit/Score Logic To Reflect Team Changes**
-- **Remove: World Save Data**
+- **Addition: Added Remaining Wool Color As Teams**
+- **Change: Re-worked Textures**
+- **Change: Make Team Selection More Intuitive**
