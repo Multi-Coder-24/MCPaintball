@@ -29,7 +29,7 @@ public record KitSenderC2SPacket() implements CustomPacketPayload {
         if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
             ServerPlayer player = context.player();
             MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-            KitHandler.grantKit(player, PaintballTeam.values()[data.team], PaintballRole.values()[data.role]);
+            //KitHandler.grantKit(player, PaintballTeam.values()[data.team], PaintballRole.values()[data.role]);
         }
     }
 }

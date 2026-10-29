@@ -46,11 +46,11 @@ public class MCPaintballGameEvents {
 
     public static void clientEndTick(Minecraft minecraft) {
         while(MCPaintballKeybinding.CYCLE_GRENADE_LAUNCHER_TYPE.consumeClick()){
-            Player player =  minecraft.player;
-            if(Objects.requireNonNull(player).getItemInHand(InteractionHand.MAIN_HAND).getItem() == MCPaintballItems.GRENADE_LAUNCHER){
-                int i = Objects.requireNonNull(player.getItemInHand(InteractionHand.MAIN_HAND).get(MCPaintballDataComponents.SETTING)).setting();
-                ClientPlayNetworking.send(new CycleGLTypeC2SPacket(i));
-            }
+//            Player player =  minecraft.player;
+//            if(Objects.requireNonNull(player).getItemInHand(InteractionHand.MAIN_HAND).getItem() == MCPaintballItems.GRENADE_LAUNCHER){
+//                int i = Objects.requireNonNull(player.getItemInHand(InteractionHand.MAIN_HAND).get(MCPaintballDataComponents.SETTING)).setting();
+//                ClientPlayNetworking.send(new CycleGLTypeC2SPacket(i));
+//            }
         }
         while (MCPaintballKeybinding.OPEN_TEAM_SELECT.consumeClick()){
             Screen Parent = minecraft.screen;

@@ -16,6 +16,8 @@ import org.multicoder.mcpaintball.core.MCPaintballBlocks;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.util.PaintballRole;
+import org.multicoder.mcpaintball.util.PaintballTeam;
 
 import java.util.*;
 
@@ -141,7 +143,7 @@ public class MCPaintballSaveData extends SavedData {
         this.setDirty(true);
         server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.game_stopped"),false);
         server.getPlayerList().getPlayers().forEach(player -> {
-            MCPaintballPlayerData data = new MCPaintballPlayerData(0,0);
+            MCPaintballPlayerData data = new MCPaintballPlayerData(PaintballTeam.None, PaintballRole.None);
             player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
         });
     }
@@ -158,13 +160,13 @@ public class MCPaintballSaveData extends SavedData {
     public void StopRound(MinecraftServer server, ServerPlayer player){
         if(this.matchStarted){
             this.roundStarted = false;
-            this.capturePoints.forEach(pos ->{
-                if(server.overworld().getBlockState(pos).getBlock() == MCPaintballBlocks.CAPTURE_POINT){
-                    int Team = server.overworld().getBlockState(pos).getValue(CapturePointBlock.TEAM);
-                    incrementCapturePointByChecker(Team);
-                    server.overworld().setBlockAndUpdate(pos,server.overworld().getBlockState(pos).setValue(CapturePointBlock.TEAM, 0));
-                }
-            });
+//            this.capturePoints.forEach(pos ->{
+//                if(server.overworld().getBlockState(pos).getBlock() == MCPaintballBlocks.CAPTURE_POINT){
+//                    int Team = server.overworld().getBlockState(pos).getValue(CapturePointBlock.TEAM);
+//                    incrementCapturePointByChecker(Team);
+//                    server.overworld().setBlockAndUpdate(pos,server.overworld().getBlockState(pos).setValue(CapturePointBlock.TEAM, 0));
+//                }
+//            });
             this.setDirty(true);
             server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_ended"),false);
         }
@@ -181,6 +183,7 @@ public class MCPaintballSaveData extends SavedData {
         points.add(MCPaintballGameEvents.INSTANCE.pinkPoints);
         points.add(MCPaintballGameEvents.INSTANCE.orangePoints);
         int Winner = points.indexOf(points.stream().max(Comparator.naturalOrder()).get());
+        PaintballTeam winningTeam = PaintballTeam.values()[Winner];
         Component Team = switch (Winner){
             case 0 -> Component.translatable("text.mcpaintball.team_red");
             case 1 -> Component.translatable("text.mcpaintball.team_green");
@@ -193,8 +196,8 @@ public class MCPaintballSaveData extends SavedData {
         int FWinner = Winner + 1;
         server.getPlayerList().broadcastSystemMessage(Component.translatable("text.mcpaintball.round_winner",Team),false);
         server.getPlayerList().getPlayers().forEach(serverPlayer ->{
-            if(Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == FWinner){
-                serverPlayer.addItem(new ItemStack(MCPaintballItems.MEDAL));
+            if(Objects.requireNonNull(serverPlayer.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team == winningTeam){
+                //serverPlayer.addItem(new ItemStack(MCPaintballItems.MEDAL));
             }
         });
     }

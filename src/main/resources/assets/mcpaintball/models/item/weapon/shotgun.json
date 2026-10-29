@@ -1,8 +1,8 @@
 {
 	"textures": {
-		"0": "mcpaintball:item/base",
+		"0": "mcpaintball:item/util/gray",
 		"1": "mcpaintball:item/util/gray",
-		"particle": "mcpaintball:item/base"
+		"particle": "mcpaintball:item/util/gray"
 	},
 	"elements": [
 		{

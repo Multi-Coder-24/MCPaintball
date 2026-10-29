@@ -9,14 +9,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class RoleCheck {
     public static boolean checkCaptainRole(MinecraftServer server){
         AtomicBoolean rv =  new AtomicBoolean(false);
-        server.getPlayerList().getPlayers().forEach(player -> {
-            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-            if(data.team != 0){
-                if(data.role == 1){
-                    rv.set(true);
-                }
-            }
-        });
+//        server.getPlayerList().getPlayers().forEach(player -> {
+//            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+//            if(data.team != 0){
+//                if(data.role == 1){
+//                    rv.set(true);
+//                }
+//            }
+//        });
         return rv.get();
     }
 }

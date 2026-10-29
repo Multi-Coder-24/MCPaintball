@@ -32,60 +32,7 @@ public class ClaymoreBlockEntity extends BlockEntity{
     }
 
     public static void tick(@NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull ClaymoreBlockEntity entity) {
-        if(!Objects.requireNonNull(level).isClientSide()){
-            if(entity.Ticker == 20){
-                if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
-                    ServerLevel serverLevel = (ServerLevel) level;
-                    Direction direction = state.getValue(ClaymoreBlock.FACING);
-                    AABB box = switch (direction){
-                        case NORTH -> new AABB(entity.getBlockPos()).contract(0,0,5);
-                        case SOUTH -> new AABB(entity.getBlockPos()).contract(0,0,-5);
-                        case EAST -> new AABB(entity.getBlockPos()).contract(-5,0,0);
-                        case WEST -> new AABB(entity.getBlockPos()).contract(5,0,0);
-                        default -> new AABB(entity.getBlockPos());
-                    };
-                    serverLevel.getEntitiesOfClass(ServerPlayer.class,box).forEach(player -> {
-                        SimpleParticleType type;
-                        int Checker = 0;
-                        if(entity.getType() == MCPaintballBlockEntities.RED_CLAYMORE_BLOCK_ENTITY){
-                            type = MCPaintballParticles.RED_PAINT;
-                            Checker = 1;
-                        }else if(entity.getType() == MCPaintballBlockEntities.GREEN_CLAYMORE_BLOCK_ENTITY){
-                            type = MCPaintballParticles.GREEN_PAINT;
-                            Checker = 2;
-                        }else if(entity.getType() == MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY){
-                            type = MCPaintballParticles.BLUE_PAINT;
-                            Checker = 3;
-                        }else if(entity.getType() == MCPaintballBlockEntities.YELLOW_CLAYMORE_BLOCK_ENTITY){
-                            type = MCPaintballParticles.YELLOW_PAINT;
-                            Checker = 4;
-                        }else if(entity.getType() == MCPaintballBlockEntities.PINK_CLAYMORE_BLOCK_ENTITY){
-                            type = MCPaintballParticles.PINK_PAINT;
-                            Checker = 5;
-                        }else if(entity.getType() == MCPaintballBlockEntities.ORANGE_CLAYMORE_BLOCK_ENTITY){
-                            type = MCPaintballParticles.ORANGE_PAINT;
-                            Checker = 6;
-                        } else {
-                            type = MCPaintballParticles.RED_PAINT;
-                        }
-                        AABB explosionBox = AABB.encapsulatingFullBlocks(entity.getBlockPos().offset(-5, 0, -5), entity.getBlockPos().offset(5, 0, 5));
-                        BlockPos.betweenClosed(explosionBox).forEach(blockPos -> serverLevel.sendParticles(type, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3, 1, 1, 1, 0.01));
-                        level.setBlockAndUpdate(pos,Blocks.AIR.defaultBlockState());
-                        if(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).team > 0 && player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).team != Checker){
-                            MCPaintballGameEvents.INSTANCE.incrementByChecker(Checker);
-                            if(player.getRespawnConfig() == null){return;}
-                            BlockPos respawn = Objects.requireNonNull(player.getRespawnConfig()).respawnData().pos();
-                            player.teleportTo(respawn.getX(), respawn.getY(), respawn.getZ());
-                        }
-                    });
-                }
-            }
-            else{
-                if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
-                    entity.Ticker++;
-                }
-            }
-        }
+        //if(!Objects.requireNonNull(level).isClientSide()){}
     }
 
     @Override

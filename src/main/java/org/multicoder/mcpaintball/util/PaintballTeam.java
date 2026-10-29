@@ -1,5 +1,9 @@
 package org.multicoder.mcpaintball.util;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import org.jspecify.annotations.NonNull;
 
@@ -21,4 +25,7 @@ public enum PaintballTeam implements StringRepresentable {
     public @NonNull String getSerializedName() {
         return this.translation;
     }
+
+    public static StringRepresentable.EnumCodec<PaintballTeam> CODEC = StringRepresentable.fromEnum(PaintballTeam::values);
+    public static StreamCodec<ByteBuf,PaintballTeam> STREAM_CODEC = ByteBufCodecs.fromCodec(CODEC);
 }

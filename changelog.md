@@ -82,7 +82,7 @@ Version number. Where possible we will use the format.
 
 ----
 
-## Version 3.0.0
+## Version 2.3.0
 
 - **Addition: Added Remaining Wool Color As Teams**
 - **Change: Re-worked Textures**

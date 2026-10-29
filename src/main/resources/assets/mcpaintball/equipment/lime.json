@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "mcpaintball:lime"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "mcpaintball:lime"
+      }
+    ]
+  }
+}

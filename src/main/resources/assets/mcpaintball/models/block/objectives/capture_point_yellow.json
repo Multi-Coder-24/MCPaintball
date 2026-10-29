@@ -1,10 +1,8 @@
 {
-	"format_version": "1.21.11",
-	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "mcpaintball:block/util/gray",
+		"0": "mcpaintball:block/util/base",
 		"1": "mcpaintball:block/util/yellow",
-		"particle": "mcpaintball:block/util/gray"
+		"particle": "mcpaintball:block/util/base"
 	},
 	"elements": [
 		{

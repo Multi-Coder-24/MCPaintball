@@ -19,6 +19,9 @@
     ],
     "main": [
       "org.multicoder.mcpaintball.MCPaintball"
+    ],
+    "voicechat": [
+      "org.multicoder.mcpaintball.integration.MCPaintballVoiceChatPlugin"
     ]
   },
   "depends": {

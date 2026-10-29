@@ -43,19 +43,19 @@ public class ClaymoreBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(@NonNull BlockPos worldPosition, @NonNull BlockState blockState) {
-        if(blockState.getBlock() == MCPaintballBlocks.RED_CLAYMORE_BLOCK){
-            return new ClaymoreBlockEntity(MCPaintballBlockEntities.RED_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
-        }else if(blockState.getBlock() == MCPaintballBlocks.GREEN_CLAYMORE_BLOCK){
-            return new ClaymoreBlockEntity(MCPaintballBlockEntities.GREEN_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
-        }else if(blockState.getBlock() == MCPaintballBlocks.BLUE_CLAYMORE_BLOCK){
-            return new ClaymoreBlockEntity(MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
-        }else if(blockState.getBlock() == MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK){
-            return new ClaymoreBlockEntity(MCPaintballBlockEntities.YELLOW_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
-        }else if(blockState.getBlock() == MCPaintballBlocks.PINK_CLAYMORE_BLOCK){
-            return new ClaymoreBlockEntity(MCPaintballBlockEntities.PINK_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
-        }else if(blockState.getBlock() == MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK){
-            return new ClaymoreBlockEntity(MCPaintballBlockEntities.ORANGE_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
-        }
+//        if(blockState.getBlock() == MCPaintballBlocks.RED_CLAYMORE_BLOCK){
+//            return new ClaymoreBlockEntity(MCPaintballBlockEntities.RED_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
+//        }else if(blockState.getBlock() == MCPaintballBlocks.GREEN_CLAYMORE_BLOCK){
+//            return new ClaymoreBlockEntity(MCPaintballBlockEntities.GREEN_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
+//        }else if(blockState.getBlock() == MCPaintballBlocks.BLUE_CLAYMORE_BLOCK){
+//            return new ClaymoreBlockEntity(MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
+//        }else if(blockState.getBlock() == MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK){
+//            return new ClaymoreBlockEntity(MCPaintballBlockEntities.YELLOW_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
+//        }else if(blockState.getBlock() == MCPaintballBlocks.PINK_CLAYMORE_BLOCK){
+//            return new ClaymoreBlockEntity(MCPaintballBlockEntities.PINK_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
+//        }else if(blockState.getBlock() == MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK){
+//            return new ClaymoreBlockEntity(MCPaintballBlockEntities.ORANGE_CLAYMORE_BLOCK_ENTITY,worldPosition,blockState);
+//        }
         return null;
     }
 
@@ -69,19 +69,19 @@ public class ClaymoreBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NonNull Level level, @NonNull BlockState state, @NonNull BlockEntityType<T> type) {
         if(!level.isClientSide()){
-            if(state.getBlock() == MCPaintballBlocks.RED_CLAYMORE_BLOCK){
-                return createTickerHelper(type,MCPaintballBlockEntities.RED_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
-            } else if (state.getBlock() == MCPaintballBlocks.GREEN_CLAYMORE_BLOCK) {
-                return createTickerHelper(type,MCPaintballBlockEntities.GREEN_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
-            } else if (state.getBlock() == MCPaintballBlocks.BLUE_CLAYMORE_BLOCK) {
-                return createTickerHelper(type,MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
-            } else if (state.getBlock() == MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK) {
-                return createTickerHelper(type,MCPaintballBlockEntities.YELLOW_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
-            } else if (state.getBlock() == MCPaintballBlocks.PINK_CLAYMORE_BLOCK) {
-                return createTickerHelper(type,MCPaintballBlockEntities.PINK_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
-            } else if (state.getBlock() == MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK) {
-                return createTickerHelper(type,MCPaintballBlockEntities.ORANGE_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
-            }
+//            if(state.getBlock() == MCPaintballBlocks.RED_CLAYMORE_BLOCK){
+//                return createTickerHelper(type,MCPaintballBlockEntities.RED_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
+//            } else if (state.getBlock() == MCPaintballBlocks.GREEN_CLAYMORE_BLOCK) {
+//                return createTickerHelper(type,MCPaintballBlockEntities.GREEN_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
+//            } else if (state.getBlock() == MCPaintballBlocks.BLUE_CLAYMORE_BLOCK) {
+//                return createTickerHelper(type,MCPaintballBlockEntities.BLUE_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
+//            } else if (state.getBlock() == MCPaintballBlocks.YELLOW_CLAYMORE_BLOCK) {
+//                return createTickerHelper(type,MCPaintballBlockEntities.YELLOW_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
+//            } else if (state.getBlock() == MCPaintballBlocks.PINK_CLAYMORE_BLOCK) {
+//                return createTickerHelper(type,MCPaintballBlockEntities.PINK_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
+//            } else if (state.getBlock() == MCPaintballBlocks.ORANGE_CLAYMORE_BLOCK) {
+//                return createTickerHelper(type,MCPaintballBlockEntities.ORANGE_CLAYMORE_BLOCK_ENTITY, ClaymoreBlockEntity::tick);
+//            }
         }
         return null;
     }

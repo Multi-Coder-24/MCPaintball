@@ -29,31 +29,13 @@ public class EMPGrenadeEntity extends ThrowableItemProjectile {
 
     @Override
     protected @NonNull Item getDefaultItem() {
-        return MCPaintballItems.SMOKE_GRENADE;
+        return MCPaintballItems.EMP_GRENADE;
     }
 
     @Override
     protected void onHit(@NonNull HitResult hitResult) {
         super.onHit(hitResult);
-            if(!this.level().isClientSide()){
-                ServerLevel level = (ServerLevel) this.level();
-                BlockPos current = this.blockPosition();
-                AABB box = AABB.encapsulatingFullBlocks(current.offset(-5,-2,-5),current.offset(5,2,5));
-                BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(ParticleTypes.ELECTRIC_SPARK,true, true,pos.getX(), pos.getY(), pos.getZ(),10,1.0,1.0,1.0,0.001));
-                level.getEntities(null,box).forEach(entity -> {
-                    if(entity instanceof ServerPlayer player){
-                        if(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).team != 0){
-                            level.playSound(null,player.blockPosition(), MCPaintballSounds.SPARK, SoundSource.PLAYERS,1f,1f);
-                            player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.GRENADE_LAUNCHER),120);
-                            player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.PISTOL),120);
-                            player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.SHOTGUN),120);
-                            player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.BURST_RIFLE),120);
-                            player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.ASSAULT_RIFLE),120);
-                            player.getCooldowns().addCooldown(new ItemStack(MCPaintballItems.SNIPER_RIFLE),120);
-                        }
-                    }
-                });
-            }
+            if(!this.level().isClientSide()){}
         this.discard();
     }
 }

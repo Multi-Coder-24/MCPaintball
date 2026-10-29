@@ -33,56 +33,7 @@ public class  GrenadeLauncherItem extends Item {
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
-        if(!level.isClientSide()){
-            ItemStack itemStack = player.getItemInHand(hand);
-            int Setting = Objects.requireNonNull(itemStack.get(MCPaintballDataComponents.SETTING)).setting();
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
-                MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                if(Setting == 1){
-                    EntityType<? extends ThrowableItemProjectile> type = switch (data.team){
-                        case 1 -> MCPaintballEntities.RED_PAINT_GRENADE;
-                        case 2 -> MCPaintballEntities.GREEN_PAINT_GRENADE;
-                        case 3 -> MCPaintballEntities.BLUE_PAINT_GRENADE;
-                        case 4 -> MCPaintballEntities.YELLOW_PAINT_GRENADE;
-                        case 5 -> MCPaintballEntities.PINK_PAINT_GRENADE;
-                        case 6 -> MCPaintballEntities.ORANGE_PAINT_GRENADE;
-                        default -> throw new IllegalStateException("Unexpected value: " + data.team);
-                    };
-                    PaintGrenadeEntity redPaintGrenade = new PaintGrenadeEntity(type,player,level,player.getItemInHand(hand));
-                    Objects.requireNonNull(redPaintGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                    level.addFreshEntity(redPaintGrenade);
-                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
-                    return InteractionResult.CONSUME;
-                }else if(Setting == 2){
-                    SmokeGrenadeEntity smokeGrenade = new SmokeGrenadeEntity(MCPaintballEntities.SMOKE_GRENADE,player,level,player.getItemInHand(hand));
-                    Objects.requireNonNull(smokeGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                    level.addFreshEntity(smokeGrenade);
-                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
-                    return InteractionResult.CONSUME;
-
-                }else if(Setting == 3){
-                    EMPGrenadeEntity empGrenade = new EMPGrenadeEntity(MCPaintballEntities.EMP_GRENADE,player,level,player.getItemInHand(hand));
-                    Objects.requireNonNull(empGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                    level.addFreshEntity(empGrenade);
-                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
-                    return InteractionResult.CONSUME;
-
-                }else if(Setting == 4){
-                    SightGrenadeEntity sightGrenade = new SightGrenadeEntity(MCPaintballEntities.SIGHT_GRENADE,player,level,player.getItemInHand(hand));
-                    Objects.requireNonNull(sightGrenade).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                    level.addFreshEntity(sightGrenade);
-                    player.getCooldowns().addCooldown(player.getItemInHand(hand),80);
-                    level.playSound(null,player.blockPosition(), MCPaintballSounds.GRENADE, SoundSource.PLAYERS,1f,1f);
-                    return InteractionResult.CONSUME;
-                }
-            }
-            else {
-                player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_use"));
-            }
-        }
+        //if(!level.isClientSide()){}
         return super.use(level, player, hand);
     }
 }

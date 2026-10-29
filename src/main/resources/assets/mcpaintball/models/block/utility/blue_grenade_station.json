@@ -1,12 +1,12 @@
 {
 	"textures": {
-		"0": "mcpaintball:block/util/light_gray",
-		"1": "mcpaintball:block/util/gray",
+		"0": "mcpaintball:block/util/base",
+		"1": "mcpaintball:block/util/base",
 		"2": "mcpaintball:block/util/blue",
 		"3": "mcpaintball:block/explosives/blue_grenade",
 		"4": "mcpaintball:block/explosives/emp_grenade",
 		"5": "mcpaintball:block/explosives/smoke_grenade",
-		"particle": "mcpaintball:block/util/light_gray"
+		"particle": "mcpaintball:block/util/base"
 	},
 	"elements": [
 		{

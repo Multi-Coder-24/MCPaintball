@@ -31,47 +31,13 @@ public class FlagBlock extends Block{
 
     @Override
     public void playerDestroy(Level level, @NonNull Player player, @NonNull BlockPos pos, @NonNull BlockState state, @Nullable BlockEntity blockEntity, @NonNull ItemStack destroyedWith) {
-        if(!level.isClientSide()) {
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
-                Block block = state.getBlock();
-                int team;
-                ItemStack stack;
-                int facing;
-                if(block == MCPaintballBlocks.RED_FLAG){
-                    stack = new ItemStack(MCPaintballItems.RED_FLAG_ITEM);
-                    team = 1;
-                    facing = state.getValue(FlagBlock.FACING).ordinal();
-                } else if (block == MCPaintballBlocks.GREEN_FLAG) {
-                    stack = new ItemStack(MCPaintballItems.GREEN_FLAG_ITEM);
-                    team = 2;
-                    facing = state.getValue(FlagBlock.FACING).ordinal();
-                } else if (block == MCPaintballBlocks.BLUE_FLAG) {
-                    stack = new ItemStack(MCPaintballItems.BLUE_FLAG_ITEM);
-                    team = 3;
-                    facing = state.getValue(FlagBlock.FACING).ordinal();
-                } else if (block == MCPaintballBlocks.YELLOW_FLAG) {
-                    stack = new ItemStack(MCPaintballItems.YELLOW_FLAG_ITEM);
-                    team = 4;
-                    facing = state.getValue(FlagBlock.FACING).ordinal();
-                } else if (block == MCPaintballBlocks.PINK_FLAG) {
-                    stack = new ItemStack(MCPaintballItems.PINK_FLAG_ITEM);
-                    team = 5;
-                    facing = state.getValue(FlagBlock.FACING).ordinal();
-                } else if (block == MCPaintballBlocks.ORANGE_FLAG) {
-                    stack = new ItemStack(MCPaintballItems.ORANGE_FLAG_ITEM);
-                    team = 6;
-                    facing = state.getValue(FlagBlock.FACING).ordinal();
-                }else{return;}
-                stack.set(MCPaintballDataComponents.FLAGITEMSETTINGS,new FlagItemSettings(pos,team,facing));
-                player.addItem(stack);
-            }
-        }
+        //if(!level.isClientSide()) {}
         super.playerDestroy(level, player, pos, state, blockEntity, destroyedWith);
     }
 
     @Override
     public @Nullable BlockState getStateForPlacement(@NonNull BlockPlaceContext context) {
-        return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(FACING, context.getNearestLookingDirection().getOpposite());
+        return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override

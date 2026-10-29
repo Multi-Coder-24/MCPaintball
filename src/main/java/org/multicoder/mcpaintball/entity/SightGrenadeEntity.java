@@ -34,21 +34,7 @@ public class SightGrenadeEntity extends ThrowableItemProjectile {
     @Override
     protected void onHit(@NonNull HitResult hitResult) {
         super.onHit(hitResult);
-            if(!this.level().isClientSide()){
-                ServerLevel level = (ServerLevel) this.level();
-                BlockPos current = this.blockPosition();
-                AABB box = AABB.encapsulatingFullBlocks(current.offset(-5,-2,-5),current.offset(5,2,5));
-                level.getEntities(null,box).forEach(entity -> {
-                    if(entity instanceof ServerPlayer player){
-                        if(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER).team != 0){
-                            MobEffectInstance blind = new MobEffectInstance(MobEffects.BLINDNESS,40);
-                            MobEffectInstance dark = new MobEffectInstance(MobEffects.DARKNESS,40);
-                            player.addEffect(dark);
-                            player.addEffect(blind);
-                        }
-                    }
-                });
-            }
+        //if(!this.level().isClientSide()){}
         this.discard();
     }
 }

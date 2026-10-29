@@ -25,27 +25,7 @@ public class ShotgunItem extends Item {
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
-        if(!level.isClientSide()){
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
-                MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-                EntityType<PaintballEntity> paintballType = data.getFromTeam();
-                PaintballEntity paintball1 = new PaintballEntity(paintballType,player,level,player.getItemInHand(hand));
-                PaintballEntity paintball2 = new PaintballEntity(paintballType,player,level,player.getItemInHand(hand));
-                PaintballEntity paintball3 = new PaintballEntity(paintballType,player,level,player.getItemInHand(hand));
-                Objects.requireNonNull(paintball1).shootFromRotation(player,player.getXRot(),player.getYRot() - 3f,0.0F,3.0F,0.1F);
-                Objects.requireNonNull(paintball2).shootFromRotation(player,player.getXRot(),player.getYRot(),0.0F,3.0F,0.1F);
-                Objects.requireNonNull(paintball3).shootFromRotation(player,player.getXRot(),player.getYRot() + 3f,0.0F,3.0F,0.1F);
-                level.addFreshEntity(paintball1);
-                level.addFreshEntity(paintball2);
-                level.addFreshEntity(paintball3);
-                player.getCooldowns().addCooldown(player.getItemInHand(hand),40);
-                level.playSound(null,player.blockPosition(), MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
-                return InteractionResult.CONSUME;
-            }
-            else {
-                player.sendSystemMessage(Component.translatable("text.mcpaintball.invalid_use"));
-            }
-        }
+        //if(!level.isClientSide()){}
         return super.use(level, player, hand);
     }
 }

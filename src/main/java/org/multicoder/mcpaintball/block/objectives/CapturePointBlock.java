@@ -31,50 +31,11 @@ public class CapturePointBlock extends Block {
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        if(!context.getLevel().isClientSide()) {
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
-                MCPaintballGameEvents.INSTANCE.addCapturePoint(context.getClickedPos());
-                return super.getStateForPlacement(context);
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public @NonNull BlockState playerWillDestroy(@NonNull Level level, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull Player player) {
-        if(!level.isClientSide()){
-            if (MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted) {
-                MCPaintballGameEvents.INSTANCE.removeCapturePoint(pos);
-            }
-        }
-        return super.playerWillDestroy(level, pos, state, player);
-    }
-
-    @Override
     protected @NonNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Player player, @NonNull BlockHitResult hitResult) {
-        if(!level.isClientSide()){
-            MCPaintball.LOGGER.info("Capture Point::Server Side");
-            if(MCPaintballGameEvents.INSTANCE.matchStarted && MCPaintballGameEvents.INSTANCE.roundStarted){
-                MCPaintball.LOGGER.info("Capture Point::Game Running");
-                if(Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team != 0){
-                    MCPaintball.LOGGER.info("Capture Point::Player Is Active");
-                    int team = Objects.requireNonNull(player.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER)).team;
-                    state = state.setValue(TEAM, team);
-                    level.setBlockAndUpdate(pos, state);
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        }
+        //if(!level.isClientSide()){}
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
-
-    @Override
-    public void playerDestroy(@NonNull Level level, @NonNull Player player, @NonNull BlockPos pos, @NonNull BlockState state, @Nullable BlockEntity blockEntity, @NonNull ItemStack destroyedWith) {
-
-        super.playerDestroy(level, player, pos, state, blockEntity, destroyedWith);
-    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
