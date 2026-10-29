@@ -23,7 +23,7 @@ import java.util.Objects;
 
 public class CapturePointBlock extends Block {
 
-    public static final IntegerProperty TEAM = IntegerProperty.create("team",0,6);
+    public static final IntegerProperty TEAM = IntegerProperty.create("team",0,16);
 
     public CapturePointBlock(Properties properties) {
         super(properties.noOcclusion().dynamicShape().pushReaction(PushReaction.BLOCK).destroyTime(5f));

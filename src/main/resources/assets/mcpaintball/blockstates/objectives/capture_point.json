@@ -4,22 +4,52 @@
       "model": "mcpaintball:block/objectives/capture_point_none"
     },
     "team=1": {
-      "model": "mcpaintball:block/objectives/capture_point_red"
+      "model": "mcpaintball:block/objectives/capture_point_white"
     },
     "team=2": {
-      "model": "mcpaintball:block/objectives/capture_point_green"
+      "model": "mcpaintball:block/objectives/capture_point_orange"
     },
     "team=3": {
-      "model": "mcpaintball:block/objectives/capture_point_blue"
+      "model": "mcpaintball:block/objectives/capture_point_magenta"
     },
     "team=4": {
-      "model": "mcpaintball:block/objectives/capture_point_yellow"
+      "model": "mcpaintball:block/objectives/capture_point_light_blue"
     },
     "team=5": {
-      "model": "mcpaintball:block/objectives/capture_point_pink"
+      "model": "mcpaintball:block/objectives/capture_point_yellow"
     },
     "team=6": {
-      "model": "mcpaintball:block/objectives/capture_point_orange"
+      "model": "mcpaintball:block/objectives/capture_point_lime"
+    },
+    "team=7": {
+      "model": "mcpaintball:block/objectives/capture_point_pink"
+    },
+    "team=8": {
+      "model": "mcpaintball:block/objectives/capture_point_gray"
+    },
+    "team=9": {
+      "model": "mcpaintball:block/objectives/capture_point_light_gray"
+    },
+    "team=10": {
+      "model": "mcpaintball:block/objectives/capture_point_cyan"
+    },
+    "team=11": {
+      "model": "mcpaintball:block/objectives/capture_point_purple"
+    },
+    "team=12": {
+      "model": "mcpaintball:block/objectives/capture_point_blue"
+    },
+    "team=13": {
+      "model": "mcpaintball:block/objectives/capture_point_brown"
+    },
+    "team=14": {
+      "model": "mcpaintball:block/objectives/capture_point_green"
+    },
+    "team=15": {
+      "model": "mcpaintball:block/objectives/capture_point_red"
+    },
+    "team=16": {
+      "model": "mcpaintball:block/objectives/capture_point_black"
     }
   }
 }

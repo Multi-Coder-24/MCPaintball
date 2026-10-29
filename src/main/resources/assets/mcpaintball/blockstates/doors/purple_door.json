@@ -1,7 +1,7 @@
 {
   "variants": {
     "facing=east,half=lower,hinge=left,open=false": {
-      "model": "mcpaintball:block/doors/_door_bottom_left"
+      "model": "mcpaintball:block/doors/purple_door_bottom_left"
    },
     "facing=east,half=lower,hinge=left,open=true": {
       "model": "mcpaintball:block/doors/purple_door_bottom_left_open",

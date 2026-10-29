@@ -136,7 +136,7 @@ public class MCPaintballItems {
     public static final Item YELLOW_FLAG_ITEM = registerHiddenItem("objectives/yellow_flag_item", FlagItem::new,new Item.Properties());
     public static final Item PINK_FLAG_ITEM = registerHiddenItem("objectives/pink_flag_item", FlagItem::new,new Item.Properties());
     public static final Item ORANGE_FLAG_ITEM = registerHiddenItem("objectives/orange_flag_item", FlagItem::new,new Item.Properties());
-    public static final Item CYAN_FLAG_ITEM = registerHiddenItem("objectives/orange_flag_item", FlagItem::new,new Item.Properties());
+    public static final Item CYAN_FLAG_ITEM = registerHiddenItem("objectives/cyan_flag_item", FlagItem::new,new Item.Properties());
     public static final Item MAGENTA_FLAG_ITEM = registerHiddenItem("objectives/magenta_flag_item", FlagItem::new,new Item.Properties());
     public static final Item LIME_FLAG_ITEM = registerHiddenItem("objectives/lime_flag_item", FlagItem::new,new Item.Properties());
     public static final Item LIGHT_BLUE_FLAG_ITEM = registerHiddenItem("objectives/light_blue_flag_item", FlagItem::new,new Item.Properties());
