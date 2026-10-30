@@ -41,17 +41,35 @@ public class MCPaintballClient implements ClientModInitializer {
         EntityRenderers.register(MCPaintballEntities.RED_PAINTBALL, RedPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.GREEN_PAINTBALL, GreenPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.BLUE_PAINTBALL, BluePaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.CYAN_PAINTBALL, CyanPaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.MAGENTA_PAINTBALL, MagentaPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.YELLOW_PAINTBALL, YellowPaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.PINK_PAINTBALL, PinkPaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.LIME_PAINTBALL, LimePaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.LIGHT_BLUE_PAINTBALL, LightBluePaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.LIGHT_GRAY_PAINTBALL, LightGrayPaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.GRAY_PAINTBALL, GrayPaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.WHITE_PAINTBALL, WhitePaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.BLACK_PAINTBALL, BlackPaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.BROWN_PAINTBALL, BrownPaintballEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.PURPLE_PAINTBALL, PurplePaintballEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.ORANGE_PAINTBALL, OrangePaintballEntityRenderer::new);
-
         EntityRenderers.register(MCPaintballEntities.RED_PAINT_GRENADE, RedPaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.GREEN_PAINT_GRENADE, GreenPaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.BLUE_PAINT_GRENADE, BluePaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.CYAN_PAINT_GRENADE, CyanPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.MAGENTA_PAINT_GRENADE, MagentaPaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.YELLOW_PAINT_GRENADE, YellowPaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.PINK_PAINT_GRENADE, PinkPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.LIME_PAINT_GRENADE, LimePaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.LIGHT_BLUE_PAINT_GRENADE, LightBluePaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.LIGHT_GRAY_PAINT_GRENADE, LightGrayPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.GRAY_PAINT_GRENADE, GrayPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.WHITE_PAINT_GRENADE, WhitePaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.BLACK_PAINT_GRENADE, BlackPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.BROWN_PAINT_GRENADE, BrownPaintGrenadeEntityRenderer::new);
+        EntityRenderers.register(MCPaintballEntities.PURPLE_PAINT_GRENADE, PurplePaintGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.ORANGE_PAINT_GRENADE, OrangePaintGrenadeEntityRenderer::new);
-
         EntityRenderers.register(MCPaintballEntities.SMOKE_GRENADE, SmokeGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.EMP_GRENADE, EMPGrenadeEntityRenderer::new);
         EntityRenderers.register(MCPaintballEntities.SIGHT_GRENADE, SightGrenadeEntityRenderer::new);

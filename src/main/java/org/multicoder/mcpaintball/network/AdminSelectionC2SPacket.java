@@ -29,18 +29,17 @@ public record AdminSelectionC2SPacket(int Selection) implements CustomPacketPayl
     public static void handlePacket(AdminSelectionC2SPacket packet, ServerPlayNetworking.Context context) {
         MinecraftServer server = Objects.requireNonNull(context.server());
         ServerPlayer player = Objects.requireNonNull(context.player());
-        switch (packet.Selection) {
-            case 0 ->// Start Game
-                    MCPaintballGameEvents.INSTANCE.StartGame(server);
-            case 1 ->// Stop Game
-                    MCPaintballGameEvents.INSTANCE.StopGame(server);
-            case 2 ->// Start Round
-                    MCPaintballGameEvents.INSTANCE.StartRound(server,player);
-            case 3 ->// Stop Round
-                    MCPaintballGameEvents.INSTANCE.StopRound(server,player);
-            case 4 ->// Round Winner
-                    MCPaintballGameEvents.INSTANCE.RoundWinner(server);
-        }
-
+//        switch (packet.Selection) {
+//            case 0 ->// Start Game
+//                    MCPaintballGameEvents.INSTANCE.StartGame(server);
+//            case 1 ->// Stop Game
+//                    MCPaintballGameEvents.INSTANCE.StopGame(server);
+//            case 2 ->// Start Round
+//                    MCPaintballGameEvents.INSTANCE.StartRound(server,player);
+//            case 3 ->// Stop Round
+//                    MCPaintballGameEvents.INSTANCE.StopRound(server,player);
+//            case 4 ->// Round Winner
+//                    MCPaintballGameEvents.INSTANCE.RoundWinner(server);
+//        }
     }
 }

@@ -28,9 +28,9 @@ public record RoleSelectC2SPacket(int Role) implements CustomPacketPayload {
     }
 
     public static void handlePacket(RoleSelectC2SPacket packet, ServerPlayNetworking.Context context) {
-        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
-            ServerPlayer player = context.player();
-            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+//        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
+//            ServerPlayer player = context.player();
+//            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
 //            if(data.team == 0) {
 //                player.sendSystemMessage(Component.translatable("text.mcpaintball.set_team"));
 //            }
@@ -44,6 +44,6 @@ public record RoleSelectC2SPacket(int Role) implements CustomPacketPayload {
 //                }
 //
 //            }
-        }
+        //}
     }
 }

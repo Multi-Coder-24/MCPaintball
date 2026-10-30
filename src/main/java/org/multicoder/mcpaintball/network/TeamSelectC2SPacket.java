@@ -33,52 +33,52 @@ public record TeamSelectC2SPacket(PaintballTeam Team) implements CustomPacketPay
     }
 
     public static void handlePacket(TeamSelectC2SPacket packet, ServerPlayNetworking.Context context) {
-        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted) {
-            ServerPlayer player = context.player();
-            MinecraftServer server = Objects.requireNonNull(context.server());
-            PaintballTeam Team = packet.Team;
-            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-            data.team = Team;
-            player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
-            switch (Team) {
-                case PaintballTeam.Red -> {
-                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.RED);
-                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
-                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.RED);
-                    }
-                }
-                case PaintballTeam.Green -> {
-                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.GREEN);
-                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
-                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.GREEN);
-                    }
-                }
-                case PaintballTeam.Blue -> {
-                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.BLUE);
-                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
-                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.BLUE);
-                    }
-                }
-                case PaintballTeam.Yellow -> {
-                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.YELLOW);
-                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
-                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.YELLOW);
-                    }
-                }
-                case PaintballTeam.Pink -> {
-                    server.getScoreboard().addPlayerToTeam(player.getName().getString(), MinecraftTeamSystem.PINK);
-                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
-                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.PINK);
-                    }
-                }
-                case PaintballTeam.Orange -> {
-                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.ORANGE);
-                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
-                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.ORANGE);
-                    }
-                }
-            }
-            ServerPlayNetworking.send(player,new DataSyncS2CPacket(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
-        }
+//        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted) {
+//            ServerPlayer player = context.player();
+//            MinecraftServer server = Objects.requireNonNull(context.server());
+//            PaintballTeam Team = packet.Team;
+//            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+//            data.team = Team;
+//            player.setAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER,data);
+//            switch (Team) {
+//                case PaintballTeam.Red -> {
+//                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.RED);
+//                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
+//                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.RED);
+//                    }
+//                }
+//                case PaintballTeam.Green -> {
+//                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.GREEN);
+//                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
+//                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.GREEN);
+//                    }
+//                }
+//                case PaintballTeam.Blue -> {
+//                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.BLUE);
+//                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
+//                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.BLUE);
+//                    }
+//                }
+//                case PaintballTeam.Yellow -> {
+//                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.YELLOW);
+//                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
+//                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.YELLOW);
+//                    }
+//                }
+//                case PaintballTeam.Pink -> {
+//                    server.getScoreboard().addPlayerToTeam(player.getName().getString(), MinecraftTeamSystem.PINK);
+//                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
+//                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.PINK);
+//                    }
+//                }
+//                case PaintballTeam.Orange -> {
+//                    server.getScoreboard().addPlayerToTeam(player.getName().getString(),MinecraftTeamSystem.ORANGE);
+//                    if(FabricLoader.getInstance().isModLoaded("voicechat")){
+//                        Objects.requireNonNull(MCPaintballVoiceChatPlugin.SERVER.getConnectionOf(player.getUUID())).setGroup(MCPaintballVoiceChatPlugin.ORANGE);
+//                    }
+//                }
+//            }
+//            ServerPlayNetworking.send(player,new DataSyncS2CPacket(player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER)));
+//        }
     }
 }

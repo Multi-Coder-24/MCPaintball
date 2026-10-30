@@ -26,10 +26,10 @@ public record KitSenderC2SPacket() implements CustomPacketPayload {
     }
 
     public static void handlePacket(KitSenderC2SPacket ignored, ServerPlayNetworking.Context context) {
-        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
-            ServerPlayer player = context.player();
-            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
-            //KitHandler.grantKit(player, PaintballTeam.values()[data.team], PaintballRole.values()[data.role]);
-        }
+//        if(MCPaintballGameEvents.INSTANCE.matchStarted && !MCPaintballGameEvents.INSTANCE.roundStarted){
+//            ServerPlayer player = context.player();
+//            MCPaintballPlayerData data = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+//            //KitHandler.grantKit(player, PaintballTeam.values()[data.team], PaintballRole.values()[data.role]);
+//        }
     }
 }
