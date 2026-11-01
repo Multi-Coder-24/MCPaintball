@@ -1,21 +1,17 @@
 package org.multicoder.mcpaintball.item.weapon;
 
-import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
-import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballSounds;
-import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
-import org.multicoder.mcpaintball.entity.PaintballEntity;
-import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
-
-import java.util.Objects;
+import org.multicoder.mcpaintball.util.PlayManager;
 
 public class SniperRifleItem extends Item {
 
@@ -25,7 +21,16 @@ public class SniperRifleItem extends Item {
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
-        //if(!level.isClientSide()){}
+        if(!level.isClientSide()){
+            ServerLevel serverLevel = (ServerLevel) level;
+            ServerPlayer serverPlayer = (ServerPlayer) player;
+            if(PlayManager.IsValid(serverLevel.getServer(), serverPlayer)){
+                ItemStack weaponItemStack = serverPlayer.getItemInHand(hand);
+                PlayManager.HandlePaintball(serverPlayer,serverLevel,0f,8f,0.1f,weaponItemStack);
+                serverLevel.playSound(null,serverPlayer, MCPaintballSounds.SHOT, SoundSource.PLAYERS,1f,1f);
+                serverPlayer.getCooldowns().addCooldown(weaponItemStack,60);
+            }
+        }
         return super.use(level, player, hand);
     }
 }

@@ -8,7 +8,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.MCPaintball;
-import org.multicoder.mcpaintball.client.MCPaintballClient;
 
 public record PointSyncS2CPacket(int red, int green, int blue, int yellow, int pink, int orange, boolean gameRunning, boolean roundRunning) implements CustomPacketPayload {
     public static final Identifier ID = Identifier.fromNamespaceAndPath(MCPaintball.MOD_ID,"point_sync");
@@ -21,13 +20,6 @@ public record PointSyncS2CPacket(int red, int green, int blue, int yellow, int p
     }
 
     public static void handlePacket(PointSyncS2CPacket packet, ClientPlayNetworking.Context ignored) {
-        MCPaintballClient.redPoints = packet.red;
-        MCPaintballClient.greenPoints = packet.green;
-        MCPaintballClient.bluePoints = packet.blue;
-        MCPaintballClient.yellowPoints = packet.yellow;
-        MCPaintballClient.pinkPoints = packet.pink;
-        MCPaintballClient.orangePoints = packet.orange;
-        MCPaintballClient.gameRunning = packet.gameRunning;
-        MCPaintballClient.roundRunning = packet.roundRunning;
+
     }
 }

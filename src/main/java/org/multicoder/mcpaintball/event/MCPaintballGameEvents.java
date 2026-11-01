@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.client.gui.AdminScreen;
 import org.multicoder.mcpaintball.client.gui.SelectRoleScreen;
 import org.multicoder.mcpaintball.client.gui.SelectTeamScreen;
@@ -17,6 +18,7 @@ import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballDataComponents;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
 import org.multicoder.mcpaintball.core.MCPaintballKeybinding;
+import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.data.MCPaintballSaveData;
 import org.multicoder.mcpaintball.network.CycleGLTypeC2SPacket;
 import org.multicoder.mcpaintball.network.KitSenderC2SPacket;
@@ -41,7 +43,8 @@ public class MCPaintballGameEvents {
     }
 
     public static void join(ServerPlayer player) {
-        player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+        MCPaintballPlayerData playerData = player.getAttachedOrCreate(MCPaintballDataAttachments.PAINTBALL_PLAYER);
+        MCPaintball.LOGGER.info("Team: {}, Role: {}",playerData.team,playerData.role);
     }
 
     public static void clientEndTick(Minecraft minecraft) {

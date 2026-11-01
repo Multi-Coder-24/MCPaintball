@@ -26,14 +26,7 @@ import static org.multicoder.mcpaintball.MCPaintball.MOD_ID;
 
 public class MCPaintballClient implements ClientModInitializer {
     public static final Logger CLIENT_LOGGER = LogManager.getLogger(MOD_ID + "_client");
-    public static int redPoints = 0;
-    public static int greenPoints = 0;
-    public static int bluePoints = 0;
-    public static int yellowPoints = 0;
-    public static int pinkPoints = 0;
-    public static int orangePoints = 0;
-    public static boolean gameRunning = false;
-    public static boolean roundRunning = false;
+
     @Override
     public void onInitializeClient() {
         CLIENT_LOGGER.info("Initializing MCPaintball Client");

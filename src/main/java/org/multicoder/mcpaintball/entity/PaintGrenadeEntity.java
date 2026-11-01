@@ -18,9 +18,11 @@ import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.*;
 import org.multicoder.mcpaintball.data.MCPaintballPlayerData;
 import org.multicoder.mcpaintball.event.MCPaintballGameEvents;
+import org.multicoder.mcpaintball.util.PlayManager;
 
 import java.util.Objects;
 
+@SuppressWarnings("unchecked")
 public class PaintGrenadeEntity extends ThrowableItemProjectile {
     public PaintGrenadeEntity(EntityType<? extends ThrowableItemProjectile> type, Level level) {
         super(type, level);
@@ -38,7 +40,12 @@ public class PaintGrenadeEntity extends ThrowableItemProjectile {
     @Override
     protected void onHit(@NonNull HitResult hitResult) {
         super.onHit(hitResult);
-        //if(!this.level().isClientSide()){}
+        if(!this.level().isClientSide()){
+            BlockPos pos = this.blockPosition();
+            ServerLevel serverLevel = (ServerLevel) this.level();
+            ServerPlayer serverPlayer = (ServerPlayer) this.getOwner();
+            PlayManager.HandlePaintGrenadeHit(serverLevel,(EntityType<PaintGrenadeEntity>) this.getType(),pos,serverPlayer);
+        }
         this.discard();
     }
 }

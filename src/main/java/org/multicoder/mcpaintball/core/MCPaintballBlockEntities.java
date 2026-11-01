@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.block.entity.*;
 
-@SuppressWarnings("all")
+
 public class MCPaintballBlockEntities {
     public static final BlockEntityType<ClaymoreBlockEntity> RED_CLAYMORE_BLOCK_ENTITY = register("red_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.RED_CLAYMORE_BLOCK);
     public static final BlockEntityType<ClaymoreBlockEntity> GREEN_CLAYMORE_BLOCK_ENTITY = register("green_claymore",ClaymoreBlockEntity::new, MCPaintballBlocks.GREEN_CLAYMORE_BLOCK);

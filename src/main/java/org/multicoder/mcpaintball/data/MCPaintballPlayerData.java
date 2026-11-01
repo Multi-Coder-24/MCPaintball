@@ -31,15 +31,4 @@ public class MCPaintballPlayerData {
             PaintballRole.STREAM_CODEC,MCPaintballPlayerData::type,
             MCPaintballPlayerData::new
     );
-//    public EntityType<PaintballEntity> getFromTeam(){
-//        return switch (team) {
-//            case 1 -> MCPaintballEntities.RED_PAINTBALL;
-//            case 2 -> MCPaintballEntities.GREEN_PAINTBALL;
-//            case 3 -> MCPaintballEntities.BLUE_PAINTBALL;
-//            case 4 -> MCPaintballEntities.YELLOW_PAINTBALL;
-//            case 5 -> MCPaintballEntities.PINK_PAINTBALL;
-//            case 6 -> MCPaintballEntities.ORANGE_PAINTBALL;
-//            default -> null;
-//        };
-//    }
 }
