@@ -2,6 +2,7 @@ package org.multicoder.mcpaintball.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.multicoder.mcpaintball.util.PaintballTeam;
 
 public class MCPaintballRoundPointsData {
     public int RedPoints = 0;
@@ -74,6 +75,25 @@ public class MCPaintballRoundPointsData {
         OrangePoints = orangePoints;
         PinkPoints = pinkPoints;
     }
-
+    public void AwardHit(PaintballTeam team){
+        switch (team){
+            case Red -> RedPoints++;
+            case Green -> GreenPoints++;
+            case Blue -> BluePoints++;
+            case Cyan -> CyanPoints++;
+            case Magenta -> MagentaPoints++;
+            case Yellow -> YellowPoints++;
+            case Lime-> LimePoints++;
+            case LightBlue-> LightBluePoints++;
+            case LightGray-> LightGrayPoints++;
+            case Gray -> GrayPoints++;
+            case White -> WhitePoints++;
+            case Black -> BlackPoints++;
+            case Brown -> BrownPoints++;
+            case Purple -> PurplePoints++;
+            case Orange -> OrangePoints++;
+            case Pink -> PinkPoints++;
+        }
+    }
 
 }

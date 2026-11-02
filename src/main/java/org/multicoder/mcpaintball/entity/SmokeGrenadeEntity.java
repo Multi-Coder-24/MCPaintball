@@ -3,6 +3,7 @@ package org.multicoder.mcpaintball.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
@@ -13,6 +14,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import org.jspecify.annotations.NonNull;
 import org.multicoder.mcpaintball.core.MCPaintballItems;
+import org.multicoder.mcpaintball.util.PlayManager;
 
 public class SmokeGrenadeEntity extends ThrowableItemProjectile {
     public SmokeGrenadeEntity(EntityType<? extends ThrowableItemProjectile> type, Level level) {
@@ -33,9 +35,13 @@ public class SmokeGrenadeEntity extends ThrowableItemProjectile {
         super.onHit(hitResult);
             if(!this.level().isClientSide()){
                 ServerLevel level = (ServerLevel) this.level();
-                BlockPos current = this.blockPosition();
-                AABB box = AABB.encapsulatingFullBlocks(current.offset(-5,-2,-5),current.offset(5,2,5));
-                BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(ParticleTypes.LARGE_SMOKE,true, true,pos.getX(), pos.getY(), pos.getZ(),10,1.0,1.0,1.0,0.001));
+                ServerPlayer serverPlayer = (ServerPlayer) this.getOwner();
+                if(PlayManager.IsValid(level.getServer(), serverPlayer)){
+                    BlockPos current = this.blockPosition();
+                    AABB box = AABB.encapsulatingFullBlocks(current.offset(-5,-2,-5),current.offset(5,2,5));
+                    BlockPos.betweenClosed(box).forEach(pos -> level.sendParticles(ParticleTypes.LARGE_SMOKE,true, true,pos.getX(), pos.getY(), pos.getZ(),10,1.0,1.0,1.0,0.001));
+
+                }
             }
         this.discard();
     }

@@ -5,8 +5,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
+import org.multicoder.mcpaintball.MCPaintball;
 import org.multicoder.mcpaintball.core.MCPaintballDataAttachments;
 import org.multicoder.mcpaintball.core.MCPaintballEntities;
 import org.multicoder.mcpaintball.core.MCPaintballParticles;
@@ -93,6 +95,28 @@ public class PlayManager {
         }
         else if(entityType == MCPaintballEntities.ORANGE_PAINT_GRENADE){
             BlockPos.betweenClosed(box).forEach(blockPos -> level.sendParticles(MCPaintballParticles.ORANGE_PAINT,blockPos.getX(),blockPos.getY(),blockPos.getZ(),5,0.1,0.1,0.1,0.01));
+        }
+        level.getEntities(null,box).forEach(entity -> {
+            if(entity instanceof Player player){
+                ServerPlayer serverPlayer = (ServerPlayer) player;
+                HandlePaintGrenadePlayerHit(serverPlayer,owner,level);
+            }
+        });
+    }
+
+    public static void HandlePaintGrenadePlayerHit(ServerPlayer target,ServerPlayer shooter,ServerLevel level){
+        MCPaintballPlayerData targetData = Objects.requireNonNull(target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER));
+        MCPaintballPlayerData shooterData = Objects.requireNonNull(shooter.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER));
+        if(targetData.team != shooterData.team && targetData.team != PaintballTeam.Admin && targetData.team != PaintballTeam.None){
+            shooterData.team.AwardHit(level);
+        }
+    }
+
+    public static void HandlePaintballPlayerHit(ServerPlayer target,ServerPlayer shooter,ServerLevel level){
+        MCPaintballPlayerData targetData = Objects.requireNonNull(target.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER));
+        MCPaintballPlayerData shooterData = Objects.requireNonNull(shooter.getAttached(MCPaintballDataAttachments.PAINTBALL_PLAYER));
+        if(targetData.team != shooterData.team && targetData.team != PaintballTeam.Admin && targetData.team != PaintballTeam.None){
+            shooterData.team.AwardHit(level);
         }
     }
 }
